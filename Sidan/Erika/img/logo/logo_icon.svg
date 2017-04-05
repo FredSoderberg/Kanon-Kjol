@@ -12,11 +12,11 @@
    inkscape:version="0.91 r13725"
    version="1.1"
    id="svg2"
-   viewBox="0 0 744.09448819 1052.3622047"
-   height="297mm"
-   width="210mm"
-   sodipodi:docname="logo.svg"
-   enable-background="new">
+   viewBox="0 0 54.916522 59.63798"
+   height="16.831163mm"
+   width="15.498663mm"
+   sodipodi:docname="logo_icon.svg"
+   style="enable-background:new">
   <sodipodi:namedview
      inkscape:snap-center="false"
      inkscape:object-nodes="true"
@@ -30,27 +30,31 @@
      showgrid="false"
      inkscape:current-layer="layer2"
      inkscape:document-units="px"
-     inkscape:cy="939.75711"
-     inkscape:cx="121.08186"
-     inkscape:zoom="4"
+     inkscape:cy="34.191336"
+     inkscape:cx="-9.5874883"
+     inkscape:zoom="5.6568542"
      inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
+     inkscape:pageopacity="0"
+     borderopacity="1"
+     bordercolor="#000000"
      pagecolor="#ffffff"
-     id="base" />
+     id="base"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <defs
      id="defs4">
     <inkscape:perspective
        id="perspective8514"
-       inkscape:persp3d-origin="372.04724 : 350.7874 : 1"
-       inkscape:vp_z="744.09449 : 526.1811 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 526.1811 : 1"
+       inkscape:persp3d-origin="372.04723 : 350.78742 : 1"
+       inkscape:vp_z="744.09448 : 526.18114 : 1"
+       inkscape:vp_y="0 : 1000.0001 : 0"
+       inkscape:vp_x="0 : 526.18114 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        id="filter8469"
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:menu-tooltip="Soft, cushion-like bevel with matte highlights"
        inkscape:menu="Bevels"
        inkscape:label="Bloom">
@@ -63,7 +67,7 @@
          id="feSpecularLighting8473"
          surfaceScale="5"
          specularConstant="2"
-         specularExponent="18.1"
+         specularExponent="18.10000038"
          result="result0">
         <feDistantLight
            id="feDistantLight8475"
@@ -119,7 +123,7 @@
     </filter>
     <filter
        id="filter8608"
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:menu-tooltip="Glowing image content without blurring it"
        inkscape:menu="Image Effects"
        inkscape:label="Soft Focus Lens">
@@ -143,7 +147,9 @@
          k1="0.5"
          in="result9"
          operator="arithmetic"
-         in2="result7" />
+         in2="result7"
+         k2="0"
+         k4="0" />
       <feBlend
          id="feBlend8618"
          in="SourceGraphic"
@@ -179,7 +185,8 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="cog"
-     style="display:none">
+     style="display:none"
+     transform="translate(-214.33399,-73.862183)">
     <g
        style="display:inline"
        id="g23901"
@@ -214,27 +221,22 @@
      inkscape:groupmode="layer"
      id="layer9"
      inkscape:label="hole"
-     style="display:inline">
-    <ellipse
+     style="display:inline"
+     transform="translate(-214.33399,-73.862183)">
+    <path
        style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+       clip-path="none"
+       d="m 197.5332,0 a 6,5.75 0 0 0 -6,5.75 6,5.75 0 0 0 5.35157,5.708984 l 0.85742,-1.177734 a 4.2132354,4.016129 0 0 1 -0.9375,0.105469 4.2132354,4.016129 0 0 1 -4.21289,-4.0156252 4.2132354,4.016129 0 0 1 4.21289,-4.015625 4.2132354,4.016129 0 0 1 4.21289,4.015625 4.2132354,4.016129 0 0 1 -2.94336,3.8242182 l -0.93945,1.291016 a 6,5.75 0 0 0 0.39843,0.01367 6,5.75 0 0 0 6,-5.75 6,5.75 0 0 0 -6,-5.75 z"
        id="path23948"
-       cx="263.25"
-       cy="79.612183"
-       rx="6"
-       ry="5.75" />
-    <ellipse
-       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
-       id="path23950"
-       cx="262.52206"
-       cy="80.233147"
-       rx="4.2132354"
-       ry="4.016129" />
+       transform="translate(65.717312,73.862183)"
+       inkscape:connector-curvature="0" />
   </g>
   <g
-     style="display:inline;opacity:1;"
+     style="display:inline;opacity:1"
      inkscape:label="Pil"
      id="layer2"
-     inkscape:groupmode="layer">
+     inkscape:groupmode="layer"
+     transform="translate(-214.33399,-73.862183)">
     <g
        transform="translate(-3.3536003e-7,4.0000005)"
        id="g8650">
@@ -310,9 +312,16 @@
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="ccccc" />
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="texten"
+     style="display:none"
+     transform="translate(-214.33399,-73.862183)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Apple Chancery';-inkscape-font-specification:'Apple Chancery, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Apple Chancery';-inkscape-font-specification:'Apple Chancery, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="63.354031"
        y="110.21044"
        id="text8123"
@@ -325,20 +334,5 @@
            y="110.21044"
            style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Apple Chancery';-inkscape-font-specification:'Apple Chancery, Medium';text-align:start;writing-mode:lr-tb;text-anchor:start"
            id="tspan8127">Nock-Off </tspan></tspan></text>
-    <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect23986"
-       width="2.40625"
-       height="0.3125"
-       x="262.21875"
-       y="89.268433" />
-    <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect23990"
-       width="3.46875"
-       height="0.21873304"
-       x="-87.719193"
-       y="-262.8201"
-       transform="matrix(-0.58778524,0.809017,-0.809017,-0.58778524,0,0)" />
   </g>
 </svg>
