@@ -459,7 +459,7 @@ gantt.mixin(gantt.config,
 	initial_scroll : true,
 	task_scroll_offset : 100,
 
-	order_branch: false,
+	order_branch: true,
 	order_branch_free: false,
 
 	task_height: "full",//number px of 'full' for row height
@@ -3989,8 +3989,9 @@ gantt._task_default_render = function(task){
 	if(this._isAllowedUnscheduledTask(task))
 		return;
 
+	var parent_mup = this._get_parent_id(task)
 	var pos = this._get_task_pos(task);
-	pos.y = 0;
+	//pos.y = 0;
 	var cfg = this.config;
 	var height = this._get_task_height();
 
@@ -5530,6 +5531,8 @@ gantt._replace_branch_child = function(node, old_id, new_id){
 	}
 	this._sync_order();
 };
+
+gantt.addResource = function(item,index){}
 
 gantt.addTask = function(item, parent, index) {
     if (!gantt.defined(parent)) parent = this.getParent(item) || 0;
