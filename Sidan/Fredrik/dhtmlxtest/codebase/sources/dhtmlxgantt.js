@@ -5920,7 +5920,7 @@ gantt._init_task = function(task){
 
     task.$source = [];
     task.$target = [];
-	if(task.parent === undefined){
+	if(task.parent === undefined){// TODO:Ändra till resource
 		this.setParent(task, this.config.root_id);
 	}
 
