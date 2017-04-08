@@ -11,6 +11,9 @@
   <link rel=stylesheet href="gantt.css" type="text/css">
   <link rel=stylesheet href="ganttPrint.css" type="text/css" media="print">
 
+  <link rel="stylesheet" href="../w3.css">
+  <link rel="stylesheet" href="../dhtmlxgantt.css">
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
@@ -35,7 +38,10 @@
   <script src="ganttDrawerSVG.js"></script>
   <script src="ganttGridEditor.js"></script>
   <script src="ganttMaster.js"></script>
+
+  <script src="Left_menu.js"></script>
 </head>
+
 <body style="background-color: #fff;">
 
 
@@ -43,6 +49,21 @@
   This Gantt editor is free thanks to <a href="http://twproject.com" target="_blank">Twproject</a> where it can be used on a complete and flexible project management solution.<br> Get your projects done! Give <a href="http://twproject.com" target="_blank">Twproject a try now</a>.
 </div>
  -->
+
+ <div class="w3-bar w3-grey" id="topMenu">
+
+   <img id="menuIcon" src="../img/logo/logo_icon.svg" class="w3-button w3-padding w3-animate-left w3-grey w3-border w3-card-4" style="display:inline;" alt="Nock-Off" onclick="openLeftMenu()"/>
+
+ </div>
+
+ <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-dark-grey w3-border" style="display:none" id="leftMenu" >
+
+   <a href="jQueryGantt-master/gantt.html" class="w3-bar-item w3-button">JqueryGantt</a>
+   <a href="Gantt-master/index2.html" class="w3-bar-item w3-button">Gantt-Master</a>
+   <a href="https://www.svenskakyrkan.se" class="w3-bar-item w3-button">MuppRoberts</a>
+
+ </div>
+
 <div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden;border:1px solid #e5e5e5;position:relative;margin:0 5px"></div>
 
 <style>
