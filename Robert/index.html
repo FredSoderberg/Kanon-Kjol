@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>How to Start with dhtmlxGantt</title>
+   <script src="codebase/sources/dhtmlxgantt.js"></script>
+   <link href="codebase/dhtmlxgantt.css" rel="stylesheet">
+
+   <style type="text/css" media="screen">
+
+    html, body{
+        margin:0px;
+        padding:0px;
+        height:100%;
+        overflow:hidden;
+    }
+
+
+</style>
+</head>
+<body>
+    <div id="gantt_here" style='width:1000px; height:400px;'></div>
+    <script type="text/javascript">
+          var tasks =  {
+              data:[
+                  {id:1, text:"Project #2", start_date:"01-04-2013", duration:3,order:10,
+                      progress:0.4, open: true},
+                  {id:2, text:"Task #1", 	  start_date:"04-04-2013", duration:3, order:10,
+                      progress:0.6, parent:1},
+                  {id:3, text:"Task #2",    start_date:"6-04-2013", duration:3, order:20,
+                      progress:0.6, parent:1}
+              ],
+                      links:[
+              { id:1, source:1, target:2, type:"1"},
+              { id:2, source:2, target:3, type:"0"},
+              { id:3, source:3, target:4, type:"0"},
+              { id:4, source:2, target:5, type:"2"},
+          ]
+          };
+
+      gantt.config.columns = [
+          {name:"text",       label:"Task name",  width:"*", tree:true },
+          {name:"start_date", label:"Start time", align: "center" },
+          {name:"duration",   label:"Duration",   align: "center" },
+          {name:"add",        label:"",           width:44 }
+      ];
+  		gantt.init("gantt_here");
+
+
+  		gantt.parse(tasks);
+
+  	</script>
+</body>
+</html>
