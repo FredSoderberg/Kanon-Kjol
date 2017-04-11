@@ -30,12 +30,13 @@ function TaskFactory() {
   /**
    * Build a new Task
    */
-  this.build = function (id, name, code, level, start, duration, collapsed) {
+  this.build = function(id, name, code, level, start, duration, collapsed) {
     // Set at beginning of day
     var adjusted_start = computeStart(start);
     var calculated_end = computeEndByDuration(adjusted_start, duration);
 
-    return new Task(id, name, code, level, adjusted_start, calculated_end, duration, collapsed);
+    return new Task(id, name, code, level, adjusted_start, calculated_end,
+      duration, collapsed);
   };
 
 }
@@ -72,7 +73,7 @@ function Task(id, name, code, level, start, end, duration, collapsed) {
   this.assigs = [];
 }
 
-Task.prototype.clone = function () {
+Task.prototype.clone = function() {
   var ret = {};
   for (var key in this) {
     if (typeof(this[key]) != "function") {
@@ -82,7 +83,7 @@ Task.prototype.clone = function () {
   return ret;
 };
 
-Task.prototype.getAssigsString = function () {
+Task.prototype.getAssigsString = function() {
   var ret = "";
   for (var i = 0; i < this.assigs.length; i++) {
     var ass = this.assigs[i];
@@ -94,7 +95,7 @@ Task.prototype.getAssigsString = function () {
   return ret;
 };
 
-Task.prototype.createAssignment = function (id, resourceId, roleId, effort) {
+Task.prototype.createAssignment = function(id, resourceId, roleId, effort) {
   var assig = new Assignment(id, resourceId, roleId, effort);
   this.assigs.push(assig);
   return assig;
@@ -102,7 +103,7 @@ Task.prototype.createAssignment = function (id, resourceId, roleId, effort) {
 
 
 //<%---------- SET PERIOD ---------------------- --%>
-Task.prototype.setPeriod = function (start, end) {
+Task.prototype.setPeriod = function(start, end) {
   //console.debug("setPeriod ",this.code,this.name,new Date(start), new Date(end));
   //var profilerSetPer = new Profiler("gt_setPeriodJS");
 
@@ -115,20 +116,21 @@ Task.prototype.setPeriod = function (start, end) {
   }
 
   var originalPeriod = {
-    start:    this.start,
-    end:      this.end,
+    start: this.start,
+    end: this.end,
     duration: this.duration
   };
 
 
   //compute legal start/end //todo mossa qui R&S 30/3/2016 perchè altrimenti il calcolo della durata, che è stato modificato sommando giorni, sbaglia
   start = computeStart(start);
-  end=computeEnd(end);
+  end = computeEnd(end);
 
   var newDuration = recomputeDuration(start, end);
 
   //if are equals do nothing and return true
-  if ( start == originalPeriod.start && end == originalPeriod.end && newDuration == originalPeriod.duration) {
+  if (start == originalPeriod.start && end == originalPeriod.end &&
+    newDuration == originalPeriod.duration) {
     //console.debug("Periods are identical!")
     return true;
   }
@@ -181,13 +183,15 @@ Task.prototype.setPeriod = function (start, end) {
 
   //cannot write exit
   if (!this.canWrite) {
-    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" + GanttMaster.messages["CANNOT_WRITE"], this);
+    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" + GanttMaster
+      .messages["CANNOT_WRITE"], this);
     return false;
   }
 
   //external dependencies: exit with error
   if (this.hasExternalDep) {
-    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" + GanttMaster.messages["TASK_HAS_EXTERNAL_DEPS"], this);
+    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" + GanttMaster
+      .messages["TASK_HAS_EXTERNAL_DEPS"], this);
     return false;
   }
 
@@ -230,7 +234,8 @@ Task.prototype.setPeriod = function (start, end) {
 
     //check global boundaries
     if (this.start < this.master.minEditableDate || this.end > this.master.maxEditableDate) {
-      this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +GanttMaster.messages["CHANGE_OUT_OF_SCOPE"], this);
+      this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +
+        GanttMaster.messages["CHANGE_OUT_OF_SCOPE"], this);
       todoOk = false;
     }
 
@@ -248,7 +253,7 @@ Task.prototype.setPeriod = function (start, end) {
 
 
 //<%---------- MOVE TO ---------------------- --%>
-Task.prototype.moveTo = function (start, ignoreMilestones) {
+Task.prototype.moveTo = function(start, ignoreMilestones) {
   //console.debug("moveTo ",this.code,this.name,new Date(start),this.duration,ignoreMilestones);
   //var profiler = new Profiler("gt_task_moveTo");
 
@@ -258,7 +263,7 @@ Task.prototype.moveTo = function (start, ignoreMilestones) {
 
   var originalPeriod = {
     start: this.start,
-    end:   this.end
+    end: this.end
   };
 
   var wantedStartMillis = start;
@@ -269,11 +274,13 @@ Task.prototype.moveTo = function (start, ignoreMilestones) {
   //if start is milestone cannot be move
   if (!ignoreMilestones && this.startIsMilestone && start != this.start) {
     //notify error
-    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +GanttMaster.messages["START_IS_MILESTONE"], this);
+    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" + GanttMaster
+      .messages["START_IS_MILESTONE"], this);
     return false;
   } else if (this.hasExternalDep) {
     //notify error
-    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +GanttMaster.messages["TASK_HAS_EXTERNAL_DEPS"], this);
+    this.master.setErrorOnTransaction("\"" + this.name + "\"\n" + GanttMaster
+      .messages["TASK_HAS_EXTERNAL_DEPS"], this);
     return false;
   }
 
@@ -307,8 +314,9 @@ Task.prototype.moveTo = function (start, ignoreMilestones) {
       this.duration = recomputeDuration(start, end);
     }*/
     //in case of end is milestone it never changes!
-    if (!ignoreMilestones && this.endIsMilestone && end!=this.end) {
-      this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +GanttMaster.messages["END_IS_MILESTONE"], this);
+    if (!ignoreMilestones && this.endIsMilestone && end != this.end) {
+      this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +
+        GanttMaster.messages["END_IS_MILESTONE"], this);
       return false;
     }
     this.start = start;
@@ -317,20 +325,23 @@ Task.prototype.moveTo = function (start, ignoreMilestones) {
 
     //check global boundaries
     if (this.start < this.master.minEditableDate || this.end > this.master.maxEditableDate) {
-      this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +GanttMaster.messages["CHANGE_OUT_OF_SCOPE"], this);
+      this.master.setErrorOnTransaction("\"" + this.name + "\"\n" +
+        GanttMaster.messages["CHANGE_OUT_OF_SCOPE"], this);
       return false;
     }
 
 
     // bicch 22/4/2016: quando si sposta un task con child a cavallo di holidays, i figli devono essere shiftati in workingDays, non in millisecondi, altrimenti si cambiano le durate
     // when moving children you MUST consider WORKING days,
-    var panDeltaInWD = new Date(originalPeriod.start).distanceInWorkingDays(new Date(this.start));
+    var panDeltaInWD = new Date(originalPeriod.start).distanceInWorkingDays(
+      new Date(this.start));
 
     //loops children to shift them
     var children = this.getChildren();
     for (var i = 0; i < children.length; i++) {
       ch = children[i];
-      var chStart=new Date(ch.start).incrementDateByWorkingDays(panDeltaInWD);
+      var chStart = new Date(ch.start).incrementDateByWorkingDays(
+        panDeltaInWD);
       if (!ch.moveTo(chStart, false)) {
         //console.debug("esco")
         return false;
@@ -351,7 +362,7 @@ Task.prototype.moveTo = function (start, ignoreMilestones) {
 
 
 //<%---------- PROPAGATE TO INFERIORS ---------------------- --%>
-Task.prototype.propagateToInferiors = function (end) {
+Task.prototype.propagateToInferiors = function(end) {
   //and now propagate to inferiors
   var todoOk = true;
   var infs = this.getInferiors();
@@ -359,7 +370,8 @@ Task.prototype.propagateToInferiors = function (end) {
     for (var i = 0; i < infs.length; i++) {
       var link = infs[i];
       if (!link.to.canWrite) {
-        this.master.setErrorOnTransaction(GanttMaster.messages["CANNOT_WRITE"] + "\n\"" + link.to.name + "\"", link.to);
+        this.master.setErrorOnTransaction(GanttMaster.messages["CANNOT_WRITE"] +
+          "\n\"" + link.to.name + "\"", link.to);
         break;
       }
       todoOk = link.to.moveTo(end, false); //this is not the right date but moveTo checks start
@@ -372,17 +384,18 @@ Task.prototype.propagateToInferiors = function (end) {
 
 
 //<%---------- COMPUTE START BY SUPERIORS ---------------------- --%>
-Task.prototype.computeStartBySuperiors = function (proposedStart) {
+Task.prototype.computeStartBySuperiors = function(proposedStart) {
   //if depends -> start is set to max end + lag of superior
-  var supEnd=proposedStart;
+  var supEnd = proposedStart;
   var sups = this.getSuperiors();
   if (sups && sups.length > 0) {
-    supEnd=0;
+    supEnd = 0;
     for (var i = 0; i < sups.length; i++) {
       var link = sups[i];
-      supEnd = Math.max(supEnd, incrementDateByWorkingDays(link.from.end, link.lag));
+      supEnd = Math.max(supEnd, incrementDateByWorkingDays(link.from.end,
+        link.lag));
     }
-    supEnd+=1;
+    supEnd += 1;
   }
   return computeStart(supEnd);
 };
@@ -404,10 +417,12 @@ function updateTree(task) {
 
   if (p.start > task.start) {
     if (p.startIsMilestone) {
-      task.master.setErrorOnTransaction("\"" + p.name + "\"\n" + GanttMaster.messages["START_IS_MILESTONE"], task);
+      task.master.setErrorOnTransaction("\"" + p.name + "\"\n" + GanttMaster.messages[
+        "START_IS_MILESTONE"], task);
       return false;
     } else if (p.depends) {
-      task.master.setErrorOnTransaction("\"" + p.name + "\"\n" + GanttMaster.messages["TASK_HAS_CONSTRAINTS"], task);
+      task.master.setErrorOnTransaction("\"" + p.name + "\"\n" + GanttMaster.messages[
+        "TASK_HAS_CONSTRAINTS"], task);
       return false;
     }
 
@@ -415,7 +430,8 @@ function updateTree(task) {
   }
   if (p.end < task.end) {
     if (p.endIsMilestone) {
-      task.master.setErrorOnTransaction("\"" + p.name + "\"\n" + GanttMaster.messages["END_IS_MILESTONE"], task);
+      task.master.setErrorOnTransaction("\"" + p.name + "\"\n" + GanttMaster.messages[
+        "END_IS_MILESTONE"], task);
       return false;
     }
 
@@ -427,13 +443,15 @@ function updateTree(task) {
 
     //can write?
     if (!p.canWrite) {
-      task.master.setErrorOnTransaction(GanttMaster.messages["CANNOT_WRITE"] + "\n" + p.name, task);
+      task.master.setErrorOnTransaction(GanttMaster.messages["CANNOT_WRITE"] +
+        "\n" + p.name, task);
       return false;
     }
 
     //has external deps ?
     if (p.hasExternalDep) {
-      task.master.setErrorOnTransaction(GanttMaster.messages["TASK_HAS_EXTERNAL_DEPS"] + "\n\"" + p.name + "\"", task);
+      task.master.setErrorOnTransaction(GanttMaster.messages[
+        "TASK_HAS_EXTERNAL_DEPS"] + "\n\"" + p.name + "\"", task);
       return false;
     }
 
@@ -445,12 +463,13 @@ function updateTree(task) {
 
 
 //<%---------- CHANGE STATUS ---------------------- --%>
-Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
+Task.prototype.changeStatus = function(newStatus, forceStatusCheck) {
   //console.debug("changeStatus: "+this.name+" from "+this.status+" -> "+newStatus);
 
   var cone = this.getDescendant();
 
-  function propagateStatus(task, newStatus, manuallyChanged, propagateFromParent, propagateFromChildren) {
+  function propagateStatus(task, newStatus, manuallyChanged,
+    propagateFromParent, propagateFromChildren) {
     //console.debug("propagateStatus",task.name, task.status,newStatus, manuallyChanged, propagateFromParent, propagateFromChildren);
     var oldStatus = task.status;
 
@@ -468,8 +487,10 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
     if (newStatus == "STATUS_DONE") {
 
       // cannot close task if open issues
-      if (task.master.permissions.cannotCloseTaskIfIssueOpen && task.openIssues > 0) {
-        task.master.setErrorOnTransaction(GanttMaster.messages["CANNOT_CLOSE_TASK_IF_OPEN_ISSUE"] + " \"" + task.name + "\"");
+      if (task.master.permissions.cannotCloseTaskIfIssueOpen && task.openIssues >
+        0) {
+        task.master.setErrorOnTransaction(GanttMaster.messages[
+          "CANNOT_CLOSE_TASK_IF_OPEN_ISSUE"] + " \"" + task.name + "\"");
         return false;
       }
 
@@ -479,9 +500,12 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
         //can be closed only if superiors are already done
         var sups = task.getSuperiors();
         for (var i = 0; i < sups.length; i++) {
-          if (sups[i].from.status != "STATUS_DONE" && cone.indexOf(sups[i].from)<0) { // è un errore se un predecessore è non chiuso ed è fuori dal cono
-            if (manuallyChanged || propagateFromParent)  //genere un errore bloccante se è cambiato a mano o se il cambiamento arriva dal parent ed ho una dipendenza fuori dal cono (altrimenti avrei un attivo figlio di un chiuso
-              task.master.setErrorOnTransaction(GanttMaster.messages["GANTT_ERROR_DEPENDS_ON_OPEN_TASK"] + "\n\"" + sups[i].from.name + "\" -> \"" + task.name + "\"");
+          if (sups[i].from.status != "STATUS_DONE" && cone.indexOf(sups[i].from) <
+            0) { // è un errore se un predecessore è non chiuso ed è fuori dal cono
+            if (manuallyChanged || propagateFromParent) //genere un errore bloccante se è cambiato a mano o se il cambiamento arriva dal parent ed ho una dipendenza fuori dal cono (altrimenti avrei un attivo figlio di un chiuso
+              task.master.setErrorOnTransaction(GanttMaster.messages[
+                "GANTT_ERROR_DEPENDS_ON_OPEN_TASK"] + "\n\"" + sups[i].from
+              .name + "\" -> \"" + task.name + "\"");
             todoOk = false;
             break;
           }
@@ -489,15 +513,15 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
 
         if (todoOk) {
           // set progress to 100% if needed by settings
-          if (task.master.set100OnClose && !task.progressByWorklog ){
-            task.progress=100;
+          if (task.master.set100OnClose && !task.progressByWorklog) {
+            task.progress = 100;
           }
 
           //set children as done
-          propagateStatusToChildren(task,newStatus,false);
+          propagateStatusToChildren(task, newStatus, false);
 
           //set inferiors as active
-          propagateStatusToInferiors( task.getInferiors(), "STATUS_ACTIVE");
+          propagateStatusToInferiors(task.getInferiors(), "STATUS_ACTIVE");
         }
       } else { // una propagazione tenta di chiudere un task fallito
         todoOk = false;
@@ -518,7 +542,9 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
         for (var i = 0; i < sups.length; i++) {
           if (sups[i].from.status != "STATUS_DONE") {
             if (manuallyChanged || propagateFromChildren)
-              task.master.setErrorOnTransaction(GanttMaster.messages["GANTT_ERROR_DEPENDS_ON_OPEN_TASK"] + "\n\"" + sups[i].from.name + "\" -> \"" + task.name + "\"");
+              task.master.setErrorOnTransaction(GanttMaster.messages[
+                  "GANTT_ERROR_DEPENDS_ON_OPEN_TASK"] + "\n\"" + sups[i].from
+                .name + "\" -> \"" + task.name + "\"");
             todoOk = false;
             break;
           }
@@ -535,25 +561,27 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
 
 
         if (todoOk) {
-          if (oldStatus == "STATUS_UNDEFINED" || oldStatus == "STATUS_SUSPENDED") {
+          if (oldStatus == "STATUS_UNDEFINED" || oldStatus ==
+            "STATUS_SUSPENDED") {
             //set children as active
-            propagateStatusToChildren(task,newStatus,true);
+            propagateStatusToChildren(task, newStatus, true);
           }
 
           //set inferiors as suspended
-          propagateStatusToInferiors( task.getInferiors(), "STATUS_SUSPENDED");
+          propagateStatusToInferiors(task.getInferiors(), "STATUS_SUSPENDED");
         }
       } else {
         todoOk = false;
       }
 
       // xxxx -> STATUS_SUSPENDED       all active children and their active descendants become suspended. when not failed or forced
-    } else if (newStatus == "STATUS_SUSPENDED" ) {
+    } else if (newStatus == "STATUS_SUSPENDED") {
       if (manuallyChanged || oldStatus != "STATUS_FAILED") { //cannot set failed task as closed for cascade - only if changed manually
 
         //check if parent if not active
         var par = task.getParent();
-        if (par && (par.status != "STATUS_ACTIVE" && par.status != "STATUS_SUSPENDED")) {
+        if (par && (par.status != "STATUS_ACTIVE" && par.status !=
+            "STATUS_SUSPENDED")) {
           todoOk = false;
         }
 
@@ -563,7 +591,7 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
           propagateStatusToChildren(task, newStatus, true);
 
           //set inferiors as STATUS_SUSPENDED
-          propagateStatusToInferiors( task.getInferiors(), newStatus);
+          propagateStatusToInferiors(task.getInferiors(), newStatus);
         }
       } else {
         todoOk = false;
@@ -571,13 +599,14 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
 
       // xxxx -> STATUS_FAILED children and dependent failed
       // xxxx -> STATUS_UNDEFINED  children and dependant become undefined.
-    } else if (newStatus == "STATUS_FAILED" || newStatus == "STATUS_UNDEFINED") {
+    } else if (newStatus == "STATUS_FAILED" || newStatus ==
+      "STATUS_UNDEFINED") {
 
       //set children as failed or undefined
-      propagateStatusToChildren(task,newStatus,false);
+      propagateStatusToChildren(task, newStatus, false);
 
       //set inferiors as failed
-      propagateStatusToInferiors( task.getInferiors(), newStatus);
+      propagateStatusToInferiors(task.getInferiors(), newStatus);
     }
     if (!todoOk) {
       task.status = oldStatus;
@@ -591,7 +620,7 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
    * A helper method to traverse an array of 'inferior' tasks
    * and signal a status change.
    */
-  function propagateStatusToInferiors( infs, status) {
+  function propagateStatusToInferiors(infs, status) {
     for (var i = 0; i < infs.length; i++) {
       propagateStatus(infs[i].to, status, false, false, false);
     }
@@ -603,12 +632,12 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
   function propagateStatusToChildren(task, newStatus, skipClosedTasks) {
     var chds = task.getChildren();
     for (var i = 0; i < chds.length; i++)
-      if (!(skipClosedTasks && chds[i].status == "STATUS_DONE") )
+      if (!(skipClosedTasks && chds[i].status == "STATUS_DONE"))
         propagateStatus(chds[i], newStatus, false, true, false);
   }
 
 
-  var manuallyChanged=true;
+  var manuallyChanged = true;
 
   var oldStatus = this.status;
   //first call
@@ -620,14 +649,15 @@ Task.prototype.changeStatus = function (newStatus,forceStatusCheck) {
   }
 };
 
-Task.prototype.synchronizeStatus = function () {
+Task.prototype.synchronizeStatus = function() {
   //console.debug("synchronizeStatus",this.name);
   var oldS = this.status;
-  this.status = this.getParent()?this.getParent().status:"STATUS_UNDEFINED"; // di default si invalida lo stato mettendo quello del padre, in modo che inde/outd siano consistenti
-  return this.changeStatus(oldS,true);
+  this.status = this.getParent() ? this.getParent().status :
+    "STATUS_UNDEFINED"; // di default si invalida lo stato mettendo quello del padre, in modo che inde/outd siano consistenti
+  return this.changeStatus(oldS, true);
 };
 
-Task.prototype.isLocallyBlockedByDependencies = function () {
+Task.prototype.isLocallyBlockedByDependencies = function() {
   var sups = this.getSuperiors();
   var blocked = false;
   for (var i = 0; i < sups.length; i++) {
@@ -640,7 +670,7 @@ Task.prototype.isLocallyBlockedByDependencies = function () {
 };
 
 //<%---------- TASK STRUCTURE ---------------------- --%>
-Task.prototype.getRow = function () {
+Task.prototype.getRow = function() {
   ret = -1;
   if (this.master)
     ret = this.master.tasks.indexOf(this);
@@ -648,7 +678,7 @@ Task.prototype.getRow = function () {
 };
 
 
-Task.prototype.getParents = function () {
+Task.prototype.getParents = function() {
   var ret;
   if (this.master) {
     var topLevel = this.level;
@@ -666,7 +696,7 @@ Task.prototype.getParents = function () {
 };
 
 
-Task.prototype.getParent = function () {
+Task.prototype.getParent = function() {
   var ret;
   if (this.master) {
     for (var i = this.getRow(); i >= 0; i--) {
@@ -681,7 +711,7 @@ Task.prototype.getParent = function () {
 };
 
 
-Task.prototype.isParent = function () {
+Task.prototype.isParent = function() {
   var ret = false;
   if (this.master) {
     var pos = this.getRow();
@@ -692,7 +722,7 @@ Task.prototype.isParent = function () {
 };
 
 
-Task.prototype.getChildren = function () {
+Task.prototype.getChildren = function() {
   var ret = [];
   if (this.master) {
     var pos = this.getRow();
@@ -708,7 +738,7 @@ Task.prototype.getChildren = function () {
 };
 
 
-Task.prototype.getDescendant = function () {
+Task.prototype.getDescendant = function() {
   var ret = [];
   if (this.master) {
     var pos = this.getRow();
@@ -724,18 +754,18 @@ Task.prototype.getDescendant = function () {
 };
 
 
-Task.prototype.getSuperiors = function () {
+Task.prototype.getSuperiors = function() {
   var ret = [];
   var task = this;
   if (this.master) {
-    ret = this.master.links.filter(function (link) {
+    ret = this.master.links.filter(function(link) {
       return link.to == task;
     });
   }
   return ret;
 };
 
-Task.prototype.getSuperiorTasks = function () {
+Task.prototype.getSuperiorTasks = function() {
   var ret = [];
   var sups = this.getSuperiors();
   for (var i = 0; i < sups.length; i++)
@@ -744,18 +774,18 @@ Task.prototype.getSuperiorTasks = function () {
 };
 
 
-Task.prototype.getInferiors = function () {
+Task.prototype.getInferiors = function() {
   var ret = [];
   var task = this;
   if (this.master) {
-    ret = this.master.links.filter(function (link) {
+    ret = this.master.links.filter(function(link) {
       return link.from == task;
     });
   }
   return ret;
 };
 
-Task.prototype.getInferiorTasks = function () {
+Task.prototype.getInferiorTasks = function() {
   var ret = [];
   var infs = this.getInferiors();
   for (var i = 0; i < infs.length; i++)
@@ -763,10 +793,10 @@ Task.prototype.getInferiorTasks = function () {
   return ret;
 };
 
-Task.prototype.deleteTask = function () {
+Task.prototype.deleteTask = function() {
   //console.debug("deleteTask",this.name,this.master.deletedTaskIds)
   //if is the current one remove it
-  if (this.master.currentTask && this.master.currentTask.id==this.id)
+  if (this.master.currentTask && this.master.currentTask.id == this.id)
     delete this.master.currentTask;
 
   //delete both dom elements if exists
@@ -791,20 +821,20 @@ Task.prototype.deleteTask = function () {
 
   //remove from links
   var task = this;
-  this.master.links = this.master.links.filter(function (link) {
+  this.master.links = this.master.links.filter(function(link) {
     return link.from != task && link.to != task;
   });
 };
 
 
-Task.prototype.isNew = function () {
+Task.prototype.isNew = function() {
   return (this.id + "").indexOf("tmp_") == 0;
 };
 
-Task.prototype.isDependent = function (t) {
+Task.prototype.isDependent = function(t) {
   //console.debug("isDependent",this.name, t.name)
   var task = this;
-  var dep = this.master.links.filter(function (link) {
+  var dep = this.master.links.filter(function(link) {
     return link.from == task;
   });
 
@@ -822,14 +852,14 @@ Task.prototype.isDependent = function (t) {
   return false;
 };
 
-Task.prototype.setLatest = function (maxCost) {
+Task.prototype.setLatest = function(maxCost) {
   this.latestStart = maxCost - this.criticalCost;
   this.latestFinish = this.latestStart + this.duration;
 };
 
 
 //<%------------------------------------------  INDENT/OUTDENT --------------------------------%>
-Task.prototype.indent = function () {
+Task.prototype.indent = function() {
   //console.debug("indent", this);
   //a row above must exist
   var row = this.getRow();
@@ -855,7 +885,7 @@ Task.prototype.indent = function () {
       if (desc.level > oldLevel || desc == this) {
         desc.level++;
         //remove links from this and descendant to my parents
-        this.master.links = this.master.links.filter(function (link) {
+        this.master.links = this.master.links.filter(function(link) {
           var linkToParent = false;
           if (link.to == desc)
             linkToParent = futureParents.indexOf(link.from) >= 0;
@@ -864,14 +894,16 @@ Task.prototype.indent = function () {
           return !linkToParent;
         });
         //remove links from this and descendants to predecessors of parents in order to avoid loop
-        var predecessorsOfFutureParents=[];
-        for (var j=0;j<futureParents.length;j++)
-          predecessorsOfFutureParents=predecessorsOfFutureParents.concat(futureParents[j].getSuperiorTasks());
+        var predecessorsOfFutureParents = [];
+        for (var j = 0; j < futureParents.length; j++)
+          predecessorsOfFutureParents = predecessorsOfFutureParents.concat(
+            futureParents[j].getSuperiorTasks());
 
-        this.master.links = this.master.links.filter(function (link) {
+        this.master.links = this.master.links.filter(function(link) {
           var linkToParent = false;
           if (link.from == desc)
-            linkToParent = predecessorsOfFutureParents.indexOf(link.to) >= 0;
+            linkToParent = predecessorsOfFutureParents.indexOf(link.to) >=
+            0;
           return !linkToParent;
         });
 
@@ -900,7 +932,7 @@ Task.prototype.indent = function () {
 };
 
 
-Task.prototype.outdent = function () {
+Task.prototype.outdent = function() {
   //console.debug("outdent", this);
 
   //a level must be >1 -> cannot escape from root
@@ -923,8 +955,9 @@ Task.prototype.outdent = function () {
   var task = this;
   var chds = this.getChildren();
   //remove links from me to my new children
-  this.master.links = this.master.links.filter(function (link) {
-    var linkExist = (link.to == task && chds.indexOf(link.from) >= 0 || link.from == task && chds.indexOf(link.to) >= 0);
+  this.master.links = this.master.links.filter(function(link) {
+    var linkExist = (link.to == task && chds.indexOf(link.from) >= 0 ||
+      link.from == task && chds.indexOf(link.to) >= 0);
     return !linkExist;
   });
 
@@ -948,7 +981,7 @@ Task.prototype.outdent = function () {
 
 
 //<%------------------------------------------  MOVE UP / MOVE DOWN --------------------------------%>
-Task.prototype.moveUp = function () {
+Task.prototype.moveUp = function() {
   //console.debug("moveUp", this);
   var ret = false;
 
@@ -991,14 +1024,15 @@ Task.prototype.moveUp = function () {
     //recompute depends string
     this.master.updateDependsStrings();
   } else {
-    this.master.setErrorOnTransaction(GanttMaster.messages["TASK_MOVE_INCONSISTENT_LEVEL"], this);
+    this.master.setErrorOnTransaction(GanttMaster.messages[
+      "TASK_MOVE_INCONSISTENT_LEVEL"], this);
     ret = false;
   }
   return ret;
 };
 
 
-Task.prototype.moveDown = function () {
+Task.prototype.moveDown = function() {
   //console.debug("moveDown", this);
 
   //a row below must exist, and cannot move root task
@@ -1084,7 +1118,3 @@ function Role(id, name) {
   this.id = id;
   this.name = name;
 }
-
-
-
-
