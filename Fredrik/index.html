@@ -3,24 +3,32 @@
 <title>Nock-Off</title>
 <meta name="viewport-hejjejejejeej" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="css/w3.css">
 
 <script src="js/w3.js" charset="utf-8"></script>
 <script src="../dep.JS/jquery-3.2.0.js"></script>
-
-<style>
-
-</style>
+<script src="dataBase/dB_util.js"></script>
+<script src="js/funcScript.js"></script>
 <script src="test.js"></script>
-<body>
-  <div display="inline">
-    <form id="contact" action="#">
-        <input id="name_value" name="name">
-        <button id="submit">Submit</button>
-    </form>
 
-  </div>
-  <div class="reponse"></div>
+<body>
+    <div display="inline">
+        <p>Type 'correct' to validate.</p>
+        <form id="task_create">
+            <div>
+                <input type="text">
+                <button type="button" id="submit_my" name="submit">submit</button>
+            </div>
+        </form>
+
+        <div id="response"></div>
+    </div>
+
+    <button type="button" name="checkExist" onclick="php_dB/dB_utilPHP.php">Check</button>
 
 </body>
+
 </html>
+<!-->
+<form align="center" action="yourpage.php?func_name=updateRecord" method="post">
+    </-->
