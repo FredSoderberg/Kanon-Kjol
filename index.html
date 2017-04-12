@@ -7,7 +7,7 @@
 <style>
 
 </style>
-
+<script src="dep.JS/jquery-3.2.0.js"></script>
 <script src="dep.JS/test.js"></script>
 
 </head>
@@ -20,6 +20,38 @@
     <a href="Robert#" class="w3-blue w3-bar-item w3-button w3-margin w3-border " onmouseover="">Robert</a>
   </div>
   </div>
+<div display="inline">
+  <form id="contact" action="#">
+      <input id="name_value" name="name"/>
+      <button id="submit">Submit</button>
+  </form>
+
+</div>
+<div class="reponse"></div>
+
+
+<script type="text/javascript">
+/*
+$( function(){
+    $( '#contact' ).submit( function(){
+        console.log( 'hello' );
+    }
+});
+
+$.ajax({
+    type: 'POST',
+    url: 'php_dB/test.php',
+    data: formData,
+    success: function( resp ){
+        if ( resp == true ){
+            $( '.response' ).text( 'Awesome - Your email was sent successfully' );
+        } else {
+            $( '.response' ).text( 'Bummer. Something went wrong' );
+       }
+    }
+ });
+*/
+ </script>
 
 </body>
 </html>

@@ -45,6 +45,10 @@ function db_query($query) {
     return $result;
 }
 
+function db_error() {
+    $connection = db_connect();
+    return mysqli_error($connection);
+}
 
 
 ?>
