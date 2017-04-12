@@ -2,7 +2,8 @@
 <html>
 <title>Nock-Off - Erika</title>
 <link rel="stylesheet" href="../dep.CSS/w3.css">
-
+<script src="jquery-ui/jquery-ui.js" charset="utf-8"></script>
+<script src="js/w3.js" charset="utf-8"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -13,8 +14,8 @@
         }
 
         .div2 {
-            width: 450px;
-            height: 450px;
+            width: 54%;
+            height: 43%;
             padding: 50px;
             border: 1px solid grey;
             background-color: grey;
@@ -55,8 +56,8 @@
         <div>
             <img src="img/logo/logo.svg" style="width:75%" class="w3-display-topmiddle w3-margin-top">
         </div>
-
-        <form class="w3-container sign" name="myForm">
+<div>
+    <form class="w3-container sign" name="myForm">
             <p>
                 <label class="w3-text-black">Email address</label>
                 <input id="name1" class="w3-input backgroundColor" type="text"></p>
@@ -81,16 +82,18 @@
                         <input class="w3-input backgroundColor" type="text"></p>
                 </div>
         </form>
+        </div>
+
     </div>
     <script>
         function RollDownFunction() {
             var x = document.getElementById("hiden")
             if (x.style.display == "none") {
                 x.style.display = "inline-block";
-                $("#square").switchClass("div2","div3")
+                w3.toggleClass("#square","div3","div2")
             } else {
                 x.style.display = "none";
-
+                w3.toggleClass("#square","div2","div3")
             }
 
         }
