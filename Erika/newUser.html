@@ -1,76 +1,105 @@
 <!DOCTYPE html>
 <html>
 <title>Nock-Off - Erika</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../dep.CSS/w3.css">
+<script src="jquery-ui/jquery-ui.js" charset="utf-8"></script>
+<script src="js/w3.js" charset="utf-8"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 <head>
-<style>
-body {
-  background-color: lightgrey;
-  }
-  .div2 {
-      width: 450px;
-      height: 450px;
-      padding: 50px;
-      border: 1px solid grey;
-      background-color: grey;
-      box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
-  }
+    <style>
+    body {
+            background-color: lightgrey;
+        }
 
-    .sign {
-      margin-left: -20px;
-      margin-right: -20px;
-      margin-top: 40px;
+        .div2 {
+            width: 54%;
+            height: 43%;
+            padding: 50px;
+            border: 1px solid grey;
+            background-color: grey;
+            box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
+        }
+
+        .sign {
+            margin-left: -20px;
+            margin-right: -20px;
+            margin-top: 40px;
+        }
+
+
+        .backgroundColor {
+            background-color: lightgrey;
+        }
+
+        .hight {
+            margin-top: -20px;
+        }
+
+        .div3 {
+            width: 450px;
+            height: 500px;
+            padding: 50px;
+            border: 1px solid grey;
+            background-color: grey;
+            box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
+        }
+
     }
-
-
-  .backgroundColor {
-  background-color: lightgrey;
-
-  }
-.hight {
-  margin-top: -20px;
-}
-}
-</style>
+    </style>
 </head>
 
 <body>
 
-  <div class="div2 w3-display-middle w3-round-large w3-card-4">
-  <div>
-  <img src="img/logo/logo.svg" style="width:75%" class="w3-display-topmiddle w3-margin-top">
-  </div>
-
+    <div id="square" class="div2 w3-display-middle w3-round-large w3-card-4">
+        <div>
+            <img src="img/logo/logo.svg" style="width:75%" class="w3-display-topmiddle w3-margin-top">
+        </div>
+<div>
     <form class="w3-container sign" name="myForm">
-    <p>
-    <label class="w3-text-black">Email address</label>
-    <input id="name1" class="w3-input backgroundColor" type="text"></p>
-    <p>
-    <label class="w3-text-black">Password</label>
-    <input class="w3-input backgroundColor" type="password"></p>
-    <p>
-    <label class="w3-text-black">Confirm password</label>
-    <input class="w3-input backgroundColor" type="password"></p>
-    <p>
-      <form class="inline-block">
-        <p> What position do you have?</p>
-        <input class="w3-check hight" type="checkbox">
-        <label>Employee</label>
-          <input class="w3-check hight" type="checkbox" onclick="RollDownFunction()">
-          <label>Administrator</label>
-      </form>
-      <a id="newUser"  class="w3-display-bottomright w3-margin-right w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4" href="index.html">Confirm and sign in</a>
-      <p>
-      <label class="w3-hide w3-text-black">Administrators email address</label>
-      <input class="w3-hide w3-input backgroundColor" type="password"></p>
+            <p>
+                <label class="w3-text-black">Email address</label>
+                <input id="name1" class="w3-input backgroundColor" type="text"></p>
+            <p>
+                <label class="w3-text-black">Password</label>
+                <input class="w3-input backgroundColor" type="password"></p>
+            <p>
+                <label class="w3-text-black">Confirm password</label>
+                <input class="w3-input backgroundColor" type="password"></p>
+            <p>
+                <form class="inline-block">
+                    <p> What position do you have?</p>
+                    <input id="employee" class="w3-check hight" type="checkbox" onchange="RollDownFunction()">
+                    <label>Employee</label>
+                    <input id="administrator" class="w3-check hight" type="checkbox">
+                    <label>Administrator</label>
+                </form>
+                <a id="newUser" class="w3-display-bottomright w3-margin-right w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4" href="index.html">Confirm and sign in</a>
+                <p>
+                    <div id="hiden" style="display:none">
+                        <label class="w3-text-black">Administrators email address</label>
+                        <input class="w3-input backgroundColor" type="text"></p>
+                </div>
+        </form>
+        </div>
 
-  </form>
-</div>
+    </div>
+    <script>
+        function RollDownFunction() {
+            var x = document.getElementById("hiden")
+            if (x.style.display == "none") {
+                x.style.display = "inline-block";
+                w3.toggleClass("#square","div3","div2")
+            } else {
+                x.style.display = "none";
+                w3.toggleClass("#square","div2","div3")
+            }
 
-<script>
-
-</script>
+        }
+        //
+    </script>
 
 </body>
+
 </html>
