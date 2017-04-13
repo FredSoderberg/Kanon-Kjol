@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="common/docs.css">
+  <!--  <link rel="stylesheet" type="text/css" href="common/docs.css">-->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="initial-scale = 1.0" />
 
@@ -47,12 +47,25 @@ div .col_container {
   flex-direction: row;            /* default value; can be omitted */
   flex-wrap: nowrap;              /* default value; can be omitted */
   justify-content: space-between; /* switched from default (flex-start, see below) */
-  background-color: lightyellow;
-}
-#container > div {
-  width: 100px;
-  height: 100px;
+  background-color: yellow;
   border: 2px dashed red;
+}
+
+div .row_container {
+  background-color: grey;
+  border: 2px dashed red;
+}
+
+div .head_cell {
+  background-color: brown;
+  border: 2px dashed black;
+  border-radius: 20px;
+}
+
+div .rersource_row {
+  background-color: blue;
+  border: 2px dashed black;
+  border-radius: 5px;
 }
 </style>
 
@@ -64,6 +77,8 @@ div .col_container {
 
     cal._init_html_area("calendar");
     cal._set_size();
+    cal._create_resource_headers();
+    cal._create_resources();
 
   </script>
 </body>

@@ -16,7 +16,12 @@ var config = {
     {name:"text", label:"Type", width:50},
     {name:"worker", label:"Assigned", width:100}
   ],
-  
+  resources: [
+    {name:"text", label:"Fredrik"},
+    {name:"worker", label:"Robert"},
+    {name:"worker", label:"Erika"}
+  ]
+
 
     /*
 		{name:"text", tree:true, width:'*', resize:true },

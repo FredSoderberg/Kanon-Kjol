@@ -92,7 +92,7 @@ Calendar.prototype._init_html_area = function(node){
   this.divScrollHor    = childs[3];
 
   this.divResourceView.innerHTML = "<div class='resource_view_header col_container'></div>"+
-                                  "<div class='resource_view_data'></div>";
+                                  "<div class='resource_view_data row_container'></div>";
 
 
   this.divResourceViewHeader = this.divResourceView.childNodes[0];
