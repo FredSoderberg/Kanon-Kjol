@@ -1,5 +1,11 @@
 <?php
 
+$form_action_func = $_POST['func_name'];
+if(isset($_POST['$form_action_func']))
+{
+  checkTableExist();
+}
+
 
 
 function db_connect() {

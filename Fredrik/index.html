@@ -24,8 +24,22 @@
         <div id="response"></div>
     </div>
 
-    <button type="button" name="checkExist" onclick="php_dB/dB_utilPHP.php">Check</button>
+    <button type="button" id="checkExistJS">CheckJS</button>
 
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $("#checkExistJS").click(function() {
+                $.ajax({
+                    //url: "demo_test.txt",
+                  url: "php_dB/dB_utilPHP.php?func_name=checkIfTableExists",
+                    success: function(result) {
+                        alert("Yeeeesss");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
