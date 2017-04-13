@@ -2,12 +2,20 @@
 
 $connection = db_connect();
 
-$result = mysqli_query($connection,'select * from t2asks');
+$test1 ="SELECT name FROM `tasks` WHERE id=1";
 
+$test2 ="SELECT * FROM `tasks`";
+
+$result = mysqli_query($connection,$test2);
+$rows = mysqli_num_rows($result);
+$result = mysqli_fetch_all($result,MYSQLI_ASSOC);
 if ($result == false) {
   echo "fail";
 } else {
-var_dump($result);
+for ($i=0; $i <$rows ; $i++) {
+  print_r($result[$i]["ID"]." ".$result[$i]["name"]."\n");
+}
+
 }
 
 function db_connect() {

@@ -10,6 +10,6 @@ return false;
 
 function checkIfTableExists() {
   $.ajax({
-    url: "dB_utilPHP.php?func_name=checkIfTableExists",
+    url: "dB_util.php?func_name=checkIfTableExists",
     success: alert("Yeeeesss");
 }

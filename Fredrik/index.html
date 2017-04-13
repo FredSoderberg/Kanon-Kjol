@@ -27,17 +27,15 @@
     <button type="button" id="checkExistJS">CheckJS</button>
 
     <script type="text/javascript">
-
         $(document).ready(function() {
             $("#checkExistJS").click(function() {
-                $.ajax({
-                    //url: "demo_test.txt",
-                  url: "php_dB/dB_utilPHP.php?func_name=checkIfTableExists",
-                    success: function(result) {
-                        alert("Yeeeesss");
-                    }
+
+                $.("#result").load("php_dB/dB_util.php", function( data ) {
+                  alert(data);
                 });
+
             });
+
         });
     </script>
 </body>
@@ -45,4 +43,4 @@
 </html>
 <!-->
 <form align="center" action="yourpage.php?func_name=updateRecord" method="post">
-    </-->
+</-->

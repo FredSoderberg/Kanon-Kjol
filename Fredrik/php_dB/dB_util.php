@@ -1,9 +1,23 @@
 <?php
+if(checkTableExist()) {
+echo "true";
+}
+else {echo "false";}
 
-$form_action_func = $_POST['func_name'];
+$form_action_func = $_POST['function'];
+
 if(isset($_POST['$form_action_func']))
 {
-  checkTableExist();
+  switch ($form_action_func) {
+    case 'checkTableExist':
+
+      break;
+
+    default:
+      break;
+  }
+
+
 }
 
 
@@ -43,10 +57,10 @@ function db_error() {
     return mysqli_error($connection);
 }
 
-public function checkTableExist()
+function checkTableExist()
 {
   $connection = db_connect();
-  $result = mysql_query('select * from tasks');
+  $result = mysqli_query($connection,'select * from tasks');
 
   return $result;
 }
