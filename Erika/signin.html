@@ -51,7 +51,7 @@
         <form class="w3-container sign" name="myForm">
             <p>
                 <label class="w3-text-black">Email address</label>
-                <input name="name1" class="w3-input backgroundColor" type="text"></p>
+                <input id="mail1" name="name1" class="w3-input backgroundColor" type="text"></p>
             <p>
                 <label class="w3-text-black">Password</label>
                 <input class="w3-input backgroundColor" type="password"></p>
@@ -70,12 +70,22 @@
         <div display="inline-block">
 
             <span class="w3-display-bottomright">
-<a id="sigin"  class="w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4" href="index.html">New user</a>
-<a id="newUser"  class="w3-margin-bottom w3-margin-right w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4" href="index.html">Sign in</a>
+<a id="newUser"  class="w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4" href="newUser.html">New user</a>
+<p id="signIn"  class="w3-margin-bottom w3-margin-right w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4" onclick="myFunction()">Sign in</p>
 </span>
         </div>
 
     </div>
+
+    <p id="nameOutput"></p>
+
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("mail1").value;
+            document.getElementById("nameOutput").innerHTML = x;
+        }
+    </script>
 
 </body>
 
