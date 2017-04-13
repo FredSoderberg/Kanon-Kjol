@@ -7,3 +7,22 @@ Calendar.prototype._set_scroll_size = function(){
 // TODO: Calculate the scroll_sizes for the task and resources
 Calendar.prototype._get_scroll_sizes = function(){
 };
+
+
+Calendar.prototype._get_column_width = function(){
+  var rvWidth = 0;
+  for (col in config.columns){
+    rvWidth += config.columns[col].width;
+  };
+  return rvWidth;
+};
+
+Calendar.prototype._create_resource_headers = function(){
+
+  
+}
+
+
+
+Calendar.prototype._get_scroll_sizes = function(){
+};

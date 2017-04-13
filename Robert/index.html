@@ -8,7 +8,9 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+  <script src="js/config.js"></script>
   <script src="js/calendar.js"></script>
+  <script src="js/calendarUtils.js"></script>
 
    <!--
    //<script src="codebase/sources/dhtmlxgantt.js"></script>
@@ -25,6 +27,35 @@
 
 
 </style>-->
+<style type="text/css">
+
+  div .resource_view{
+       background-color: #66cccc;
+  }
+  div .resource_view_header{
+      background-color: #cc6666;
+  }
+  div .task_view{
+       background-color: #6666cc;
+  }
+  div .task_view_header{
+       background-color: #66cc66;
+   }
+
+div .col_container {
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-between; /* switched from default (flex-start, see below) */
+  background-color: lightyellow;
+}
+#container > div {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed red;
+}
+</style>
+
 </head>
 <body>
   <div id="calendar" style='width:800px; height:1200px;'></div>
