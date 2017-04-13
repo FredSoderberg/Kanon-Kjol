@@ -66,8 +66,8 @@ Calendar.prototype._init_html_area = function(node){
 	//var gridDataAriaAttr = this._waiAria.gridDataAttrString();
 
   this.divBase.innerHTML = "<div class='calendar_container'>"+
-                              "<div class='resources_view'></div>"+
-                              "<div class='tasks_view'></div>"+
+                              "<div class='resource_view'></div>"+
+                              "<div class='task_view'></div>"+
                               "<div class='gantt_ver_scroll'>"+
                                 "<div></div>"+
                               "</div>"+
@@ -91,8 +91,8 @@ Calendar.prototype._init_html_area = function(node){
   this.divScrollVer    = childs[2];
   this.divScrollHor    = childs[3];
 
-  this.divResourceView.innerHTML = "<div class='resouce_view_header'></div>"+
-                                  "<div class='resouce_view_data'></div>";
+  this.divResourceView.innerHTML = "<div class='resource_view_header col_container'></div>"+
+                                  "<div class='resource_view_data row_container'></div>";
 
 
   this.divResourceViewHeader = this.divResourceView.childNodes[0];
@@ -227,6 +227,8 @@ Calendar.prototype._baseBox = function(){
 
 
 
+
+
 // TODO: Function explenation
 // _set_size calculates and defines the scrollable regions of the Calendar
 Calendar.prototype._set_size = function(){
@@ -276,17 +278,24 @@ Calendar.prototype._set_size = function(){
  divResourceViewData         = reswidth + "px"
  divTaskView                 = (baseBox.innerWidth - reswidth - 2) + "px"
 */
-  this.divResourceView.style.width = "20%"; //(width*ratio).toString() + "px";
+  var rvWidth = this._get_column_width();
+  this.divResourceView.style.width = rvWidth + "px"; //(width*ratio).toString() + "px";
   this.divResourceView.style.left = "0px";
   this.divResourceView.style.float = "left";
-  this.divResourceView.style.border.right = "1px silver solid";
+  //this.divResourceView.style.border.right = "1px silver solid";
+  //this.divResourceView.color = "#CCCC66";
   //this.divResourceView.style.position = "absolute";
 
-  this.divTaskView.style.width = "80%"; //(width * (1-ratio)).toString() + "px";
+  this.divTaskView.style.width = (baseBox.innerWidth - rvWidth) + "px"; //(width * (1-ratio)).toString() + "px";
   this.divTaskView.style.right = "0px";
   this.divTaskView.style.float = "right";
+  //this.divTaskViewData.style.color       = "#99CCCC";
   //this.divTaskView.style.border = "1px silver solid";
   //this.divTaskView.style.position = "absolute";
+  console.debug("RvWidth and style", rvWidth, this.divResourceView.style)
+  console.debug("Taskview", this.divTaskView);
 
-
+  //this.divResourceViewHeader.style.width = this.divResourceView.style.width;
+  this.divResourceViewHeader.style.height= 100 + "px";
+  this.divTaskViewHeader.style.height    = 100 + "px";
 };
