@@ -5,11 +5,11 @@
 
 <link rel="stylesheet" href="css/w3.css">
 
-<script src="js/w3.js" charset="utf-8"></script>
+<script src="js/w3.js"></script>
 <script src="../dep.JS/jquery-3.2.0.js"></script>
-<script src="dataBase/dB_util.js"></script>
+<script src="php_dB/dB_util.js"></script>
 <script src="js/funcScript.js"></script>
-<script src="test.js"></script>
+<script src="js/test.js"></script>
 
 <body>
     <div display="inline">
@@ -21,26 +21,118 @@
             </div>
         </form>
 
-        <div id="response"></div>
-    </div>
+        <div id="response">ff</div>
+        <div id="images">ff</div>
+<ul>
+</ul>
+         </div>
 
     <button type="button" id="checkExistJS">CheckJS</button>
 
     <script type="text/javascript">
         $(document).ready(function() {
+          (function() {
+            var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+            $.getJSON( flickerAPI, {
+              tags: "mount rainier",
+              tagmode: "any",
+              format: "json"
+            })
+              .done(function( data ) {
+                $.each( data.items, function( i, item ) {
+                  $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+                  if ( i === 3 ) {
+                    return false;
+                  }
+                });
+              });
+          })();
+
+
+
             $("#checkExistJS").click(function() {
 
-                $.("#result").load("php_dB/dB_util.php", function( data ) {
-                  alert(data);
+
+              $.getJSON('./php_dB/dB_util.php', {
+
+                format:'json'
+              })
+              .fail(function( data ) {
+alert("fail");
                 });
 
-            });
 
-        });
+
+/*
+              var data = "hej";
+              var jqxhr = $.getJSON( "php_dB/dB_util.php", function(data) {
+                $('#result').html(data.id);
+test = data;
+alert(data.simple);
+
+              })
+                .done(function(data) {
+                  console.log( "second success" );
+                  $('#result').html(data.id);
+                  alert("Successful");
+                //  console.log( data );
+
+                })
+                .fail(function(response, status, xhr) {
+                    console.log( "error" );
+                    console.log( response );
+                })
+
+  });
+              // Perform other work here ...
+
+              // Set another completion function for the request above
+
+
+              /*
+                $.getJSON("php_dB/dB_util.php", function(data) {
+
+$("#response").append(document.createTextNode( "Hello" ));
+
+
+                });*/
+
+                /*                    $.get("dB_util.php",function(data) {
+                        success:    alert(data);
+                //      alert(data);
+                        $( "#response" ).append(data);
+                      });
+*/
+                /*
+                                         $("#response").load("php_dB/dB_util.php", function(response, status, xhr) {
+                                                    if (status == "error") {
+                                                        // alert(msg + xhr.status + " " + xhr.statusText);
+                                                        alert(response);
+                                                        console.log(msg + xhr.status + " " + xhr.statusText);
+                                                    }});
+                                                    if (status == "success"){
+                                                      alert("test");
+                                                    }
+                */
+                /*, function(responseTxt, statusTxt, xhr) {
+
+                                    if (statusTxt == "success") {
+                                        alert(responseTxt);
+                                    }
+                                    if (statusTxt == "error") {
+                                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                                    }
+
+                                });
+                */
+
+
+    });
+    });
     </script>
 </body>
 
 </html>
 <!-->
 <form align="center" action="yourpage.php?func_name=updateRecord" method="post">
-</-->
+    </-->

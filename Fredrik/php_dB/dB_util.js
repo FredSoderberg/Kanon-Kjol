@@ -9,7 +9,10 @@ return false;
 }
 
 function checkIfTableExists() {
+/*
   $.ajax({
     url: "dB_util.php?func_name=checkIfTableExists",
-    success: alert("Yeeeesss");
+    success: alert("Yeeeesss")
+});
+*/
 }

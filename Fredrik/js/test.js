@@ -1,4 +1,4 @@
-document.write('<script src="w3.js"><\/script>');
+document.write('<script src="js/w3.js"><\/script>');
 //document.write('<script src="modernizr-2.7.2.js"><\/script>');
 
 
