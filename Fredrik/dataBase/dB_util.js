@@ -21,4 +21,5 @@ function checkIfTableExists() {
   $.ajax({
     url: "dB_util.php",
     success: alert("Yeeeesss");
+});
 }

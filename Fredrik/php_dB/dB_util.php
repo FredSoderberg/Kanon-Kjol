@@ -1,4 +1,31 @@
 <?php
+header('Content-Type: application/json');
+
+echo json_encode(checkTableExist());
+
+/*
+if(checkTableExist()) {
+echo "true";
+}
+else {echo "false";}
+
+
+/*
+$form_action_func = $_POST['function'];
+
+if(isset($_POST['$form_action_func']))
+{
+  switch ($form_action_func) {
+    case 'checkTableExist':
+
+      break;
+
+    default:
+      break;
+  }
+
+
+}*/
 
 
 
@@ -37,12 +64,21 @@ function db_error() {
     return mysqli_error($connection);
 }
 
-public function checkTableExist()
+function checkTableExist()
 {
   $connection = db_connect();
-  $result = mysql_query('select * from tasks');
-
-  return $result;
+  $result = mysqli_query($connection,'select * from tasks');
+/*
+  while ($row=mysqli_fetch_row($result))
+    {
+    printf ("ID:%s Name:%s\n",$row[0],$row[1]);
+    }
+*/
+  $rows = array();
+    while($r = mysqli_fetch_assoc($result)) {
+        $rows[] = $r;
+    }
+    return $rows;
 }
 
  ?>
