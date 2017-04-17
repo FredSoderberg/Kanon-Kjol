@@ -1,0 +1,90 @@
+
+div .resource_view{
+     background-color: #66cccc;
+}
+div .resource_view_header{
+    background-color: #cc6666;
+}
+div .task_view{
+     background-color: #f0f0f0;
+     overflow: scroll;
+}
+div .task_view_header{
+     background-color: #66cc66;
+
+ }
+
+ div .task_row_cell{
+   border-right: 1px solid #999999;
+   border-bottom: 1px solid #999999;
+ }
+
+div .col_container {
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: flex-start; /* switched from default (flex-start, see below) */
+  background-color: lightyellow;
+
+  /*border: 2px solid black;*/
+}
+
+div .row_container {
+  display: flex;                  /* establish flex container */
+  flex-direction: column;            /* default value; can be omitted */
+  background-color: grey;
+}
+
+div .head_cell {
+  background-color: #99aabc;
+  border: 2px solid lightgrey;
+  border-radius: 10px 10px 0px 0px;
+  vertical-align: top;
+  text-align: center;
+  line-height: 40px;
+}
+
+div .resource_row {
+  background-color: #aabacb;
+  border-top: 1px solid #cccccc;
+
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+  -moz-transition: border linear .2s, box-shadow linear .2s;
+  -o-transition: border linear .2s, box-shadow linear .2s;
+  transition: border linear .2s, box-shadow linear .2s;
+
+  text-align: center;
+}
+
+div .resource_row_odd {
+  background-color: #aabacb;
+  border-bottom: 1px solid #999999;
+
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+  -moz-transition: border linear .2s, box-shadow linear .2s;
+  -o-transition: border linear .2s, box-shadow linear .2s;
+  transition: border linear .2s, box-shadow linear .2s;
+
+  text-align: center;
+}
+
+div .resource_cell {
+  background-color: #aabacb;
+  /*border: 1px solid black;*/
+  border: 1px solid #cccccc;
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+  -moz-transition: border linear .2s, box-shadow linear .2s;
+  -o-transition: border linear .2s, box-shadow linear .2s;
+  transition: border linear .2s, box-shadow linear .2s;
+  border-radius: .2em;
+  text-align: center;
+}
+
+div .task_head_cell {
+  background-color: #eeeeee;
+  /*border: 2px line lightgrey;*/
+  border-radius: 3px 3px 0px 0px;
+  vertical-align: top;
+  text-align: center;
+  line-height: 40px;
+}
