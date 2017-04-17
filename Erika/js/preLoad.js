@@ -8,11 +8,29 @@ $(document).ready(function() {
 
 
 function checkPwd() {
-  if (document.getElementById("pwd").value == document.getElementById("confpwd").value) {
+var password = document.getElementById("pwd").value;
+var email = document.getElementById("name1").value;
+var confirmPassword = document.getElementById("confpwd").value;
+  if ((document.getElementById("pwd").value == document.getElementById("confpwd").value) &&
+      (document.getElementById("name1").value !== (" " || null)) && (document.getElementById("confpwd").value !== (" " || null))) {
+        if (typeof password == 'undefined' || !password || password.length === 0 || password === "" || !/[^\s]/.test(password) || /^\s*$/.test(password) || password.replace(/\s/g,"") === ""){
+          alert("Fill in your password");
+          $( "#pwd" ).addClass( "one" );
+        }
+        else if (typeof email == 'undefined' || !email || email.length === 0 || email === "" || !/[^\s]/.test(email) || /^\s*$/.test(email) || email.replace(/\s/g,"") === "") {
+          alert("Fill in your email address");
+          $( "#name1" ).addClass( "one" );
+        }
+        else if (typeof confirmPassword == 'undefined' || !confirmPassword || confirmPassword.length === 0 || confirmPassword === "" || !/[^\s]/.test(confirmPassword) || /^\s*$/.test(confirmPassword) || confirmPassword.replace(/\s/g,"") === "") {
+          alert("Fill in your confirmed password");
+          $( "#confpwd" ).addClass( "one" );
+        }
+        else {
     window.location.href="index.html";
   }
+  }
   else {
-//alert("Passwords doesn't match");
+alert("Task failed successfully");
 $( "#pwd" ).addClass( "one" );
 $( "#confpwd" ).addClass( "one" );
   }
