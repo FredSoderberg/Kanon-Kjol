@@ -31,7 +31,7 @@ function listAllTasks() {
       $("#tasks_list").empty();
 
         $.each(tasks,function (key,val) {
-          $("#tasks_list").append("<li>ID: "+val.ID+" - Name: "+val.name+"</li>");
+          $("#tasks_list").append("<li>ID: "+val.id+" - Name: "+val.name+"</li>");
         })
 
        })
