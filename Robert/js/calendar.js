@@ -33,6 +33,7 @@ function Calendar() {
   this.config = {
     header_height : 100
   };
+  this.attacking = function(){return true;};
 };
 
 

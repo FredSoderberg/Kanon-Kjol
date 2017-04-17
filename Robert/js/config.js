@@ -18,12 +18,12 @@ var config = {
     {name:"id", label:"id", width:30},
   ],
   resources: [
-    {name:"Fredrik", type:"Tjuren",  id:1},
+    {name:"Fredrik", type:"Tjuren", id:1},
     {type:"Bäst", name:"Robert", id:2},
     {type:"Häst", name:"Erika", id:3},
     {type:"Test", name:"Fluffy", id:4}
   ],
-  headerHeight: 60,
+  headerHeight: 40,
 
 
     /*
