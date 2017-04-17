@@ -2,15 +2,18 @@ $(document).ready(function() {
 
     $("#newUserButton").click(function(event) {  checkPwd();  });
     $("#employee").change(function(event) {  RollDownFunction();  });
+    $("#rememberMe").change(function(event) {  cookieFunction();  });
 
 
 });
 
 
 function checkPwd() {
+
 var password = document.getElementById("pwd").value;
 var email = document.getElementById("name1").value;
 var confirmPassword = document.getElementById("confpwd").value;
+
   if ((document.getElementById("pwd").value == document.getElementById("confpwd").value) &&
       (document.getElementById("name1").value !== (" " || null)) && (document.getElementById("confpwd").value !== (" " || null))) {
         if (typeof password == 'undefined' || !password || password.length === 0 || password === "" || !/[^\s]/.test(password) || /^\s*$/.test(password) || password.replace(/\s/g,"") === ""){
@@ -26,7 +29,17 @@ var confirmPassword = document.getElementById("confpwd").value;
           $( "#confpwd" ).addClass( "one" );
         }
         else {
-    window.location.href="index.html";
+          if ($('#' + "administrator").is(":checked")) {
+            window.location.href="index.html";
+          }
+          else if ($('#' + "employee").is(":checked")){
+            alert("NÖÖÖÖÖFF");
+            //TODO Fixa vad som händer
+          }
+          else{
+            alert("What position do you have?");
+          }
+
   }
   }
   else {
@@ -37,7 +50,7 @@ $( "#confpwd" ).addClass( "one" );
 }
 
 function RollDownFunction() {
-    var x = document.getElementById("hiden")
+    var x = document.getElementById("hidden")
     if (x.style.display == "none") {
         x.style.display = "inline-block";
         w3.toggleClass("#square","div3","div2")
@@ -45,4 +58,7 @@ function RollDownFunction() {
         x.style.display = "none";
         w3.toggleClass("#square","div2","div3")
     }
+}
+function cookieFunction() {
+  
 }
