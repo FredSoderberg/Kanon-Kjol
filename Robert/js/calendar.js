@@ -33,6 +33,7 @@ function Calendar() {
   this.config = {
     header_height : 100
   };
+  this.attacking = function(){return true;};
 };
 
 
@@ -84,7 +85,7 @@ Calendar.prototype._init_html_area = function(node){
   this.divResourceViewHeader = this.divResourceView.childNodes[0];
   this.divResourceViewData   = this.divResourceView.childNodes[1];
 
-	this.divTaskView.innerHTML = "<div class='task_view_header'></div>"+
+	this.divTaskView.innerHTML = "<div class='task_view_header col_container'></div>"+
                                 "<div class='task_view_data'>"+
                                   "<div class='task_view_rows'></div>"+
                                   "<div class='task_view_links'></div>"+
@@ -135,4 +136,7 @@ Calendar.prototype._set_size = function(){
 
   this.divResourceViewHeader.style.height= config.headerHeight + "px";
   this.divTaskViewHeader.style.height    = config.headerHeight + "px";
+
+  this.divTaskViewHeader.style.width = 50*20 + "px";
+
 };

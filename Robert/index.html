@@ -2,6 +2,7 @@
 <html>
 <head>
   <!--  <link rel="stylesheet" type="text/css" href="common/docs.css">-->
+  <title>Calendar</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="initial-scale = 1.0" />
 
@@ -11,6 +12,7 @@
   <script src="js/config.js"></script>
   <script src="js/calendar.js"></script>
   <script src="js/calendarUtils.js"></script>
+  <link href="calendar.css" rel="stylesheet">
 
    <!--
    //<script src="codebase/sources/dhtmlxgantt.js"></script>
@@ -27,79 +29,6 @@
 
 
 </style>-->
-<style type="text/css">
-
-  div .resource_view{
-       background-color: #66cccc;
-  }
-  div .resource_view_header{
-      background-color: #cc6666;
-  }
-  div .task_view{
-       background-color: #f0f0f0;
-  }
-  div .task_view_header{
-       background-color: #66cc66;
-   }
-
-div .col_container {
-  display: flex;                  /* establish flex container */
-  flex-direction: row;            /* default value; can be omitted */
-  flex-wrap: nowrap;              /* default value; can be omitted */
-  justify-content: space-between; /* switched from default (flex-start, see below) */
-  background-color: lightyellow;
-  /*border: 2px solid black;*/
-}
-
-div .row_container {
-  display: flex;                  /* establish flex container */
-  flex-direction: column;            /* default value; can be omitted */
-  background-color: grey;
-}
-
-div .head_cell {
-  background-color: #99aabc;
-  border: 2px line lightgrey;
-  border-radius: 10px 10px 0px 0px;
-  text-align: center;
-}
-
-div .resource_row {
-  background-color: #aabacb;
-  border-top: 1px solid #cccccc;
-
-  -webkit-transition: border linear .2s, box-shadow linear .2s;
-  -moz-transition: border linear .2s, box-shadow linear .2s;
-  -o-transition: border linear .2s, box-shadow linear .2s;
-  transition: border linear .2s, box-shadow linear .2s;
-
-  text-align: center;
-}
-
-div .resource_row_odd {
-  background-color: #aabacb;
-  border-bottom: 1px solid #999999;
-
-  -webkit-transition: border linear .2s, box-shadow linear .2s;
-  -moz-transition: border linear .2s, box-shadow linear .2s;
-  -o-transition: border linear .2s, box-shadow linear .2s;
-  transition: border linear .2s, box-shadow linear .2s;
-
-  text-align: center;
-}
-
-div .resource_cell {
-  background-color: #aabacb;
-  /*border: 1px solid black;*/
-  border: 1px solid #cccccc;
-  -webkit-transition: border linear .2s, box-shadow linear .2s;
-  -moz-transition: border linear .2s, box-shadow linear .2s;
-  -o-transition: border linear .2s, box-shadow linear .2s;
-  transition: border linear .2s, box-shadow linear .2s;
-  border-radius: .2em;
-  text-align: center;
-}
-</style>
 
 </head>
 <body>
@@ -107,11 +36,9 @@ div .resource_cell {
   <script type = "text/javascript">
     var cal = new Calendar();
 
-    cal._init_html_area("calendar");
-    cal._set_size();
-    cal._create_resource_headers();
-    cal._create_resources();
+    cal.init();
 
+    var d = new Date()
   </script>
 </body>
 </html>
