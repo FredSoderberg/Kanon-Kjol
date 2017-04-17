@@ -6,133 +6,36 @@
 <link rel="stylesheet" href="css/w3.css">
 
 <script src="js/w3.js"></script>
-<script src="../dep.JS/jquery-3.2.0.js"></script>
-<script src="php_dB/dB_util.js"></script>
-<script src="js/funcScript.js"></script>
-<script src="js/test.js"></script>
+<script src="js/jquery-3.2.0.js"></script>
+
+<script src="scripts.JS/init.js"></script>
+<script src="scripts.JS/test.js"></script>
+
+<script src="scripts.dB/dB_util.js"></script>
 
 <body>
     <div display="inline">
-        <p>Type 'correct' to validate.</p>
-        <form id="task_create">
-            <div>
-                <input type="text">
-                <button type="button" id="submit_my" name="submit">submit</button>
-            </div>
+        <div id="images"></div>
+
+    </div>
+
+
+
+  <p>Type task name.</p>
+<div displa="block-inline">
+
+
+  <form id="task_create">
+          <input type="text" id="task_name">
+          <button type="button" id="create_task" name="submit">Create new task</button>
+          <button type="button" id="listAllTasks">List all tasks</button>
         </form>
 
-        <div id="response">ff</div>
-        <div id="images">ff</div>
-<ul>
-</ul>
-         </div>
-
-    <button type="button" id="checkExistJS">CheckJS</button>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-          (function() {
-            var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-            $.getJSON( flickerAPI, {
-              tags: "mount rainier",
-              tagmode: "any",
-              format: "json"
-            })
-              .done(function( data ) {
-                $.each( data.items, function( i, item ) {
-                  $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
-                  if ( i === 3 ) {
-                    return false;
-                  }
-                });
-              });
-          })();
+        <ul id="tasks_list"></ul>
 
 
 
-            $("#checkExistJS").click(function() {
-
-
-              $.getJSON('./php_dB/dB_util.php', {
-
-                format:'json'
-              })
-              .fail(function( data ) {
-alert("fail");
-                });
-
-
-
-/*
-              var data = "hej";
-              var jqxhr = $.getJSON( "php_dB/dB_util.php", function(data) {
-                $('#result').html(data.id);
-test = data;
-alert(data.simple);
-
-              })
-                .done(function(data) {
-                  console.log( "second success" );
-                  $('#result').html(data.id);
-                  alert("Successful");
-                //  console.log( data );
-
-                })
-                .fail(function(response, status, xhr) {
-                    console.log( "error" );
-                    console.log( response );
-                })
-
-  });
-              // Perform other work here ...
-
-              // Set another completion function for the request above
-
-
-              /*
-                $.getJSON("php_dB/dB_util.php", function(data) {
-
-$("#response").append(document.createTextNode( "Hello" ));
-
-
-                });*/
-
-                /*                    $.get("dB_util.php",function(data) {
-                        success:    alert(data);
-                //      alert(data);
-                        $( "#response" ).append(data);
-                      });
-*/
-                /*
-                                         $("#response").load("php_dB/dB_util.php", function(response, status, xhr) {
-                                                    if (status == "error") {
-                                                        // alert(msg + xhr.status + " " + xhr.statusText);
-                                                        alert(response);
-                                                        console.log(msg + xhr.status + " " + xhr.statusText);
-                                                    }});
-                                                    if (status == "success"){
-                                                      alert("test");
-                                                    }
-                */
-                /*, function(responseTxt, statusTxt, xhr) {
-
-                                    if (statusTxt == "success") {
-                                        alert(responseTxt);
-                                    }
-                                    if (statusTxt == "error") {
-                                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                                    }
-
-                                });
-                */
-
-
-    });
-    });
-    </script>
+</div>
 </body>
 
 </html>
-<!-->
-<form align="center" action="yourpage.php?func_name=updateRecord" method="post">
-    </-->

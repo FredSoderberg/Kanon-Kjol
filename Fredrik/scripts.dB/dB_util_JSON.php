@@ -1,6 +1,54 @@
 <?php
+header('Content-Type: application/json');
 
 
+$form_action_func = $_GET['function'];
+
+if(isset($form_action_func))
+{
+  switch ($form_action_func) {
+    case 'getAllTasks':
+            getAllTasks();
+      break;
+
+        case 'undefinerd2':
+                getAllTasks();
+          break;
+
+    default:
+      break;
+  }
+}
+
+
+
+
+function getAllResources()
+{
+  $connection = db_connect();
+  $result = mysqli_query($connection,'select * from resources');
+  $rows = db_fetch_rows($result);
+  echo json_encode($rows);
+}
+
+function getAllTasks()
+{
+  $connection = db_connect();
+  $result = mysqli_query($connection,'select * from tasks');
+  $rows = db_fetch_rows($result);
+
+  echo json_encode($rows);
+}
+
+//---------------------DATABASE TOOLS-----------------------------------------------------
+
+function db_fetch_rows($result) {
+  $rows = array();
+  while($obj = mysqli_fetch_object($result)) {
+  $rows[] = $obj;
+  }
+return $rows;
+}
 
 function db_connect() {
 
@@ -10,7 +58,7 @@ function db_connect() {
     // Try and connect to the database, if a connection has not been established yet
     if(!isset($connection)) {
          // Load configuration as an array. Use the actual location of your configuration file
-        $config = parse_ini_file('../Db_connection/configDB.ini');
+        $config = parse_ini_file('../../../Db_connection/configDB.ini');
         $connection = mysqli_connect('localhost',$config['username'],$config['password'],$config['dbname']);
     }
 
@@ -36,13 +84,4 @@ function db_error() {
     $connection = db_connect();
     return mysqli_error($connection);
 }
-
-public function checkTableExist()
-{
-  $connection = db_connect();
-  $result = mysql_query('select * from tasks');
-
-  return $result;
-}
-
  ?>
