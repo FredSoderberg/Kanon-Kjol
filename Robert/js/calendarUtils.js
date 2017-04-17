@@ -1,3 +1,14 @@
+
+var TaskViewRow = function(){
+
+};
+
+
+
+
+
+
+
 // TODO: Setting the scroll_sizes of the hor and ver scroll
 Calendar.prototype._set_scroll_size = function(){
   /*
@@ -27,13 +38,29 @@ Calendar.prototype._create_resource_headers = function(){
 
 Calendar.prototype._create_resources = function(){
   var html = "";
+  var odd = true;
   for (res in config.resources){
-    html += "<div class='resource_row'>"+config.resources[res].label+"</div>";
+    if (odd){
+      html += "<div class='resource_row_odd col_container'>"+this._create_resources_cells(config.resources[res])+"</div>";
+      odd = false;
+    }
+    else {
+      html += "<div class='resource_row col_container'>"+this._create_resources_cells(config.resources[res])+"</div>";
+      odd = true;
+    };
   };
   this.divResourceViewData.innerHTML = html;
 }
 
+Calendar.prototype._create_resources_cells = function(res){
+  var html = "";
 
+
+  for (var i = 0; i < config.columns.length; i++){
+    html += "<div class='resource_cell' style='width: "+config.columns[i].width+"px'>"+res[config.columns[i].label.toString().toLowerCase()]+"</div>";
+  };
+  return html;
+};
 
 Calendar.prototype._get_scroll_sizes = function(){
 };
