@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require 'dB_connect.php';
 
 $form_action_func = $_GET['function'];
 
@@ -22,7 +22,7 @@ if(isset($form_action_func))
 function insertTask($name)
 {
   $connection = db_connect();
-  $result = mysqli_query($connection,"insert into tasks (name) values ("+name+")";
+  $result = mysqli_query($connection,"insert into tasks (name) values ("+name+")");
 }
 
  ?>

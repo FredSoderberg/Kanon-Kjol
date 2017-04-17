@@ -29,7 +29,7 @@ function listAllTasks() {
 
       .done(function(tasks) {
       $("#tasks_list").empty();
-
+          console.log(tasks); 
         $.each(tasks,function (key,val) {
           $("#tasks_list").append("<li>ID: "+val.id+" - Name: "+val.name+"</li>");
         })
