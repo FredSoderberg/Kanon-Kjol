@@ -1,16 +1,17 @@
-
 <?php
+require 'db_connect.php';
+
 $form_action_func = $_GET['function'];
 
 if(isset($form_action_func))
 {
   switch ($form_action_func) {
-    case 'getAllTasks':
-            getAllTasks();
+    case 'insertTask':
+            insertTask();
       break;
 
         case 'undefinerd2':
-                getAllTasks();
+                insertTask();
           break;
 
     default:
