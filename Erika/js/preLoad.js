@@ -2,15 +2,20 @@ $(document).ready(function() {
 
     $("#newUserButton").click(function(event) {  checkPwd();  });
     $("#employee").change(function(event) {  RollDownFunction();  });
+    $("#rememberMe").change(function(event) {
+console.log("erikajs bajs");
+      checkCookie();  });
 
 
 });
 
 
 function checkPwd() {
+
 var password = document.getElementById("pwd").value;
 var email = document.getElementById("name1").value;
 var confirmPassword = document.getElementById("confpwd").value;
+
   if ((document.getElementById("pwd").value == document.getElementById("confpwd").value) &&
       (document.getElementById("name1").value !== (" " || null)) && (document.getElementById("confpwd").value !== (" " || null))) {
         if (typeof password == 'undefined' || !password || password.length === 0 || password === "" || !/[^\s]/.test(password) || /^\s*$/.test(password) || password.replace(/\s/g,"") === ""){
@@ -26,7 +31,17 @@ var confirmPassword = document.getElementById("confpwd").value;
           $( "#confpwd" ).addClass( "one" );
         }
         else {
-    window.location.href="index.html";
+          if ($('#' + "administrator").is(":checked")) {
+            window.location.href="index.html";
+          }
+          else if ($('#' + "employee").is(":checked")){
+            alert("NÖÖÖÖÖFF");
+            //TODO Fixa vad som händer
+          }
+          else{
+            alert("What position do you have?");
+          }
+
   }
   }
   else {
@@ -37,12 +52,57 @@ $( "#confpwd" ).addClass( "one" );
 }
 
 function RollDownFunction() {
-    var x = document.getElementById("hiden")
+    var x = document.getElementById("hidden")
     if (x.style.display == "none") {
         x.style.display = "inline-block";
         w3.toggleClass("#square","div3","div2")
     } else {
         x.style.display = "none";
         w3.toggleClass("#square","div2","div3")
+    }
+}
+/* function cookieFunction() {
+  var mail = document.getElementById("mail1").value;
+  $.cookie('e-mail', 'mail', { expires: 1 });
+var knas = $.cookie('e-mail');
+  document.getElementById("output").innerHTML = knas;
+}
+
+function cookietoken() {
+
+} */
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user=getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+       user = document.getElementById("mail1").value;
+       if (user != "" && user != null) {
+           setCookie("username", user, 2);
+       }
     }
 }
