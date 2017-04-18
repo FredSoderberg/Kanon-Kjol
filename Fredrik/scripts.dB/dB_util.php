@@ -23,10 +23,9 @@ if(isset($form_action_func))
 function removeTask($taskToRemove)
 {
   $taskDecoded = json_decode($taskToRemove,true);
-  $connection = db_connect();
   $sql = "delete from tasks where tasks.id=".$taskDecoded["id"];
 
-  if (mysqli_query($connection, $sql)) {
+  if (db_query($sql)) {
       echo "record removed successfully";
   } else {
       echo "Error: " . $sql . "<br>" . mysqli_error($connection);
@@ -37,10 +36,9 @@ function removeTask($taskToRemove)
 function insertTask($newTask)
 {
   $taskDecoded = json_decode($newTask,true);
-  $connection = db_connect();
   $sql = "insert into tasks (id, name) VALUES (NULL, '".$taskDecoded["name"]."')";
 
-  if (mysqli_query($connection, $sql)) {
+  if (db_query($sql)) {
       echo "New record created successfully";
   } else {
       echo "Error: " . $sql . "<br>" . mysqli_error($connection);
