@@ -13,10 +13,12 @@ $(document).ready(function() {
               }
               else{
                 alert("Please fill in your password");
+                $( "#pass" ).addClass( "one" );
               }
       }
       else {
         alert("Please fill in your email address");
+        $( "#mail1" ).addClass( "one" );
       }
     }
   else {
