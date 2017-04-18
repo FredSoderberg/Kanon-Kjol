@@ -1,8 +1,9 @@
-$(document).ready(function() {
+$(function(){
 
 $("#create_task").click(function() {
-var name = $("#task_name").val();
-  insertTask(null,name);
+var task = $("#task_name").val();
+//console.log("task"+task);
+  insertTask(null,task);
 listAllTasks();
 });
 

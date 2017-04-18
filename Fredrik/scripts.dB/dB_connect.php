@@ -16,7 +16,6 @@ function db_connect() {
     if(!isset($connection)) {
          // Load configuration as an array. Use the actual location of your configuration file
         $config = parse_ini_file('../../../Db_connection/configDB.ini');
-//                $connection = mysqli_connect('localhost','Nock-Off','kanonkjol','Nock-Off');
         $connection = mysqli_connect('localhost:3307',$config['username'],$config['password'],$config['dbname']);
     }
 

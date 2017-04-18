@@ -4,7 +4,7 @@ require 'dB_connect.php';
 header('Content-Type: application/json');
 
 
-$form_action_func = "getAllTasks";//$_GET['function'];
+$form_action_func = $_GET['function'];
 
 if(isset($form_action_func))
 {

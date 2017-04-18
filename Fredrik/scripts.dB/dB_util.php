@@ -1,13 +1,13 @@
 <?php
 require 'dB_connect.php';
 
-$form_action_func = $_GET['function'];
+$form_action_func = $_POST['function'];
 
 if(isset($form_action_func))
 {
   switch ($form_action_func) {
     case 'insertTask':
-            insertTask();
+            insertTask($_POST['newTask']);
       break;
 
         case 'undefinerd2':
@@ -19,10 +19,17 @@ if(isset($form_action_func))
   }
 }
 
-function insertTask($name)
+function insertTask($newTask)
 {
   $connection = db_connect();
-  $result = mysqli_query($connection,"insert into tasks (name) values ("+name+")");
+  $sql = "insert into tasks (id, name) VALUES (NULL, '".$newTask."')";
+
+  if (mysqli_query($connection, $sql)) {
+      echo "New record created successfully";
+  } else {
+      echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+  }
+
 }
 
  ?>
