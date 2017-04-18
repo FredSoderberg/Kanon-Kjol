@@ -15,6 +15,18 @@ if(isset($form_action_func))
               removeTask($_POST['taskToRemove']);
           break;
 
+            case 'createDatabase':
+                 createDatabase();
+              break;
+
+                case 'deleteDatabase':
+                     deleteDatabase();
+                  break;
+
+                    case 'buildDatabase':
+                         buildDatabase();
+                      break;
+
     default:
       break;
   }
@@ -45,5 +57,27 @@ function insertTask($newTask)
   }
 
 }
+
+function createDatabase()
+{
+  $sql = "CREATE DATABASE NockOffDB";
+  if (db_query($sql)) {
+      echo "Database created successfully";
+  } else {
+      echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+  }
+}
+
+function deleteDatabase()
+{
+
+}
+
+function buildDatabase()
+{
+
+}
+
+
 
  ?>
