@@ -5,6 +5,7 @@ function Calendar() {
   this.tasks      = [];
 
 
+  this.project;
 //TODO: Look over namings for these html.elements
 // 1. div naming to represent the div elements
 // 2. camelCase naming or underline convention: divTaskViewLinks or div_task_view_links
@@ -87,7 +88,7 @@ Calendar.prototype._init_html_area = function(node){
 
 	this.divTaskView.innerHTML = "<div class='task_view_header col_container'></div>"+
                                 "<div class='task_view_data'>"+
-                                  "<div class='task_view_rows'></div>"+
+                                  "<div class='task_view_rows row_container'></div>"+
                                   "<div class='task_view_links'></div>"+
                                   "<div class='task_view_bars'></div>"+
                                 "</div>";
@@ -102,7 +103,7 @@ Calendar.prototype._init_html_area = function(node){
 };
 
 // _baseBox creates a box with size as the divBase
-Calendar.prototype._baseBox = function(){
+Calendar.prototype.baseBox = function(){
   var box = {
     innerHeight : Number(this.divBase.style.height.replace("px", "")),
     innerWidth : Number(this.divBase.style.width.replace("px", ""))
@@ -120,7 +121,7 @@ Calendar.prototype._set_size = function(){
   var baseHeight = this.divBase.style.height;
   var baseWidth = this.divBase.style.width;
 
-  var baseBox = this._baseBox();
+  var baseBox = this.baseBox();
 
   this.divResourceView.style.height =
   this.divTaskView.style.height     =
@@ -131,12 +132,12 @@ Calendar.prototype._set_size = function(){
   Math.max(baseBox.innerHeight - (this.config.header_height||0) - this.divScrollHor.offsetHeight - 2) + "px";
 
   var rvWidth = this._get_column_width();
-  this.divResourceView.style.width = rvWidth + "px"; //(width*ratio).toString() + "px";
-  this.divTaskView.style.width = (baseBox.innerWidth - rvWidth) + "px"; //(width * (1-ratio)).toString() + "px";
+  this.divResourceView.style.width       = rvWidth + "px"; //(width*ratio).toString() + "px";
+  this.divTaskView.style.width           = (baseBox.innerWidth - rvWidth) + "px"; //(width * (1-ratio)).toString() + "px";
 
   this.divResourceViewHeader.style.height= config.headerHeight + "px";
   this.divTaskViewHeader.style.height    = config.headerHeight + "px";
 
-  this.divTaskViewHeader.style.width = 50*20 + "px";
+  this.divTaskViewHeader.style.width     = 50*20 + "px";
 
 };

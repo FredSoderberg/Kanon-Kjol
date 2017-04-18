@@ -15,8 +15,9 @@ div .task_view_header{
  }
 
  div .task_row_cell{
-   border-right: 1px solid #999999;
-   border-bottom: 1px solid #999999;
+   border-right: 1px solid #ddd;
+   /*border-bottom: 1px solid #999999;*/
+   border-top: 1px solid #ddd;
  }
 
 div .col_container {
@@ -35,56 +36,45 @@ div .row_container {
   background-color: grey;
 }
 
-div .head_cell {
+div .add_cell, .head_cell {
   background-color: #99aabc;
-  border: 2px solid lightgrey;
-  border-radius: 10px 10px 0px 0px;
+  border-right: 1px solid lightgrey;
+  border-radius: 5px 5px 0px 0px;
   vertical-align: top;
   text-align: center;
   line-height: 40px;
 }
 
+
 div .resource_row {
   background-color: #aabacb;
-  border-top: 1px solid #cccccc;
-
-  -webkit-transition: border linear .2s, box-shadow linear .2s;
-  -moz-transition: border linear .2s, box-shadow linear .2s;
-  -o-transition: border linear .2s, box-shadow linear .2s;
-  transition: border linear .2s, box-shadow linear .2s;
+  /*border-top: 1px solid #cccccc;*/
 
   text-align: center;
 }
 
 div .resource_row_odd {
   background-color: #aabacb;
-  border-bottom: 1px solid #999999;
-
-  -webkit-transition: border linear .2s, box-shadow linear .2s;
-  -moz-transition: border linear .2s, box-shadow linear .2s;
-  -o-transition: border linear .2s, box-shadow linear .2s;
-  transition: border linear .2s, box-shadow linear .2s;
+  /*border-bottom: 1px solid #999999;*/
 
   text-align: center;
 }
 
-div .resource_cell {
-  background-color: #aabacb;
+div .remove_cell, .resource_cell {
+  background-color: #eee;
   /*border: 1px solid black;*/
-  border: 1px solid #cccccc;
-  -webkit-transition: border linear .2s, box-shadow linear .2s;
-  -moz-transition: border linear .2s, box-shadow linear .2s;
-  -o-transition: border linear .2s, box-shadow linear .2s;
-  transition: border linear .2s, box-shadow linear .2s;
-  border-radius: .2em;
+  border-right: 1px solid #aaa;
+  border-top: 1px solid #aaa;
+
   text-align: center;
 }
 
 div .task_head_cell {
   background-color: #eeeeee;
   /*border: 2px line lightgrey;*/
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
   vertical-align: top;
   text-align: center;
   line-height: 40px;
+  border-bottom-color: 1px solid #aaaaaa;
 }
