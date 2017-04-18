@@ -1,6 +1,11 @@
 <?php
-
-
+function db_fetch_rows($result) {
+  $rows = array();
+  while($obj = mysqli_fetch_object($result)) {
+  $rows[] = $obj;
+  }
+return $rows;
+}
 
 function db_connect() {
 
@@ -10,8 +15,8 @@ function db_connect() {
     // Try and connect to the database, if a connection has not been established yet
     if(!isset($connection)) {
          // Load configuration as an array. Use the actual location of your configuration file
-        $config = parse_ini_file('../Db_connection/configDB.ini');
-        $connection = mysqli_connect('localhost',$config['username'],$config['password'],$config['dbname']);
+        $config = parse_ini_file('../../../Db_connection/configDB.ini');
+        $connection = mysqli_connect('localhost:3307',$config['username'],$config['password'],$config['dbname']);
     }
 
     // If connection was not successful, handle the error
@@ -36,13 +41,4 @@ function db_error() {
     $connection = db_connect();
     return mysqli_error($connection);
 }
-
-public function checkTableExist()
-{
-  $connection = db_connect();
-  $result = mysql_query('select * from tasks');
-
-  return $result;
-}
-
  ?>

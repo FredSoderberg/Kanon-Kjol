@@ -1,6 +1,14 @@
-document.write('<script src="w3.js"><\/script>');
-//document.write('<script src="modernizr-2.7.2.js"><\/script>');
+$(function(){
 
+$("#create_task").click(function() {
+var task = $("#task_name").val();
+//console.log("task"+task);
+  insertTask(null,task);
+listAllTasks();
+});
+
+$("#listAllTasks").click(function() {
+    listAllTasks();
 
 function openLeftMenu() {
   document.getElementById("main").style.marginLeft = "25%";
@@ -20,3 +28,29 @@ function closeLeftMenu() {
   document.getElementById("menuIcon").style.backgroundColor ="lightgrey";
     w3.toggleClass('#menuIcon','w3-dark-grey','w3-grey')
 }
+
+
+});
+
+
+
+
+
+//-----------------------------DEMO!!!!!!!!!!---------------------------------------------
+var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+$.getJSON( flickerAPI, {
+  tags: "uppsala domkyrka",
+  tagmode: "any",
+  format: "json"
+})
+  .done(function( data ) {
+    $.each( data.items, function( i, item ) {
+      $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+      if ( i === 10 ) {
+        return false;
+      }
+    });
+  });
+
+
+});
