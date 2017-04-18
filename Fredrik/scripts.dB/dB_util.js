@@ -1,7 +1,7 @@
 function removeTask(task) {
-console.log("data1: " + task);
+//console.log("data1: " + task);
     taskSend = JSON.stringify(task);
-    console.log("data2: " + taskSend);
+//    console.log("data2: " + taskSend);
 
     $.post('scripts.dB/dB_util.php', {
             function: "removeTask",
@@ -15,7 +15,7 @@ console.log("data1: " + task);
 
         .fail(function(jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;
-        //    console.log("Request Failed: " + err);
+          console.log("Request Failed: " + err);
         });
 }
 
@@ -36,7 +36,7 @@ function insertTask(task) {
 
         .fail(function(jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;
-      //      console.log("Request Failed: " + err);
+          console.log("Request Failed: " + err);
         });
 }
 
