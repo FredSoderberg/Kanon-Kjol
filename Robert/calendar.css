@@ -14,12 +14,6 @@ div .task_view_header{
 
  }
 
- div .task_row_cell{
-   border-right: 1px solid #ddd;
-   /*border-bottom: 1px solid #999999;*/
-   border-top: 1px solid #ddd;
- }
-
 div .col_container {
   display: flex;                  /* establish flex container */
   flex-direction: row;            /* default value; can be omitted */
@@ -33,6 +27,8 @@ div .col_container {
 div .row_container {
   display: flex;                  /* establish flex container */
   flex-direction: column;            /* default value; can be omitted */
+  flex-wrap: nowrap;
+  justify-content: flex-start;
   background-color: grey;
 }
 
@@ -65,16 +61,24 @@ div .remove_cell, .resource_cell {
   /*border: 1px solid black;*/
   border-right: 1px solid #aaa;
   border-top: 1px solid #aaa;
-
+  vertical-align: top;
   text-align: center;
 }
 
 div .task_head_cell {
   background-color: #eeeeee;
-  /*border: 2px line lightgrey;*/
+  border-right: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
   border-radius: 5px 5px 0px 0px;
   vertical-align: top;
   text-align: center;
   line-height: 40px;
   border-bottom-color: 1px solid #aaaaaa;
 }
+
+
+ div .task_row_cell{
+   border-right: 1px solid #ddd;
+   /*border-bottom: 1px solid #999999;*/
+   border-top: 1px solid #ddd;
+ }

@@ -7,19 +7,20 @@ var TaskViewRow = function(){
 Calendar.prototype.init = function(){
 
   this.project = new Project(1);
-  this.project.init_test();
+  //this.project.init_test();
   this._init_html_area("calendar");
   this._set_size();
 
   this._create_resource_headers();
-  this._create_resources();
+  //this._create_resources();
   this._create_date_headers();
-  this._create_empty_task_rows();
-
+  //this._create_empty_task_rows();
+  /*
   var childs = this.divTaskViewRows.childNodes;
   for (var i = 0; i < childs.length; i++){
     childs[i].innerHTML = this._create_empty_task_rows_cells(50);
   }
+  */
 };
 
 
@@ -61,13 +62,13 @@ Calendar.prototype._create_resources = function(){
   var html = "";
   var odd = true;
   for (res in this.project.resources){
-    if (odd){
+    if (!odd){
       html += "<div class='resource_row_odd col_container' style= 'height: 30px'>"+this._create_resources_cells(this.project.resources[res])+"</div>";
-      odd = false;
+
     }
     else {
       html += "<div class='resource_row col_container' style= 'height: 30px'>"+this._create_resources_cells(this.project.resources[res])+"</div>";
-      odd = true;
+
     };
   };
   this.divResourceViewData.innerHTML = html;
@@ -75,15 +76,19 @@ Calendar.prototype._create_resources = function(){
 
 Calendar.prototype._create_resource = function(){
   var html = "";
-  var resource = new Resource(0, "", "")
+  var resource = new Resource(this.project.nextResourceID, "", "")
   html += "<div class='resource_row col_container' style= 'height: 30px'>"+this._create_resources_cells(resource)+"</div>";
   this.divResourceViewData.innerHTML += html;
   remove_resource();
+  this.project.nextResourceID += 1;
+  this._create_empty_task_row();
+  $(".task_view_rows").children().last().html(this._create_empty_task_rows_cells(50));
 }
 
 function remove_resource(){
   $(".remove_cell").dblclick(function(){
       $(this).parent().hide();
+      $(".task_view_rows").children(0).hide();
   });
 }
 
@@ -115,7 +120,7 @@ Calendar.prototype._create_date_headers = function(){
   };
   this.divTaskViewHeader.innerHTML = html;
   config.taskHeaderWidth = 20*amount;
-  this._create_empty_task_rows(amount);
+  //this._create_empty_task_rows(amount);
 };
 
 Calendar.prototype._create_empty_task_rows = function(amount){
@@ -135,4 +140,13 @@ Calendar.prototype._create_empty_task_rows_cells = function(amount){
 };
 
 Calendar.prototype._get_scroll_sizes = function(){
+};
+
+
+Calendar.prototype._create_empty_task_row = function(){
+  var html = "";
+  //console.debug("Rows", this._create_empty_task_rows_cells(amount));
+  html += "<div class='task_row col_container' style='width: 1000px; height: 30px'></div>";
+
+  this.divTaskViewRows.innerHTML += html;
 };

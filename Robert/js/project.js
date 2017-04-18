@@ -12,7 +12,7 @@ function Project(id) {
   this.tasks      = [];   // Tasks for this project
   this.categories;
 
-  this.nextResourceID;
+  this.nextResourceID = 1;
 }
 
 
