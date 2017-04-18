@@ -2,13 +2,11 @@
 	"curly": true,
 	"eqeqeq": true,
 	"expr": true,
+	// "maxlen": 130,
 	"newcap": true,
 	"noarg": true,
 	"nonbsp": true,
 	"trailing": true,
 	"undef": true,
-	"unused": true,
-	"globals": {
-		"Cookies": true
-	}
+	"unused": true
 }
