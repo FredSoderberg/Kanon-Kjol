@@ -2,7 +2,9 @@ $(document).ready(function() {
 
     $("#newUserButton").click(function(event) {  checkPwd();  });
     $("#employee").change(function(event) {  RollDownFunction();  });
-    $("#rememberMe").change(function(event) {  cookieFunction();  });
+    $("#rememberMe").change(function(event) {
+console.log("erikajs bajs");
+      checkCookie();  });
 
 
 });
@@ -59,6 +61,48 @@ function RollDownFunction() {
         w3.toggleClass("#square","div2","div3")
     }
 }
-function cookieFunction() {
-  
+/* function cookieFunction() {
+  var mail = document.getElementById("mail1").value;
+  $.cookie('e-mail', 'mail', { expires: 1 });
+var knas = $.cookie('e-mail');
+  document.getElementById("output").innerHTML = knas;
+}
+
+function cookietoken() {
+
+} */
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user=getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+       user = document.getElementById("mail1").value;
+       if (user != "" && user != null) {
+           setCookie("username", user, 2);
+       }
+    }
 }

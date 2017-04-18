@@ -2,11 +2,12 @@
 <html>
 	<head>
 		<title></title>
-		<script src="../build/js.cookie.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="../src/jquery.cookie.js"></script>
 		<script>
 			try {
 				Object.defineProperty(document, "cookie", { get: function() { return "first=one; ; second=two"; } });
-				window.testValue = Cookies.get("second");
+				window.testValue = $.cookie("second");
 				window.ok = true;
 			} catch (er) {
 			}

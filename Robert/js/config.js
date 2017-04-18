@@ -16,13 +16,11 @@ var config = {
     {name:"text", label:"Type", width:50},
     {name:"worker", label:"Name", width:100},
     {name:"id", label:"id", width:30},
+    {name:"add", label:"add", width:40}
   ],
-  resources: [
-    {name:"Fredrik", type:"Tjuren", id:1},
-    {type:"Bäst", name:"Robert", id:2},
-    {type:"Häst", name:"Erika", id:3},
-    {type:"Test", name:"Fluffy", id:4}
-  ],
+  resources: [],
   headerHeight: 40,
-  taskHeaderWidth: 20
+  taskHeaderWidth: 20,
+  rowHeight: 30
+
 };

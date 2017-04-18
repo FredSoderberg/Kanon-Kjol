@@ -1,12 +1,12 @@
 {
 	"browser": true,
 	"camelcase": true,
+	"jquery": true,
 	"quotmark": "single",
 	"globals": {
 		"define": true,
 		"module": true,
-		"require": true,
-		"escape": true
+		"require": true
 	},
 
 	"extends": "../.jshintrc"

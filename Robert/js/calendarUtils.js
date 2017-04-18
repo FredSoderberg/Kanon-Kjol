@@ -5,17 +5,18 @@ var TaskViewRow = function(){
 
 
 Calendar.prototype.init = function(){
+
+  this.project = new Project(1);
+  this.project.init_test();
   this._init_html_area("calendar");
   this._set_size();
+
   this._create_resource_headers();
   this._create_resources();
   this._create_date_headers();
   this._create_empty_task_rows();
 
-  console.debug("taskview", this.divTaskViewData);
-  var childs = this.divTaskViewData.childNodes;
-  console.debug("vhild", childs[0]);
-  console.debug("vhild", childs.length);
+  var childs = this.divTaskViewRows.childNodes;
   for (var i = 0; i < childs.length; i++){
     childs[i].innerHTML = this._create_empty_task_rows_cells(50);
   }
@@ -46,7 +47,12 @@ Calendar.prototype._get_column_width = function(){
 Calendar.prototype._create_resource_headers = function(){
   var html = "";
   for (col in config.columns){
-    html += "<div class='head_cell' style='width: "+config.columns[col].width+"px'>"+config.columns[col].label+"</div>";
+    if (config.columns[col].label == "add"){
+      html += "<div class='add_cell' style='width: "+config.columns[col].width+"px'>"+config.columns[col].label+"</div>";
+    }
+    else{
+      html += "<div class='head_cell' style='width: "+config.columns[col].width+"px'>"+config.columns[col].label+"</div>";
+    }
   };
   this.divResourceViewHeader.innerHTML = html;
 }
@@ -54,25 +60,44 @@ Calendar.prototype._create_resource_headers = function(){
 Calendar.prototype._create_resources = function(){
   var html = "";
   var odd = true;
-  for (res in config.resources){
+  for (res in this.project.resources){
     if (odd){
-      html += "<div class='resource_row_odd col_container' style= 'height: 30px'>"+this._create_resources_cells(config.resources[res])+"</div>";
+      html += "<div class='resource_row_odd col_container' style= 'height: 30px'>"+this._create_resources_cells(this.project.resources[res])+"</div>";
       odd = false;
     }
     else {
-      html += "<div class='resource_row col_container' style= 'height: 30px'>"+this._create_resources_cells(config.resources[res])+"</div>";
+      html += "<div class='resource_row col_container' style= 'height: 30px'>"+this._create_resources_cells(this.project.resources[res])+"</div>";
       odd = true;
     };
   };
   this.divResourceViewData.innerHTML = html;
 }
 
+Calendar.prototype._create_resource = function(){
+  var html = "";
+  var resource = new Resource(0, "", "")
+  html += "<div class='resource_row col_container' style= 'height: 30px'>"+this._create_resources_cells(resource)+"</div>";
+  this.divResourceViewData.innerHTML += html;
+  remove_resource();
+}
+
+function remove_resource(){
+  $(".remove_cell").dblclick(function(){
+      $(this).parent().hide();
+  });
+}
+
 Calendar.prototype._create_resources_cells = function(res){
   var html = "";
 
-
   for (var i = 0; i < config.columns.length; i++){
-    html += "<div class='resource_cell' style='width: "+config.columns[i].width+"px'>"+res[config.columns[i].label.toString().toLowerCase()]+"</div>";
+    if (config.columns[i].label.toString().toLowerCase() == "add"){
+      console.log("hej")
+      html += "<div class='remove_cell' style='width: "+config.columns[i].width+"px'>"+res[config.columns[i].label.toString().toLowerCase()]+"</div>";
+
+    } else {
+      html += "<div class='resource_cell' style='width: "+config.columns[i].width+"px'>"+res[config.columns[i].label.toString().toLowerCase()]+"</div>";
+    }
   };
   return html;
 };
@@ -99,7 +124,7 @@ Calendar.prototype._create_empty_task_rows = function(amount){
   for (var i = 0; i < 4; i++){
     html += "<div class='task_row col_container' style='width: 1000px; height: 30px'></div>";
   };
-  this.divTaskViewData.innerHTML = html;
+  this.divTaskViewRows.innerHTML = html;
 };
 Calendar.prototype._create_empty_task_rows_cells = function(amount){
   var html = "";
