@@ -2,10 +2,33 @@ $(document).ready(function() {
 
     $("#newUserButton").click(function(event) {  checkPwd();  });
     $("#employee").change(function(event) {  RollDownFunction();  });
-    $("#rememberMe").change(function(event) {
-console.log("erikajs bajs");
-      checkCookie();  });
 
+    $("#signIn").click(function(event) {  if ($('#' + "rememberMe").is(":checked")) {
+       var user = document.getElementById("mail1").value;
+      if (user != "" && user != null) {
+       var pw = document.getElementById("pass").value;
+        if(pw != "" && pw != null){
+          setCookie("username", user, 2);
+                window.location.href="planning.html";
+              }
+              else{
+                alert("Please fill in your password");
+              }
+      }
+      else {
+        alert("Please fill in your email address");
+      }
+    }
+  else {
+window.location.href="planning.html";
+  }
+});
+
+
+$("#signOut").click(function(event) {
+  deleteCookie();
+  window.location.href="signin.html";
+  });
 
 });
 
@@ -32,7 +55,7 @@ var confirmPassword = document.getElementById("confpwd").value;
         }
         else {
           if ($('#' + "administrator").is(":checked")) {
-            window.location.href="index.html";
+            window.location.href="planning.html";
           }
           else if ($('#' + "employee").is(":checked")){
             alert("NÖÖÖÖÖFF");
@@ -98,11 +121,12 @@ function getCookie(cname) {
 function checkCookie() {
     var user=getCookie("username");
     if (user != "") {
-        alert("Welcome again " + user);
+      window.location.href="planning.html";
     } else {
-       user = document.getElementById("mail1").value;
-       if (user != "" && user != null) {
-           setCookie("username", user, 2);
+       window.location.href="signin.html";
        }
     }
-}
+
+    function deleteCookie() {
+document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
