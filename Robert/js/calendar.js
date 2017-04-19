@@ -126,10 +126,13 @@ Calendar.prototype._set_size = function(){
   this.divResourceView.style.height =
   this.divTaskView.style.height     =
   baseBox.innerHeight - this.divScrollHor.offsetHeight + "px";
+  console.log(this.divResourceView.style.height)
 
   this.divResourceViewData.style.height =
   this.divTaskViewData.style.height     =
   Math.max(baseBox.innerHeight - (this.config.header_height||0) - this.divScrollHor.offsetHeight - 2) + "px";
+  console.log(this.divResourceViewData.style.height)
+
 
   var rvWidth = this._get_column_width();
   this.divResourceView.style.width       = rvWidth + "px"; //(width*ratio).toString() + "px";

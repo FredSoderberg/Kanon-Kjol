@@ -1,7 +1,73 @@
 
+div.calendar_cover{
+  background-color: #000000;
+  opacity: 0.4;
+  position: absolute;
+  z-index: 10000;
+
+  padding:0;
+  margin:0;
+
+  top:0;
+  left:0;
+
+  width: 100%;
+  height: 100%;
+}
+
+#infoBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    z-index: 10001;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+    /*-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);*/
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}​
+
+#infobox_text{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 50px;
+  background-color: #683;
+}
+
+
+
+
+
+
+div .head_cell, .resource_cell, .task_head_cell, .task_row_cell{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+
+
+
 div .resource_view{
      background-color: #66cccc;
+
+     /*overflow: hidden;
+     /*overflow: scroll;*/
 }
+div .resource_view_data{
+     background-color: #66cccc;
+     border-color: #55aaaa;
+     border: 1px solid;
+}
+
 div .resource_view_header{
     background-color: #cc6666;
 }
@@ -35,7 +101,7 @@ div .row_container {
 div .add_cell, .head_cell {
   background-color: #ddd;
   border-right: 1px solid #999;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 2px 2px 0px 0px;
   vertical-align: top;
   text-align: center;
   line-height: 40px;
@@ -73,7 +139,7 @@ div .task_head_cell {
   vertical-align: top;
   text-align: center;
   line-height: 40px;
-  border-bottom-color: 1px solid #aaaaaa;
+  /*border-bottom-color: 1px solid #aaaaaa;*/
 }
 
 

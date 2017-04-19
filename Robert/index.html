@@ -45,7 +45,10 @@
         $(this).parent().hide();
     });
 
-
+    $('.task_view').on('scroll', function () {
+      console.log("här")
+      $('.resource_view').scrollTop($(this).scrollTop());
+    });
   });
   </script>
 
