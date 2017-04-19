@@ -92,9 +92,9 @@ Calendar.prototype._create_resource = function(){
 
 function event_remove_resource(){
   $(".remove_cell").dblclick(function(){
-    console.log("#row_"+$(this).parent().attr("id"));
-      console.log($("#row_"+$(this).parent().attr("id")).remove());
-      $(this).parent().remove();
+
+    $("#row_"+$(this).parent().attr("id")).remove();
+    $(this).parent().remove();
   });
 }
 
@@ -118,8 +118,6 @@ Calendar.prototype._create_date_headers = function(){
   var date = this.project.startDate;
   var amount = this.project.lengthDays;
   var html = "";
-  console.debug("Date:", date, "Length:", amount)
-  console.debug("Length:", config.taskWidth)
 
   for (var i = 0; i < amount; i++){
     html += "<div class='task_head_cell' style='width: "+config.dateHeaderWidth+"px;'>"+date.getDate()+"</div>";

@@ -61,7 +61,6 @@ div .remove_cell, .resource_cell {
   /*border: 1px solid black;*/
   border-right: 1px solid #aaa;
   border-top: 1px solid #aaa;
-  border-radius: 5px 5px 0px 0px;
   vertical-align: top;
   text-align: center;
 }
