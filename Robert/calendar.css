@@ -33,8 +33,8 @@ div .row_container {
 }
 
 div .add_cell, .head_cell {
-  background-color: #99aabc;
-  border-right: 1px solid lightgrey;
+  background-color: #ddd;
+  border-right: 1px solid #999;
   border-radius: 5px 5px 0px 0px;
   vertical-align: top;
   text-align: center;
@@ -61,6 +61,7 @@ div .remove_cell, .resource_cell {
   /*border: 1px solid black;*/
   border-right: 1px solid #aaa;
   border-top: 1px solid #aaa;
+  border-radius: 5px 5px 0px 0px;
   vertical-align: top;
   text-align: center;
 }

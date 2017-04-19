@@ -23,5 +23,6 @@ var config = {
   taskWidth: 500,
   rowHeight: 30,
 
-  dateHeaderWidth: 20
+  dateHeight: 20,
+  dateHeaderWidth: 40
 };

@@ -6,7 +6,7 @@ var TaskViewRow = function(){
 
 Calendar.prototype.init = function(){
 
-  this.project = new Project(1, 600);
+  this.project = new Project(1, 300);
   config.taskWidth = this.project.lengthDays*config.dateHeaderWidth;
 
   //this.project.init_test();
@@ -122,7 +122,7 @@ Calendar.prototype._create_date_headers = function(){
   console.debug("Length:", config.taskWidth)
 
   for (var i = 0; i < amount; i++){
-    html += "<div class='task_head_cell' style='width: 20px'>"+date.getDate()+"</div>";
+    html += "<div class='task_head_cell' style='width: "+config.dateHeaderWidth+"px;'>"+date.getDate()+"</div>";
     date.setDate(date.getDate()+1);
   };
   this.divTaskViewHeader.innerHTML = html;
@@ -141,7 +141,7 @@ Calendar.prototype._create_empty_task_rows = function(amount){
 Calendar.prototype._create_row_cells = function(){
   var html = "";
   for (var i = 0; i < this.project.lengthDays; i++){
-    html += "<div class='task_row_cell' style='width: 20px; height: 30px'></div>";
+    html += "<div class='task_row_cell' style='width: "+config.dateHeaderWidth+"px; height: "+config.rowHeight+"px'></div>";
   };
   return html;
 };
