@@ -1,6 +1,3 @@
-document.write('<script src="w3.js"><\/script>');
-//document.write('<script src="modernizr-2.7.2.js"><\/script>');
-
 
 function openLeftMenu() {
   document.getElementById("map").style.marginLeft = "25%";

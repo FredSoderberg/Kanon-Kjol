@@ -1,0 +1,59 @@
+body {
+  background-color: lightgrey;
+}
+
+.div2 {
+  width: 450px;
+  height: 350px;
+  padding: 50px;
+  border: 1px solid grey;
+  background-color: grey;
+  box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
+}
+
+.backgroundColor {
+  background-color: lightgrey;
+}
+
+.Planning {}
+
+.sign {
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: 40px;
+}
+
+.remb {
+  margin-left: -5px;
+  margin-bottom: 0px;
+  margin-top: -25px;
+}
+
+.one {
+  border-style: solid;
+  border-width: medium;
+  border-bottom-style: solid;
+  color: rgb(190, 14, 25)
+}
+
+.hight {
+  margin-top: -20px;
+}
+
+.div3 {
+  width: 450px;
+  height: 450px;
+  padding: 50px;
+  border: 1px solid grey;
+  background-color: grey;
+  box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
+}
+
+.div4 {
+  width: 450px;
+  height: 530px;
+  padding: 50px;
+  border: 1px solid grey;
+  background-color: grey;
+  box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
+}

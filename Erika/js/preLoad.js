@@ -3,7 +3,7 @@ $(document).ready(function() {
     $("#newUserButton").click(function(event) {  checkPwd();  });
     $("#employee").change(function(event) {  RollDownFunction();  });
 
-    $("#signIn").click(function(event) {  if ($('#' + "rememberMe").is(":checked")) {
+    $("#signIn").click(function(event) {  if ($("#rememberMe").is(":checked")) {
        var user = document.getElementById("mail1").value;
       if (user != "" && user != null) {
        var pw = document.getElementById("pass").value;
