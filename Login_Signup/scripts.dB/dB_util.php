@@ -1,6 +1,5 @@
 <?php
 require 'dB_connect.php';
-checkCookieValid("abba",9304566);
 
 $form_action_func = $_POST['function'];
 
@@ -96,7 +95,7 @@ function buildDatabase()
 function saveNewUser($user,$pass)
 {
   $passHash = password_hash($pass, PASSWORD_BCRYPT);
-$sessionID = rand(1000000,10000000);
+  $sessionID = rand(1000000,10000000);
   $sql = "insert into users (email, password, sessionID) VALUES ('$user', '$passHash', $sessionID)";
   if (db_query($sql)) {
       echo $sessionID;

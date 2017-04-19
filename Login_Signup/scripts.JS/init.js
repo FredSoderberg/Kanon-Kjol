@@ -24,11 +24,13 @@ $(function() {
 
   $("#newUserButton").click(function(event) {
     if (checkSignUp()) {
-      var user = $(name1).val();
-      var pass = $(pwd).val();
-storeSignUp(user,pass);
+      var user = $("#name1").val();
+      var pass = $("#pwd").val();
+      storeSignUp(user,pass);
+      
     };
   });
+
   $("#employee").change(function(event) {
     RollDownFunction();
   });
