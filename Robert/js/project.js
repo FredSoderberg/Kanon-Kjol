@@ -1,9 +1,10 @@
-function Project(id) {
+function Project(id, lengthDays) {
   this.id = id;   //Master keeps track on what projects exists
 
   this.startDate = new Date();
   this.stopDate = new Date();
-  this.stopDate.setDate(this.stopDate.getDate()+10)
+  this.lengthDays = lengthDays;
+  this.stopDate.setDate(this.stopDate.getDate()+lengthDays)
 
 
   this.classes    = [];   // Unfilled resources

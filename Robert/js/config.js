@@ -20,7 +20,8 @@ var config = {
   ],
   resources: [],
   headerHeight: 40,
-  taskHeaderWidth: 20,
-  rowHeight: 30
+  taskWidth: 500,
+  rowHeight: 30,
 
+  dateHeaderWidth: 20
 };

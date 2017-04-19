@@ -138,6 +138,6 @@ Calendar.prototype._set_size = function(){
   this.divResourceViewHeader.style.height= config.headerHeight + "px";
   this.divTaskViewHeader.style.height    = config.headerHeight + "px";
 
-  this.divTaskViewHeader.style.width     = 50*20 + "px";
+  this.divTaskViewHeader.style.width     = config.taskWidth + "px";
 
 };
