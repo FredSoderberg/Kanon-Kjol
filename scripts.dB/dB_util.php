@@ -22,7 +22,7 @@ if(isset($form_action_func))
     break;
 
     case 'verifyUser':
-      dB_verifyUser(
+      verifyUser(
         $_POST['username'],
         $_POST['password']
       );
@@ -221,7 +221,7 @@ function saveNewUser($username,$pass)
 {
   $passHash = password_hash($pass, PASSWORD_BCRYPT);
   $sessionID = rand(1000000,10000000);
-  $sql = "insert into users (email, password, sessionID) VALUES ('$username', '$passHash', $sessionID)";
+  $sql = "insert into user (email, password, sessionID) VALUES ('$username', '$passHash', $sessionID)";
   if (db_query($sql)) {
       echo $sessionID;
   } else {
@@ -233,7 +233,7 @@ function saveNewUser($username,$pass)
 
 function checkCookieValid($user,$sessionID)
 {
-  $sql = "select * from users where email = '$user' AND sessionID = '$sessionID' ";
+  $sql = "select * from user where email = '$user' AND sessionID = '$sessionID' ";
   $result = db_query($sql);
   if ($result && (mysqli_num_rows($result)>0)) {
       echo "true";
@@ -245,13 +245,13 @@ function checkCookieValid($user,$sessionID)
 
 function verifyUser($username,$pass)
 {
-  $sql = "select password from users where email = '".$username."'";
+  $sql = "select password from user where email = '".$username."'";
   $result = db_query($sql);
   $passHash = mysqli_fetch_assoc($result);
 
   if ($result && password_verify($pass,$passHash['password'])) {
     $sessionID = rand(1000000,10000000);
-    $sql = "update users set sessionID = '$sessionID' where users.email ='$username'";
+    $sql = "update user set sessionID = '$sessionID' where user.email ='$username'";
 
     if(db_query($sql)) {
       echo $sessionID;

@@ -23,7 +23,7 @@ function dB_SessionIDValid(user, sessionID) {
   }).done(function(data) {
     console.log("cokkieDDdatan:" + data);
     if (data === "true") {
-      window.location.replace("planning.html");
+      window.location.replace("planning2.html");
     } else {
       window.location.replace("signin.html");
     }
@@ -47,7 +47,7 @@ function dB_verifyUser() {
     }
     setCookie("username", email, 7);
     setCookie("sessionID", data, 7);
-    window.location.replace("planning.html");
+    window.location.replace("planning2.html");
 
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;

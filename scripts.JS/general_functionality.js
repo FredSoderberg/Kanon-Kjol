@@ -134,3 +134,7 @@ function signInValid() {
     }
     return false;
 }
+
+function recaptchaCallback() {
+    $('#signIn').removeAttr('disabled');
+};

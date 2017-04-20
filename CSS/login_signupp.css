@@ -57,3 +57,13 @@ body {
   background-color: grey;
   box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
 }
+
+#signIn {
+  -webkit-appearance: none
+}
+
+iframe {
+    border-radius: 10px;
+    width: 302px;
+    height: 76px;
+ }
