@@ -1,5 +1,33 @@
 $(function() {
 
+  $("#newUserButton").click(function(event) {
+    if (checkSignUp()) {
+      var user = $("#name1").val();
+      var pass = $("#pwd").val();
+      dB_storeSignUp(user, pass);
+    };
+  });
+
+  $("#employee").change(function(event) {
+    RollDownFunction();
+  });
+
+  $("#signIn").click(function(event) {
+    if (signInValid()) {
+      dB_verifyUser();
+    };
+  });
+
+  $("#signOut").click(function(event) {
+    deleteCookies();
+    window.location.href = "index.html";
+  });
+
+
+
+
+
+  //--------------------------------------------
   $("#remove_task").click(function() {
     var taskToSend = new task();
     taskToSend.id = $("#rem_task_id").val();
@@ -20,28 +48,6 @@ $(function() {
 
   $("#listAllTasks").click(function() {
     listAllTasks();
-  });
-
-  $("#newUserButton").click(function(event) {
-    if (checkSignUp()) {
-      var user = $("#name1").val();
-      var pass = $("#pwd").val();
-      storeSignUp(user,pass);
-      
-    };
-  });
-
-  $("#employee").change(function(event) {
-    RollDownFunction();
-  });
-
-  $("#signIn").click(function(event) {
-    rememberSignIn()
-  });
-
-  $("#signOut").click(function(event) {
-    deleteCookies();
-    window.location.href = "index.html";
   });
 
 });

@@ -105,7 +105,7 @@ function checkLoginCookie() {
   var user = getCookie("username");
   var sessionID = getCookie("sessionID");
   if (user != "") {
-    checkCookieValid(user, sessionID);
+    dB_SessionIDValid(user, sessionID);
   }
   else {
     window.location.href = "signin.html";
@@ -115,16 +115,15 @@ function checkLoginCookie() {
 function deleteCookies() {
   document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   document.cookie = "sessionID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "rememberMe=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
-function rememberSignIn() {
-  if ($("#rememberMe").is(":checked")) {
-    var user = document.getElementById("mail1").value;
+function signInValid() {
+    var user = $("#mail1").val();
     if (user != "" && user != null) {
-      var pw = document.getElementById("pass").value;
+      var pw = $("#pass").val();
       if (pw != "" && pw != null) {
-        setCookie("username", user, 2);
-        window.location.href = "planning.html";
+      return true;
       } else {
         alert("Please fill in your password");
         $("#pass").addClass("one");
@@ -133,7 +132,5 @@ function rememberSignIn() {
       alert("Please fill in your email address");
       $("#mail1").addClass("one");
     }
-  } else {
-    window.location.href = "planning.html";
-  }
+    return false;
 }
