@@ -99,14 +99,15 @@ Calendar.prototype._init_html_area = function(node){
 	this.divTaskViewRows   = this.divTaskViewData.childNodes[0];
 	this.divTaskViewLinks  = this.divTaskViewData.childNodes[1];
 	this.divTaskViewBars   = this.divTaskViewData.childNodes[2];
+  console.debug("Taskview", this.divResourceView);
 
 };
 
 // _baseBox creates a box with size as the divBase
 Calendar.prototype.baseBox = function(){
   var box = {
-    innerHeight : Number(this.divBase.style.height.replace("px", "")),
-    innerWidth : Number(this.divBase.style.width.replace("px", ""))
+    innerHeight : this.divBase.clientHeight,
+    innerWidth : this.divBase.clientWidth
   };
   return box;
 };
@@ -123,20 +124,27 @@ Calendar.prototype._set_size = function(){
 
   var baseBox = this.baseBox();
 
-  this.divResourceView.style.height =
-  this.divTaskView.style.height     =
-  baseBox.innerHeight - this.divScrollHor.offsetHeight + "px";
-  console.log(this.divResourceView.style.height)
+  this.divResourceView.style.height = baseBox.innerHeight - this.divScrollHor.offsetHeight - 18 + "px";
+  this.divTaskView.style.height     = baseBox.innerHeight  + "px";
+
+  console.debug("Taskview", this.divBase.clientHeight );
+  //baseBox.innerHeight - this.divScrollHor.offsetHeight + "px";
+
+
+  //this.divResourceView.style.height -= 20+"px";
+
 
   this.divResourceViewData.style.height =
   this.divTaskViewData.style.height     =
   Math.max(baseBox.innerHeight - (this.config.header_height||0) - this.divScrollHor.offsetHeight - 2) + "px";
-  console.log(this.divResourceViewData.style.height)
+  //console.log(this.divResourceViewData.style.height)
 
 
   var rvWidth = this._get_column_width();
   this.divResourceView.style.width       = rvWidth + "px"; //(width*ratio).toString() + "px";
+  this.divTaskView.style.left            = rvWidth +8+ "px";
   this.divTaskView.style.width           = (baseBox.innerWidth - rvWidth) + "px"; //(width * (1-ratio)).toString() + "px";
+  console.debug("width: ", baseBox.innerWidth)
 
   this.divResourceViewHeader.style.height= config.headerHeight + "px";
   this.divTaskViewHeader.style.height    = config.headerHeight + "px";

@@ -24,7 +24,7 @@
 
 </head>
 <body>
-  <div id="calendar" style='width:100%; height:800px;'></div>
+  <div id="calendar" style='width:100%; height:400px;'></div>
   <div id="test"></div>
   <script type = "text/javascript">
 
@@ -39,14 +39,20 @@
     $(".add_cell").click(function(){
       cal._create_resource();
 
+    });
 
+    $(".resource_view_data").on('click', '.resource_cell', function(){
+      create_cover();
     });
-    $(".remove_cell").dblclick(function(){
-        $(this).parent().hide();
+
+    $(".resource_view_data").on('click', '.remove_cell', function(){
+      $("#row_"+$(this).parent().attr("id")).remove();
+      $(this).parent().hide();
     });
+
 
     $('.task_view').on('scroll', function () {
-      console.log("här")
+      //console.log($(this).scrollTop())
       $('.resource_view').scrollTop($(this).scrollTop());
     });
   });

@@ -82,7 +82,6 @@ Calendar.prototype._create_resource = function(){
   var resource = new Resource(resourceID, "", "")
   html += "<div id="+resourceID+" class='resource_row col_container' style= 'height: 30px'>"+this._create_resources_cells(resource)+"</div>";
   this.divResourceViewData.innerHTML += html;
-  event_remove_resource(resourceID);
 
   this._create_empty_task_row(resourceID);
   //$(".task_view_rows").children().last().html(this._create_empty_task_rows_cells(50));
@@ -90,20 +89,6 @@ Calendar.prototype._create_resource = function(){
   this.project.nextResourceID += 1;
 }
 
-function event_remove_resource(resourceID){
-  $(".resource_row").dblclick(function(){
-    create_cover();
-  });
-
-
-  $(".remove_cell").dblclick(function(){
-    $("#row_"+$(this).parent().attr("id")).remove();
-    $(this).parent().remove();
-  });
-
-
-
-}
 
 Calendar.prototype._create_resources_cells = function(res){
   var html = "";

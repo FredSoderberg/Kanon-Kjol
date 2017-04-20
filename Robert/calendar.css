@@ -57,23 +57,31 @@ div .head_cell, .resource_cell, .task_head_cell, .task_row_cell{
 
 
 div .resource_view{
-     background-color: #66cccc;
+     background-color: #88cccc;
 
-     /*overflow: hidden;
-     /*overflow: scroll;*/
+     /*position: absolute;*/
+
+     overflow: hidden;
 }
 div .resource_view_data{
-     background-color: #66cccc;
-     border-color: #55aaaa;
-     border: 1px solid;
+     background-color: #88cccc;
+     border-color: #bbb;
+     overflow: : hidden;
+
+     /*border-top: 1px solid #bbb;
+     border-bottom: 1px solid #bbb;*/
 }
 
 div .resource_view_header{
     background-color: #cc6666;
+    /*position: absolute;*/
+
 }
 div .task_view{
      background-color: #f0f0f0;
      overflow: scroll;
+     position: absolute;
+
 }
 div .task_view_header{
      background-color: #66cc66;
