@@ -63,7 +63,8 @@ function dB_storeObject(object) {
     function: "storeObject",
     objectToSend: stringObject
   }).done(function(data) {
-    console.log("saved data: " + data);
+    console.log("saved data: ID:" + data);
+    object.id = data;
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
@@ -116,7 +117,7 @@ function dB_builObjectTable(object) {
 }
 
 function dB_buildAllTables(object) {
-  $.each(objects, function( index, value ) {
+  $.each(objects, function(index, value) {
     if (value.type === "user") {
       dB_buildUserTable();
     } else {
@@ -127,9 +128,7 @@ function dB_buildAllTables(object) {
 }
 
 function dB_buildUserTable() {
-  $.post('scripts.dB/dB_util.php', {
-    function: "builUserTable"
-  }).done(function(data) {
+  $.post('scripts.dB/dB_util.php', {function: "builUserTable"}).done(function(data) {
     console.log("created table data: " + data);
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
@@ -153,11 +152,9 @@ function dB_dropObjectTable(object) {
 }
 
 function dB_createDatabase(objects) {
-  $.post('scripts.dB/dB_util.php', {
-    function: "createDatabase"
-  }).done(function(data) {
+  $.post('scripts.dB/dB_util.php', {function: "createDatabase"}).done(function(data) {
     console.log("created Nock-Off database: " + data);
-    $.each(objects, function( index, value ) {
+    $.each(objects, function(index, value) {
       if (value.type === "user") {
         dB_buildUserTable();
       } else {
@@ -173,15 +170,13 @@ function dB_createDatabase(objects) {
 }
 
 function dB_dropAllTables(objects) {
-  $.each(objects, function( index, value ) {
+  $.each(objects, function(index, value) {
     dB_dropObjectTable(value);
   });
 }
 
 function dB_dropDB() {
-  $.post('scripts.dB/dB_util.php', {
-    function: "dropDB"
-  }).done(function(data) {
+  $.post('scripts.dB/dB_util.php', {function: "dropDB"}).done(function(data) {
     console.log("dropped Nock-Off database: " + data);
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
