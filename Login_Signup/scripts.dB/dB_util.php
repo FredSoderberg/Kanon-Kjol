@@ -209,9 +209,8 @@ function storeObject($object)
   };
   $sql .= $sqlFirst.") VALUES (NULL, ".$sqlSecond.")";
 
-  $connection = db_connect(false);
-  if (db_query(mysqli_query($connection,$sql))) {
-    echo mysqli_insert_id($connection);
+  if (db_query($sql)) {
+      echo "record stored successfully";
   } else {
     $failure = (string)$sql;
     header('HTTP/1.0 404 Not found: '.$failure);

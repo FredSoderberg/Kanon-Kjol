@@ -63,8 +63,7 @@ function dB_storeObject(object) {
     function: "storeObject",
     objectToSend: stringObject
   }).done(function(data) {
-    console.log("saved data: ID:" + data);
-    object.id = data;
+    console.log("saved data: " + data);
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
@@ -116,7 +115,7 @@ function dB_builObjectTable(object) {
   });
 }
 
-function dB_buildAllTables(object) {
+function dB_buildAllTables(objects) {
   $.each(objects, function(index, value) {
     if (value.type === "user") {
       dB_buildUserTable();
