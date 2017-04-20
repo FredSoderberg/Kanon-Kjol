@@ -146,7 +146,7 @@ Calendar.prototype._create_empty_task_row = function(resID){
   this.divTaskViewRows.innerHTML += html;
 
   $("#row_"+resID).html(this._create_row_cells());
-
+  $("#row_"+resID).children('div:first').html(resID);
 };
 
 create_cover = function(){

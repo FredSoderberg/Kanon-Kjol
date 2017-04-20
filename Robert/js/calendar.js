@@ -80,7 +80,7 @@ Calendar.prototype._init_html_area = function(node){
   this.divScrollHor    = childs[3];
 
   this.divResourceView.innerHTML = "<div class='resource_view_header col_container'></div>"+
-                                  "<div class='resource_view_data row_container'></div>";
+                                  "<div id='sortable' class='resource_view_data row_container'></div>";
 
 
   this.divResourceViewHeader = this.divResourceView.childNodes[0];
@@ -124,10 +124,10 @@ Calendar.prototype._set_size = function(){
 
   var baseBox = this.baseBox();
 
-  this.divResourceView.style.height = baseBox.innerHeight - this.divScrollHor.offsetHeight - 18 + "px";
+  this.divResourceView.style.height = baseBox.innerHeight - 18 + "px";
   this.divTaskView.style.height     = baseBox.innerHeight  + "px";
 
-  console.debug("Taskview", this.divBase.clientHeight );
+
   //baseBox.innerHeight - this.divScrollHor.offsetHeight + "px";
 
 
@@ -136,11 +136,13 @@ Calendar.prototype._set_size = function(){
 
   this.divResourceViewData.style.height =
   this.divTaskViewData.style.height     =
-  Math.max(baseBox.innerHeight - (this.config.header_height||0) - this.divScrollHor.offsetHeight - 2) + "px";
+  baseBox.innerHeight - (config.headerHeight) - 18 + "px";
   //console.log(this.divResourceViewData.style.height)
+  console.debug("Resview", this.divResourceViewData.style.height);
+  //för att fixa en fully flex div
+  this.divResourceViewData.style.height = null;
 
-
-  var rvWidth = this._get_column_width();
+    var rvWidth = this._get_column_width();
   this.divResourceView.style.width       = rvWidth + "px"; //(width*ratio).toString() + "px";
   this.divTaskView.style.left            = rvWidth +8+ "px";
   this.divTaskView.style.width           = (baseBox.innerWidth - rvWidth) + "px"; //(width * (1-ratio)).toString() + "px";
