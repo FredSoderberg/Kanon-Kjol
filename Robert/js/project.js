@@ -4,7 +4,7 @@ function Project(id, lengthDays) {
   this.startDate = new Date();
   this.stopDate = new Date();
   this.lengthDays = lengthDays;
-  this.stopDate.setDate(this.stopDate.getDate()+lengthDays)
+  //this.stopDate.setDate(this.stopDate.getDate()+lengthDays)
 
 
   this.classes    = [];   // Unfilled resources
@@ -14,6 +14,7 @@ function Project(id, lengthDays) {
   this.categories;
 
   this.nextResourceID = 1;
+  this.taskID = 1;
 }
 
 

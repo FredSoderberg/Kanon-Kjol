@@ -106,8 +106,7 @@ Calendar.prototype._create_resources_cells = function(res){
 
 
 Calendar.prototype._create_date_headers = function(){
-
-  var date = this.project.startDate;
+  var date = new Date(this.project.startDate.getTime());
   var amount = this.project.lengthDays;
   var html = "";
 
@@ -141,12 +140,28 @@ Calendar.prototype._create_empty_task_row = function(resID){
   var html = "";
   //console.debug("Rows", this._create_empty_task_rows_cells(amount));
   //var width = this.project.lengthDays * config.taskWidth;
-  html += "<div id='row_"+resID+"' class='task_row col_container' style='width: "+config.taskWidth+"px; height: 30px'></div>";
+  html += "<div id='row_"+resID+"' class='task_row col_container' style='width: "+config.taskWidth+"px; height: "+config.rowHeight+"px'></div>";
 
   this.divTaskViewRows.innerHTML += html;
 
   $("#row_"+resID).html(this._create_row_cells());
   $("#row_"+resID).children('div:first').html(resID);
+};
+
+Calendar.prototype.create_task = function(cell, resID){
+  console.log("create task cell pos:", cell.position())
+  var pos = cell.offset();
+  var date = new Date(this.project.startDate.getTime());
+  date.setDate(date.getDate()+cell.index())
+  var html = "<div id='task_"+this.project.taskID+"' res='"+resID+"' class='task_bar' style='width: 80px; height: "+(config.rowHeight-6)+"px'>"+ date.getDate()+"</div>";
+
+
+  this.divTaskViewBars.innerHTML += html;
+
+  $("#task_"+this.project.taskID).offset({left: pos.left, top: pos.top+3});
+  console.debug("Task: ", $("#task_"+this.project.taskID).position())
+  $("#task_"+this.project.taskID).draggable({ grid: [ config.dateHeaderWidth+1 , config.rowHeight+1 ] }).resizable();
+  this.project.taskID++;
 };
 
 create_cover = function(){

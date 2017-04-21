@@ -90,16 +90,34 @@ div .task_view{
      position: absolute;
 
 }
+div .task_view_data{
+     background-color: #f0f0f0;
+     position: relative;
+}
+div .task_view_bars{
+     background-color: #f0f0f0;
+
+}
 div .task_view_header{
      background-color: #66cc66;
 
  }
+ div .task_bar{
+   background-color: #cceecc;
+   border: 1px solid #c0e0c0;
+   border-radius: 3px;
+   position: absolute;
+ }
+
+
+
+
 
 div .col_container {
   display: flex;                  /* establish flex container */
   flex-direction: row;            /* default value; can be omitted */
   flex-wrap: nowrap;              /* default value; can be omitted */
-  justify-content: flex-start; /* switched from default (flex-start, see below) */
+  justify-content: flex-start;    /* switched from default (flex-start, see below) */
   background-color: lightyellow;
 
   /*border: 2px solid black;*/

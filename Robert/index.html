@@ -49,7 +49,7 @@
       cal._create_resource();
 
     });
-
+    /*
     var isDragging = false;
 
     $(".resource_view_data").on({
@@ -68,6 +68,12 @@
         }
       }
     }, '.resource_cell');
+*/
+    $(".task_view_rows").on('dblclick', '.task_row_cell', function(){
+      var resID = Number($(this).parent().attr("id").replace('row_', ''));
+      console.log("this", $(this).index(), resID);
+      cal.create_task($(this), resID);
+    });
 
 
     $(".resource_view_data").on('dblclick', '.resource_cell', function(){
@@ -75,8 +81,15 @@
     });
 
 
+    $(document).on("sortchange",function(ui, e){
+      console.log("Dragging");
+      var id = e.item.attr('id');
+    });
+
     $(".resource_view_data").on('click', '.remove_cell', function(){
-      $("#row_"+$(this).parent().attr("id")).remove();
+      var resID = $(this).parent().attr("id");
+      $("[res="+resID+"]").remove();
+      $("#row_" + resID).remove();
       $(this).parent().hide();
     });
 
@@ -91,12 +104,22 @@
       $('#key').html(key);
     });
 
-    $( "#sortable" ).sortable();
+    //sortupdate
+    //sortchange
+    $('#sortable').sortable({
+    change: function(ui, event){
+        var id = event.item.attr('id');
+        console.log("Id Drag: ",id);
+    }
+    });
     $( "#sortable" ).disableSelection();
+
+
 
     $( ".task_view_rows").sortable();
     $( ".task_view_rows").disableSelection();
 
+    //$( ".task_view_bars").on("draggable")
 
   });
   </script>
