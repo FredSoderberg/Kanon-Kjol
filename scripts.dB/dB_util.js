@@ -8,7 +8,7 @@ function dB_storeSignUp(email, pass) {
     setCookie("username", email, 7);
     setCookie("sessionID", data, 7);
     //console.log(data);
-    window.location.replace("planning.html");
+    window.location.replace("planning2.html");
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);

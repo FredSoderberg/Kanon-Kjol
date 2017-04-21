@@ -177,7 +177,8 @@ div .task_head_cell {
 
 
  div .task_row_cell{
-   border-right: 1px solid #ddd;
-   /*border-bottom: 1px solid #999999;*/
    border-top: 1px solid #ddd;
+   border-left: 1px solid #ddd;
+   border-right: 1px solid #ddd;
+   border-bottom: 1px solid #ddd;
  }
