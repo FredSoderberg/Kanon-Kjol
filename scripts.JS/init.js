@@ -13,18 +13,15 @@ $(function() {
   });
 
   $("#signIn").click(function(event) {
-    if (signInValid()) {
-      dB_verifyUser();
-    };
+   if (signInValid()) {
+     dB_verifyUser();
+ }
   });
 
   $("#signOut").click(function(event) {
     deleteCookies();
     window.location.href = "index.html";
   });
-
-
-
 
 
   //--------------------------------------------
