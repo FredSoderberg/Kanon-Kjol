@@ -1,0 +1,61 @@
+.menuIcon {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* Rotate first bar */
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+    transform: rotate(-45deg) translate(-9px, 6px) ;
+}
+
+/* Fade out the second bar */
+.change .bar2 {
+    opacity: 0;
+}
+
+/* Rotate last bar */
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+    transform: rotate(45deg) translate(-8px, -8px) ;
+}
+
+.div1 {
+    width: 100%;
+    height: 150px;
+    padding: 50px;
+    border: 1px solid grey;
+    background-color: grey;
+    /*box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);*/
+}
+
+.colour{
+  background-color: grey;
+}
+.tabcolor{
+  background-color: lightgrey;
+}
+.buttonfin{
+  width: 15px;
+  height: 30px;
+}
+
+.widthSmall{
+margin-left: 25%;
+width: 75%;
+}
+
+.hidden{
+    left:-220px;
+  }
+.newWidth{
+width: 25%;
+}
