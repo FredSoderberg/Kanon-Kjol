@@ -110,11 +110,11 @@
       $('.resource_view').scrollTop($(this).scrollTop());
     });
 
-    $('.task_view_bars').on('mouseover', '.ui-resizable-handle',function () {
+    $('.task_view_bars').on('mouseout', '.ui-resizable-handle',function () {
       //console.log($(this).scrollTop())
       //alert("mouseover");
       //$(this).draggable("disable");
-      $(this).parent().resizable({ grid: [ config.dateHeaderWidth , config.rowHeight ] });
+      //$(this).parent().resizable('destroy');
 
     });
     $('.task_view_bars').on('mouseover', '.task_bar',function () {
@@ -122,6 +122,9 @@
       //alert("mouseover");
       //$(this).draggable("disable");
       $(this).draggable({
+        stop: function(event, ui) {
+          $(this).draggable('destroy');
+        },
         grid: [ config.dateHeaderWidth , config.rowHeight ],
         containment: ".task_view_rows",
         stack: ".task_bar",
@@ -154,8 +157,10 @@
           },
           stop: function(event, ui) {
             $(this).removeClass("task_bar_resize");
+            $(this).resizable('destroy');
           },
-          containment: ".task_view_rows"
+          containment: ".task_view_rows",
+          disabled: false
           /*
           resize: function(event,ui){
           var rows = cal.divResourceViewData.children.length;
