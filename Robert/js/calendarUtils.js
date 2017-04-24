@@ -119,14 +119,6 @@ Calendar.prototype._create_date_headers = function(){
   //this._create_empty_task_rows(amount);
 };
 
-Calendar.prototype._create_empty_task_rows = function(amount){
-  var html = "";
-  //console.debug("Rows", this._create_empty_task_rows_cells(amount));
-  for (var i = 0; i < 4; i++){
-    html += "<div class='task_row col_container' style='width: 1000px; height: 30px'></div>";
-  };
-  this.divTaskViewRows.innerHTML = html;
-};
 Calendar.prototype._create_row_cells = function(){
   var html = "";
   for (var i = 0; i < this.project.lengthDays; i++){
