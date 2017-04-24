@@ -153,15 +153,35 @@ Calendar.prototype.create_task = function(cell, resID){
   var pos = cell.offset();
   var date = new Date(this.project.startDate.getTime());
   date.setDate(date.getDate()+cell.index())
-  var html = "<div id='task_"+this.project.taskID+"' res='"+resID+"' class='task_bar' style='width: 80px; height: "+(config.rowHeight-6)+"px'>"+ date.getDate()+"</div>";
+  var html = "<div id='task_"+this.project.taskID+"' res='"+resID+"' class='task_bar' style='width: "+(config.dateHeaderWidth*2 - 6)+"px; height: "+(config.rowHeight-6)+"px'>"+ date.getDate()+"</div>";
+
 
 
   this.divTaskViewBars.innerHTML += html;
 
-  $("#task_"+this.project.taskID).offset({left: pos.left, top: pos.top+3});
+  $("#task_"+this.project.taskID).offset({left: pos.left+2, top: pos.top+3});
   console.debug("Task: ", $("#task_"+this.project.taskID).position())
-  $("#task_"+this.project.taskID).draggable({ grid: [ config.dateHeaderWidth+1 , config.rowHeight+1 ] }).resizable();
-  this.project.taskID++;
+
+  this.project.create_task(date, resID);
+/*
+  $("#task_"+this.project.taskID).draggable({
+    grid: [ config.dateHeaderWidth , config.rowHeight ],
+    drag: function( event, ui ) {
+
+    // Keep the left edge of the element
+    // at least 100 pixels from the container
+    //ui.position.left = Math.max( 2, ui.position.left );
+    ui.position.top = Math.max( 3, ui.position.top );
+  },
+    revert: function( event, ui ){
+
+      if (event.item.position.left < 2 || event.item.position.top < 3){
+        return true;
+      }else{
+        return false;
+      }
+    }}).resizable({ grid: [ config.dateHeaderWidth , config.rowHeight ] });
+*/
 };
 
 create_cover = function(){

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+  <script src="js/task.js"></script>
   <script src="js/config.js"></script>
   <script src="js/project.js"></script>
   <script src="js/resource.js"></script>
@@ -90,7 +91,7 @@
       var resID = $(this).parent().attr("id");
       $("[res="+resID+"]").remove();
       $("#row_" + resID).remove();
-      $(this).parent().hide();
+      $(this).parent().remove();
     });
 
 
@@ -99,11 +100,60 @@
       $('.resource_view').scrollTop($(this).scrollTop());
     });
 
+    $('.task_view_bars').on('mouseover', '.ui-resizable-handle',function () {
+      //console.log($(this).scrollTop())
+      //alert("mouseover");
+      //$(this).draggable("disable");
+      $(this).parent().resizable({ grid: [ config.dateHeaderWidth , config.rowHeight ] });
+
+    });
+    $('.task_view_bars').on('mouseover', '.task_bar',function () {
+      //console.log($(this).scrollTop())
+      //alert("mouseover");
+      //$(this).draggable("disable");
+      $(this).draggable({
+        grid: [ config.dateHeaderWidth , config.rowHeight ],
+        drag: function( event, ui ) {
+
+        // Keep the left edge of the element
+        // at least 100 pixels from the container
+        ui.position.left = Math.max( 2, ui.position.left );
+        ui.position.top = Math.max( 3, ui.position.top );
+      },
+        revert: function( event, ui ){
+
+          return false;
+          }
+        }).resizable({ grid: [ config.dateHeaderWidth , config.rowHeight ] });
+
+    });
+    $('.task_view_bars').on('drag', '.task_bar',function () {
+      //console.log($(this).scrollTop())
+      //alert("mouseover");
+      //$(this).draggable("disable");
+      //$(this).draggable({ grid: [ config.dateHeaderWidth , config.rowHeight ] }).resizable({ grid: [ config.dateHeaderWidth , config.rowHeight ] });
+    });
+
+    $(document).on('dragstop', function(event, ui) {
+      $('#key').html("");
+      console.log(event.target.getAttribute("res"))
+
+      console.log(cal.project.get_task_by_resource(event.target.getAttribute("res")));
+
+    });
+
     $(document).keypress(function(e){
       var key = String.fromCharCode(e.which);
       $('#key').html(key);
     });
-
+    /*
+    $(document).on('drag', function(e){
+      $('#key').html("dragging time");
+    });
+    $(document).on('drag', function(e){
+      //alert(e.item.innerHTML);
+    });
+*/
     //sortupdate
     //sortchange
     $('#sortable').sortable({
