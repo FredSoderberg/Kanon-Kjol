@@ -69,11 +69,37 @@ $(document).on('dragstop', function(event, ui) {
   changePos.left /= config.dateHeaderWidth *(-1);
   changePos.top  /= config.rowHeight *(-1);
 
-  console.log("Row diff", changePos.top);
-  console.log("Column shift", changePos.left);
+  //console.log("Row diff", changePos.top);
+  //console.log("Column shift", changePos.left);
 
   var startRow = get_row_index(task);
   var indexNewRes = startRow + changePos.top;
+
+
+  var tasks = $(".task_bar").overlaps();
+  var task1;
+  var task2;
+  if($(tasks[0]).position().left > $(tasks[1]).position().left){
+    task1 = tasks[0];
+    task2 = tasks[1];
+  }else{
+    task1 = tasks[0];
+    task2 = tasks[1];
+  }
+
+  if(tasks.length > 1){
+    var diff =  ($(task2).position().left - $(task1).position().left) / config.dateHeaderWidth;
+    console.log("diff", diff);
+  }
+  if($(task2).position().left < $(task1).position().left){
+    $(task1).animate({
+      left: "+="+(config.dateHeaderWidth*diff)
+    })
+  }else{
+    $(task2).animate({
+      left: "+="+(config.dateHeaderWidth*diff)
+    })
+  }
 
   for(var i = 0; i < task.resources.length; i++){
     task.resources[i] = cal.divResourceViewData.children[indexNewRes+i].id;
@@ -81,8 +107,10 @@ $(document).on('dragstop', function(event, ui) {
   }
   $("#"+event.target.id).attr("res", cal.divResourceViewData.children[indexNewRes].id);
 
-  var tasks = $(".task_bar").overlaps();
-  console.log("Tasks: ", tasks);
+
+
+  //console.log("Tasks: ", tasks);
+
   //var tasks = cal.project.get_task_by_resource(task)
 });
 
@@ -96,6 +124,7 @@ $(document).on('dragstart', function(event, ui) {
   //console.log("startPos:", task.startPos)
 
 });
+
 function get_task_position(event){
   var task = cal.project.get_task_by_element(event.target);
   return $("#"+event.target.id).position();
