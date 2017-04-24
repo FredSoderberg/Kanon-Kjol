@@ -129,17 +129,24 @@ Calendar.prototype._create_empty_task_row = function(resID) {
 Calendar.prototype.create_task = function(cell, resID) {
   console.log("create task cell pos:", cell.position())
   var pos = cell.offset();
-  var date = new Date(this.project.startDate.getTime());
-  date.setDate(date.getDate() + cell.index())
-  var html = this.divTaskViewBars.innerHTML += html;
+  var startDate = new Date(this.project.startDate.getTime());
+  startDate.setDate(startDate.getDate() + cell.index())
 
-  $("#task_" + this.project.taskID).offset({
+  var endDate = new Date(startDate);
+  endDate.setDate(endDate.getDate()+1);
+
+  console.debug("Task: ", $("#task_" + this.project.taskID).position())
+
+  var newTask = this.project.create_task(startDate, endDate, resID);
+
+  this.divTaskViewBars.innerHTML += newTask.render();
+
+
+  $("#task_" + newTask.taskID).offset({
     left: pos.left + 2,
     top: pos.top + 3
   });
-  console.debug("Task: ", $("#task_" + this.project.taskID).position())
 
-  this.project.create_task(date, resID);
   /*
   $("#task_"+this.project.taskID).draggable({
     grid: [ config.dateHeaderWidth , config.rowHeight ],

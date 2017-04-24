@@ -30,8 +30,11 @@ Project.prototype.init_test = function() {
 
 }
 
-Project.prototype.create_task = function(date, resID) {
-this.tasks.push(new Task(this.taskID++, date, resID));
+Project.prototype.create_task = function(startDate, endDate, resID) {
+  var task = new Task(startDate, endDate, resID, this.taskID);
+this.tasks.push(task);
+this.taskID++;
+return task;
 }
 
 Project.prototype.get_task_by_resource = function(resID){
@@ -43,3 +46,18 @@ Project.prototype.get_task_by_resource = function(resID){
   }
   return touchingTasks;
 }
+
+Project.prototype.get_task_by_id = function (taskID) {
+
+  for (var task in this.tasks) {
+    if (this.tasks[task].taskID === taskID) {
+      return this.tasks[task];
+    }
+  }
+}
+
+  Project.prototype.get_task_by_element = function (element) {
+    //console.log("ELEMENT: ", element)
+    var id = Number(element[0].id.replace("task_", ""));
+      return this.get_task_by_id(id);
+    }
