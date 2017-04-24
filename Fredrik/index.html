@@ -1,46 +1,56 @@
-<!DOCTYPE html>
-<html>
-<title>Nock-Off</title>
-<meta name="viewport-hejjejejejeej" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Sortable - Display as grid</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+  #sortable2 { margin: 3px 3px 3px 0; padding: 1px; float: right; width: 100px; height: 90px; font-size: 4em; text-align: center; }
+  #diff {margin: 3px 3px 3px 0; padding: 1px; float: right; width: 100px; height: 110px; font-size: 4em; text-align: center;}
+  </style>
 
-<link rel="stylesheet" href="dep.CSS/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-<script src="dep.JS/w3.js"></script>
-<script src="dep.JS/jquery-3.2.0.js"></script>
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
 
-<script src="scripts.JS/init.js"></script>
-<script src="scripts.JS/task.js" charset="utf-8"></script>
+  $('#box-3').draggable({
+      drag: function( event, ui ) {
+          var snapTolerance = $(this).draggable('option', 'snapTolerance');
+          var topRemainder = ui.position.top % 20;
+          var leftRemainder = ui.position.left % 20;
 
-<script src="scripts.dB/dB_util.js"></script>
+          if (topRemainder <= snapTolerance) {
+              ui.position.top = ui.position.top - topRemainder;
+          }
 
+          if (leftRemainder <= snapTolerance) {
+              ui.position.left = ui.position.left - leftRemainder;
+          }
+      }
+  });
+
+  </script>
+
+</head>
 <body>
-    <div display="inline">
-        <div id="images"></div>
 
-    </div>
-
-
-
-  <p>Type task name.</p>
-<div display="block-inline">
-
-
-          <input type="text" id="task_name">
-          <button type="submit" id="create_task" name="submit">Create new task</button>
+<ul id="sortable">
+  <li id="diff" class="ui-state-default">1</li>
+  <li id="sortable2" class="ui-state-default">2</li>
+  <li id="box-3" width="30px" class="ui-state-default">3</li>
+  <li id="box-3" class="ui-state-default">4</li>
+  <li id="sortable2" class="ui-state-default">5</li>
+</ul>
 
 
-          <button type="button" id="listAllTasks">List all tasks</button>
-
-
-        <ul id="tasks_list"></ul>
-
-        <input type="text" id="rem_task_id">
-        <button type="submit" id="remove_task" name="submit">remove task by id</button>
-
-
-
-
-</div>
 </body>
-
 </html>
