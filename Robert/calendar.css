@@ -1,24 +1,131 @@
 
-div .resource_view{
-     background-color: #66cccc;
+div.calendar_cover{
+  background-color: #000000;
+  opacity: 0.4;
+  position: absolute;
+  z-index: 10000;
+
+  padding:0;
+  margin:0;
+
+  top:0;
+  left:0;
+
+  width: 100%;
+  height: 100%;
 }
+
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }
+
+
+#infoBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    z-index: 10001;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+    /*-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);*/
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}​
+
+div#infoBox#infobox_text{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 50px;
+  background-color: #683;
+}
+
+
+
+
+
+
+div .head_cell, .resource_cell, .task_head_cell, .task_row_cell{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+
+
+
+div .resource_view{
+     background-color: #88cccc;
+
+     /*position: absolute;*/
+
+     overflow: hidden;
+}
+div .resource_view_data{
+     background-color: #88cccc;
+     border-color: #bbb;
+     /*overflow: hidden;*/
+     /*position: absolute;
+     overflow: hidden;*/
+
+     /*border-top: 1px solid #bbb;
+     border-bottom: 1px solid #bbb;*/
+}
+
 div .resource_view_header{
     background-color: #cc6666;
+    /*position: absolute;*/
+
 }
 div .task_view{
      background-color: #f0f0f0;
      overflow: scroll;
+     position: absolute;
+
+}
+div .task_view_data{
+     background-color: #f0f0f0;
+     position: relative;
+}
+div .task_view_bars{
+     background-color: #f0f0f0;
+
 }
 div .task_view_header{
      background-color: #66cc66;
 
  }
+ div .task_bar{
+   background-color: #cceecc;
+   border: 1px solid #c0e0c0;
+   border-radius: 3px;
+   position: absolute;
+
+ }
+ div .task_bar:hover{
+   background-color: #ddffdd;
+   border: 1px solid #c0e0c0;
+   border-radius: 3px;
+   position: absolute;
+ }
+ div .task_bar_obs{
+
+ }
+
+
 
 div .col_container {
   display: flex;                  /* establish flex container */
   flex-direction: row;            /* default value; can be omitted */
   flex-wrap: nowrap;              /* default value; can be omitted */
-  justify-content: flex-start; /* switched from default (flex-start, see below) */
+  justify-content: flex-start;    /* switched from default (flex-start, see below) */
   background-color: lightyellow;
 
   /*border: 2px solid black;*/
@@ -33,9 +140,9 @@ div .row_container {
 }
 
 div .add_cell, .head_cell {
-  background-color: #99aabc;
-  border-right: 1px solid lightgrey;
-  border-radius: 5px 5px 0px 0px;
+  background-color: #ddd;
+  border-right: 1px solid #999;
+  border-radius: 2px 2px 0px 0px;
   vertical-align: top;
   text-align: center;
   line-height: 40px;
@@ -73,12 +180,13 @@ div .task_head_cell {
   vertical-align: top;
   text-align: center;
   line-height: 40px;
-  border-bottom-color: 1px solid #aaaaaa;
+  /*border-bottom-color: 1px solid #aaaaaa;*/
 }
 
 
  div .task_row_cell{
-   border-right: 1px solid #ddd;
-   /*border-bottom: 1px solid #999999;*/
    border-top: 1px solid #ddd;
+   border-left: 1px solid #ddd;
+   border-right: 1px solid #ddd;
+   border-bottom: 1px solid #ddd;
  }

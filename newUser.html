@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<title>Nock-Off - Erika</title>
+<link rel="stylesheet" href="../dep.CSS/w3.css">
+<link rel="stylesheet" href="CSS/login_signupp.css">
+
+<script src="dep.JS/w3.js" charset="utf-8"></script>
+<script src="dep.JS/jquery-3.2.0.js" charset="utf-8"></script>
+
+<script src="scripts.JS/init.js" charset="utf-8"></script>
+<script src="scripts.JS/general_functionality.js" charset="utf-8"></script>
+
+<script src="scripts.dB/dB_util.js" charset="utf-8"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+  <div id="square" class="div3 w3-display-middle w3-round-large w3-card-4">
+    <div>
+      <img src="img/logo/logo.svg" style="height:20%; width:75%;" class="w3-display-topmiddle w3-margin-top">
+    </div>
+    <div>
+      <form class="w3-container sign" name="myForm">
+        <p>
+          <label class="w3-text-black">Email address</label>
+          <input id="name1" class="w3-input backgroundColor" type="text"></p>
+        <p>
+          <label class="w3-text-black">Password</label>
+          <input id="pwd" class="w3-input backgroundColor" type="password"></p>
+        <p>
+          <label class="w3-text-black">Confirm password</label>
+          <input id="confpwd" class="w3-input backgroundColor" type="password"></p>
+        <p>
+          <form class="inline-block">
+            <p> What position do you have?</p>
+            <input id="employee" class="w3-check hight" type="checkbox">
+            <label>Employee</label>
+            <input id="administrator" class="w3-check hight" type="checkbox">
+            <label>Administrator</label>
+          </form>
+
+          <button type=button id="newUserButton" class="w3-display-bottomright w3-margin-right w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4">Confirm and sign in</button>
+
+          <p>
+            <div id="hidden" style="display:none">
+              <label class="w3-text-black">Administrators email address</label>
+              <select class="w3-select backgroundColor" name="option">
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">erika_jansson@nock-off.com</option>
+                          <option value="2">fredrik_soderberg@nock-off.com</option>
+                          <option value="3">robert_carlsson@nock-off.com</option>
+                        </select>
+            </div>
+      </form>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
