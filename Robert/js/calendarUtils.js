@@ -127,7 +127,7 @@ Calendar.prototype._create_empty_task_row = function(resID) {
 };
 
 Calendar.prototype.create_task = function(cell, resID) {
-  console.log("create task cell pos:", cell.position())
+  //console.log("create task cell pos:", cell.position())
   var pos = cell.offset();
   var startDate = new Date(this.project.startDate.getTime());
   startDate.setDate(startDate.getDate() + cell.index())
@@ -135,7 +135,7 @@ Calendar.prototype.create_task = function(cell, resID) {
   var endDate = new Date(startDate);
   endDate.setDate(endDate.getDate()+1);
 
-  console.debug("Task: ", $("#task_" + this.project.taskID).position())
+  //console.debug("Task: ", $("#task_" + this.project.taskID).position())
 
   var newTask = this.project.create_task(startDate, endDate, resID);
 
