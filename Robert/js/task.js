@@ -169,22 +169,30 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
 }
 
 function handleX(thisTaskID, parentTaskID){
-  console.log("HandleX:", thisTaskID, parentTaskID);
 
-  var movedTaskLeft = $("#"+parentTaskID).position().left;
-//  var movedTaskright = $("#"+task_id).position().right;
   var currTaskID = thisTaskID;
-
+  var movedTaskLeft = $("#"+parentTaskID).position().left;
+  var width = $("#"+parentTaskID).width();
   var pos = $("#"+currTaskID).position().left;
-  var diff = pos - movedTaskLeft;
-  var diffDays = Math.round(diff/config.dateHeaderWidth);
+  var posw = $("#"+currTaskID).width();
 
+//  var movedTaskright = $("#"+task_id).position().right;
+
+  var diff;
+  if (pos >= movedTaskLeft){
+    diff = (movedTaskLeft + width) - pos;
+  } else if(pos < movedTaskLeft){
+    diff = movedTaskLeft - (pos + posw)
+  }
+
+  var diffDays = Math.round(diff/config.dateHeaderWidth);
+  console.log("HandleX:", thisTaskID, parentTaskID, pos, movedTaskLeft, width);
   console.log("Diff:", diff," diffdays: ", diffDays, "Left:", (config.dateHeaderWidth * diffDays));
 
 
   $("#"+currTaskID).animate({
     left: pos + (config.dateHeaderWidth * diffDays)},
-    50, function (){
+    100, function (){
       var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
       overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
       if(overlappingTasks.length <= 0){
