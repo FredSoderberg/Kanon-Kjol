@@ -13,7 +13,7 @@
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<!-- <script src ="js/calenderPage.js" charset="utf-8"></script> -->
+<script src="js/calenderPage.js" charset="utf-8"></script>
 
 <head>
 
@@ -29,20 +29,45 @@
           <div class="bar3"></div>
         </a>
       </div>
-        <img src="img/logo/logo.svg" alt="Planning" style="width:40%" class="w3-margin-top w3-display-topmiddle">
+      <img src="img/logo/logo.svg" alt="Planning" style="width:38%" class="w3-margin-top w3-display-topmiddle">
 
-        <botton id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Sign out <botton/>
-      </div>
+      <botton id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Sign out
+        <botton/>
+    </div>
 
-        <div id="mySidebar" class="w3-sidebar w3-grey hidden" style="width:25%">
-          <a href="#" class="w3-bar-item w3-button tabcolor">Edit Resource</a>
-          <a href="#" class="w3-bar-item w3-button tabcolor">Edit Class</a>
-          <a href="#" class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
-        </div>
 
-        <!-- TABS NEDANFÖR -->
 
-       <div id="dialog" title="Tab data">
+
+    <div id="mySidebar" class="w3-sidebar w3-grey hidden" style="width:25%">
+      <a id="resources" href="#" class="w3-bar-item w3-button tabcolor">Resources</a>
+      <a href="#" class="w3-bar-item w3-button tabcolor">Edit Chategory</a>
+      <a href="#" class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
+    </div>
+
+    <div id="resourceSidebar" class="w3-sidebar hidden w3-grey" style="overflow: scroll; height: 90%; width:25%">
+      <button id="back" href="#" class="w3-bar-item w3-button tabcolor">Go back</button>
+
+      <ul style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px">
+        <li style="margin: 5px; padding: 5px; width: 90%;" id="draggable" class="ui-state-highlight draggableClone">Add resource</li>
+      </ul>
+
+      <ul style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px" id="sortable">
+        <li id="test" style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 1</li>
+        <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 2</li>
+        <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 3</li>
+        <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 4</li>
+        <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 5</li>
+      </ul>
+
+    </div>
+
+
+
+
+
+    <!-- TABS NEDANFÖR -->
+
+    <div id="dialog" title="Tab data">
       <form>
         <fieldset class="ui-helper-reset">
           <label for="tab_title">Title</label>
@@ -60,25 +85,20 @@
           <span class="widthSmall ui-icon ui-icon-close" role="presentation">Remove Tab</span>
         </li>
         <button id="add_tab" class="">Add Tab</button>
-        </ul>
+      </ul>
 
-        <div id="tabs-1">
-          <p>This is a planing schedule. Just so you know! (Insert schedule)</p>
-        </div>
+      <div id="tabs-1">
+        <p>This is a planing schedule. Just so you know! (Insert schedule)</p>  <ul style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px" id="sortable">
+            <li id="test" style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 1</li>
+          </ul>
 
       </div>
+
+    </div>
 
 
     <script>
       $(function() {
-        $( "#menuIcon").on("click",function() {
-        $("#menuIcon").toggleClass("change");
-        $("#mySidebar").toggleClass("hidden",750);
-        $("#tabs").toggleClass("widthSmall",750);
-      });
-
-      $("#tabs").tabs();
-
 
         var tabTitle = $("#tab_title"),
           tabContent = $("#tab_content"),
