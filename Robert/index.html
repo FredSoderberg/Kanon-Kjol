@@ -40,7 +40,9 @@
 <body>
   <div id="calendar" style='width:100%; height:400px;'></div>
   <div id="key"></div>
-
+  <div id="dialog" title="Basic dialog">
+  <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
 
   <script type = "text/javascript">
 
@@ -211,7 +213,30 @@
 
     $( ".task_view_rows").sortable();
     $( ".task_view_rows").disableSelection();
+    var dialog = $("#dialog");
+    dialog.dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Create an account": function() {
+          dialog.dialog( "close" );
+        },
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        //form[ 0 ].reset();
+        //allFields.removeClass( "ui-state-error" );
+      }
+    });
 
+    $(document).on("dblclick", ".task_bar", function(event, ui){
+      console.log("Vem vet");
+      dialog.dialog("open");
+    })
     //$( ".task_view_bars").on("draggable")
 
   });
