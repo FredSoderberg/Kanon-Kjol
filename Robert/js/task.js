@@ -162,10 +162,11 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
   overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
   if (overlappingTasks.length <= 0) return;
 
-  handleX(overlappingTasks[0].id, thisTaskID);
+  if(handleX(overlappingTasks[0].id, thisTaskID)){
 
   overlappingTasks.shift();
   handleY(thisTaskID, parentTaskID, overlappingTasks);
+  }
 }
 
 function handleX(thisTaskID, parentTaskID){
@@ -177,7 +178,7 @@ function handleX(thisTaskID, parentTaskID){
   var posw = $("#"+currTaskID).width();
 
 //  var movedTaskright = $("#"+task_id).position().right;
-
+  pos = Math.round(pos)
   var diff;
   if (pos >= movedTaskLeft){
     diff = (movedTaskLeft + width) - pos;
@@ -192,18 +193,16 @@ function handleX(thisTaskID, parentTaskID){
 
   $("#"+currTaskID).animate({
     left: pos + (config.dateHeaderWidth * diffDays)},
-    100, function (){
+    50, function (){
       var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
       overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
       if(overlappingTasks.length <= 0){
-        return;
+        return true;
       }
       handleY(thisTaskID, parentTaskID, overlappingTasks);
     })
+    return true
 }
-
-
-
 
 /*  for (var i = 0; i < tasks.length; i++) {
     if (tasks[i].id != task_id) {
