@@ -7,14 +7,14 @@
     width: 25px;
     height: 4px;
     background-color: #333;
-    margin: 3px 0;
+    margin: 3px;
     transition: 0.4s;
 }
 
 /* Rotate first bar */
 .change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
-    transform: rotate(-45deg) translate(-9px, 6px) ;
+    -webkit-transform: rotate(-45deg) translate(-9px, 2px) ;
+    transform: rotate(-45deg) translate(-9px, 2px) ;
 }
 
 /* Fade out the second bar */
@@ -24,8 +24,9 @@
 
 /* Rotate last bar */
 .change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
-    transform: rotate(45deg) translate(-8px, -8px) ;
+    -webkit-transform: rotate(45deg) translate(-8px, -2px) ;
+    transform: rotate(45deg) translate(-8px, -2px) ;
+
 }
 
 .div1 {
@@ -66,7 +67,4 @@ list-style-type: none;
 margin: 0;
 padding: 0;
 margin-bottom: 10px;
-}
-.tabsBottom {
-      top: 1px;
 }

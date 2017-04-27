@@ -1,12 +1,12 @@
 var TaskViewRow = function() {};
 
-Calendar.prototype.init = function() {
+Calendar.prototype.init = function(whereToStart) {
 
   this.project = new Project(1, 300);
   config.taskWidth = this.project.lengthDays * config.dateHeaderWidth;
 
   //this.project.init_test();
-  this._init_html_area("calendar");
+  this._init_html_area(whereToStart);
   this._set_size();
 
   this._create_resource_headers();

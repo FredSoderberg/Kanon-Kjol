@@ -10,46 +10,42 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://www.w3schools.com/lib/w3.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"charset="utf-8"></script>
+<script src="https://www.w3schools.com/lib/w3.js" charset="utf-8"></script>
+<script src="dep.JS/jquery-overlaps-1.2.3/jquery.overlaps.js" charset="utf-8"></script>
 
-<script src="objects/task.js"></script>
-<script src="objects/project.js"></script>
-<script src="objects/resource.js"></script>
-<script src="objects/calendar.js"></script>
+<script src="objects/task.js"charset="utf-8"></script>
+<script src="objects/project.js"charset="utf-8"></script>
+<script src="objects/resource.js"charset="utf-8"></script>
+<script src="objects/calendar.js"charset="utf-8"></script>
 
-<script src="scripts.JS/config.js"></script>
-<script src="scripts.JS/calendarUtils.js"></script>
-<script src="scripts.JS/eventlistener.js"></script>
-<script src="scripts.JS/calenderPage.js"></script>
+<script src="scripts.JS/config.js"charset="utf-8"></script>
+<script src="scripts.JS/calendarUtils.js"charset="utf-8"></script>
+<script src="scripts.JS/eventlistener.js"charset="utf-8"></script>
+<script src="scripts.JS/calenderPage.js"charset="utf-8"></script>
+<script src="scripts.JS/calenderInit.js"charset="utf-8"></script>
 
 
 <head>
 
   <body>
-
-
-
       <div id="top" class="div1 w3-display-container">
 
       <img src="img/logo/logo.svg" alt="Planning" style="width:38%" class="w3-margin-top w3-display-topmiddle">
 
-      <botton id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Sign out
-        <botton/>
+      <a id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Sign out
+        <a/>
     </div>
-
-
-
 
     <div id="mySidebar" class="w3-sidebar w3-grey hidden" style="width:25%">
-      <a id="resources" href="#" class="w3-bar-item w3-button tabcolor">Resources</a>
-      <a href="#" class="w3-bar-item w3-button tabcolor">Edit Chategory</a>
-      <a href="#" class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
+      <a id="resourcesButton" class="w3-bar-item w3-button tabcolor">Resources</a>
+      <a class="w3-bar-item w3-button tabcolor">Edit Chategory</a>
+      <a class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
     </div>
 
-    <div id="resourceSidebar" class="w3-sidebar hidden w3-grey" style="overflow: scroll; height: 90%; width:25%">
-      <button id="back" href="#" class="w3-bar-item w3-button tabcolor">Go back</button>
+    <div id="resourceSidebar" class="w3-sidebar w3-grey hidden" style="overflow: scroll; height: 90%; width:25%">
+      <button id="back" class="w3-bar-item w3-button tabcolor">Go back</button>
 
       <ul style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px">
         <li style="margin: 5px; padding: 5px; width: 90%;" id="draggable" class="ui-state-highlight draggableClone">Add resource</li>
@@ -62,12 +58,7 @@
         <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 4</li>
         <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 5</li>
       </ul>
-
     </div>
-
-
-
-
 
     <!-- TABS NEDANFÖR -->
 
@@ -85,35 +76,49 @@
     <div id="tabs">
       <ul>
 
-        <li>
-
+        <li id="menuIcon" class="menuIcon">
+               <div class="bar1"></div>
+               <div class="bar2"></div>
+               <div class="bar3"></div>
         </li>
 
         <li>
-          <a id="menuIcon" class="w3-display-bottomleft w3-button menuIcon">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </a>
-
           <a href="#calendar">Projekt 1</a>
+          <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
+        </li>
+        <li>
+          <a href="#calendar2">Projekt 2</a>
           <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
         </li>
 
         <button id="add_tab" class="">Add Tab</button>
 
       </ul>
-        <div id="calendar" style='width:100%; height:400px;'></div>
+        <div id="calendar" style='width:100%; height:400px;'>
 
         <script type = "text/javascript">
 
           var cal = new Calendar();
 
-          cal.init();
+          cal.init(calendar);
 
         </script>
-      </ul>
+
       </div>
+
+      <div id="calendar2" style='width:100%; height:400px;'>
+        <script type = "text/javascript">
+
+          var cal = new Calendar();
+
+          cal.init(calendar2);
+
+        </script>
+      </div>
+
+
+
+    </div>
 
     <div id="key"></div>
     <div id="taskDialog" title="Basic dialog">
