@@ -19,26 +19,29 @@
   <body>
 
 
-
-      <div id="top" class="div1 w3-display-container">
-
+    <div id="top">
+      <div class="div1 w3-display-container">
+        <a id="menuIcon" class="w3-display-bottomleft w3-button menuIcon">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </a>
+      </div>
       <img src="img/logo/logo.svg" alt="Planning" style="width:38%" class="w3-margin-top w3-display-topmiddle">
 
-      <botton id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Sign out
-        <botton/>
+      <button id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Sign out
+        <bottun/>
     </div>
-
-
 
 
     <div id="mySidebar" class="w3-sidebar w3-grey hidden" style="width:25%">
-      <a id="resources" href="#" class="w3-bar-item w3-button tabcolor">Resources</a>
-      <a href="#" class="w3-bar-item w3-button tabcolor">Edit Chategory</a>
-      <a href="#" class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
+      <a id="resources" class="w3-bar-item w3-button tabcolor">Resources</a>
+      <a class="w3-bar-item w3-button tabcolor">Edit Chategory</a>
+      <a class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
     </div>
 
     <div id="resourceSidebar" class="w3-sidebar hidden w3-grey" style="overflow: scroll; height: 90%; width:25%">
-      <button id="back" href="#" class="w3-bar-item w3-button tabcolor">Go back</button>
+      <button id="back" class="w3-bar-item w3-button tabcolor">Go back</button>
 
       <ul style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px">
         <li style="margin: 5px; padding: 5px; width: 90%;" id="draggable" class="ui-state-highlight draggableClone">Add resource</li>
@@ -53,8 +56,6 @@
       </ul>
 
     </div>
-
-
 
 
 
@@ -106,6 +107,79 @@
           </ul>
       </div>
     </div>
+
+
+    <script>
+      $(function() {
+
+        var tabTitle = $("#tab_title"),
+          tabContent = $("#tab_content"),
+          tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
+          tabCounter = 2;
+
+        var tabs = $("#tabs").tabs();
+
+        // Modal dialog init: custom buttons and a "close" callback resetting the form inside
+        var dialog = $("#dialog").dialog({
+          autoOpen: false,
+          modal: true,
+          buttons: {
+            Add: function() {
+              addTab();
+              $(this).dialog("close");
+            },
+            Cancel: function() {
+              $(this).dialog("close");
+            }
+          },
+          close: function() {
+            form[0].reset();
+          }
+        });
+
+        // AddTab form: calls addTab function on submit and closes the dialog
+        var form = dialog.find("form").on("submit", function(event) {
+          addTab();
+          dialog.dialog("close");
+          event.preventDefault();
+        });
+
+        // Actual addTab function: adds new tab using the input from the form above
+        function addTab() {
+          var label = tabTitle.val() || "Tab " + tabCounter,
+            id = '"tabs-" + tabCounter,'
+            li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+            tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+
+          tabs.find(".ui-tabs-nav").append(li);
+          tabs.append("<div id='" + id + "'><p>" + tabContentHtml + "</p></div>");
+          tabs.tabs("refresh");
+          tabCounter++;
+        }
+
+        // AddTab button: just opens the dialog
+        $("#add_tab")
+          .button()
+          .on("click", function() {
+            dialog.dialog("open");
+          });
+
+        // Close icon: removing the tab on click
+        tabs.on("click", "span.ui-icon-close", function() {
+          var panelId = $(this).closest("li").remove().attr("aria-controls");
+          $("#" + panelId).remove();
+          tabs.tabs("refresh");
+        });
+
+        tabs.on("keyup", function(event) {
+          if (event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE) {
+            var panelId = tabs.find(".ui-tabs-active").remove().attr("aria-controls");
+            $("#" + panelId).remove();
+            tabs.tabs("refresh");
+          }
+        });
+      });
+    </script>
   </body>
 
 </html>
