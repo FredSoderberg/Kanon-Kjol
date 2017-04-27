@@ -24,7 +24,7 @@ function hideSideBar () {
 
 function showSideBar () {
   var mySidebar = $("#mySidebar").detach();
-  $("#calendar").prepend(mySidebar);
+  $("#calendarArea").prepend(mySidebar);
   $("#mySidebar").toggleClass("hidden", 750);
 
 }

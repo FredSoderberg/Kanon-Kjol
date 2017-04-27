@@ -12,8 +12,7 @@
       if ($("#mySidebar").hasClass("hidden")) {
         $("#calendar").toggleClass("widthSmall", 750);
         showSideBar()
-          }
-      else {
+      } else {
         if (!$("#resourceSidebar").hasClass("hidden")) {
             hideResourceBar();
         }
