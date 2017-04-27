@@ -38,6 +38,8 @@
         <a/>
     </div>
 
+<div id="noMansLand">
+
     <div id="mySidebar" class="w3-sidebar w3-grey hidden" style="width:25%">
       <a id="resourcesButton" class="w3-bar-item w3-button tabcolor">Resources</a>
       <a class="w3-bar-item w3-button tabcolor">Edit Chategory</a>
@@ -59,7 +61,7 @@
         <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone">Item 5</li>
       </ul>
     </div>
-
+</div>
     <!-- TABS NEDANFÖR -->
 
     <div id="dialog" title="Tab data">
@@ -83,47 +85,32 @@
         </li>
 
         <li>
-          <a href="#calendar">Projekt 1</a>
-          <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
-        </li>
-        <li>
-          <a href="#calendar2">Projekt 2</a>
+          <a href="#calendarArea">Projekt 1</a>
           <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
         </li>
 
         <button id="add_tab">Add Tab</button>
 
       </ul>
-        <div id="calendar" style='padding: 0; width:100%; height:400px;'>
+        <div id="calendarArea" style="padding:2px">
 
-        <script type = "text/javascript">
-
-          var cal = new Calendar();
-
-          cal.init(calendar);
-
-        </script>
-
+            <div id="calendar" style='width:100%; height:400px;'>
+            </div>
       </div>
-
-      <div id="calendar2" style='width:100%; height:400px;'>
-        <script type = "text/javascript">
-
-          var cal = new Calendar();
-
-          cal.init(calendar2);
-
-        </script>
-      </div>
-
-
-
     </div>
 
     <div id="key"></div>
     <div id="taskDialog" title="Basic dialog">
     <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
   </div>
+
+  <script type = "text/javascript">
+
+    var cal = new Calendar();
+
+    cal.init(calendar);
+
+  </script>
 
   </body>
 

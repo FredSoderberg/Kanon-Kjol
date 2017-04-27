@@ -14,3 +14,30 @@ function moveSidebar(){
       }
   });
 };
+
+function hideSideBar () {
+  $("#mySidebar").toggleClass("hidden", 750).promise().done(function(){
+    var mySidebar = $("#mySidebar").detach();
+    $("#noMansLand").prepend(mySidebar);
+});
+}
+
+function showSideBar () {
+  var mySidebar = $("#mySidebar").detach();
+  $("#calendar").prepend(mySidebar);
+  $("#mySidebar").toggleClass("hidden", 750);
+
+}
+
+    function hideResourceBar () {
+      $("#resourceSidebar").toggleClass("hidden", 750).promise().done(function(){
+        var resourceSidebar = $("#resourceSidebar").detach();
+        $("#noMansLand").prepend(resourceSidebar);
+})
+    }
+
+    function showResourceBar () {
+      var resourceSidebar = $("#resourceSidebar").detach();
+      $("#mySidebar").prepend(resourceSidebar);
+      $("#resourceSidebar").toggleClass("hidden", 750);
+    }

@@ -2,28 +2,41 @@
 
     $("#tabs").tabs({
           activate: function(event, ui){
-            console.log("fuck!");
-            moveSidebar();
+        //    console.log("fuck!");
+        //    moveSidebar();
           }
       });
 
     $("#menuIcon").on("click", function() {
-      moveSidebar();
       $("#menuIcon").toggleClass("change");
-      $("#mySidebar").toggleClass("hidden", 750);
-    //  $("#tabs").toggleClass("widthSmall", 750);
-     $("#calendar").toggleClass("widthSmall", 750);
-      if (!$("#resourceSidebar").hasClass("hidden")) {
-        console.log("jehehege");        $("#resourceSidebar").toggleClass("hidden", 750);
+      if ($("#mySidebar").hasClass("hidden")) {
+        $("#calendarArea").toggleClass("widthSmall", 750);
+        showSideBar()
+          }
+      else {
+        if (!$("#resourceSidebar").hasClass("hidden")) {
+            hideResourceBar();
+        }
+        $("#calendarArea").toggleClass("widthSmall", 750);
+        hideSideBar();
       }
     });
 
+
+
+    //   moveSidebar();
+    //   $("#menuIcon").toggleClass("change");
+    //   $("#mySidebar").toggleClass("hidden", 750);
+      //$("#calendar").toggleClass("widthSmall", 750);
+      // $("#task_view").toggleClass("widthSmall", 750);
+      // $("#resource_view").toggleClass("widthSmall", 750);
+
     $("#resourcesButton").on("click", function() {
-      $("#resourceSidebar").toggleClass("hidden", 750);
+      showResourceBar();
     });
 
     $("#back").on("click", function() {
-      $("#resourceSidebar").toggleClass("hidden", 750);
+      hideResourceBar();
     });
   /*   $( "#sortable" ).sortable({
       revert: true
