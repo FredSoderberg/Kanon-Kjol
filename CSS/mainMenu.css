@@ -68,3 +68,8 @@ margin: 0;
 padding: 0;
 margin-bottom: 10px;
 }
+
+.noPadding {
+  padding: 0;
+  background-color: blue;
+}

@@ -79,7 +79,7 @@
       modal: true,
       buttons: {
         Add: function() {
-          addTab();
+          addTab(false);
           $(this).dialog("close");
         },
         Cancel: function() {
@@ -99,7 +99,10 @@
     });
 
       // Actual addTab function: adds new tab using the input from the form above
-      function addTab() {
+      function addTab(fromDB,projectToAdd) {
+        if (!fromDB) {
+
+
         var label = tabTitle.val() || "Tab " + tabCounter,
           id = "tabs-" + tabCounter,
           li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
@@ -109,6 +112,10 @@
         tabs.append("<div id='" + id + "'><p>" + tabContentHtml + "</p></div>");
         tabs.tabs("refresh");
         tabCounter++;
+        }
+        else {
+
+        }
       }
 
       // AddTab button: just opens the dialog
