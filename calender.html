@@ -2,17 +2,28 @@
 <html>
 <title>Nock-Off - Erika</title>
 
+
+<link href="CSS/calendar.css" rel="stylesheet">
 <link rel="stylesheet" href="dep.CSS/w3.css">
 <link rel="stylesheet" href="dep.JS/jquery-ui/jquery-ui.css">
 <link rel="stylesheet" href="CSS/mainMenu.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<script src="js/calenderPage.js" charset="utf-8"></script>
+<script src="objects/task.js"></script>
+<script src="objects/project.js"></script>
+<script src="objects/resource.js"></script>
+<script src="objects/calendar.js"></script>
+
+<script src="scripts.JS/config.js"></script>
+<script src="scripts.JS/calendarUtils.js"></script>
+<script src="scripts.JS/eventlistener.js"></script>
+<script src="scripts.JS/calenderPage.js"></script>
+
 
 <head>
 
@@ -75,37 +86,42 @@
       <ul>
 
         <li>
-            <a id="menuIcon" class="w3-display-bottomleft w3-button menuIcon">
-              <div class="bar1"></div>
-              <div class="bar2"></div>
-              <div class="bar3"></div>
-          </a>
-          <span class="widthSmall ui-icon ui-icon-close" role="presentation">Remove Tab</span>
+
         </li>
 
         <li>
-          <a href="#tabs-1">Projekt 1</a>
-          <span class="widthSmall ui-icon ui-icon-close" role="presentation">Remove Tab</span>
+          <a id="menuIcon" class="w3-display-bottomleft w3-button menuIcon">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </a>
+
+          <a href="#calendar">Projekt 1</a>
+          <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
         </li>
 
         <button id="add_tab" class="">Add Tab</button>
 
       </ul>
-<div id="menuIconLink">
-  <a id="menuIcon" class="w3-display-bottomleft w3-button menuIcon">
-    <div class="bar1"></div>
-    <div class="bar2"></div>
-    <div class="bar3"></div>
-  </a>
-</div>
-      <div id="tabs-1">
-        <p>This is a planing schedule. Just so you know! (Insert schedule)</p>
-          <ul style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px" id="sortable">
-            <li id="test" style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-default draggableClone ui-widget-content">Item 1
-            </li>
-          </ul>
+        <div id="calendar" style='width:100%; height:400px;'></div>
+
+        <script type = "text/javascript">
+
+          var cal = new Calendar();
+
+          cal.init();
+
+        </script>
+      </ul>
       </div>
-    </div>
+
+    <div id="key"></div>
+    <div id="taskDialog" title="Basic dialog">
+    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+  </div>
+
   </body>
+
+
 
 </html>

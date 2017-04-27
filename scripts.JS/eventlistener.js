@@ -158,18 +158,18 @@ $(document).ready(function(){
 
   $( ".task_view_rows").sortable();
   $( ".task_view_rows").disableSelection();
-  var dialog = $("#dialog");
-  dialog.dialog({
+  var taskDialog = $("#taskDialog");
+  taskDialog.dialog({
     autoOpen: false,
     height: 400,
     width: 350,
     modal: true,
     buttons: {
       "Create an account": function() {
-        dialog.dialog( "close" );
+        taskDialog.dialog( "close" );
       },
       Cancel: function() {
-        dialog.dialog( "close" );
+        taskDialog.dialog( "close" );
       }
     },
     close: function() {
@@ -180,7 +180,7 @@ $(document).ready(function(){
 
   $(document).on("dblclick", ".task_bar", function(event, ui){
     console.log("Vem vet");
-    dialog.dialog("open");
+    taskDialog.dialog("open");
   })
   //$( ".task_view_bars").on("draggable")
 

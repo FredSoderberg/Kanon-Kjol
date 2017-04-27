@@ -1,7 +1,7 @@
   $(function() {
 
     $("#tabs").click(function(event) {
-      tabbarna();
+      $("#tabs").tabs();
     });
 
     $("#menuIcon").on("click", function() {
@@ -59,16 +59,6 @@
     });
 
     $("ul, li").disableSelection();
-
-  });
-
-
-  $(function tabbarna() {
-    $("#tabs").tabs();
-  });
-
-
-    $(function() {
 
       var tabTitle = $("#tab_title"),
         tabContent = $("#tab_content"),
@@ -136,4 +126,5 @@
           tabs.tabs("refresh");
         }
       });
+
     });
