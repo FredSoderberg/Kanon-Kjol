@@ -10,14 +10,14 @@
     $("#menuIcon").on("click", function() {
       $("#menuIcon").toggleClass("change");
       if ($("#mySidebar").hasClass("hidden")) {
-        $("#calendarArea").toggleClass("widthSmall", 750);
+        $("#calendar").toggleClass("widthSmall", 750);
         showSideBar()
           }
       else {
         if (!$("#resourceSidebar").hasClass("hidden")) {
             hideResourceBar();
         }
-        $("#calendarArea").toggleClass("widthSmall", 750);
+        $("#calendar").toggleClass("widthSmall", 750);
         hideSideBar();
       }
     });
