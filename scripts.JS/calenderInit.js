@@ -1,5 +1,46 @@
   $(function() {
 
+    $(".resourceDrag").draggable({revert: "invalid"});
+
+    $("#sortable").droppable({ accept: ".resourceDrag",
+               drop: function(event, ui) {
+                        console.log("drop");
+                        // TODO: om fler listor kan man lägga till scope i draggable
+                      // $(this).removeClass("border").removeClass("over");
+                 var dropped = ui.draggable;
+
+                 console.log(ui);
+
+                var droppedOn = $(this);
+                $(dropped).detach().appendTo(droppedOn);},
+
+                over: function(event, elem) {
+                  $(this).addClass("over");
+                  console.log("over");
+                },
+                out: function(event, elem) {
+                  $(this).removeClass("over");
+                }
+              });
+
+    $("#sortable").sortable();
+
+    $("#availableResources").droppable({ accept: ".resourceDrag", drop: function(event, ui) {
+                        console.log("drop");
+                    //   $(this).removeClass("border").removeClass("over");
+                 var dropped = ui.draggable;
+                var droppedOn = $(this);
+                $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
+
+
+                    }});
+
+
+
+
+
+
+
     $("#tabs").tabs({
           activate: function(event, ui){
         //    console.log("fuck!");
@@ -23,15 +64,6 @@
       cal.change_width();
     });
 
-
-
-    //   moveSidebar();
-    //   $("#menuIcon").toggleClass("change");
-    //   $("#mySidebar").toggleClass("hidden", 750);
-      //$("#calendar").toggleClass("widthSmall", 750);
-      // $("#task_view").toggleClass("widthSmall", 750);
-      // $("#resource_view").toggleClass("widthSmall", 750);
-
     $("#resourcesButton").on("click", function() {
       showResourceBar();
     });
@@ -42,40 +74,40 @@
   /*   $( "#sortable" ).sortable({
       revert: true
     });*/
-   $("#sortable").sortable({
-      connectWith: ".connectedSortable",
-      forcePlaceholderSize: false
-    });
-
-    $(".draggableClone").draggable({
-      //connectToSortable: "#sortable",
-      helper: "clone",
-      revert: "invalid"
-    });
-
-    $(document).on("dragstart", "#draggable", function(event, ui){
-      $(".draggableClone").draggable({
-        //connectToSortable: "#tabs",
-        helper: "clone",
-        revert: "invalid"
-      });
-
-      $(".draggableClone").on("click", function(){
-      alert("hej");
-      });
-    });
-
-  /*  $(".connectedSortable").sortable({
-      receive: function(e, ui) {
-        copyHelper = null;
-      }
-    }); */
-
-    $("#draggable").draggable({
-      connectToSortable: "#sortable",
-      helper: "clone",
-      revert: "unvalid"
-    });
+  //  $("#availableResources").sortable({
+  //     connectWith: ".connectedSortable",
+  //     forcePlaceholderSize: false
+  //   });
+  //
+  //   $(".draggableClone").draggable({
+  //     //connectToSortable: "#sortable",
+  //     helper: "clone",
+  //     revert: "invalid"
+  //   });
+  //
+  //   $(document).on("dragstart", "#addResources", function(event, ui){
+  //     $(".draggableClone").draggable({
+  //       //connectToSortable: "#tabs",
+  //       helper: "clone",
+  //       revert: "invalid"
+  //     });
+  //
+  //     $(".draggableClone").on("click", function(){
+  //     });
+  //   });
+  //
+  //
+  // /*  $(".connectedSortable").sortable({
+  //     receive: function(e, ui) {
+  //       copyHelper = null;
+  //     }
+  //   }); */
+  //
+  //   $("#draggable").draggable({
+  //     connectToSortable: "#sortable",
+  //     helper: "clone",
+  //     revert: "unvalid"
+  //   });
 
     $("ul, li").disableSelection();
 
