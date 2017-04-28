@@ -48,7 +48,25 @@
           }
       });
 
-    $("#menuIcon").on("click", function() {
+       //$(".sidebar.left").sidebar();
+
+
+    /*  $("#menuIcon").on("click", function() {
+        $("#menuIcon").toggleClass("change");
+
+        if ($("mySidebar").hasClass("open")) {
+          hideSideBar();
+        }
+        else {
+          showSideBar();
+        }
+          });
+
+      $("mySidebar").on("sidebar:opened", function () {
+          $("#calendar").toggleClass("widthSmall", 750);
+      });*/
+
+   $("#menuIcon").on("click", function() {
       $("#menuIcon").toggleClass("change");
 
       if ($("#mySidebar").hasClass("hidden")) {
@@ -71,6 +89,8 @@
     $("#back").on("click", function() {
       hideResourceBar();
     });
+
+
   /*   $( "#sortable" ).sortable({
       revert: true
     });*/
