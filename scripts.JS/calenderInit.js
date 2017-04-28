@@ -12,14 +12,13 @@
                  console.log(ui);
 
                 var droppedOn = $(this);
-                $(dropped).detach().appendTo(droppedOn);},
-
+                $(dropped).detach();
+                cal._create_resource(new Resource(1,"hej","bajs"));
+              },
                 over: function(event, elem) {
                   $(this).addClass("over");
-                  console.log("over");
-                },
+              },
                 out: function(event, elem) {
-                  $(this).removeClass("over");
                 }
               });
 
