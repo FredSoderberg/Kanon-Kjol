@@ -162,23 +162,32 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
   overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
   if (overlappingTasks.length <= 0) return;
 
-  handleX(overlappingTasks[0].id, thisTaskID);
+  if(handleX(overlappingTasks[0].id, thisTaskID)){
 
   overlappingTasks.shift();
   handleY(thisTaskID, parentTaskID, overlappingTasks);
+  }
 }
 
 function handleX(thisTaskID, parentTaskID){
-  console.log("HandleX:", thisTaskID, parentTaskID);
 
-  var movedTaskLeft = $("#"+parentTaskID).position().left;
-//  var movedTaskright = $("#"+task_id).position().right;
   var currTaskID = thisTaskID;
-
+  var movedTaskLeft = $("#"+parentTaskID).position().left;
+  var width = $("#"+parentTaskID).width();
   var pos = $("#"+currTaskID).position().left;
-  var diff = pos - movedTaskLeft;
-  var diffDays = Math.round(diff/config.dateHeaderWidth);
+  var posw = $("#"+currTaskID).width();
 
+//  var movedTaskright = $("#"+task_id).position().right;
+  pos = Math.round(pos)
+  var diff;
+  if (pos >= movedTaskLeft){
+    diff = (movedTaskLeft + width) - pos;
+  } else if(pos < movedTaskLeft){
+    diff = movedTaskLeft - (pos + posw)
+  }
+
+  var diffDays = Math.round(diff/config.dateHeaderWidth);
+  console.log("HandleX:", thisTaskID, parentTaskID, pos, movedTaskLeft, width);
   console.log("Diff:", diff," diffdays: ", diffDays, "Left:", (config.dateHeaderWidth * diffDays));
 
 
@@ -188,14 +197,12 @@ function handleX(thisTaskID, parentTaskID){
       var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
       overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
       if(overlappingTasks.length <= 0){
-        return;
+        return true;
       }
       handleY(thisTaskID, parentTaskID, overlappingTasks);
     })
+    return true
 }
-
-
-
 
 /*  for (var i = 0; i < tasks.length; i++) {
     if (tasks[i].id != task_id) {
