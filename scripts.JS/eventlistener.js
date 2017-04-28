@@ -24,7 +24,7 @@ $(document).ready(function(){
 */
   $(".task_view_rows").on('dblclick', '.task_row_cell', function(){
     var resID = Number($(this).parent().attr("id").replace('row_', ''));
-    console.log("this", $(this).index(), resID);
+    //console.log("this", $(this).index(), resID);
     cal.create_task($(this), resID);
   });
 
@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 
   $(document).on("sortchange",function(ui, e){
-    console.log("Dragging");
+    //console.log("Dragging");
     var id = e.item.attr('id');
   });
 

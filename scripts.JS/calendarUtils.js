@@ -148,7 +148,7 @@ Calendar.prototype.create_task = function(cell, resID) {
 
   var newTask = this.project.create_task(startDate, endDate, resID);
 
-  this.divTaskViewBars.innerHTML += newTask.render();
+  newTask.render();
 
 
   $("#task_" + newTask.taskID).offset({
@@ -198,25 +198,27 @@ create_cover = function() {
 Calendar.prototype.change_width = function () {
   if(this.ifSidebarOpen){
     //$("#calendar").width($("#calendar").width() + 200);
-    $("#calendar").animate({
-      width: "+=200"
-    }, 750, function() {
-    });
-
     $(".task_view").animate({
       width: "+=200"
-    }, 750, function() {
+    }, 100, function() {
     });
+    $("#calendar").animate({
+      width: "+=200"
+    }, 100, function() {
+    });
+
+
     //$(".calendar_container").width($(".calendar_container").width() + 200);
     //$(".task_view").width($(".task_view").width() + 200);
     this.ifSidebarOpen = false;
   }else{
     //$("#calendar").width($("#calendar").width() - 200);
-    $(".task_view").animate({
+
+    $("#calendar").animate({
       width: "-=200"
     }, 750, function() {
     });
-    $("#calendar").animate({
+    $(".task_view").animate({
       width: "-=200"
     }, 750, function() {
     });
