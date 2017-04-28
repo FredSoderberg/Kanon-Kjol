@@ -8,8 +8,9 @@
                         // TODO: om fler listor kan man lägga till scope i draggable
                       // $(this).removeClass("border").removeClass("over");
                  var dropped = ui.draggable;
-                $(dropped).detach();
-                cal._create_resource(new Resource(1,"hej","bajs"));
+                 dropped.removeClass().addClass("resource_row", "col_container");
+                 var droppedOn = $(this);
+                $(dropped).detach().appendTo(droppedOn);
               },
                 over: function(event, elem) {
                   $(this).addClass("over");
@@ -24,10 +25,11 @@
                  var dropped = ui.draggable;
                 var droppedOn = $(this);
                 $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-
-
                     }});
 
+                      $( "#availableResources" ).sortable({
+                        revert: true
+                      });
 
 
 
