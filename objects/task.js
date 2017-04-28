@@ -41,8 +41,8 @@ function dateString(date){
   return dateString;
 }
 
-
-$(document).on('resizestop', function(event, ui) {
+$(function (){
+$(".task_view_bars").on('resizestop', function(event, ui) {
   var id = Number(event.target.id.replace("task_", ""));
   var task = cal.project.get_task_by_id(id);
 
@@ -59,7 +59,7 @@ $(document).on('resizestop', function(event, ui) {
 })
 
 
-$(document).on('resizestart', function(event, ui) {
+$(".task_view_bars").on('resizestart', function(event, ui) {
   var id = Number(event.target.id.replace("task_", ""));
   //console.log("Task ID:", id)
   var task = cal.project.get_task_by_id(id);
@@ -68,7 +68,7 @@ $(document).on('resizestart', function(event, ui) {
   task.startSize.width = $("#" + event.target.id).width();
 })
 
-$(document).on('dragstop', function(event, ui) {
+$(".task_view_bars").on('dragstop', function(event, ui) {
   //$('#key').html("");
 
   var id = Number(event.target.id.replace("task_", ""));
@@ -79,7 +79,7 @@ $(document).on('dragstop', function(event, ui) {
   updateInnerHtml(task);
 })
 
-$(document).on('dragstart', function(event, ui) {
+$(".task_view_bars").on('dragstart', function(event, ui) {
   //$('#key').html("");
   var id = Number(event.target.id.replace("task_", ""));
   var task = cal.project.get_task_by_id(id);
@@ -89,6 +89,7 @@ $(document).on('dragstart', function(event, ui) {
   //console.log("startPos:", task.startPos)
 
 })
+});
 
 function set_resources(task, shiftResources){
   var startRow = get_row_index(task);
