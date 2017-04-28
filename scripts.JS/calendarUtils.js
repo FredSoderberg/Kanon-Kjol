@@ -196,11 +196,19 @@ Calendar.prototype.change_width = function () {
     }, 300, function() {
     });
 
+    $(".task_view").animate({
+      width: "+=200"
+    }, 300, function() {
+    });
     //$(".calendar_container").width($(".calendar_container").width() + 200);
     //$(".task_view").width($(".task_view").width() + 200);
     this.ifSidebarOpen = false;
   }else{
     //$("#calendar").width($("#calendar").width() - 200);
+    $(".task_view").animate({
+      width: "-=200"
+    }, 300, function() {
+    });
     $("#calendar").animate({
       width: "-=200"
     }, 300, function() {
