@@ -50,7 +50,7 @@ Project.prototype.get_task_by_resource = function(resID){
 Project.prototype.get_task_by_id = function (taskID) {
 
   for (var task in this.tasks) {
-    if (this.tasks[task].taskID === taskID) {
+    if (this.tasks[task].id === taskID) {
       return this.tasks[task];
     }
   }
@@ -61,3 +61,16 @@ Project.prototype.get_task_by_id = function (taskID) {
     var id = Number(element[0].id.replace("task_", ""));
       return this.get_task_by_id(id);
     }
+
+Project.prototype.get_resource_by_id = function (resourceID) {
+  for (var resource in this.resources) {
+    if (this.resources[resource].id === resourceID) {
+      return this.resources[resource];
+    }
+  }
+};
+
+Project.prototype.get_resource_by_element = function (element) {
+  var id = Number(element[0].id);
+    return this.get_resource_by_id(id);
+};

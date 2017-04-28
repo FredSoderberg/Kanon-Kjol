@@ -1,9 +1,9 @@
 function Task(startDate, endDate, resID, taskID) {
 
+  this.id = taskID;
   this.startDate = startDate;
   this.endDate = endDate;
   this.resources = [resID];
-  this.taskID = taskID;
   this.startPos;
 
   this.startSize = {

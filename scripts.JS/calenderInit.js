@@ -1,4 +1,4 @@
-  $(function() {
+    $(function() {
 
     $(".resourceDrag").draggable({revert: "invalid"});
 
@@ -8,10 +8,6 @@
                         // TODO: om fler listor kan man lägga till scope i draggable
                       // $(this).removeClass("border").removeClass("over");
                  var dropped = ui.draggable;
-
-                 console.log(ui);
-
-                var droppedOn = $(this);
                 $(dropped).detach();
                 cal._create_resource(new Resource(1,"hej","bajs"));
               },
@@ -21,8 +17,6 @@
                 out: function(event, elem) {
                 }
               });
-
-    $("#sortable").sortable();
 
     $("#availableResources").droppable({ accept: ".resourceDrag", drop: function(event, ui) {
                         console.log("drop");
@@ -42,28 +36,9 @@
 
     $("#tabs").tabs({
           activate: function(event, ui){
-        //    console.log("fuck!");
-        //    moveSidebar();
+
           }
       });
-
-       //$(".sidebar.left").sidebar();
-
-
-    /*  $("#menuIcon").on("click", function() {
-        $("#menuIcon").toggleClass("change");
-
-        if ($("mySidebar").hasClass("open")) {
-          hideSideBar();
-        }
-        else {
-          showSideBar();
-        }
-          });
-
-      $("mySidebar").on("sidebar:opened", function () {
-          $("#calendar").toggleClass("widthSmall", 750);
-      });*/
 
    $("#menuIcon").on("click", function() {
       $("#menuIcon").toggleClass("change");

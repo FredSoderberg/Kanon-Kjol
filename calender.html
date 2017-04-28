@@ -25,7 +25,6 @@
 <script src="scripts.JS/eventlistener.js"charset="utf-8"></script>
 <script src="scripts.JS/calenderPage.js"charset="utf-8"></script>
 <script src="scripts.JS/calenderInit.js"charset="utf-8"></script>
-<script src="dep.JS/jQuery-sidebar/src/jquery.sidebar.min.js"></script>
 
 <head>
 
@@ -55,7 +54,12 @@
       </ul>
 
       <ul id="availableResources" style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px">
-        <li style="margin: 5px; padding: 5px; width: 90%;" class="ui-state-highlight resourceDrag">Item 1</li>
+        <div id="1" class="resource_row col_container resourceDrag" style="height: 30px">
+          <div class="resource_cell" style="width: 50px">bajs</div>
+          <div class="resource_cell" style="width: 100px">hej</div>
+          <div class="resource_cell" style="width: 30px">1</div>
+          <div class="remove_cell" style="width: 40px">X</div>
+        </div>
       </ul>
     </div>
 </div>
