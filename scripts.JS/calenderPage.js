@@ -15,7 +15,7 @@ function moveSidebar(){
   });
 };
 
-function hideSideBar () {
+ function hideSideBar () {
   $("#mySidebar").toggleClass("hidden", 750).promise().done(function(){
     var mySidebar = $("#mySidebar").detach();
     $("#noMansLand").prepend(mySidebar);
@@ -25,8 +25,7 @@ function hideSideBar () {
 function showSideBar () {
   var mySidebar = $("#mySidebar").detach();
   $("#calendarArea").prepend(mySidebar);
-  $("#mySidebar").toggleClass("hidden", 750);
-
+  $("#mySidebar").toggleClass("hidden",750);
 }
 
     function hideResourceBar () {

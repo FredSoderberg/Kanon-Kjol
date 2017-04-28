@@ -1,4 +1,4 @@
-  $(function() {
+    $(function() {
 
     $(".resourceDrag").draggable({revert: "invalid"});
 
@@ -8,22 +8,15 @@
                         // TODO: om fler listor kan man lägga till scope i draggable
                       // $(this).removeClass("border").removeClass("over");
                  var dropped = ui.draggable;
-
-                 console.log(ui);
-
-                var droppedOn = $(this);
-                $(dropped).detach().appendTo(droppedOn);},
-
+                $(dropped).detach();
+                cal._create_resource(new Resource(1,"hej","bajs"));
+              },
                 over: function(event, elem) {
                   $(this).addClass("over");
-                  console.log("over");
-                },
+              },
                 out: function(event, elem) {
-                  $(this).removeClass("over");
                 }
               });
-
-    $("#sortable").sortable();
 
     $("#availableResources").droppable({ accept: ".resourceDrag", drop: function(event, ui) {
                         console.log("drop");
@@ -43,12 +36,11 @@
 
     $("#tabs").tabs({
           activate: function(event, ui){
-        //    console.log("fuck!");
-        //    moveSidebar();
+
           }
       });
 
-    $("#menuIcon").on("click", function() {
+   $("#menuIcon").on("click", function() {
       $("#menuIcon").toggleClass("change");
 
       if ($("#mySidebar").hasClass("hidden")) {
@@ -71,6 +63,8 @@
     $("#back").on("click", function() {
       hideResourceBar();
     });
+
+
   /*   $( "#sortable" ).sortable({
       revert: true
     });*/
