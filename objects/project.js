@@ -32,9 +32,9 @@ Project.prototype.init_test = function() {
 
 Project.prototype.create_task = function(startDate, endDate, resID) {
   var task = new Task(startDate, endDate, resID, this.taskID);
-this.tasks.push(task);
-this.taskID++;
-return task;
+  this.tasks.push(task);
+  this.taskID++;
+  return task;
 }
 
 Project.prototype.get_task_by_resource = function(resID){
