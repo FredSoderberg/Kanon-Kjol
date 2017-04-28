@@ -4,7 +4,7 @@ function Calendar() {
   this.resources  = [];
   this.tasks      = [];
 
-
+  this.ifSidebarOpen = false;
   this.project;
 //TODO: Look over namings for these html.elements
 // 1. div naming to represent the div elements
@@ -99,7 +99,7 @@ Calendar.prototype._init_html_area = function(node){
 	this.divTaskViewRows   = this.divTaskViewData.childNodes[0];
 	this.divTaskViewLinks  = this.divTaskViewData.childNodes[1];
 	this.divTaskViewBars   = this.divTaskViewData.childNodes[2];
-  console.debug("Taskview", this.divResourceView);
+  //console.debug("Taskview", this.divResourceView);
 
 };
 
@@ -138,19 +138,21 @@ Calendar.prototype._set_size = function(){
   this.divTaskViewData.style.height     =
   baseBox.innerHeight - (config.headerHeight) - 18 + "px";
   //console.log(this.divResourceViewData.style.height)
-  console.debug("Resview", this.divResourceViewData.style.height);
+  //console.debug("Resview", this.divResourceViewData.style.height);
   //för att fixa en fully flex div
   this.divResourceViewData.style.height = null;
 
     var rvWidth = this._get_column_width();
   this.divResourceView.style.width       = rvWidth + "px"; //(width*ratio).toString() + "px";
-  this.divTaskView.style.left            = rvWidth +8+ "px";
+  //this.divTaskView.style.left            = rvWidth +8+ "px";
   this.divTaskView.style.width           = (baseBox.innerWidth - rvWidth) + "px"; //(width * (1-ratio)).toString() + "px";
-  console.debug("width: ", baseBox.innerWidth)
+  //console.debug("width: ", baseBox.innerWidth)
 
   this.divResourceViewHeader.style.height= config.headerHeight + "px";
   this.divTaskViewHeader.style.height    = config.headerHeight + "px";
 
   this.divTaskViewHeader.style.width     = config.taskWidth + "px";
+
+  this.divTaskViewRows.style.width     = config.taskWidth + "px";
 
 };

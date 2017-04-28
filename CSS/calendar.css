@@ -58,16 +58,32 @@ div .head_cell, .resource_cell, .task_head_cell, .task_row_cell{
   user-select: none;
 }
 
-
-
-
+div .task_view{
+     background-color: #f0f0f0;
+     overflow: scroll;
+     /*position: relative;
+     float:right;*/
+}
 div .resource_view{
      background-color: #88cccc;
 
+     overflow: hidden;
      /*position: absolute;*/
 
-     overflow: hidden;
+
 }
+div .calendar_container{
+  /*position: absolute;
+  overflow: hidden;*/
+}
+
+div .calendar_head{
+/*  position: relative;
+  overflow: hidden;*/
+}
+
+
+
 div .resource_view_data{
      background-color: #88cccc;
      border-color: #bbb;
@@ -84,12 +100,7 @@ div .resource_view_header{
     /*position: absolute;*/
 
 }
-div .task_view{
-     background-color: #f0f0f0;
-     overflow: scroll;
-     position: absolute;
 
-}
 div .task_view_data{
      background-color: #f0f0f0;
      position: relative;

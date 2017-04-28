@@ -9,6 +9,7 @@
 
     $("#menuIcon").on("click", function() {
       $("#menuIcon").toggleClass("change");
+
       if ($("#mySidebar").hasClass("hidden")) {
         $("#calendar").toggleClass("widthSmall", 750);
         showSideBar()
@@ -19,6 +20,7 @@
         $("#calendar").toggleClass("widthSmall", 750);
         hideSideBar();
       }
+      cal.change_width();
     });
 
 

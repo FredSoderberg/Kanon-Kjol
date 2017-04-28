@@ -12,6 +12,8 @@ Calendar.prototype.init = function(whereToStart) {
   this._create_resource_headers();
   //this._load_resources();
   this._create_date_headers();
+
+
   //this._create_empty_task_rows();
   /*
   var childs = this.divTaskViewRows.childNodes;
@@ -185,3 +187,27 @@ create_cover = function() {
   html += "</div>";
   $("body").prepend(html);
 }
+
+Calendar.prototype.change_width = function () {
+  if(this.ifSidebarOpen){
+    //$("#calendar").width($("#calendar").width() + 200);
+    $("#calendar").animate({
+      width: "+=200"
+    }, 300, function() {
+    });
+
+    //$(".calendar_container").width($(".calendar_container").width() + 200);
+    //$(".task_view").width($(".task_view").width() + 200);
+    this.ifSidebarOpen = false;
+  }else{
+    //$("#calendar").width($("#calendar").width() - 200);
+    $("#calendar").animate({
+      width: "-=200"
+    }, 300, function() {
+    });
+    //$(".calendar_container").width($(".calendar_container").width() - 200);
+    //$(".task_view").width($(".task_view").width() - 200);
+    this.ifSidebarOpen = true;
+
+  }
+};

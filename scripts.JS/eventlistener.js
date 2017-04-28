@@ -1,7 +1,6 @@
 $(document).ready(function(){
   $(".add_cell").click(function(){
     cal._create_resource();
-
   });
   /*
   var isDragging = false;
