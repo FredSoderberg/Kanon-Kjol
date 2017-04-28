@@ -196,6 +196,14 @@ function handleX(thisTaskID, parentTaskID){
     })
     return true
 }
+
+/*  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].id != task_id) {
+      //handleOverlaps();
+    }
+  }
+*
+};
 /*
 var endPos = $("#" + event.target.id).position();
 
