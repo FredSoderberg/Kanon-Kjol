@@ -31,8 +31,8 @@ function dB_SessionIDValid(user, sessionID,init) {
     } else if (data === "true" && init === true) {
 
       cal.userID= user;
-      cal.init(calendar);
-      
+      // TODO: START LOADING TASKS AND RESOURCES!
+
     }
      else {
       window.location.replace("signin.html");
