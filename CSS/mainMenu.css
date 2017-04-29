@@ -66,6 +66,7 @@ list-style-type: none;
 margin: 0;
 padding: 0;
 margin-bottom: 10px;
+overflow: auto;
 }
 
 .noPadding {
@@ -93,3 +94,6 @@ background-color: lightgrey;
 .grey-background {
   background-color: grey !important;
 }
+/*.resourceDrag {
+  vertical-align:top;
+}*/

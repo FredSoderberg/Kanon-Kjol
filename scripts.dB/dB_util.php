@@ -10,7 +10,8 @@ if(isset($form_action_func))
     case 'saveNewUser':
      saveNewUser(
         $_POST['username'],
-        $_POST['password']
+        $_POST['password'],
+        $_POST['defaulProject']
       );
     break;
 
@@ -39,6 +40,10 @@ if(isset($form_action_func))
         $_POST['objectToSend']
       );
     break;
+
+
+
+
 
     case 'deleteObject':
       deleteObject(
@@ -89,6 +94,165 @@ if(isset($form_action_func))
 
 
 
+
+function updateObject($object)
+{
+  $arr = json_decode($object,true);
+  $sql = "update ".$arr["type"]." SET ";
+  foreach ($arr as $key => $value) {
+    if($key != "id" && $key != "type" && $key != "structure")$sql .= $key." = '".$value."'";
+    if($key != "id" && $key != "type" && $key != "id_temp" && $key != "structure") $sql .= ", ";
+
+  }
+  $sql .= " where ".$arr["type"].".id = ".$arr["id"];
+
+  if (db_query($sql)) {
+      echo "record modified successfully";
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+
+}
+
+function deleteObject($object)
+{
+  $arr = json_decode($object,true);
+  $sql = "delete from ".$arr["type"]." where ".$arr["type"].".id=".$arr["id"];
+
+  if (db_query($sql)) {
+      echo "record removed successfully";
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+
+}
+
+// $myObj->id = 5;
+// $myObj->name = "test";
+// $myObj->adminEmail = "New York2";
+// $myObj->lengthDays = "Project";
+// $myObj->type = "Project3";
+//
+// $myJSON = json_encode($myObj);
+// $myJSON = json_decode($myJSON,true);
+// //storeProject($myJSON, false);
+
+
+function storeProject($arr,$quiet){
+
+    $sql = "insert into ".$arr['type']." (";
+    $sqlFirst = "";
+    $sqlSecond = "";
+    foreach ($arr as $key => $value) {
+          if($key != 'type' && $key !=  'id')  $sqlFirst .= ", ";
+          if($key != 'type' && $key !=  'id')  $sqlSecond.= ", ";
+
+      if($key != "type")$sqlFirst .= $key;
+      if($key != 'type' && $key !=  'id') $sqlSecond .= "'".$value."'";
+      if ($key == "type") { break;}
+}
+
+    $sql .= $sqlFirst.") VALUES (NULL".$sqlSecond.")";
+    $connection = db_connect(false);
+    $result = mysqli_query($connection,$sql);
+    if ($result && $quiet) {
+        return mysqli_insert_id($connection);
+}
+        elseif ($result && !$quiet) {
+          echo $result;
+        }
+     else {
+      $failure = (string)$sql;
+      header('HTTP/1.0 404 Not found: '.$failure);
+    }
+}
+
+
+function storeObject($object,$quiet)
+ {
+  $object = json_decode($object,true);
+   switch ($object['type']) {
+     case 'Project':
+      storeProject($object,$quiet);
+       break;
+
+     default:
+       # code...
+       break;
+   }
+//   $arr = json_decode($object,true);
+//   $sql = "insert into ".$arr['type']." (";
+//   $sqlFirst;
+//   $sqlSecond;
+//   foreach ($arr as $key => $value) {
+//    if($key != "type" && $key != "structure")$sqlFirst .= $key;
+//    if($key != "id_temp" && $key != "type" && $key != "structure") $sqlFirst .=", ";
+//
+//    if($key != 'type' && $key !=  'id' && $key !=  'structure') $sqlSecond .= "'".$value."'";
+//    if($key != 'type' && $key !=  'id' && $key !=  'id_temp' && $key != 'structure') $sqlSecond .= ", ";
+//   };
+//   $sql .= $sqlFirst.") VALUES (NULL, ".$sqlSecond.")";
+//
+//   if (db_query($sql)) {
+//       echo "record stored successfully";
+//   } else {
+//     $failure = (string)$sql;
+//     header('HTTP/1.0 404 Not found: '.$failure);
+//   }
+}
+
+function saveNewUser($username,$pass,$defaulProject)
+{
+  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+  $sessionID = rand(1000000,10000000);
+  $sql = "insert into user (email, password, sessionID) VALUES ('$username', '$passHash', $sessionID)";
+  if (db_query($sql)) {
+      storeObject($defaulProject,true);
+      echo $sessionID;
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+
+}
+
+function checkCookieValid($user,$sessionID)
+{
+  $sql = "select * from user where email = '$user' AND sessionID = '$sessionID' ";
+  $result = db_query($sql);
+  if ($result && (mysqli_num_rows($result)>0)) {
+      echo "true";
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+}
+
+function verifyUser($username,$pass)
+{
+  $sql = "select password from user where email = '".$username."'";
+  $result = db_query($sql);
+  $passHash = mysqli_fetch_assoc($result);
+
+  if ($result && password_verify($pass,$passHash['password'])) {
+    $sessionID = rand(1000000,10000000);
+    $sql = "update user set sessionID = '$sessionID' where user.email ='$username'";
+
+    if(db_query($sql)) {
+      echo $sessionID;
+    }
+
+  } else {
+      $failure = (string)$sql;
+      header('HTTP/1.0 404 Not found: '.$failure);
+
+  }
+}
+
+
+// ---------------------------------- DEPRECATED ----------------------------------------
 function createDatabase()
 {
   $sql = "CREATE DATABASE NockOff";
@@ -159,111 +323,6 @@ function builUserTable($object)
     header('HTTP/1.0 404 Not found: '.$failure);
   }
 }
-
-function updateObject($object)
-{
-  $arr = json_decode($object,true);
-  $sql = "update ".$arr["type"]." SET ";
-  foreach ($arr as $key => $value) {
-    if($key != "id" && $key != "type" && $key != "structure")$sql .= $key." = '".$value."'";
-    if($key != "id" && $key != "type" && $key != "id_temp" && $key != "structure") $sql .= ", ";
-
-  }
-  $sql .= " where ".$arr["type"].".id = ".$arr["id"];
-
-  if (db_query($sql)) {
-      echo "record modified successfully";
-  } else {
-    $failure = (string)$sql;
-    header('HTTP/1.0 404 Not found: '.$failure);
-  }
-
-}
-
-function deleteObject($object)
-{
-  $arr = json_decode($object,true);
-  $sql = "delete from ".$arr["type"]." where ".$arr["type"].".id=".$arr["id"];
-
-  if (db_query($sql)) {
-      echo "record removed successfully";
-  } else {
-    $failure = (string)$sql;
-    header('HTTP/1.0 404 Not found: '.$failure);
-  }
-
-}
-
-function storeObject($object)
-{
-  $arr = json_decode($object,true);
-  $sql = "insert into ".$arr['type']." (";
-  $sqlFirst;
-  $sqlSecond;
-  foreach ($arr as $key => $value) {
-   if($key != "type" && $key != "structure")$sqlFirst .= $key;
-   if($key != "id_temp" && $key != "type" && $key != "structure") $sqlFirst .=", ";
-
-   if($key != 'type' && $key !=  'id' && $key !=  'structure') $sqlSecond .= "'".$value."'";
-   if($key != 'type' && $key !=  'id' && $key !=  'id_temp' && $key != 'structure') $sqlSecond .= ", ";
-  };
-  $sql .= $sqlFirst.") VALUES (NULL, ".$sqlSecond.")";
-
-  if (db_query($sql)) {
-      echo "record stored successfully";
-  } else {
-    $failure = (string)$sql;
-    header('HTTP/1.0 404 Not found: '.$failure);
-  }
-}
-
-function saveNewUser($username,$pass)
-{
-  $passHash = password_hash($pass, PASSWORD_BCRYPT);
-  $sessionID = rand(1000000,10000000);
-  $sql = "insert into user (email, password, sessionID) VALUES ('$username', '$passHash', $sessionID)";
-  if (db_query($sql)) {
-      echo $sessionID;
-  } else {
-    $failure = (string)$sql;
-    header('HTTP/1.0 404 Not found: '.$failure);
-  }
-
-}
-
-function checkCookieValid($user,$sessionID)
-{
-  $sql = "select * from user where email = '$user' AND sessionID = '$sessionID' ";
-  $result = db_query($sql);
-  if ($result && (mysqli_num_rows($result)>0)) {
-      echo "true";
-  } else {
-    $failure = (string)$sql;
-    header('HTTP/1.0 404 Not found: '.$failure);
-  }
-}
-
-function verifyUser($username,$pass)
-{
-  $sql = "select password from user where email = '".$username."'";
-  $result = db_query($sql);
-  $passHash = mysqli_fetch_assoc($result);
-
-  if ($result && password_verify($pass,$passHash['password'])) {
-    $sessionID = rand(1000000,10000000);
-    $sql = "update user set sessionID = '$sessionID' where user.email ='$username'";
-
-    if(db_query($sql)) {
-      echo $sessionID;
-    }
-
-  } else {
-      $failure = (string)$sql;
-      header('HTTP/1.0 404 Not found: '.$failure);
-
-  }
-}
-
 
 //------------------------------------------------------------------------
 

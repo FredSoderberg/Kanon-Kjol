@@ -1,36 +1,68 @@
     $(function() {
 
-    $(".resourceDrag").draggable({revert: "invalid"});
+    // $(".resourceDrag").draggable({
+    //   connectToSortable: "#sortable",
+    //   revert: "invalid"});
+    // //
+    $( "#availableResources" ).sortable({
+         connectWith: "#sortable",
+         placeholder: "highlight",
+         dropOnEmpty: true
+        });
 
-    $("#sortable").droppable({ accept: ".resourceDrag",
+        $( "#sortable" ).sortable({
+             connectWith: "#availableResources",
+                      dropOnEmpty: true,
+                      receive: function(event, ui) {
+                  //    console.log(ui.item[0].id);
+                    //  console.log(event);
+//            var new = ui.helper.children('.hidden');
+  //           ui.helper.replaceWith(new.html());
+        }
+            });
+    // $( "#sortable" ).sortable({
+    //       connectWith: "#availableResources"
+    //     });
+
+
+
+
+        //  $("#availableResources").sortable({
+        //     connectWith: ".connectedSortable",
+        //     forcePlaceholderSize: false
+        //   });
+
+    $("#sortable").droppable({ accept: ".resource_row",
                drop: function(event, ui) {
-                        console.log("drop");
+              //          console.log("drop");
                         // TODO: om fler listor kan man lägga till scope i draggable
                       // $(this).removeClass("border").removeClass("over");
                  var dropped = ui.draggable;
-                 dropped.removeClass().addClass("resource_row", "col_container");
+                 var droppedID = $(dropped).attr("id");
                  var droppedOn = $(this);
-                $(dropped).detach().appendTo(droppedOn);
+              //   console.log(droppedID);
+                 if ($("#row_"+droppedID).length === 0) {
+                   cal._create_empty_task_row(droppedID);
+                 }
               },
                 over: function(event, elem) {
-                  $(this).addClass("over");
+                  // $(this).addClass("over");
               },
                 out: function(event, elem) {
                 }
               });
 
-    $("#availableResources").droppable({ accept: ".resourceDrag", drop: function(event, ui) {
+    $("#availableResources").droppable({ accept: ".resource_row",
+                        drop: function(event, ui) {
                         console.log("drop");
-                    //   $(this).removeClass("border").removeClass("over");
-                 var dropped = ui.draggable;
-                var droppedOn = $(this);
-                $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-                    }});
-
-                      $( "#availableResources" ).sortable({
-                        revert: true
-                      });
-
+                        var dropped = ui.draggable;
+                        var droppedID = $(dropped).attr("id");
+                        var droppedOn = $(this);
+                        console.log(droppedID);
+                        console.log("row_"+droppedID);
+                        $("#row_"+droppedID).remove();
+}
+})
 
 
 

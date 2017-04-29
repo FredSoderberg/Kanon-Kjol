@@ -1,30 +1,40 @@
 function dB_storeSignUp(email, pass) {
+var project = new Project("defualt project",30,email);
+stringObject = JSON.stringify(project);
+console.log("object: " + stringObject);
   $.post('scripts.dB/dB_util.php', {
     function: "saveNewUser",
     username: email,
-    password: pass
+    password: pass,
+    defaulProject:stringObject
   }).done(function(data) {
     //      console.log("datan:" + data);
     setCookie("username", email, 7);
     setCookie("sessionID", data, 7);
     //console.log(data);
-    window.location.replace("planning2.html");
+    window.location.replace("calendar.html");
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
   });
 }
 
-function dB_SessionIDValid(user, sessionID) {
+function dB_SessionIDValid(user, sessionID,init) {
   $.post('scripts.dB/dB_util.php', {
     function: "checkCookieValid",
     username: user,
     sessID: sessionID
   }).done(function(data) {
     console.log("cokkieDDdatan:" + data);
-    if (data === "true") {
-      window.location.replace("planning2.html");
-    } else {
+    if (data === "true" && init === false) {
+      window.location.replace("calendar.html");
+    } else if (data === "true" && init === true) {
+
+      cal.userID= user;
+      cal.init(calendar);
+      
+    }
+     else {
       window.location.replace("signin.html");
     }
   }).fail(function(jqxhr, textStatus, error) {
@@ -47,7 +57,7 @@ function dB_verifyUser() {
     }
     setCookie("username", email, 7);
     setCookie("sessionID", data, 7);
-    window.location.replace("planning2.html");
+    window.location.replace("calendar.html");
 
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
@@ -100,6 +110,26 @@ function dB_updateObject(object) {
   });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ----------------------- DEPRECATED ------------------------------------------
 function dB_builObjectTable(object) {
   stringObject = JSON.stringify(object);
   console.log("object: " + stringObject);

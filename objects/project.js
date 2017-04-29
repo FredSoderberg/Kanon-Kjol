@@ -1,20 +1,23 @@
-function Project(id, lengthDays) {
-  this.id = id;   //Master keeps track on what projects exists
-
+function Project(name, lengthDays, adminEmail) {
+  this.id = "";   //Master keeps track on what projects exists
+  this.name = name;
+  this.adminEmail = adminEmail;
+  this.lengthDays = lengthDays;
   this.startDate = new Date();
   this.stopDate = new Date();
-  this.lengthDays = lengthDays;
+  this.categories = "";
+  this.nextResourceID = -1;
+  this.taskID = 1;
+  this.type = "Project"; //obejct must "end" with type
+
+  //below is DB associative tables - these objects save themselves in DB and when a prject is built from db theese are populated.
+  this.classes    = [];   // Unfilled resources
+  this.resources  = [];
+  this.tasks      = [];   // Tasks for this project
   //this.stopDate.setDate(this.stopDate.getDate()+lengthDays)
 
 
-  this.classes    = [];   // Unfilled resources
-  this.resources  = [];
 
-  this.tasks      = [];   // Tasks for this project
-  this.categories;
-
-  this.nextResourceID = -1;
-  this.taskID = 1;
 }
 
 

@@ -2,7 +2,7 @@ var TaskViewRow = function() {};
 
 Calendar.prototype.init = function(whereToStart) {
 
-  this.project = new Project(1, 300);
+  this.project = new Project("name", 300,"test1");
   config.taskWidth = this.project.lengthDays * config.dateHeaderWidth;
 
   //this.project.init_test();
@@ -91,10 +91,13 @@ Calendar.prototype._create_resources_cells = function(resource) {
 
 // html += "<div class='remove_cell' style='width: " + config.columns[i].width + "px'>" + res[config.columns[i].label.toString().toLowerCase()] + "</div>";
   for (var i = 0; i < config.columns.length; i++) {
-    if (config.columns[i].label.toString().toLowerCase() == "add") {
+    if (config.columns[i].label.toString().toLowerCase() == "add" && resource.type === "Default" ) {
       html += "<div class='remove_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString().toLowerCase()] + "</div>";
-
-    } else {
+}
+else if (config.columns[i].label.toString().toLowerCase() == "add") {
+      html += "<div class='non_removable_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString().toLowerCase()] + "</div>";
+}
+     else {
       html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString().toLowerCase()] + "</div>";
     }
   };

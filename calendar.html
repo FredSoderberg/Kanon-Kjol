@@ -21,11 +21,14 @@
 <script src="objects/resource.js"charset="utf-8"></script>
 <script src="objects/calendar.js"charset="utf-8"></script>
 
+<script src="scripts.JS/init.js" charset="utf-8"></script>
 <script src="scripts.JS/config.js"charset="utf-8"></script>
 <script src="scripts.JS/calendarUtils.js"charset="utf-8"></script>
 <script src="scripts.JS/eventlistener.js"charset="utf-8"></script>
 <script src="scripts.JS/calenderPage.js"charset="utf-8"></script>
 <script src="scripts.JS/calenderInit.js"charset="utf-8"></script>
+<script src="scripts.JS/general_functionality.js" charset="utf-8"></script>
+<script src="scripts.dB/dB_util.js" charset="utf-8"></script>
 
 <head>
 
@@ -54,18 +57,18 @@
         <li id="addResource" style="margin: 5px; padding: 5px; width: 90%;"  class="ui-state-highlight draggableClone">Add resource</li>
       </ul>
 
-      <ul id="availableResources" style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px">
-        <div id="1" class="resource_row col_container resourceDrag" style="height: 30px">
+      <ul id="availableResources" style="margin: 0; padding: 0; margin-bottom: 10px" class="">
+        <div id="1" class="resource_row col_container" style="height: 30px">
           <div class="resource_cell" style="width: 50px">bajs</div>
           <div class="resource_cell" style="width: 100px">hej</div>
           <div class="resource_cell" style="width: 30px">1</div>
-          <div class="remove_cell" style="width: 40px">X</div>
+          <div class="non_removable_cell" style="width: 40px"></div>
         </div>
-        <div id="2" class="resource_row col_container resourceDrag" style="height: 30px">
+        <div id="2" class="resource_row col_container" style="height: 30px">
           <div class="resource_cell" style="width: 50px">bajs</div>
           <div class="resource_cell" style="width: 100px">hej</div>
           <div class="resource_cell" style="width: 30px">2</div>
-          <div class="remove_cell" style="width: 40px">X</div>
+          <div class="non_removable_cell" style="width: 40px"></div>
         </div>
       </ul>
     </div>
@@ -113,10 +116,10 @@
   </div>
 
   <script type = "text/javascript">
-//$(function () {
-    var cal = new Calendar();
-    cal.init(calendar);
-//  });
+  var cal = new Calendar();
+
+  checkLoginCookie(true);
+  //init calender är flyttad till dB_SessionIDValid()
   </script>
 
   </body>

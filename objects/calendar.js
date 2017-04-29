@@ -1,5 +1,5 @@
 function Calendar() {
-
+  this.userID;
   this.categories = [];
   this.resources  = [];
   this.tasks      = [];
@@ -57,7 +57,7 @@ Calendar.prototype._init_html_area = function(node){
 	else
 		this.divBase = node;
 
-  this.divBase.innerHTML = "<div class='calendar_container col_container'>"+
+  this.divBase.innerHTML = "<div class='calendar_container col_container' style='height:400px'>"+
                               "<div class='resource_view'></div>"+
                               "<div class='task_view'></div>"+
                               "<div class='gantt_ver_scroll'>"+

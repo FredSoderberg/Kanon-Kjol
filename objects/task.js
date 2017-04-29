@@ -222,19 +222,19 @@ var startRow = get_row_index(task);
 var indexNewRes = startRow + changePos.top;
 */
 
-  this.startDate = startDate;
-  this.endDate = endDate;
-  this.resources = [resID];
-  this.taskID = taskID;
-  this.startPos;
+  // this.startDate = startDate;
+  // this.endDate = endDate;
+  // this.resources = [resID];
+  // this.taskID = taskID;
+  // this.startPos;
+  //
+  // this.startSize = {
+  //   height: 0,
+  //   width: 0
+  // };
+  // //this.startSize.height = 0;
+  // //this.startSize.width = 0;
 
-  this.startSize = {
-    height: 0,
-    width: 0
-  };
-  //this.startSize.height = 0;
-  //this.startSize.width = 0;
-}
 
 Task.prototype.render = function() {
   var html = "<div id='task_" + this.taskID + "' " + "res='" + this.resources[0] + "'class='task_bar task_bar_obs' " + "style='" + "width : " + (config.dateHeaderWidth * 2 - 6) + "px;" + "height : " + (config.rowHeight - 6) + "px '>";

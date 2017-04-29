@@ -81,11 +81,11 @@ function getCookie(cname) {
   return "";
 }
 
-function checkLoginCookie() {
+function checkLoginCookie(init) {
   var user = getCookie("username");
   var sessionID = getCookie("sessionID");
   if (user != "") {
-    dB_SessionIDValid(user, sessionID);
+    dB_SessionIDValid(user, sessionID,init);
   }
   else {
     window.location.href = "signin.html";
