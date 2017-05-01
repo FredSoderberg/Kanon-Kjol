@@ -187,7 +187,7 @@ console.log("Eventlistener: Ready")
   });
 
   $(document).on("dblclick", ".task_bar", function(event, ui){
-    console.log("Vem vet");
+    //console.log("Vem vet");
     taskDialog.dialog("open");
   })
   //$( ".task_view_bars").on("draggable")

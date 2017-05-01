@@ -5,6 +5,7 @@ function Task(startDate, endDate, resID, taskID) {
   this.resources = [resID];
   this.taskID = taskID;
   this.startPos;
+  this.taskName = "Task: " + taskID;
 
   this.startSize = {
     height: 0,
@@ -16,7 +17,7 @@ function Task(startDate, endDate, resID, taskID) {
 
 Task.prototype.render = function() {
   //console.log("Task_render: ", this)
-  console.log("Index: ", $("#"+this.resources[0]).index())
+  //console.log("Index: ", $("#"+this.resources[0]).index())
   var html = "<div id='task_" + this.taskID +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
@@ -32,8 +33,9 @@ Task.prototype.render = function() {
 };
 
 function updateInnerHtml(task){
-  var html = "ID:"+task.taskID+"</br>"+
-          "Date:"+dateString(task.startDate)+"-"+dateString(task.endDate);
+  var html = "Name:"+task.taskName+"</br>"+
+          "Date:"+dateString(task.startDate)+"-"+dateString(task.endDate)+"</br>"+
+          "Resources:"+task.resources;
   $("#task_"+task.taskID).html(html);
 }
 function dateString(date){
@@ -53,17 +55,17 @@ $(".task_view_bars").on('resizestop', function(event, ui) {
   var shiftResources = Math.round((endHeight - task.startSize.height) / config.rowHeight);
   var shiftTime = Math.round((endWidth - task.startSize.width) / config.dateHeaderWidth);
 
-  console.log("Shifttime:", shiftTime)
+  //console.log("Shifttime:", shiftTime)
   task.endDate.setDate(task.endDate.getDate() + shiftTime);
 
-  set_resources(task, shiftResources);
+  set_resources(task, shiftResources, 0);
   updateInnerHtml(task);
 })
 
 
 $(".task_view_bars").on('resizestart', function(event, ui) {
   var id = Number(event.target.id.replace("task_", ""));
-  console.log("Task ID:", id)
+  //console.log("Task ID:", id)
   var task = cal.project.get_task_by_id(id);
 
   task.startSize.height = $("#" + event.target.id).height();
@@ -76,8 +78,27 @@ $(".task_view_bars").on('dragstop', function(event, ui) {
   var id = Number(event.target.id.replace("task_", ""));
   var task = cal.project.get_task_by_id(id);
 
+  var taskHeight = $("#" + event.target.id).height();
+  var taskWidth = $("#" + event.target.id).width();
+
+  var shiftResources = Math.round(taskHeight / config.rowHeight);
+  var shiftTime = Math.round(taskWidth / config.dateHeaderWidth);
+
+  var endPos = $("#" + event.target.id).position();
+  var diffTop =  Math.round((endPos.top - task.startPos.top)/config.rowHeight);
+  var diffLeft =  Math.round((endPos.left - task.startPos.left)/config.dateHeaderWidth);
+
+
+
+  task.startDate.setDate(task.startDate.getDate() + diffLeft);
+
+  task.endDate.setDate(task.endDate.getDate() + diffLeft);
+
 
   handleY("task_"+id, null,$("#"+"task_"+id).overlaps(".task_bar"));
+
+  //console.log("Task:", task, "Res:", shiftResources, diffTop)
+  set_resources(task, 0, diffTop);
   updateInnerHtml(task);
 })
 
@@ -93,8 +114,8 @@ $(".task_view_bars").on('dragstart', function(event, ui) {
 })
 });
 
-function set_resources(task, shiftResources){
-  var startRow = get_row_index(task);
+function set_resources(task, shiftResources, shiftTop){
+  var startRow = get_row_index(task) + shiftTop;
 
   //console.log("column diff", shiftTime);
   //console.log("row shift", shiftResources);
@@ -130,7 +151,7 @@ function otherTasks(thisTaskID, parentTaskID, overlappingTasks){
 
 
 function handleY(thisTaskID, parentTaskID, overlappingTasks){
-  console.log("HandleY:", thisTaskID, parentTaskID, overlappingTasks);
+  //console.log("HandleY:", thisTaskID, parentTaskID, overlappingTasks);
   overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
 
   /* TODO: FIXa ändring av datum och resurser
@@ -180,7 +201,7 @@ function handleX(thisTaskID, parentTaskID){
   }
 
   var diffDays = Math.round(diff/config.dateHeaderWidth);
-  console.log("HandleX:", thisTaskID, parentTaskID, pos, movedTaskLeft, width);
+  //console.log("HandleX:", thisTaskID, parentTaskID, pos, movedTaskLeft, width);
   //console.log("Diff:", diff," diffdays: ", diffDays, "Left:", (config.dateHeaderWidth * diffDays));
 
 
