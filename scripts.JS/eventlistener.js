@@ -1,3 +1,11 @@
+task_func = function(){
+  $(".task_view_rows").on('dblclick', '.task_row_cell', function(){
+    var resID = Number($(this).parent().attr("id").replace('row_', ''));
+    //console.log("this", $(this).index(), resID);
+    cal.create_task($(this), resID);
+  });
+}
+
 $(document).ready(function(){
   $(".add_cell").click(function(){
     cal._create_resource();
@@ -22,9 +30,10 @@ $(document).ready(function(){
     }
   }, '.resource_cell');
 */
+console.log("Eventlistener: Ready")
   $(".task_view_rows").on('dblclick', '.task_row_cell', function(){
     var resID = Number($(this).parent().attr("id").replace('row_', ''));
-    //console.log("this", $(this).index(), resID);
+    //console.log("Create task", $(this).index(), resID);
     cal.create_task($(this), resID);
   });
 
@@ -164,10 +173,10 @@ $(document).ready(function(){
     width: 350,
     modal: true,
     buttons: {
-      "Create an account": function() {
+      "Save Changes": function() {
         taskDialog.dialog( "close" );
       },
-      Cancel: function() {
+      "Cancel": function() {
         taskDialog.dialog( "close" );
       }
     },

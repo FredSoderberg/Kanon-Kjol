@@ -14,7 +14,8 @@ function Project(name, lengthDays, adminEmail) {
   this.classes    = [];   // Unfilled resources
   this.resources  = [];
   this.tasks      = [];   // Tasks for this project
-  //this.stopDate.setDate(this.stopDate.getDate()+lengthDays)
+
+  this.stopDate.setDate(this.stopDate.getDate()+lengthDays)
 
 
 
@@ -34,6 +35,7 @@ Project.prototype.init_test = function() {
 }
 
 Project.prototype.create_task = function(startDate, endDate, resID) {
+  //console.log("Projekt_createTask:", this)
   var task = new Task(startDate, endDate, resID, this.taskID);
   this.tasks.push(task);
   this.taskID++;
@@ -53,7 +55,8 @@ Project.prototype.get_task_by_resource = function(resID){
 Project.prototype.get_task_by_id = function (taskID) {
 
   for (var task in this.tasks) {
-    if (this.tasks[task].id === taskID) {
+    //console.log(this.tasks[task].taskID)
+    if (this.tasks[task].taskID === taskID) {
       return this.tasks[task];
     }
   }

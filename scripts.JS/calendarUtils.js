@@ -145,15 +145,17 @@ Calendar.prototype.create_task = function(cell, resID) {
   startDate.setDate(startDate.getDate() + cell.index())
 
   var endDate = new Date(startDate);
-  endDate.setDate(endDate.getDate()+1);
+  endDate.setDate(endDate.getDate()+2);
 
   //console.debug("Task: ", $("#task_" + this.project.taskID).position())
 
   var newTask = this.project.create_task(startDate, endDate, resID);
 
+  //console.log("Task_prerender: ", newTask)
+
   newTask.render();
 
-
+/*
   $("#task_" + newTask.taskID).offset({
     left: pos.left + 2,
     top: pos.top + 3
