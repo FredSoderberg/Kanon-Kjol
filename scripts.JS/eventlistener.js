@@ -174,7 +174,7 @@ console.log("Eventlistener: Ready")
     modal: true,
     buttons: {
       "Save Changes": function() {
-        taskDialog.dialog( "close" );
+        change_taskinfo();
       },
       "Cancel": function() {
         taskDialog.dialog( "close" );
@@ -185,9 +185,18 @@ console.log("Eventlistener: Ready")
       //allFields.removeClass( "ui-state-error" );
     }
   });
+  var taskDialogID = 0;
+  function change_taskinfo(){
+    var task = cal.project.get_task_by_id(taskDialogID);
+    task.taskName = $("#task_dialog_name").val();
+    updateInnerHtml(task);
+    taskDialog.dialog( "close" );
+  }
 
   $(document).on("dblclick", ".task_bar", function(event, ui){
     //console.log("Vem vet");
+    taskDialogID = Number(event.target.id.replace("task_", ""));
+    $("#task_dialog_name").val(cal.project.get_task_by_id(taskDialogID).taskName);
     taskDialog.dialog("open");
   })
   //$( ".task_view_bars").on("draggable")

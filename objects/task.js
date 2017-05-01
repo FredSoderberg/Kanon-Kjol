@@ -21,7 +21,7 @@ Task.prototype.render = function() {
   var html = "<div id='task_" + this.taskID +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
-                  "style='width : " + (config.dateHeaderWidth * (this.endDate.getDate() - this.startDate.getDate()) - 6)+"px;"+
+                  "style='width : " + (config.dateHeaderWidth * (this.endDate.getDate() - this.startDate.getDate() + 1) - 6)+"px;"+
                         "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
                            "left: " + (config.dateHeaderWidth * (this.startDate.getDate() - 1)+ 3)+"px;"+
                            "top: " + (config.rowHeight * ($("#"+this.resources[0]).index()) + 3)+"px'>";
