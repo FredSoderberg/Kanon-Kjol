@@ -1,25 +1,40 @@
     $(function() {
 
-    // $(".resourceDrag").draggable({
-    //   connectToSortable: "#sortable",
-    //   revert: "invalid"});
-    // //
     $( "#availableResources" ).sortable({
          connectWith: "#sortable , newResourceList",
          placeholder: "highlight",
-         dropOnEmpty: true
-        });
+         dropOnEmpty: true,
+         stop: function(event,ui) {
+           $("#availableResources").children().each(function(index,item) {
+             cal.project.set_resource_row(item , "U" + index);
+           })
+         }
+    });
 
     $( "#sortable" ).sortable({
         connectWith: "#availableResources , newResourceList",
         dropOnEmpty: true,
-        receive: function(event, ui) {
-                  //    console.log(ui.item[0].id);
-                  //  console.log(event);
-                  // var new = ui.helper.children('.hidden');
-                  // ui.helper.replaceWith(new.html());
+        stop: function(event, ui) {
+            $("#sortable").children().each(function(index,item) {
+              cal.project.set_resource_row(item , "A" + index);
+            })
         }
-            });
+    });
+
+
+            $("#addResource").draggable({
+           connectToSortable: "#sortable, #availableResources",
+           helper: "clone",
+           start: function (event) {
+              var dragClone = $("#newResourceList").find("div:last")
+              $(dragClone).removeClass();
+              $(dragClone).empty();
+              $(dragClone).addClass("draggableClone resource_row col_container ui-sortable-handle");
+              $(dragClone).append(cal._create_resource());
+              $(dragClone).css("width","auto");
+            },
+             revert: "invalid"
+           });
     // $( "#sortable" ).sortable({
     //       connectWith: "#availableResources"
     //     });
@@ -34,27 +49,30 @@
 
     $("#sortable").droppable({ accept: ".resource_row",
                drop: function(event, ui) {
-                 if ($(ui.draggable).hasClass("draggableClone")) {
-                   ui.draggable.removeClass("draggableClone");
-                   console.log("draggableClone removed");
-                 }
-                 else {
-              //          console.log("drop");
-                        // TODO: om fler listor kan man lägga till scope i draggable
-                      // $(this).removeClass("border").removeClass("over");
                  var dropped = ui.draggable;
                  var droppedID = $(dropped).attr("id");
                  var droppedOn = $(this);
-              //   console.log(droppedID);
-                 if ($("#row_"+droppedID).length === 0) {
+                 resourceOjbect = cal.project.get_resource_by_element(dropped);
+                 //resourceOjbect.row =
+
+                 if ($(ui.draggable).hasClass("draggableClone")) {
+                   dropped.removeClass("draggableClone");
+                   dropped.attr("id",cal._get_next_true_resourceID());
+                  // console.log("draggableClone removed");
+                 }
+                 else if ($("#row_"+droppedID).length === 0) {
                    cal._create_empty_task_row(droppedID);
                  }
-               }
+              //          console.log("drop");
+                        // TODO: om fler listor kan man lägga till scope i draggable
+                      // $(this).removeClass("border").removeClass("over")
+              //   console.log(droppedID);
               },
                 over: function(event, elem) {
                   // $(this).addClass("over");
               },
                 out: function(event, elem) {
+
                 }
               });
 
@@ -62,14 +80,15 @@
                         drop: function(event, ui) {
                           if ($(ui.draggable).hasClass("draggableClone")) {
                             ui.draggable.removeClass("draggableClone");
-                            console.log("draggableClone removed");
+                            ui.draggable.attr("id",cal._get_next_true_resourceID());
+                          //  console.log("draggableClone removed");
                           } else {
-                            console.log("drop");
+                        //    console.log("drop");
                             var dropped = ui.draggable;
                             var droppedID = $(dropped).attr("id");
                             var droppedOn = $(this);
-                            console.log(droppedID);
-                            console.log("row_"+droppedID);
+                          //  console.log(droppedID);
+                          //  console.log("row_"+droppedID);
                             $("#row_"+droppedID).remove();
                           }
 
@@ -120,28 +139,7 @@
   //   });
 
   //
-     $("#addResource").draggable({
-    connectToSortable: "#sortable, #availableResources",
-    helper: "clone",
-    start: function (event) {
-       var html = cal._create_resource();
-       var dragClone = $("#newResourceList").find("div:last")
-       $(dragClone).removeClass();
-       $(dragClone).empty();
-       $(dragClone).addClass("draggableClone resource_row col_container ui-sortable-handle");
-       $(dragClone).append(cal._create_resource());
-       $(dragClone).attr("id",cal._get_next_true_resourceID());
-       $(dragClone).css("width","auto");
 
-      //$("#newResourceList").find("div:last").replaceWith(html);
-    //  $(this).replaceWith(html);
-    // var $div = $('div[id^="addResource"]:last');
-    // var num = parseInt( $div.prop("id").match(/\d+/g), 10 ) +1;
-    // var $addResource = $div.clone().prop('id', 'addResource'+num );
-    // $("#addResource").find("div:last").replaceWith(html);
-     },
-      revert: "invalid"
-    });
   //
     // $(".draggableClone").on("dragstart", function(event, ui){
     //   $(".draggableClone").draggable({

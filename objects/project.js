@@ -13,7 +13,7 @@ function Project(name, lengthDays, adminEmail) {
 
   //below is DB associative tables - these objects save themselves in DB and when a prject is built from db theese are populated.
   this.classes    = [];   // Unfilled resources
-  this.resources  = [];
+  this.resources  = [];  // position sparas i realtions tabelen projekt-resource
   this.tasks      = [];   // Tasks for this project
 
   this.stopDate.setDate(this.stopDate.getDate()+lengthDays)
@@ -80,4 +80,14 @@ Project.prototype.get_resource_by_id = function (resourceID) {
 Project.prototype.get_resource_by_element = function (element) {
   var id = Number(element[0].id);
     return this.get_resource_by_id(id);
+};
+
+Project.prototype.set_resource_row = function (element,value) {
+  var resourceID = Number(element.id);
+  for (var resource in this.resources) {
+    if (this.resources[resource].id === resourceID) {
+      //console.log("nytt varde: ", value);
+      this.resources[resource].row = value;
+    }
+  }
 };

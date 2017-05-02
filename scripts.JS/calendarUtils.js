@@ -2,7 +2,7 @@ var TaskViewRow = function() {};
 
 Calendar.prototype.init = function(whereToStart) {
 
-  this.project = new Project("name", 300,"test1");
+  this.project = new Project("default", 300,"test1");
   config.taskWidth = this.project.lengthDays * config.dateHeaderWidth;
 
   //this.project.init_test();
@@ -80,6 +80,7 @@ Calendar.prototype._create_resource = function(resource) {
   type = "Default";
   resource = new Resource(resourceID, name, type);
   resource.add = "";
+  this.project.resources.push(resource);
   return this._create_resources_cells(resource)
 }
 

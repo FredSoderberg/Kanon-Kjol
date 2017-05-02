@@ -30,7 +30,7 @@ function dB_SessionIDValid(user, sessionID,init) {
       window.location.replace("calendar.html");
     } else if (data === "true" && init === true) {
 
-      cal.userID= user;
+      cal.userID = user;
       // TODO: START LOADING TASKS AND RESOURCES!
 
     }
