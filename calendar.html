@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Nock-Off - Erika</title>
+<title>Nock-Off</title>
 
 
 <link href="CSS/calendar.css" rel="stylesheet">
@@ -53,23 +53,11 @@
     <div id="resourceSidebar" class="sidebarLeft hidden" style="height: 90%; width:200px;" >
       <button id="back" class="w3-bar-item w3-button tabcolor">Go back</button>
 
-      <ul style="list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px">
-        <li id="addResource" style="margin: 5px; padding: 5px; width: 90%;"  class="ui-state-highlight draggableClone">Add resource</li>
+      <ul id="newResourceList" style="margin: 0; padding: 0; margin-bottom: 10px" class="">
+        <div id="addResource"  class="ui-state-highlight center-text" style="height:30px">Add resource</div>
       </ul>
 
       <ul id="availableResources" style="margin: 0; padding: 0; margin-bottom: 10px" class="">
-        <div id="1" class="resource_row col_container" style="height: 30px">
-          <div class="resource_cell" style="width: 50px">bajs</div>
-          <div class="resource_cell" style="width: 100px">hej</div>
-          <div class="resource_cell" style="width: 30px">1</div>
-          <div class="non_removable_cell" style="width: 40px"></div>
-        </div>
-        <div id="2" class="resource_row col_container" style="height: 30px">
-          <div class="resource_cell" style="width: 50px">bajs</div>
-          <div class="resource_cell" style="width: 100px">hej</div>
-          <div class="resource_cell" style="width: 30px">2</div>
-          <div class="non_removable_cell" style="width: 40px"></div>
-        </div>
       </ul>
     </div>
 </div>
@@ -111,19 +99,9 @@
     </div>
 
     <div id="key"></div>
-    <div id="taskDialog" title="Task info">
-  <p class="validateTips">Info info info</p>
-
-  <form>
-    <fieldset>
-      <label for="name">Task</label>
-      <input type="text" name="name" id="task_dialog_name" value="" class="text ui-widget-content ui-corner-all">
-
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-  </form>
-</div>
+    <div id="taskDialog" title="Basic dialog">
+    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+  </div>
 
   <script type = "text/javascript">
   var cal = new Calendar();

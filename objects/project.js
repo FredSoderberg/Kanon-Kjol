@@ -6,6 +6,7 @@ function Project(name, lengthDays, adminEmail) {
   this.startDate = new Date();
   this.stopDate = new Date();
   this.categories = "";
+  this.nextTrueResourceID = 1;
   this.nextResourceID = -1;
   this.taskID = 1;
   this.type = "Project"; //obejct must "end" with type
