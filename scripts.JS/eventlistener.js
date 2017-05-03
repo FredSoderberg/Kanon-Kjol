@@ -30,7 +30,7 @@ $(document).ready(function(){
     }
   }, '.resource_cell');
 */
-console.log("Eventlistener: Ready")
+//console.log("Eventlistener: Ready")
   $(".task_view_rows").on('dblclick', '.task_row_cell', function(){
     var resID = Number($(this).parent().attr("id").replace('row_', ''));
     //console.log("Create task", $(this).index(), resID);
