@@ -15,9 +15,11 @@ function Task(startDate, endDate, resID, taskID) {
   //this.startSize.width = 0;
 }
 
+
 Task.prototype.render = function() {
   //console.log("Task_render: ", this)
   //console.log("Index: ", $("#"+this.resources[0]).index())
+  var amountOfDays =
   var html = "<div id='task_" + this.taskID +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
@@ -43,6 +45,17 @@ function dateString(date){
 
   return dateString;
 }
+
+Task.prototype.calculate_days = function(){
+  var projTime = new Date(cal.project.startDate);
+  var taskTime = new Date(task.startDate);
+  taskTime.clearTime();
+  projTime.clearTime();
+
+}
+
+
+
 
 $(function (){
 $(".task_view_bars").on('resizestop', function(event, ui) {
