@@ -67,19 +67,20 @@ Calendar.prototype._load_resources = function() {
   this.divResourceViewData.innerHTML = html;
 }
 
-Calendar.prototype._get_next_true_resourceID = function () {
-  resourceID = this.project.nextTrueResourceID;
-  this.project.nextTrueResourceID += 1;
+Calendar.prototype._get_next_resourceID = function () {
+  resourceID = this.project.nextResourceID;
+  this.project.nextResourceID -= 1;
   return resourceID;
 };
 
 Calendar.prototype._create_resource = function(resource) {
   if (resource === undefined) {
-  resourceID = this.project.nextTrueResourceID;
+  resourceID = this.project.nextResourceID;
   name = "G.I Doe";
-  type = "Default";
-  resource = new Resource(resourceID, name, type);
+  groupType = "Default";
+  resource = new Resource(resourceID, name, groupType);
   resource.add = "";
+  resource.projectID = this.project.id;
   this.project.resources.push(resource);
   return this._create_resources_cells(resource)
 }

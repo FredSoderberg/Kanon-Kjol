@@ -1,18 +1,30 @@
 function dB_storeSignUp(email, pass) {
-var project = new Project("defualt project",30,email);
-stringObject = JSON.stringify(project);
-console.log("object: " + stringObject);
+  var project = new Project("defualt project",30,email);
+  stringObject = JSON.stringify(project);
+  //console.log("object: " + stringObject);
   $.post('scripts.dB/dB_util.php', {
-    function: "saveNewUser",
-    username: email,
-    password: pass,
-    defaulProject:stringObject
+      function: "saveNewUser",
+      username: email,
+      password: pass,
+      defaulProject:stringObject
+    }).done(function(data) {
+      //      console.log("datan:" + data);
+      setCookie("username", email, 7);
+      setCookie("sessionID", data, 7);
+      //console.log(data);
+      window.location.replace("calendar.html");
+    }).fail(function(jqxhr, textStatus, error) {
+      var err = textStatus + ", " + error;
+      console.log("Request Failed: " + err);
+    });
+}
+
+function dB_LoadProjects(user) {
+  $.post('scripts.dB/dB_util.php', {
+    function: "LoadProjects",
+    username: user,
   }).done(function(data) {
-    //      console.log("datan:" + data);
-    setCookie("username", email, 7);
-    setCookie("sessionID", data, 7);
-    //console.log(data);
-    window.location.replace("calendar.html");
+      cal.project.id = data;
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
@@ -25,12 +37,13 @@ function dB_SessionIDValid(user, sessionID,init) {
     username: user,
     sessID: sessionID
   }).done(function(data) {
-    console.log("cokkieDDdatan:" + data);
+  //  console.log("cokkieDDdatan:" + data);
     if (data === "true" && init === false) {
       window.location.replace("calendar.html");
     } else if (data === "true" && init === true) {
 
       cal.userID = user;
+      dB_LoadProjects(user);
       // TODO: START LOADING TASKS AND RESOURCES!
 
     }
@@ -40,6 +53,7 @@ function dB_SessionIDValid(user, sessionID,init) {
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
+    window.location.replace("signin.html");
   });
 }
 
@@ -67,13 +81,26 @@ function dB_verifyUser() {
 
 function dB_storeObject(object) {
   stringObject = JSON.stringify(object);
-  console.log("object: " + stringObject);
+  //console.log("object: ",object);
+  //console.log("stringObject: ",stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "storeObject",
     objectToSend: stringObject
   }).done(function(data) {
-    console.log("saved data: " + data);
+
+    switch (object.type) {
+      case "Resource":
+        $("#row_"+object.id).attr("id","row_"+data);
+        $("#"+object.id).attr("id",data);
+        object.id = data;
+      break;
+
+  default:
+}
+
+
+  //  console.log("new ID: " + data);
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);

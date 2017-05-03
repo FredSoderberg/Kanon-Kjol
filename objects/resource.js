@@ -1,8 +1,10 @@
-function Resource(id, name, type) {
+function Resource(id, name, groupType) {
   this.id      = id;
   this.name    = name;
-  this.row;
-  this.type    = type;
+  this.groupType   = groupType;
 
+  this.type    = "Resource";
+  this.row;
+  this.projectID;
   this.add     = "X";
 }

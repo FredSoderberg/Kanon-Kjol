@@ -1,12 +1,11 @@
 function Project(name, lengthDays, adminEmail) {
-  this.id = "";   //Master keeps track on what projects exists
+  this.id = "-1";   //Master keeps track on what projects exists
   this.name = name;
   this.adminEmail = adminEmail;
   this.lengthDays = lengthDays;
   this.startDate = new Date();
   this.stopDate = new Date();
   this.categories = "";
-  this.nextTrueResourceID = 1;
   this.nextResourceID = -1;
   this.taskID = 1;
   this.type = "Project"; //obejct must "end" with type
@@ -90,4 +89,7 @@ Project.prototype.set_resource_row = function (element,value) {
       this.resources[resource].row = value;
     }
   }
+};
+Project.prototype.update_resource_id = function (target,value) {
+  this.get_resource_by_id(target).id = value;
 };

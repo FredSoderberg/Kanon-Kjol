@@ -21,7 +21,6 @@
         }
     });
 
-
             $("#addResource").draggable({
            connectToSortable: "#sortable, #availableResources",
            helper: "clone",
@@ -52,13 +51,13 @@
                  var dropped = ui.draggable;
                  var droppedID = $(dropped).attr("id");
                  var droppedOn = $(this);
-                 resourceOjbect = cal.project.get_resource_by_element(dropped);
-                 //resourceOjbect.row =
 
                  if ($(ui.draggable).hasClass("draggableClone")) {
                    dropped.removeClass("draggableClone");
-                   dropped.attr("id",cal._get_next_true_resourceID());
-                  // console.log("draggableClone removed");
+                   dropped.attr("id",cal._get_next_resourceID());
+                   var resourceObject = cal.project.get_resource_by_element(dropped);
+                //  console.log("resource",resourceObject);
+                   dB_storeObject(resourceObject);
                  }
                  else if ($("#row_"+droppedID).length === 0) {
                    cal._create_empty_task_row(droppedID);
@@ -67,28 +66,23 @@
                         // TODO: om fler listor kan man lägga till scope i draggable
                       // $(this).removeClass("border").removeClass("over")
               //   console.log(droppedID);
-              },
-                over: function(event, elem) {
-                  // $(this).addClass("over");
-              },
-                out: function(event, elem) {
-
-                }
+              }
               });
 
     $("#availableResources").droppable({ accept: ".resource_row",
                         drop: function(event, ui) {
+                          var dropped = ui.draggable;
+                          var droppedID = $(dropped).attr("id");
+                          var droppedOn = $(this);
+
                           if ($(ui.draggable).hasClass("draggableClone")) {
-                            ui.draggable.removeClass("draggableClone");
-                            ui.draggable.attr("id",cal._get_next_true_resourceID());
-                          //  console.log("draggableClone removed");
+                            dropped.removeClass("draggableClone");
+                            dropped.attr("id",cal._get_next_resourceID());
+                            var resourceObject = cal.project.get_resource_by_element(dropped);
+                         //  console.log("resource",resourceObject);
+                            dB_storeObject(resourceObject);
                           } else {
-                        //    console.log("drop");
-                            var dropped = ui.draggable;
-                            var droppedID = $(dropped).attr("id");
-                            var droppedOn = $(this);
-                          //  console.log(droppedID);
-                          //  console.log("row_"+droppedID);
+                            console.log(droppedID);
                             $("#row_"+droppedID).remove();
                           }
 

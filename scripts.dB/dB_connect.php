@@ -32,13 +32,20 @@ function db_connect($create) {
 }
 
 function db_query($query) {
-    // Connect to the database
     $connection = db_connect(false);
-
-    // Query the database
     $result = mysqli_query($connection,$query);
-
     return $result;
+}
+
+function db_query_ID($query) {
+    $connection = db_connect(false);
+    $result = mysqli_query($connection,$query);
+    if ($result) {
+      return mysqli_insert_id($connection);
+    }
+    else {
+      return -1;
+    }
 }
 
 function db_error() {

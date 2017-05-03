@@ -41,6 +41,11 @@ if(isset($form_action_func))
       );
     break;
 
+    case 'LoadProjects':
+      LoadProjects(
+        $_POST['username']
+      );
+    break;
 
 
 
@@ -95,8 +100,7 @@ if(isset($form_action_func))
 
 
 
-function updateObject($object)
-{
+function updateObject($object) {
   $arr = json_decode($object,true);
   $sql = "update ".$arr["type"]." SET ";
   foreach ($arr as $key => $value) {
@@ -115,8 +119,7 @@ function updateObject($object)
 
 }
 
-function deleteObject($object)
-{
+function deleteObject($object) {
   $arr = json_decode($object,true);
   $sql = "delete from ".$arr["type"]." where ".$arr["type"].".id=".$arr["id"];
 
@@ -129,58 +132,102 @@ function deleteObject($object)
 
 }
 
-// $myObj->id = 5;
-// $myObj->name = "test";
-// $myObj->adminEmail = "New York2";
-// $myObj->lengthDays = "Project";
-// $myObj->type = "Project3";
-//
-// $myJSON = json_encode($myObj);
-// $myJSON = json_decode($myJSON,true);
-// //storeProject($myJSON, false);
+function storeObjectQuery($arr) {
+  $sql = "insert into ".$arr['type']." (";
+  $sqlFirst = "";
+  $sqlSecond = "";
+  foreach ($arr as $key => $value) {
+        if($key != 'type' && $key !=  'id')  $sqlFirst .= ", ";
+        if($key != 'type' && $key !=  'id')  $sqlSecond.= ", ";
 
+    if($key != "type")$sqlFirst .= $key;
+    if($key != 'type' && $key !=  'id') $sqlSecond .= "'".$value."'";
+    if ($key == "type") { break;}
+  }
+  $sql .= $sqlFirst.") VALUES (NULL".$sqlSecond.")";
+  return $sql;
+};
 
-function storeProject($arr,$quiet){
-
-    $sql = "insert into ".$arr['type']." (";
-    $sqlFirst = "";
-    $sqlSecond = "";
-    foreach ($arr as $key => $value) {
-          if($key != 'type' && $key !=  'id')  $sqlFirst .= ", ";
-          if($key != 'type' && $key !=  'id')  $sqlSecond.= ", ";
-
-      if($key != "type")$sqlFirst .= $key;
-      if($key != 'type' && $key !=  'id') $sqlSecond .= "'".$value."'";
-      if ($key == "type") { break;}
-}
-
-    $sql .= $sqlFirst.") VALUES (NULL".$sqlSecond.")";
-    $connection = db_connect(false);
-    $result = mysqli_query($connection,$sql);
-    if ($result && $quiet) {
-        return mysqli_insert_id($connection);
-}
-        elseif ($result && !$quiet) {
-          echo $result;
-        }
-     else {
+function storeObjectGeneric($arr,$quiet){
+    $sql = storeObjectQuery($arr);
+    $result = db_query_ID($sql);
+    if (($result != (-1)) && $quiet) {
+      return $result;
+    }
+    else if (($result != -1 )&& !$quiet) {
+      echo $result;
+    }
+    else {
       $failure = (string)$sql;
       header('HTTP/1.0 404 Not found: '.$failure);
     }
 }
 
+$myObj->id = 1;
+$myObj->name = "test";
+$myObj->groupType   = "test";
+//$myObj->adminEmail = "New York2";
+//$myObj->lengthDays = "Project";
+$myObj->type = "Resource";
+$myObj->row = "U7";
+$myObj->projectID = "16";
+$myObj->add     = "X";
+
+$myJSON = json_encode($myObj);
+$myJSON = json_decode($myJSON,true);
+//storeResource($myJSON);
+
+//LoadProjects("alpha");
+
+function LoadProjects($user)
+{
+  $sql = "select id from project where adminEmail = '$user'";
+  $result = db_query($sql);
+  if($result) {
+    echo mysqli_fetch_row($result)[0];
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+}
+
+function storeResource($arr)
+{
+  $sql = storeObjectQuery($arr);
+  $result = db_query_ID($sql);
+  $relation = "insert into resProjRelation (projectID,resourceID,rowNumber) VALUES ('".$arr['projectID']."','".$result."','".$arr['row']."')";
+  if ($result != -1) {
+      $result2 = db_query($relation);
+      if ($result2) {
+      echo $result;
+    }
+    else {
+      $failure = (string)$result2;
+      header('HTTP/1.0 404 Not found: '.$relation);
+    }
+
+  }
+  else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+}
 
 function storeObject($object,$quiet)
  {
   $object = json_decode($object,true);
    switch ($object['type']) {
-     case 'Project':
-      storeProject($object,$quiet);
-       break;
+      case 'Project':
+        storeObjectGeneric($object,$quiet);
+      break;
 
-     default:
-       # code...
-       break;
+      case 'Resource':
+        storeResource($object);
+      break;
+
+      default:
+
+     break;
    }
 //   $arr = json_decode($object,true);
 //   $sql = "insert into ".$arr['type']." (";
@@ -203,13 +250,12 @@ function storeObject($object,$quiet)
 //   }
 }
 
-function saveNewUser($username,$pass,$defaulProject)
-{
+function saveNewUser($username,$pass,$defaultProject) {
   $passHash = password_hash($pass, PASSWORD_BCRYPT);
   $sessionID = rand(1000000,10000000);
   $sql = "insert into user (email, password, sessionID) VALUES ('$username', '$passHash', $sessionID)";
   if (db_query($sql)) {
-      storeObject($defaulProject,true);
+      storeObject($defaultProject,true);
       echo $sessionID;
   } else {
     $failure = (string)$sql;
@@ -218,8 +264,7 @@ function saveNewUser($username,$pass,$defaulProject)
 
 }
 
-function checkCookieValid($user,$sessionID)
-{
+function checkCookieValid($user,$sessionID) {
   $sql = "select * from user where email = '$user' AND sessionID = '$sessionID' ";
   $result = db_query($sql);
   if ($result && (mysqli_num_rows($result)>0)) {
@@ -230,8 +275,7 @@ function checkCookieValid($user,$sessionID)
   }
 }
 
-function verifyUser($username,$pass)
-{
+function verifyUser($username,$pass) {
   $sql = "select password from user where email = '".$username."'";
   $result = db_query($sql);
   $passHash = mysqli_fetch_assoc($result);
