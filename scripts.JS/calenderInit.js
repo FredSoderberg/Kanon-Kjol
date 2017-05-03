@@ -1,25 +1,39 @@
     $(function() {
 
-    // $(".resourceDrag").draggable({
-    //   connectToSortable: "#sortable",
-    //   revert: "invalid"});
-    // //
     $( "#availableResources" ).sortable({
-         connectWith: "#sortable",
+         connectWith: "#sortable , newResourceList",
          placeholder: "highlight",
-         dropOnEmpty: true
-        });
+         dropOnEmpty: true,
+         stop: function(event,ui) {
+           $("#availableResources").children().each(function(index,item) {
+             cal.project.set_resource_row(item , "U" + index);
+           })
+         }
+    });
 
-        $( "#sortable" ).sortable({
-             connectWith: "#availableResources",
-                      dropOnEmpty: true,
-                      receive: function(event, ui) {
-                  //    console.log(ui.item[0].id);
-                    //  console.log(event);
-//            var new = ui.helper.children('.hidden');
-  //           ui.helper.replaceWith(new.html());
+    $( "#sortable" ).sortable({
+        connectWith: "#availableResources , newResourceList",
+        dropOnEmpty: true,
+        stop: function(event, ui) {
+            $("#sortable").children().each(function(index,item) {
+              cal.project.set_resource_row(item , "A" + index);
+            })
         }
-            });
+    });
+
+            $("#addResource").draggable({
+           connectToSortable: "#sortable, #availableResources",
+           helper: "clone",
+           start: function (event) {
+              var dragClone = $("#newResourceList").find("div:last")
+              $(dragClone).removeClass();
+              $(dragClone).empty();
+              $(dragClone).addClass("draggableClone resource_row col_container ui-sortable-handle");
+              $(dragClone).append(cal._create_resource());
+              $(dragClone).css("width","auto");
+            },
+             revert: "invalid"
+           });
     // $( "#sortable" ).sortable({
     //       connectWith: "#availableResources"
     //     });
@@ -34,33 +48,44 @@
 
     $("#sortable").droppable({ accept: ".resource_row",
                drop: function(event, ui) {
-              //          console.log("drop");
-                        // TODO: om fler listor kan man lägga till scope i draggable
-                      // $(this).removeClass("border").removeClass("over");
                  var dropped = ui.draggable;
                  var droppedID = $(dropped).attr("id");
                  var droppedOn = $(this);
-              //   console.log(droppedID);
-                 if ($("#row_"+droppedID).length === 0) {
+
+                 if ($(ui.draggable).hasClass("draggableClone")) {
+                   dropped.removeClass("draggableClone");
+                   dropped.attr("id",cal._get_next_resourceID());
+                   var resourceObject = cal.project.get_resource_by_element(dropped);
+                //  console.log("resource",resourceObject);
+                   dB_storeObject(resourceObject);
+                 }
+                 else if ($("#row_"+droppedID).length === 0) {
                    cal._create_empty_task_row(droppedID);
                  }
-              },
-                over: function(event, elem) {
-                  // $(this).addClass("over");
-              },
-                out: function(event, elem) {
-                }
+              //          console.log("drop");
+                        // TODO: om fler listor kan man lägga till scope i draggable
+                      // $(this).removeClass("border").removeClass("over")
+              //   console.log(droppedID);
+              }
               });
 
     $("#availableResources").droppable({ accept: ".resource_row",
                         drop: function(event, ui) {
-                        console.log("drop");
-                        var dropped = ui.draggable;
-                        var droppedID = $(dropped).attr("id");
-                        var droppedOn = $(this);
-                        console.log(droppedID);
-                        console.log("row_"+droppedID);
-                        $("#row_"+droppedID).remove();
+                          var dropped = ui.draggable;
+                          var droppedID = $(dropped).attr("id");
+                          var droppedOn = $(this);
+
+                          if ($(ui.draggable).hasClass("draggableClone")) {
+                            dropped.removeClass("draggableClone");
+                            dropped.attr("id",cal._get_next_resourceID());
+                            var resourceObject = cal.project.get_resource_by_element(dropped);
+                         //  console.log("resource",resourceObject);
+                            dB_storeObject(resourceObject);
+                          } else {
+                            console.log(droppedID);
+                            $("#row_"+droppedID).remove();
+                          }
+
 }
 })
 
@@ -106,19 +131,19 @@
   //     connectWith: ".connectedSortable",
   //     forcePlaceholderSize: false
   //   });
+
   //
-  //   $(".draggableClone").draggable({
-  //     //connectToSortable: "#sortable",
-  //     helper: "clone",
-  //     revert: "invalid"
-  //   });
+
   //
-  //   $(document).on("dragstart", "#addResources", function(event, ui){
-  //     $(".draggableClone").draggable({
-  //       //connectToSortable: "#tabs",
-  //       helper: "clone",
-  //       revert: "invalid"
-  //     });
+    // $(".draggableClone").on("dragstart", function(event, ui){
+    //   $(".draggableClone").draggable({
+    //     //connectToSortable: "#tabs",
+    //     helper: function (event) {
+    //
+    //     },
+    //     revert: "invalid"
+    //   })
+    // })
   //
   //     $(".draggableClone").on("click", function(){
   //     });

@@ -85,7 +85,7 @@ function checkLoginCookie(init) {
   var user = getCookie("username");
   var sessionID = getCookie("sessionID");
   if (user != "") {
-    dB_SessionIDValid(user, sessionID,init);
+    dB_SessionIDValid(user, sessionID, init);
   }
   else {
     window.location.href = "signin.html";
