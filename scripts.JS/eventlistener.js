@@ -38,10 +38,10 @@ $(document).ready(function(){
   });
 
 
-  $(".resource_view_data").on('dblclick', '.resource_cell', function(){
+  /* $(".resource_view_data").on('dblclick', '.resource_cell', function(){
     create_cover();
   });
-
+*/
 
   $(document).on("sortchange",function(ui, e){
     //console.log("Dragging");
@@ -201,5 +201,48 @@ $(document).ready(function(){
     taskDialog.dialog("open");
   })
   //$( ".task_view_bars").on("draggable")
+
+//-----------------Change info about resources--------------------------------
+
+var resourceDialog = $("#resourceDialog");
+resourceDialog.dialog({
+  autoOpen: false,
+  height: 400,
+  width: 350,
+  modal: true,
+  buttons: {
+    "Save Changes": function() {
+      change_resourceinfo();
+    },
+    "Cancel": function() {
+      resourceDialog.dialog( "close" );
+    }
+  },
+  close: function() {
+    //form[ 0 ].reset();
+    //allFields.removeClass( "ui-state-error" );
+  }
+});
+var resourceDialogID = 0;
+function change_resourceinfo(){
+  var resource = cal.project.get_resource_by_id(resourceDialogID);
+  resource.name = $("#resource_dialog_name").val();
+  //updateInnerHtml(resource);
+  $("#"+resourceDialogID).children().eq(1).html(resource.name)
+  resourceDialog.dialog( "close" );
+}
+
+$(document).on("dblclick", ".resource_row", function(event, ui){
+  //console.log("Vem vet");
+  resourceDialogID = Number($(event.target).parent().attr("id"));
+  console.log("resorceID", cal.project.get_resource_by_id(resourceDialogID));
+  $("#resource_dialog_name").val(cal.project.get_resource_by_id(resourceDialogID).name);
+  resourceDialog.dialog("open")
+})
+
+/* $(".resource_view_data").on('dblclick', '.resource_cell', function(){
+  create_cover();
+});
+*/
 
 });
