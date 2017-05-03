@@ -19,13 +19,13 @@ function Task(startDate, endDate, resID, taskID) {
 Task.prototype.render = function() {
   //console.log("Task_render: ", this)
   //console.log("Index: ", $("#"+this.resources[0]).index())
-  var amountOfDays =
+  //var amountOfDays =
   var html = "<div id='task_" + this.taskID +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
                   "style='width : " + (config.dateHeaderWidth * (this.endDate.getDate() - this.startDate.getDate() + 1) - 6)+"px;"+
                         "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
-                           "left: " + (config.dateHeaderWidth * (this.startDate.getDate() - 1)+ 3)+"px;"+
+                           "left: " + (config.dateHeaderWidth * this.calculate_days() + 3)+"px;"+
                            "top: " + (config.rowHeight * ($("#"+this.resources[0]).index()) + 3)+"px'>";
 
   html += "</div>";
@@ -47,11 +47,16 @@ function dateString(date){
 }
 
 Task.prototype.calculate_days = function(){
-  var projTime = new Date(cal.project.startDate);
-  var taskTime = new Date(task.startDate);
+  var projTime = new Date(cal.project.startDate.getTime());
+  var taskTime = new Date(this.startDate.getTime());
   taskTime.clearTime();
   projTime.clearTime();
 
+  var ms = taskTime.getTime() - projTime.getTime();
+  console.log(ms)
+  var days = ms/(1000*60*60*24);
+  console.log(days)
+  return days;
 }
 
 

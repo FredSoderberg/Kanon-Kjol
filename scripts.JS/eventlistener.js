@@ -166,6 +166,7 @@ console.log("Eventlistener: Ready")
 
   $( ".task_view_rows").sortable();
   $( ".task_view_rows").disableSelection();
+
   var taskDialog = $("#taskDialog");
   taskDialog.dialog({
     autoOpen: false,
