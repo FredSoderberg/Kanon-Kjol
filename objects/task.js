@@ -53,9 +53,9 @@ Task.prototype.calculate_days = function(){
   projTime.clearTime();
 
   var ms = taskTime.getTime() - projTime.getTime();
-  console.log(ms)
+  //console.log(ms)
   var days = ms/(1000*60*60*24);
-  console.log(days)
+  //console.log(days)
   return days;
 }
 
