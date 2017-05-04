@@ -13,10 +13,9 @@ var config = {
 
   autofit: false, // grid column automatic fit grid_width config
 	columns: [
-    {name:"text", label:"groupType", width:50},
+    {name:"text", label:"groupType", width:100},
     {name:"worker", label:"name", width:100},
-    {name:"id", label:"id", width:30},
-    {name:"add", label:"add", width:40}
+    {name:"id", label:"id", width:30}
   ],
   resources: [],
   headerHeight: 40,

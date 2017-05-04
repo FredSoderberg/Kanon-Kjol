@@ -88,7 +88,7 @@ Calendar.prototype._create_resource = function(resource) {
   return this._create_resources_cells(resource)
 }
 
-  var html = "<div id=" + resource.id + " class='resource_row col_container' style= 'height: 30px'>" + this._create_resources_cells(resource) + "</div>";
+  var html = "<div id=" + resource.id + " class='resource_row col_container' style= 'height: 30px width: auto'>" + this._create_resources_cells(resource) + "</div>";
   //  this._create_empty_task_row(resource.id);
   //$(".task_view_rows").children().last().html(this._create_empty_task_rows_cells(50));
 
@@ -103,16 +103,16 @@ Calendar.prototype._create_resources_cells = function(resource) {
 //       html += "<div class='remove_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString().toLowerCase()] + "</div>";
 // }
 // else
- if (config.columns[i].label.toString().toLowerCase() == "add") {
-      html += "<div class='non_removable_cell' style='width: ";
-      html += config.columns[i].width + "px'>";
-      html += resource[config.columns[i].label.toString().toLowerCase()];
-      html += "</div>";
-}
-     else {
+//  if (config.columns[i].label.toString().toLowerCase() == "add") {
+//       html += "<div class='non_removable_cell' style='width: ";
+//       html += config.columns[i].width + "px'>";
+//       html += resource[config.columns[i].label.toString().toLowerCase()];
+//       html += "</div>";
+// }
+//      else {
       html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString().toLowerCase()] + "</div>";
-    }
-  };
+    // }
+  }
   return html;
 };
 
