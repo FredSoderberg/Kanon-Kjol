@@ -125,7 +125,7 @@ function dB_storeObject(object) {
       case "Resource":
         $("#row_"+object.id).attr("id","row_"+data);
         $("#"+object.id).attr("id",data);
-        object.id = data;
+        object.id = Number(data);
       break;
 
   default:

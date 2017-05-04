@@ -99,9 +99,34 @@
     </div>
 
     <div id="key"></div>
-    <div id="taskDialog" title="Basic dialog">
-    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-  </div>
+    <div id="taskDialog" title="Task info">
+<p class="validateTips">Superbra info = Erika info</p>
+
+<form>
+<fieldset>
+  <label for="name">Name</label>
+  <input type="text" name="name" id="task_dialog_name" value="" class="text ui-widget-content ui-corner-all">
+
+  <!-- Allow form submission with keyboard without duplicating the dialog button -->
+  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+</fieldset>
+</form>
+</div>
+
+
+<div id="resourceDialog" title="Resource info">
+<p class="validateTips">Superdubermegabra info</p>
+<form>
+<fieldset>
+  <label for="name">Name</label>
+  <input type="text" name="name" id="resource_dialog_name" value="" class="text ui-widget-content ui-corner-all">
+
+  <!-- Allow form submission with keyboard without duplicating the dialog button -->
+<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+</fieldset>
+</form>
+</div>
+
 
   <script type = "text/javascript">
   var cal = new Calendar();

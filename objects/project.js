@@ -70,7 +70,7 @@ Project.prototype.get_task_by_id = function (taskID) {
 
 Project.prototype.get_resource_by_id = function (resourceID) {
   for (var resource in this.resources) {
-    if (this.resources[resource].id === resourceID) {
+    if (this.resources[resource].id == resourceID) {
       return this.resources[resource];
     }
   }
