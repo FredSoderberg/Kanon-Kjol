@@ -73,15 +73,18 @@ Calendar.prototype._get_next_resourceID = function () {
   return resourceID;
 };
 
-Calendar.prototype._create_resource = function(resource) {
-  if (resource === undefined) {
+Calendar.prototype._get_new_default_resource = function () {
   resourceID = this.project.nextResourceID;
   name = "G.I Doe";
   groupType = "Default";
   resource = new Resource(resourceID, name, groupType);
-  resource.add = "";
   resource.projectID = this.project.id;
-  this.project.resources.push(resource);
+  return resource;
+};
+
+Calendar.prototype._create_resource = function(resource) {
+  if (resource === undefined) {
+  resource = this._get_new_default_resource();
   return this._create_resources_cells(resource)
 }
 

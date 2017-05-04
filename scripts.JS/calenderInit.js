@@ -5,6 +5,21 @@
          placeholder: "highlight",
          dropOnEmpty: true,
          stop: function(event,ui) {
+           var dropped = ui.draggable;
+           var droppedID = $(dropped).attr("id");
+           var droppedOn = $(this);
+
+           if ($(ui.draggable).hasClass("draggableClone")) {
+             dropped.removeClass("draggableClone");
+             dropped.attr("id",cal._get_next_resourceID());
+             var resourceObject = cal.project.get_resource_by_element(dropped);
+           //  console.log("resource",resourceObject);
+             dB_storeObject(resourceObject);
+           } else {
+             console.log(droppedID);
+             $("#row_"+droppedID).remove();
+           }
+
            $("#availableResources").children().each(function(index,item) {
              cal.project.set_resource_row(item , "U" + index);
            })
@@ -15,9 +30,31 @@
         connectWith: "#availableResources , newResourceList",
         dropOnEmpty: true,
         stop: function(event, ui) {
-            $("#sortable").children().each(function(index,item) {
-              cal.project.set_resource_row(item , "A" + index);
-            })
+
+          $("#sortable").children().each(function(index,item) {
+            cal.project.set_resource_row(item , "A" + index);
+          })
+
+          var dropped = ui.item;
+          var droppedID = $(dropped).attr("id");
+          var droppedOn = $(this);
+
+          if ($(ui.item).hasClass("draggableClone")) {
+
+              dropped.removeClass("draggableClone");
+              var resourceObject  =cal._get_new_default_resource();
+              dropped.attr("id",cal._get_next_resourceID());
+              console.log("row",resourceObject.row);
+              cal.project.resources.push(resourceObject);
+              //update på alla rader
+//skriv en utbrytar funktion för sortering
+              dB_storeObject(resourceObject);
+          }
+          else if ($("#row_"+droppedID).length === 0) {
+            cal._create_empty_task_row(droppedID);
+          }
+
+
         }
     });
 
@@ -46,48 +83,6 @@
         //     forcePlaceholderSize: false
         //   });
 
-    $("#sortable").droppable({ accept: ".resource_row",
-               drop: function(event, ui) {
-                 var dropped = ui.draggable;
-                 var droppedID = $(dropped).attr("id");
-                 var droppedOn = $(this);
-
-                 if ($(ui.draggable).hasClass("draggableClone")) {
-                   dropped.removeClass("draggableClone");
-                   dropped.attr("id",cal._get_next_resourceID());
-                   var resourceObject = cal.project.get_resource_by_element(dropped);
-                //  console.log("resource",resourceObject);
-                   dB_storeObject(resourceObject);
-                 }
-                 else if ($("#row_"+droppedID).length === 0) {
-                   cal._create_empty_task_row(droppedID);
-                 }
-              //          console.log("drop");
-                        // TODO: om fler listor kan man lägga till scope i draggable
-                      // $(this).removeClass("border").removeClass("over")
-              //   console.log(droppedID);
-              }
-              });
-
-    $("#availableResources").droppable({ accept: ".resource_row",
-                        drop: function(event, ui) {
-                          var dropped = ui.draggable;
-                          var droppedID = $(dropped).attr("id");
-                          var droppedOn = $(this);
-
-                          if ($(ui.draggable).hasClass("draggableClone")) {
-                            dropped.removeClass("draggableClone");
-                            dropped.attr("id",cal._get_next_resourceID());
-                            var resourceObject = cal.project.get_resource_by_element(dropped);
-                         //  console.log("resource",resourceObject);
-                            dB_storeObject(resourceObject);
-                          } else {
-                            console.log(droppedID);
-                            $("#row_"+droppedID).remove();
-                          }
-
-}
-})
 
 
 

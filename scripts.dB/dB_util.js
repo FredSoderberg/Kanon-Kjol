@@ -19,16 +19,47 @@ function dB_storeSignUp(email, pass) {
     });
 }
 
-function dB_LoadProjects(user) {
+function dB_loadProjects(user) {
   $.post('scripts.dB/dB_util.php', {
-    function: "LoadProjects",
+    function: "loadProjects",
     username: user,
   }).done(function(data) {
+
       cal.project.id = data;
+      console.log("projectID",data);
+      dB_loadResources(data);
+
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
   });
+}
+
+function dB_loadResources(projIDToGet) {
+  $.getJSON('scripts.dB/dB_util_JSON.php', {
+    function: "loadResources",
+    project: projIDToGet
+  }).done(function(data) {
+    var resourcesList = [];
+    console.log("resurser",data);
+        $.each( data, function( key, value ) {
+          var toAdd = new Resource (
+          value['id'],
+          value['name'],
+          value['groupType']);
+          toAdd.projectID = projIDToGet;
+          resourcesList.push()
+
+      })
+    dB_loadResProjRel(resourcesList);
+  }).fail(function(jqxhr, textStatus, error) {
+    var err = textStatus + ", " + error;
+    console.log("Request Failed: " + err);
+  });
+}
+
+function dB_loadResProjRel(resourcesList) {
+
 }
 
 function dB_SessionIDValid(user, sessionID,init) {
@@ -43,7 +74,8 @@ function dB_SessionIDValid(user, sessionID,init) {
     } else if (data === "true" && init === true) {
 
       cal.userID = user;
-      dB_LoadProjects(user);
+      dB_loadProjects(user);
+
       // TODO: START LOADING TASKS AND RESOURCES!
 
     }
