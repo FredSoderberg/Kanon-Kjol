@@ -15,8 +15,16 @@ div.calendar_cover{
   height: 100%;
 }
 
-#sortable {padding-bottom: 1000px !important;}
-#availableResources {padding-bottom: 1000px  !important;}
+#sortable {
+  padding-bottom: 450px !important;
+  overflow: auto;
+}
+
+#availableResources {
+  padding-bottom: 420px  !important;
+  overflow: auto;
+  max-height: 420px;
+}
 
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }

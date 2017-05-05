@@ -88,7 +88,7 @@ Calendar.prototype._create_resource = function(resource) {
   return this._create_resources_cells(resource)
 }
 
-  var html = "<div id=" + resource.id + " class='resource_row col_container' style= 'height: 30px width: auto'>" + this._create_resources_cells(resource) + "</div>";
+  var html = "<div id=" + resource.id + " class='resource_row col_container' style= 'height: 30px; width: auto'>" + this._create_resources_cells(resource) + "</div>";
   //  this._create_empty_task_row(resource.id);
   //$(".task_view_rows").children().last().html(this._create_empty_task_rows_cells(50));
 

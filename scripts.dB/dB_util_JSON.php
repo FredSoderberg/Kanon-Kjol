@@ -20,13 +20,14 @@ if(isset($form_action_func))
       break;
   }
 }
-loadResources(28);
+loadResources(26);
 function loadResources($projectID)
 {
-  $sql = "select * from resource where id in (select resourceID from resprojrelation where projectID = $projectID)";
+  $sql = "select * from resource join resprojrelation on resprojrelation.resourceID=resource.id where projectID = $projectID order by rowNumber";
   $result = db_query($sql);
-  $rows = db_fetch_rows($result);
-  echo json_encode($rows,JSON_PRETTY_PRINT);
+  $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+  //$rows = db_fetch_rows($result);
+  echo json_encode($result,JSON_PRETTY_PRINT);
 }
 
 function getAllTasks()

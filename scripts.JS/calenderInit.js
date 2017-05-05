@@ -1,20 +1,22 @@
 $(document).ready(function(){
 
     $("#availableResources").sortable({
-         connectWith: "#sortable",
-         dropOnEmpty: true,
-         stop: function(event,ui) {
-           var dropped = ui.item;
-           $(dropped).css("width","auto");
-
-           if ($(ui.item).hasClass("draggableClone")) {
-             console.log("i aval!");
-             initiateNewResource(dropped,"availableResources","U");
-           } else {
-            updateResourceRows("availableResources","U");
-           }
-
-
+        connectWith: "#sortable",
+        scroll: true,
+        dropOnEmpty: true,
+        stop: function(event,ui) {
+           updateResourceRows("availableResources","U");
+        },
+        receive: function(event, ui) {
+          var dropped = $(this).data().uiSortable.currentItem;
+          $(dropped).css("width","auto");
+          if ($(dropped).hasClass("draggableClone")) {
+            initiateNewResource(dropped,"availableResources","A");
+          }
+          if(ui.sender[0].id === "sortable") {
+            // console.log("droppedid remove:",ui.item[0].id);
+            $("#row_"+ui.item[0].id).remove();
+          }
          }
     });
 
@@ -24,17 +26,17 @@ $(document).ready(function(){
         connectWith: "#availableResources",
         dropOnEmpty: true,
         stop: function(event, ui) {
-          var dropped = ui.item;
+          updateResourceRows("sortable","A");
+        },
+        receive: function(event, ui) {
+          var dropped = $(this).data().uiSortable.currentItem;
           $(dropped).css("width","auto");
-
-          if ($(ui.item).hasClass("draggableClone")) {
+          if ($(dropped).hasClass("draggableClone")) {
             initiateNewResource(dropped,"sortable","A");
           }
-          else if ($("#row_"+droppedID).length === 0) {
-            updateResourceRows("sortable","A");
+          if(ui.sender[0].id === "availableResources") {
+            cal._create_empty_task_row(ui.item[0].id);
           }
-
-
         }
     });
 

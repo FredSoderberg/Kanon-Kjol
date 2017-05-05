@@ -1,5 +1,5 @@
 function Project(name, lengthDays, adminEmail) {
-  this.id = "-1";   //Master keeps track on what projects exists
+  this.id = "";   //Master keeps track on what projects exists
   this.name = name;
   this.adminEmail = adminEmail;
   this.lengthDays = lengthDays;
@@ -90,6 +90,23 @@ Project.prototype.set_resource_row = function (element,value) {
     }
   }
 };
+
 Project.prototype.update_resource_id = function (target,value) {
   this.get_resource_by_id(target).id = value;
+};
+
+Project.prototype.render_all_resources = function () {
+  this.resources.sort(function(a,b){
+    return a.row - b.row;
+  });
+  //console.log(this.resources);
+  $.each(this.resources, function( key, value ) {
+    if(value.row.charAt(0) === "U") {
+      $(cal._create_resource(value)).appendTo("#availableResources");
+    }
+    else if (value.row.charAt(0) === "A") {
+      $(cal._create_resource(value)).appendTo("#sortable");
+      cal._create_empty_task_row(value.id);
+    }
+  });
 };
