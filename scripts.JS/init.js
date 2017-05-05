@@ -1,5 +1,10 @@
 $(function() {
 
+  $("#cookieAccept").click(function(event) {
+    hideCookieSquare();
+    setCookie("cookieApproval", "true", 7);
+  });
+
   $("#newUserButton").click(function(event) {
     if (checkSignUp()) {
       var user = $("#name1").val();

@@ -41,6 +41,10 @@ function showResourceBar () {
   $("#resourceSidebar").toggleClass("hidden", 750);
 }
 
+function hideCookieSquare () {
+  $("#cookieSquare").toggleClass("hidden", 750).promise().done();
+}
+
 function initiateNewResource(dropped,target,flag) {
   var droppedID = $(dropped).attr("id");
   dropped.removeClass("draggableClone");
