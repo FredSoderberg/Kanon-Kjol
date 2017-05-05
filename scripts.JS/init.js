@@ -1,9 +1,13 @@
 $(function() {
 
+  addCookieDiv();
+
   $("#cookieAccept").click(function(event) {
     hideCookieSquare();
     setCookie("cookieApproval", "true", 7);
   });
+
+  checkAcceptCookie();
 
   $("#newUserButton").click(function(event) {
     if (checkSignUp()) {
