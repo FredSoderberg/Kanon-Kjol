@@ -41,8 +41,8 @@ if(isset($form_action_func))
       );
     break;
 
-    case 'LoadProjects':
-      LoadProjects(
+    case 'loadProjects':
+      loadProjects(
         $_POST['username']
       );
     break;

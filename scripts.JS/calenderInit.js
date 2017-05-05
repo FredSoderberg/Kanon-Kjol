@@ -1,23 +1,40 @@
-    $(function() {
+$(document).ready(function(){
 
-    $( "#availableResources" ).sortable({
-         connectWith: "#sortable , newResourceList",
-         placeholder: "highlight",
+    $("#availableResources").sortable({
+         connectWith: "#sortable",
          dropOnEmpty: true,
          stop: function(event,ui) {
-           $("#availableResources").children().each(function(index,item) {
-             cal.project.set_resource_row(item , "U" + index);
-           })
+           var dropped = ui.item;
+           $(dropped).css("width","auto");
+
+           if ($(ui.item).hasClass("draggableClone")) {
+             console.log("i aval!");
+             initiateNewResource(dropped,"availableResources","U");
+           } else {
+            updateResourceRows("availableResources","U");
+           }
+
+
          }
     });
 
+
+
     $( "#sortable" ).sortable({
-        connectWith: "#availableResources , newResourceList",
+        connectWith: "#availableResources",
         dropOnEmpty: true,
         stop: function(event, ui) {
-            $("#sortable").children().each(function(index,item) {
-              cal.project.set_resource_row(item , "A" + index);
-            })
+          var dropped = ui.item;
+          $(dropped).css("width","auto");
+
+          if ($(ui.item).hasClass("draggableClone")) {
+            initiateNewResource(dropped,"sortable","A");
+          }
+          else if ($("#row_"+droppedID).length === 0) {
+            updateResourceRows("sortable","A");
+          }
+
+
         }
     });
 
@@ -30,6 +47,7 @@
               $(dragClone).empty();
               $(dragClone).addClass("draggableClone resource_row col_container ui-sortable-handle");
               $(dragClone).append(cal._create_resource());
+              dragClone.attr("id",cal.project.nextResourceID);
               $(dragClone).css("width","auto");
             },
              revert: "invalid"
@@ -46,48 +64,6 @@
         //     forcePlaceholderSize: false
         //   });
 
-    $("#sortable").droppable({ accept: ".resource_row",
-               drop: function(event, ui) {
-                 var dropped = ui.draggable;
-                 var droppedID = $(dropped).attr("id");
-                 var droppedOn = $(this);
-
-                 if ($(ui.draggable).hasClass("draggableClone")) {
-                   dropped.removeClass("draggableClone");
-                   dropped.attr("id",cal._get_next_resourceID());
-                   var resourceObject = cal.project.get_resource_by_element(dropped);
-                //  console.log("resource",resourceObject);
-                   dB_storeObject(resourceObject);
-                 }
-                 else if ($("#row_"+droppedID).length === 0) {
-                   cal._create_empty_task_row(droppedID);
-                 }
-              //          console.log("drop");
-                        // TODO: om fler listor kan man lägga till scope i draggable
-                      // $(this).removeClass("border").removeClass("over")
-              //   console.log(droppedID);
-              }
-              });
-
-    $("#availableResources").droppable({ accept: ".resource_row",
-                        drop: function(event, ui) {
-                          var dropped = ui.draggable;
-                          var droppedID = $(dropped).attr("id");
-                          var droppedOn = $(this);
-
-                          if ($(ui.draggable).hasClass("draggableClone")) {
-                            dropped.removeClass("draggableClone");
-                            dropped.attr("id",cal._get_next_resourceID());
-                            var resourceObject = cal.project.get_resource_by_element(dropped);
-                         //  console.log("resource",resourceObject);
-                            dB_storeObject(resourceObject);
-                          } else {
-                            console.log(droppedID);
-                            $("#row_"+droppedID).remove();
-                          }
-
-}
-})
 
 
 
