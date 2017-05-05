@@ -57,6 +57,7 @@ function initiateNewResource(dropped,target,flag) {
 
 function updateResourceRows (target,flag) {
   $("#"+target).children().each(function(index,item) {
+    console.log(item.id,":",flag+index);
     cal.project.set_resource_row(item , flag + index);
   })
 }

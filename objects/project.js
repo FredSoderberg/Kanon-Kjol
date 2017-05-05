@@ -101,6 +101,7 @@ Project.prototype.render_all_resources = function () {
   });
   //console.log(this.resources);
   $.each(this.resources, function( key, value ) {
+    console.log(value);
     if(value.row.charAt(0) === "U") {
       $(cal._create_resource(value)).appendTo("#availableResources");
     }

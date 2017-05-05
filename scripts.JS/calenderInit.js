@@ -11,7 +11,7 @@ $(document).ready(function(){
           var dropped = $(this).data().uiSortable.currentItem;
           $(dropped).css("width","auto");
           if ($(dropped).hasClass("draggableClone")) {
-            initiateNewResource(dropped,"availableResources","A");
+            initiateNewResource(dropped,"availableResources","U");
           }
           if(ui.sender[0].id === "sortable") {
             // console.log("droppedid remove:",ui.item[0].id);
@@ -31,12 +31,14 @@ $(document).ready(function(){
         receive: function(event, ui) {
           var dropped = $(this).data().uiSortable.currentItem;
           $(dropped).css("width","auto");
+
           if ($(dropped).hasClass("draggableClone")) {
             initiateNewResource(dropped,"sortable","A");
           }
-          if(ui.sender[0].id === "availableResources") {
-            cal._create_empty_task_row(ui.item[0].id);
-          }
+          var droppedID = $(dropped).attr("id");
+          if(ui.sender[0].id === "availableResources") droppedID = ui.item[0].id;
+            cal._create_empty_task_row(droppedID);
+
         }
     });
 

@@ -3,7 +3,7 @@ require 'dB_connect.php';
 
 header('Content-Type: application/json');
 
-$form_action_func = $_POST['function'];
+$form_action_func = $_GET['function'];
 
 if(isset($form_action_func))
 {
@@ -13,21 +13,28 @@ if(isset($form_action_func))
     break;
 
     case 'loadResources':
-      loadResources();
+      loadResources(
+              $_GET['project']
+      );
     break;
 
     default:
       break;
   }
 }
-loadResources(26);
+
 function loadResources($projectID)
 {
   $sql = "select * from resource join resprojrelation on resprojrelation.resourceID=resource.id where projectID = $projectID order by rowNumber";
   $result = db_query($sql);
+
+if ($result) {
   $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
-  //$rows = db_fetch_rows($result);
   echo json_encode($result,JSON_PRETTY_PRINT);
+} else {
+  $failure = (string)$sql;
+  header('HTTP/1.0 404 Not found: '.$failure);
+}
 }
 
 function getAllTasks()

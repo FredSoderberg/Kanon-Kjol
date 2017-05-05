@@ -36,10 +36,12 @@ function dB_loadProjects(user) {
 }
 
 function dB_loadResources(projIDToGet) {
+  console.log("projectIDToGet:",projIDToGet);
   $.getJSON('scripts.dB/dB_util_JSON.php', {
     function: "loadResources",
     project: projIDToGet
   }).done(function(data) {
+    console.log("ladda resurs:",data);
     // console.log("project:ID:TOGET:",projIDToGet);
     // console.log("resurser",data);
         $.each( data, function( key, value ) {
