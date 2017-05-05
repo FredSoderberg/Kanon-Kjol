@@ -36,30 +36,30 @@ function dB_loadProjects(user) {
 }
 
 function dB_loadResources(projIDToGet) {
+  console.log("projectIDToGet:",projIDToGet);
   $.getJSON('scripts.dB/dB_util_JSON.php', {
     function: "loadResources",
     project: projIDToGet
   }).done(function(data) {
-    var resourcesList = [];
-    console.log("resurser",data);
+    console.log("ladda resurs:",data);
+    // console.log("project:ID:TOGET:",projIDToGet);
+    // console.log("resurser",data);
         $.each( data, function( key, value ) {
-          var toAdd = new Resource (
-          value['id'],
-          value['name'],
-          value['groupType']);
-          toAdd.projectID = projIDToGet;
-          resourcesList.push()
-
+        var toAdd = new Resource (
+        value['id'],
+        value['name'],
+        value['groupType']);
+        toAdd.row = value['rowNumber'];
+        toAdd.projectID = projIDToGet;
+        console.log(projIDToGet,"- resurs:",toAdd);
+        cal.project.resources.push(toAdd);
       })
-    dB_loadResProjRel(resourcesList);
+      cal.project.render_all_resources();
+
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
   });
-}
-
-function dB_loadResProjRel(resourcesList) {
-
 }
 
 function dB_SessionIDValid(user, sessionID,init) {

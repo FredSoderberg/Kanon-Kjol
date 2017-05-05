@@ -1,11 +1,5 @@
 <?php
-function db_fetch_rows($result) {
-  $rows = array();
-  while($obj = mysqli_fetch_object($result)) {
-  $rows[] = $obj;
-  }
-return $rows;
-}
+
 
 function db_connect($create) {
 

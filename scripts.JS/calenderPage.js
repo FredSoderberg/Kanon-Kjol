@@ -51,20 +51,13 @@ function initiateNewResource(dropped,target,flag) {
   var resourceObject  = cal._get_new_default_resource();
   dropped.attr("id",cal._get_next_resourceID());
   cal.project.resources.push(resourceObject);
-  updateResourceRows(droppedID, target ,flag);
+  updateResourceRows(target ,flag);
   dB_storeObject(resourceObject);
 }
 
-function updateResourceRows (droppedID,target,flag) {
-  if(target === "sortable") {
-  //  console.log("droppedID",droppedID);
-    cal._create_empty_task_row(droppedID);
-  }
-  else {
-    $("#row_"+droppedID).remove();
-  }
-
+function updateResourceRows (target,flag) {
   $("#"+target).children().each(function(index,item) {
+    console.log(item.id,":",flag+index);
     cal.project.set_resource_row(item , flag + index);
   })
 }
