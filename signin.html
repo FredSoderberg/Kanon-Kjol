@@ -12,6 +12,7 @@
 <script src="scripts.JS/init.js" charset="utf-8"></script>
 <script src="scripts.JS/general_functionality.js" charset="utf-8"></script>
 <script src="scripts.dB/dB_util.js" charset="utf-8"></script>
+<script src="scripts.JS/calenderPage.js" charset="utf-8"></script>
 
 <script src="Objects/task.js" charset="utf-8"></script>
 <script src="Objects/resource.js" charset="utf-8"></script>
@@ -20,6 +21,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <body>
+  <div id="toHide">
+  <div id="cookieSquare" class="cookieWarning w3-display-topmiddle">
+    <h4> This site uses cookies for automatical sign in.
+    </h4>
+<a id="cookieAccept"  class="w3-display-bottommiddle w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4 w3-margin-right">I understand</a>
+   </div>
+</div>
   <div class="div2 w3-display-middle w3-round-large w3-card-4">
 
     <div>
@@ -53,6 +61,10 @@
 <p id="signIn"  class="w3-margin-bottom w3-margin-right w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4">Sign in</p>
 </span>
 
-</body>
+<script>
+checkAcceptCookie();
+</script>
 
+
+</body>
 </html>

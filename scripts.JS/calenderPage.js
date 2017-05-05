@@ -40,3 +40,7 @@ function showSideBar () {
       $("#mySidebar").prepend(resourceSidebar);
       $("#resourceSidebar").toggleClass("hidden", 750);
     }
+
+function hideCookieSquare () {
+  $("#cookieSquare").toggleClass("hidden", 750).promise().done();
+}
