@@ -26,7 +26,7 @@ function dB_loadProjects(user) {
   }).done(function(data) {
 
       cal.project.id = data;
-      console.log("projectID",data);
+      // console.log("projectID",data);
       dB_loadResources(data);
 
   }).fail(function(jqxhr, textStatus, error) {
@@ -41,7 +41,7 @@ function dB_loadResources(projIDToGet) {
     function: "loadResources",
     project: projIDToGet
   }).done(function(data) {
-    console.log("ladda resurs:",data);
+  //  console.log("ladda resurs:",data);
     // console.log("project:ID:TOGET:",projIDToGet);
     // console.log("resurser",data);
         $.each( data, function( key, value ) {
@@ -51,7 +51,7 @@ function dB_loadResources(projIDToGet) {
         value['groupType']);
         toAdd.row = value['rowNumber'];
         toAdd.projectID = projIDToGet;
-        console.log(projIDToGet,"- resurs:",toAdd);
+  //      console.log(projIDToGet,"- resurs:",toAdd);
         cal.project.resources.push(toAdd);
       })
       cal.project.render_all_resources();
@@ -97,7 +97,7 @@ function dB_verifyUser() {
     username: email,
     password: pass
   }).done(function(data) {
-    console.log("datan:" + data);
+  //  console.log("datan:" + data);
     if ($("#rememberMe").is(":checked")) {
       setCookie("rememberMe", "true", 7);
     }

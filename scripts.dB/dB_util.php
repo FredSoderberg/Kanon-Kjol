@@ -97,17 +97,55 @@ if(isset($form_action_func))
   }
 }
 
-
-
+// $object2->id = "28";
+// $object2->name = "G.I Doe";
+// $object2->groupType = "Default";
+// $object2->type = "Resource";
+// $object2->row = "U1";
+// $object2->projectID = "28";
+// $object2->typeToNotINCLUE = "Resourgfsddgfce";
+//
+// $object3 = json_encode($object2);
+//updateObject($object3);
 
 function updateObject($object) {
-  $arr = json_decode($object,true);
+$arr = json_decode($object,true);
+  switch ($arr['type']) {
+    case 'Resource':
+      updateResource($arr);
+      updateResProjRelation($arr);
+      break;
+
+    default:
+      # code...
+      break;
+  }
+}
+
+Function updateResProjRelation($arr) {
+
+  $sql = "update resprojrelation SET ";
+  $sql .= "rowNumber = '".$arr['row']."'";
+  $sql .= " where resprojrelation.projectID = ".$arr["projectID"]." and resprojrelation.resourceID = ".$arr['id'];
+
+  if (db_query($sql)) {
+    echo "record modified successfully";
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+}
+
+Function updateResource($arr) {
+
   $sql = "update ".$arr["type"]." SET ";
   foreach ($arr as $key => $value) {
-    if($key != "id" && $key != "type" && $key != "structure")$sql .= $key." = '".$value."'";
-    if($key != "id" && $key != "type" && $key != "id_temp" && $key != "structure") $sql .= ", ";
 
+    if($key != "id" && $key != "type")$sql .= $key." = '".$value."'";
+    if($key != "id" && $key != "type") $sql .= ", ";
+    if ($key == "type") { break;}
   }
+  $sql = substr($sql,0,-2);
   $sql .= " where ".$arr["type"].".id = ".$arr["id"];
 
   if (db_query($sql)) {
@@ -116,7 +154,6 @@ function updateObject($object) {
     $failure = (string)$sql;
     header('HTTP/1.0 404 Not found: '.$failure);
   }
-
 }
 
 function deleteObject($object) {
@@ -163,19 +200,19 @@ function storeObjectGeneric($arr,$quiet){
     }
 }
 
-$myObj->id = 1;
-$myObj->name = "test";
-$myObj->groupType   = "test";
-//$myObj->adminEmail = "New York2";
-//$myObj->lengthDays = "Project";
-$myObj->type = "Resource";
-$myObj->row = "U7";
-$myObj->projectID = "16";
-$myObj->add     = "X";
-
-$myJSON = json_encode($myObj);
-$myJSON = json_decode($myJSON,true);
-//storeResource($myJSON);
+// $myObj->id = 1;
+// $myObj->name = "test";
+// $myObj->groupType   = "test";
+// //$myObj->adminEmail = "New York2";
+// //$myObj->lengthDays = "Project";
+// $myObj->type = "Resource";
+// $myObj->row = "U7";
+// $myObj->projectID = "16";
+// $myObj->add     = "X";
+//
+// $myJSON = json_encode($myObj);
+// $myJSON = json_decode($myJSON,true);
+// //storeResource($myJSON);
 
 //LoadProjects("alpha");
 

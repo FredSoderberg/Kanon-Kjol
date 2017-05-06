@@ -89,13 +89,14 @@ div.calendar_cover{
 }
 
 #sortable {
-  padding-bottom: 450px !important;
+  min-height: 450px !important;
   overflow: auto;
 }
 
 #availableResources {
-  padding-bottom: 420px  !important;
+  /*padding-bottom: 420px  !important;*/
   overflow: auto;
+  min-height: 420px;
   max-height: 420px;
 }
 

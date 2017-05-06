@@ -5,8 +5,8 @@ function moveSidebar(){
         //console.log(element);
         var corrChild = $(element).children(".ui-tabs-anchor")
         var href = $(corrChild).attr("href");
-        console.log(corrChild);
-        console.log(href);
+        // console.log(corrChild);
+        // console.log(href);
         $(href).prepend(mySidebar);
 
         //var href = $().attr('href');
@@ -57,7 +57,8 @@ function initiateNewResource(dropped,target,flag) {
 
 function updateResourceRows (target,flag) {
   $("#"+target).children().each(function(index,item) {
-    console.log(item.id,":",flag+index);
+  //  console.log(item.id,":",flag+index);
     cal.project.set_resource_row(item , flag + index);
+    dB_updateObject(cal.project.get_resource_by_id(item.id));
   })
 }

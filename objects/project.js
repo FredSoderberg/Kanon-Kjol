@@ -84,7 +84,7 @@ Project.prototype.get_resource_by_element = function (element) {
 Project.prototype.set_resource_row = function (element,value) {
   var resourceID = Number(element.id);
   for (var resource in this.resources) {
-    if (this.resources[resource].id === resourceID) {
+    if (this.resources[resource].id == resourceID) {
       //console.log("nytt varde: ", value);
       this.resources[resource].row = value;
     }
@@ -101,7 +101,7 @@ Project.prototype.render_all_resources = function () {
   });
   //console.log(this.resources);
   $.each(this.resources, function( key, value ) {
-    console.log(value);
+    //  console.log(value);
     if(value.row.charAt(0) === "U") {
       $(cal._create_resource(value)).appendTo("#availableResources");
     }

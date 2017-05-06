@@ -5,6 +5,7 @@ $(document).ready(function(){
         scroll: true,
         dropOnEmpty: true,
         stop: function(event,ui) {
+
            updateResourceRows("availableResources","U");
         },
         receive: function(event, ui) {
@@ -12,6 +13,8 @@ $(document).ready(function(){
           $(dropped).css("width","auto");
           if ($(dropped).hasClass("draggableClone")) {
             initiateNewResource(dropped,"availableResources","U");
+          } else {
+        //    updateResourceRows("availableResources","U");
           }
           if(ui.sender[0].id === "sortable") {
             // console.log("droppedid remove:",ui.item[0].id);
@@ -34,6 +37,8 @@ $(document).ready(function(){
 
           if ($(dropped).hasClass("draggableClone")) {
             initiateNewResource(dropped,"sortable","A");
+          } else {
+          //  updateResourceRows("sortable","A");
           }
           var droppedID = $(dropped).attr("id");
           if(ui.sender[0].id === "availableResources") droppedID = ui.item[0].id;
