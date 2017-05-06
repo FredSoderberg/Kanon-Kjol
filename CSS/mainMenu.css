@@ -100,3 +100,16 @@ background-color: lightgrey;
 .center-text {
   text-align: center;
 }
+
+.cookieWarning {
+  background: linear-gradient(
+                     grey,
+                     rgba(0, 0, 0, 0.5));
+
+width: 100%;
+height: 100px;
+background-color: grey;
+text-align: center;
+font-size: 18px;
+box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
+}

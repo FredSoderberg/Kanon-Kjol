@@ -59,6 +59,9 @@ body {
 }
 
 .cookieWarning {
+  background: linear-gradient(
+                     lightgrey,
+                     rgba(44, 45, 47, 0.50));
 width: 100%;
 height: 100px;
 background-color: grey;
