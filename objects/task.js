@@ -4,8 +4,8 @@ function Task(startDate, endDate, resID, taskID) {
   this.startDate = startDate;
   this.endDate = endDate;
   this.parentProject = cal.project.id;
-  this.resources = [resID];
-  this.type = "task";
+  this.resources = resID;
+  this.type = "Task";
 
   this.startPos;
   this.startSize = {
@@ -18,13 +18,15 @@ function Task(startDate, endDate, resID, taskID) {
 
 
 Task.prototype.render = function() {
+  var timeDiff = Math.abs(this.endDate.getTime() - this.startDate.getTime());
+  var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
   //console.log("Task_render: ", this)
   //console.log("Index: ", $("#"+this.resources[0]).index())
   //var amountOfDays =
   var html = "<div id='task_" + this.id +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
-                  "style='width : " + (config.dateHeaderWidth * (this.endDate.getDate() - this.startDate.getDate() + 1) - 6)+"px;"+
+                  "style='width : " + (config.dateHeaderWidth * (diffDays + 1) - 6)+"px;"+
                         "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
                            "left: " + (config.dateHeaderWidth * this.calculate_days() + 3)+"px;"+
                            "top: " + (config.rowHeight * ($("#"+this.resources[0]).index()) + 3)+"px'>";

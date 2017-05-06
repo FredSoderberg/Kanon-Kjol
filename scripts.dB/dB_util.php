@@ -41,11 +41,7 @@ if(isset($form_action_func))
       );
     break;
 
-    case 'loadProjects':
-      loadProjects(
-        $_POST['username']
-      );
-    break;
+
 
 
 
@@ -106,23 +102,26 @@ if(isset($form_action_func))
 // $object2->typeToNotINCLUE = "Resourgfsddgfce";
 //
 // $object3 = json_encode($object2);
-//updateObject($object3);
+// updateObject($object3);
 
 function updateObject($object) {
-$arr = json_decode($object,true);
+  $arr = json_decode($object,true);
   switch ($arr['type']) {
     case 'Resource':
-      updateResource($arr);
-      updateResProjRelation($arr);
+        updateGeneral($arr);
+        updateResProjRelation($arr);
       break;
 
+      case 'Project':
+        updateGeneral($arr);
+      break;
     default:
       # code...
       break;
   }
 }
 
-Function updateResProjRelation($arr) {
+function updateResProjRelation($arr) {
 
   $sql = "update resprojrelation SET ";
   $sql .= "rowNumber = '".$arr['row']."'";
@@ -136,7 +135,7 @@ Function updateResProjRelation($arr) {
   }
 }
 
-Function updateResource($arr) {
+function updateGeneral($arr) {
 
   $sql = "update ".$arr["type"]." SET ";
   foreach ($arr as $key => $value) {
@@ -169,6 +168,10 @@ function deleteObject($object) {
 
 }
 
+// $jsonOBJ = '{"id":-1,"name":"Task: -1","startDate":"2017-05-11T16:53:08.971Z","endDate":"2017-05-12T16:53:08.971Z","parentProject":"29","resources":[37],"type":"Task","startSize":{"height":0,"width":0}}';
+// $result2 = json_decode($jsonOBJ,true);
+// echo storeObjectQuery($result2);
+
 function storeObjectQuery($arr) {
   $sql = "insert into ".$arr['type']." (";
   $sqlFirst = "";
@@ -177,13 +180,25 @@ function storeObjectQuery($arr) {
         if($key != 'type' && $key !=  'id')  $sqlFirst .= ", ";
         if($key != 'type' && $key !=  'id')  $sqlSecond.= ", ";
 
-    if($key != "type")$sqlFirst .= $key;
-    if($key != 'type' && $key !=  'id') $sqlSecond .= "'".$value."'";
-    if ($key == "type") { break;}
+        if($key != "type")                                      $sqlFirst  .= $key;
+        if($key != 'type' && !is_array($value) && $key != 'id') $sqlSecond .= "'".$value."'";
+
+        if(is_array($value)) {
+          $sqlSecond .= " '[";
+          foreach ($value as $value2) {
+            $sqlSecond .= $value2.", ";
+          }
+//          echo $sqlSecond;
+           $sqlSecond = substr($sqlSecond,0,-2);
+            $sqlSecond .= "]' " ;
+        }
+        if ($key == "type") break;
+
   }
   $sql .= $sqlFirst.") VALUES (NULL".$sqlSecond.")";
   return $sql;
 };
+
 
 function storeObjectGeneric($arr,$quiet){
     $sql = storeObjectQuery($arr);
@@ -200,33 +215,7 @@ function storeObjectGeneric($arr,$quiet){
     }
 }
 
-// $myObj->id = 1;
-// $myObj->name = "test";
-// $myObj->groupType   = "test";
-// //$myObj->adminEmail = "New York2";
-// //$myObj->lengthDays = "Project";
-// $myObj->type = "Resource";
-// $myObj->row = "U7";
-// $myObj->projectID = "16";
-// $myObj->add     = "X";
-//
-// $myJSON = json_encode($myObj);
-// $myJSON = json_decode($myJSON,true);
-// //storeResource($myJSON);
 
-//LoadProjects("alpha");
-
-function LoadProjects($user)
-{
-  $sql = "select id from project where adminEmail = '$user'";
-  $result = db_query($sql);
-  if($result) {
-    echo mysqli_fetch_row($result)[0];
-  } else {
-    $failure = (string)$sql;
-    header('HTTP/1.0 404 Not found: '.$failure);
-  }
-}
 
 function storeResource($arr)
 {
@@ -250,8 +239,11 @@ function storeResource($arr)
   }
 }
 
+
+
 function storeObject($object,$quiet)
  {
+
   $object = json_decode($object,true);
    switch ($object['type']) {
       case 'Project':
@@ -260,6 +252,10 @@ function storeObject($object,$quiet)
 
       case 'Resource':
         storeResource($object);
+      break;
+
+      case 'Task':
+        storeObjectGeneric($object,false);
       break;
 
       default:

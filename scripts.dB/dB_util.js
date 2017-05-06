@@ -20,14 +20,24 @@ function dB_storeSignUp(email, pass) {
 }
 
 function dB_loadProjects(user) {
-  $.post('scripts.dB/dB_util.php', {
+  console.log("userID:",user);
+  $.getJSON('scripts.dB/dB_util_JSON.php', {
     function: "loadProjects",
     username: user,
   }).done(function(data) {
+      console.log("projectID:",data);
+      data =  data[0];
+      cal.project.id             = data.id;
+      cal.project.name           = data.name;
+      cal.project.adminEmail     = data.adminEmail;
+      cal.project.lengthDays     = data.lengthDays;
+      cal.project.startDate      = new Date(Date.parse(data.startDate));
+      cal.project.stopDate       = new Date(Date.parse(data.stopDate));
+      cal.project.categories     = data.categories;
+      cal.project.nextResourceID = data.nextResourceID;
+      cal.project.nextTaskID     = data.nextTaskID;
 
-      cal.project.id = data;
-      // console.log("projectID",data);
-      dB_loadResources(data);
+      dB_loadResources(data.id);
 
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
@@ -36,7 +46,7 @@ function dB_loadProjects(user) {
 }
 
 function dB_loadResources(projIDToGet) {
-  console.log("projectIDToGet:",projIDToGet);
+
   $.getJSON('scripts.dB/dB_util_JSON.php', {
     function: "loadResources",
     project: projIDToGet
@@ -55,7 +65,27 @@ function dB_loadResources(projIDToGet) {
         cal.project.resources.push(toAdd);
       })
       cal.project.render_all_resources();
+      dB_loadTasks(projIDToGet);
 
+  }).fail(function(jqxhr, textStatus, error) {
+    var err = textStatus + ", " + error;
+    console.log("Request Failed: " + err);
+  });
+}
+
+function dB_loadTasks(projIDToGet) {
+  $.getJSON('scripts.dB/dB_util_JSON.php', {
+    function: "loadTasks",
+    project: projIDToGet
+  }).done(function(data) {
+  //  console.log("tasks",data);
+      $.each( data, function( key, value ) {
+        var resourceList = JSON.parse(value.resources);
+        var startDatetoAdd = new Date(Date.parse(value.startDate));
+        var endDatetoAdd = new Date(Date.parse(value.endDate));
+        var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,value.id);
+        toAdd.render();
+      })
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
@@ -113,8 +143,8 @@ function dB_verifyUser() {
 
 function dB_storeObject(object) {
   stringObject = JSON.stringify(object);
-  //console.log("object: ",object);
-  //console.log("stringObject: ",stringObject);
+  // console.log("object: ",object);
+  // console.log("stringObject: ",stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "storeObject",
@@ -125,7 +155,12 @@ function dB_storeObject(object) {
       case "Resource":
         $("#row_"+object.id).attr("id","row_"+data);
         $("#"+object.id).attr("id",data);
-        object.id = Number(data);
+        // object.id = Number(data);
+      break;
+
+      case "Task":
+        $("#task_"+object.id).attr("id","task_"+data);
+        // object.id = Number(data);
       break;
 
   default:
@@ -156,7 +191,7 @@ function dB_deleteObject(object) {
 
 function dB_updateObject(object) {
   stringObject = JSON.stringify(object);
-  console.log("object: " + stringObject);
+  // console.log("object: " + stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "updateObject",
@@ -191,7 +226,7 @@ function dB_updateObject(object) {
 // ----------------------- DEPRECATED ------------------------------------------
 function dB_builObjectTable(object) {
   stringObject = JSON.stringify(object);
-  console.log("object: " + stringObject);
+  // console.log("object: " + stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "builObjectTable",

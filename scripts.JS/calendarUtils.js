@@ -153,11 +153,12 @@ Calendar.prototype._create_empty_task_row = function(resID) {
 Calendar.prototype.create_resource = function (dropped,target,flag) {
   var droppedID = $(dropped).attr("id");
   dropped.removeClass("draggableClone");
-  var resourceObject  = cal._get_new_default_resource();
+  var newResource  = cal._get_new_default_resource();
   dropped.attr("id",cal._get_next_resourceID());
-  cal.project.resources.push(resourceObject);
+  cal.project.resources.push(newResource);
   updateResourceRows(target ,flag);
-  dB_storeObject(resourceObject);
+  dB_storeObject(newResource);
+  dB_updateObject(cal.project);
 };
 
 Calendar.prototype.create_task = function(cell, resID) {
@@ -174,7 +175,8 @@ Calendar.prototype.create_task = function(cell, resID) {
   var newTask = this.project.create_task(startDate, endDate, resID);
 
   //console.log("Task_prerender: ", newTask)
-
+  dB_storeObject(newTask);
+  dB_updateObject(cal.project);
   newTask.render();
 
 /*
