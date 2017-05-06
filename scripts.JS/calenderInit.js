@@ -12,9 +12,9 @@ $(document).ready(function(){
           var dropped = $(this).data().uiSortable.currentItem;
           $(dropped).css("width","auto");
           if ($(dropped).hasClass("draggableClone")) {
-            initiateNewResource(dropped,"availableResources","U");
+            cal.create_resource(dropped,"availableResources","U");
           } else {
-        //    updateResourceRows("availableResources","U");
+           updateResourceRows("availableResources","U");
           }
           if(ui.sender[0].id === "sortable") {
             // console.log("droppedid remove:",ui.item[0].id);
@@ -28,6 +28,7 @@ $(document).ready(function(){
     $( "#sortable" ).sortable({
         connectWith: "#availableResources",
         dropOnEmpty: true,
+        cursor: "move",
         stop: function(event, ui) {
           updateResourceRows("sortable","A");
         },
@@ -36,9 +37,9 @@ $(document).ready(function(){
           $(dropped).css("width","auto");
 
           if ($(dropped).hasClass("draggableClone")) {
-            initiateNewResource(dropped,"sortable","A");
+            cal.create_resource(dropped,"sortable","A");
           } else {
-          //  updateResourceRows("sortable","A");
+            updateResourceRows("sortable","A");
           }
           var droppedID = $(dropped).attr("id");
           if(ui.sender[0].id === "availableResources") droppedID = ui.item[0].id;
@@ -108,44 +109,6 @@ $(document).ready(function(){
       hideResourceBar();
     });
 
-
-  /*   $( "#sortable" ).sortable({
-      revert: true
-    });*/
-  //  $("#availableResources").sortable({
-  //     connectWith: ".connectedSortable",
-  //     forcePlaceholderSize: false
-  //   });
-
-  //
-
-  //
-    // $(".draggableClone").on("dragstart", function(event, ui){
-    //   $(".draggableClone").draggable({
-    //     //connectToSortable: "#tabs",
-    //     helper: function (event) {
-    //
-    //     },
-    //     revert: "invalid"
-    //   })
-    // })
-  //
-  //     $(".draggableClone").on("click", function(){
-  //     });
-  //   });
-  //
-  //
-  // /*  $(".connectedSortable").sortable({
-  //     receive: function(e, ui) {
-  //       copyHelper = null;
-  //     }
-  //   }); */
-  //
-  //   $("#draggable").draggable({
-  //     connectToSortable: "#sortable",
-  //     helper: "clone",
-  //     revert: "unvalid"
-  //   });
 
     $("ul, li").disableSelection();
 

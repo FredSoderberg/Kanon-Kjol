@@ -150,6 +150,16 @@ Calendar.prototype._create_empty_task_row = function(resID) {
   $("#row_" + resID).children('div:first').html(resID);
 };
 
+Calendar.prototype.create_resource = function (dropped,target,flag) {
+  var droppedID = $(dropped).attr("id");
+  dropped.removeClass("draggableClone");
+  var resourceObject  = cal._get_new_default_resource();
+  dropped.attr("id",cal._get_next_resourceID());
+  cal.project.resources.push(resourceObject);
+  updateResourceRows(target ,flag);
+  dB_storeObject(resourceObject);
+};
+
 Calendar.prototype.create_task = function(cell, resID) {
   //console.log("create task cell pos:", cell.position())
   var pos = cell.offset();

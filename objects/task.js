@@ -1,12 +1,13 @@
 function Task(startDate, endDate, resID, taskID) {
-
+  this.id = taskID;
+  this.name = "Task: " + taskID;
   this.startDate = startDate;
   this.endDate = endDate;
+  this.parentProject = cal.project.id;
   this.resources = [resID];
-  this.taskID = taskID;
-  this.startPos;
-  this.taskName = "Task: " + taskID;
+  this.type = "task";
 
+  this.startPos;
   this.startSize = {
     height: 0,
     width: 0
@@ -20,7 +21,7 @@ Task.prototype.render = function() {
   //console.log("Task_render: ", this)
   //console.log("Index: ", $("#"+this.resources[0]).index())
   //var amountOfDays =
-  var html = "<div id='task_" + this.taskID +"'"+
+  var html = "<div id='task_" + this.id +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
                   "style='width : " + (config.dateHeaderWidth * (this.endDate.getDate() - this.startDate.getDate() + 1) - 6)+"px;"+
@@ -35,10 +36,10 @@ Task.prototype.render = function() {
 };
 
 function updateInnerHtml(task){
-  var html = "Name:"+task.taskName+"</br>"+
+  var html = "Name:"+task.name+"</br>"+
           "Date:"+dateString(task.startDate)+"-"+dateString(task.endDate)+"</br>"+
           "Resources:"+task.resources;
-  $("#task_"+task.taskID).html(html);
+  $("#task_"+task.id).html(html);
 }
 function dateString(date){
   var dateString = date.getMonthName()+"/"+date.getDate();

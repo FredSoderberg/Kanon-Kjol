@@ -45,16 +45,6 @@ function hideCookieSquare () {
   $("#cookieSquare").toggleClass("hidden", 750).promise().done();
 }
 
-function initiateNewResource(dropped,target,flag) {
-  var droppedID = $(dropped).attr("id");
-  dropped.removeClass("draggableClone");
-  var resourceObject  = cal._get_new_default_resource();
-  dropped.attr("id",cal._get_next_resourceID());
-  cal.project.resources.push(resourceObject);
-  updateResourceRows(target ,flag);
-  dB_storeObject(resourceObject);
-}
-
 function updateResourceRows (target,flag) {
   $("#"+target).children().each(function(index,item) {
   //  console.log(item.id,":",flag+index);

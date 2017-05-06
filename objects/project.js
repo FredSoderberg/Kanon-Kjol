@@ -7,7 +7,7 @@ function Project(name, lengthDays, adminEmail) {
   this.stopDate = new Date();
   this.categories = "";
   this.nextResourceID = -1;
-  this.taskID = 1;
+  this.nextTaskID = -1;
   this.type = "Project"; //obejct must "end" with type
 
   //below is DB associative tables - these objects save themselves in DB and when a prject is built from db theese are populated.
@@ -36,9 +36,10 @@ Project.prototype.init_test = function() {
 
 Project.prototype.create_task = function(startDate, endDate, resID) {
   //console.log("Projekt_createTask:", this)
-  var task = new Task(startDate, endDate, resID, this.taskID);
+  var task = new Task(startDate, endDate, resID, this.nextTaskID);
   this.tasks.push(task);
-  this.taskID++;
+  
+  this.nextTaskID--;
   return task;
 }
 
@@ -56,7 +57,7 @@ Project.prototype.get_task_by_id = function (taskID) {
 
   for (var task in this.tasks) {
     //console.log(this.tasks[task].taskID)
-    if (this.tasks[task].taskID === taskID) {
+    if (this.tasks[task].id === taskID) {
       return this.tasks[task];
     }
   }

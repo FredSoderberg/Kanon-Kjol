@@ -89,7 +89,7 @@ div.calendar_cover{
 }
 
 #sortable {
-  min-height: 450px !important;
+  min-height: 450px;
   overflow: auto;
 }
 
@@ -99,6 +99,10 @@ div.calendar_cover{
   min-height: 420px;
   max-height: 420px;
 }
+
+/*div.ui-sortable-helper {
+  z-index: 9999 !important;
+}*/
 
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
@@ -261,6 +265,7 @@ div .add_cell, .head_cell {
 
 div .resource_row {
   background-color: #aabacb;
+
   /*border-top: 1px solid #cccccc;*/
 
   text-align: center;
@@ -275,6 +280,10 @@ div .resource_row_odd {
 
 div .remove_cell, .resource_cell {
   background-color: #eee;
+  box-shadow: inset 1px 1px 1px 1px #fff;
+  /*background-image: linear-gradient(to top, #aaa, #fff);*/
+
+
   /*border: 1px solid black;*/
   border-right: 1px solid #aaa;
   border-top: 1px solid #aaa;
