@@ -54,14 +54,15 @@ $at.click(function() {
   var $newTask = $(newTask.render_task_storage());
 
   //console.log($grid);
-  //$grid.append($newTask).packery('appended', $newTask);
+  $grid.append($newTask).packery('appended', $newTask);
 
-  $grid.addItems( $newTask).packery('addItems', $newTask);
+  //$grid.packery('addItems', $newTask);
   $grid.packery('fit', $newTask, (config.dateHeaderWidth * newTask.calculate_days()), 0)
 
   $newTask.draggable();
   $grid.packery( 'bindUIDraggableEvents', $newTask );
 
+  updateInnerHtml(newTask);
 
 
   });
@@ -74,10 +75,19 @@ $at.click(function() {
 $(".task_view_rows").droppable({
   accept: '.grid-item',
   drop: function(event, ui){
-    console.log("dropped at row")
+    console.log("dropped at row",  ui)
     var $clone = ui.draggable.clone();
     //console.log(ui.draggable.attr("id"));
+    console.log("elemnt at pos", document.elementFromPoint(ui.offset.left, ui.offset.top));
+    var $targetCell = $(document.elementFromPoint(ui.offset.left, ui.offset.top));
+
+
+
+
+    console.log("clone pos",$targetCell.position(), $clone)
     $(this).parent().children().eq(2).append($clone);
+
+    $clone.css({top: $targetCell.position().top +"px", left: $targetCell.position().left + "px", position:'absolute'});
     $clone.removeClass('grid-item');
     /*
     $clone.removeClass();

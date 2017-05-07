@@ -7,7 +7,7 @@ function Task(startDate, endDate, resID, taskID, name) {
   }else{
     this.name = name;
   }
-  
+
   this.startDate = startDate;
   this.endDate = endDate;
 
@@ -70,6 +70,15 @@ function updateInnerHtml(task){
           "Resources:"+task.resources;
   $("#task_"+task.id).html(html);
 }
+function updateInnerHtml2(task){
+  var html = "Name:"+task.name+"</br>";
+  //+
+    //      "Date:"+dateString(task.startDate)+"-"+dateString(task.endDate)+"</br>"+
+      //    "Resources:"+task.resources;
+  $("#task_"+task.id).html(html);
+}
+
+
 function dateString(date){
   var dateString = date.getMonthName()+"/"+date.getDate();
 
