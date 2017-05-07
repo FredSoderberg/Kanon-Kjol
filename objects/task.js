@@ -7,7 +7,7 @@ function Task(startDate, endDate, resID, taskID) {
   this.resources = resID;
   this.type = "Task";
 
-  this.startPos;
+  this.startPos = "";
   this.startSize = {
     height: 0,
     width: 0
@@ -81,6 +81,9 @@ $(".task_view_bars").on('resizestop', function(event, ui) {
 
   set_resources(task, shiftResources, 0);
   updateInnerHtml(task);
+
+  console.log("update:resizestop");
+  dB_updateObject(task);
 })
 
 
@@ -98,6 +101,8 @@ $(".task_view_bars").on('dragstop', function(event, ui) {
 
   var id = Number(event.target.id.replace("task_", ""));
   var task = cal.project.get_task_by_id(id);
+
+
 
   var taskHeight = $("#" + event.target.id).height();
   var taskWidth = $("#" + event.target.id).width();
@@ -121,18 +126,17 @@ $(".task_view_bars").on('dragstop', function(event, ui) {
   //console.log("Task:", task, "Res:", shiftResources, diffTop)
   set_resources(task, 0, diffTop);
   updateInnerHtml(task);
+
+  dB_updateObject(task);
 })
 
 $(".task_view_bars").on('dragstart', function(event, ui) {
   //$('#key').html("");
   var id = Number(event.target.id.replace("task_", ""));
   var task = cal.project.get_task_by_id(id);
-
   task.startPos = $("#" + event.target.id).position();
-
   //console.log("startPos:", task.startPos)
-
-})
+  })
 });
 
 function set_resources(task, shiftResources, shiftTop){

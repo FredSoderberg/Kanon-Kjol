@@ -56,7 +56,7 @@ Project.prototype.get_task_by_resource = function(resID){
 Project.prototype.get_task_by_id = function (taskID) {
 
   for (var task in this.tasks) {
-    //console.log(this.tasks[task].taskID)
+    // console.log(this.tasks[task].id)
     if (this.tasks[task].id === taskID) {
       return this.tasks[task];
     }

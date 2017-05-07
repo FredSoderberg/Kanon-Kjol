@@ -78,7 +78,10 @@ $(document).ready(function(){
     //$(this).draggable("disable");
     $(this).draggable({
       stop: function(event, ui) {
-        $(this).draggable('destroy');
+        // console.log("taskModeved",this);
+        // console.log("taskModeved",cal.project.get_task_by_element([this]));
+        
+       $(this).draggable('destroy'); // why??
       },
       grid: [ config.dateHeaderWidth , config.rowHeight ],
       containment: ".task_view_rows",

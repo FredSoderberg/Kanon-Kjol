@@ -19,6 +19,8 @@ function dB_storeSignUp(email, pass) {
     });
 }
 
+
+
 function dB_loadProjects(user) {
   console.log("userID:",user);
   $.getJSON('scripts.dB/dB_util_JSON.php', {
@@ -27,7 +29,7 @@ function dB_loadProjects(user) {
   }).done(function(data) {
       console.log("projectID:",data);
       data =  data[0];
-      cal.project.id             = data.id;
+      cal.project.id             = Number(data.id);
       cal.project.name           = data.name;
       cal.project.adminEmail     = data.adminEmail;
       cal.project.lengthDays     = data.lengthDays;
@@ -56,7 +58,7 @@ function dB_loadResources(projIDToGet) {
     // console.log("resurser",data);
         $.each( data, function( key, value ) {
         var toAdd = new Resource (
-        value['id'],
+        Number(value['id']),
         value['name'],
         value['groupType']);
         toAdd.row = value['rowNumber'];
@@ -83,9 +85,11 @@ function dB_loadTasks(projIDToGet) {
         var resourceList = JSON.parse(value.resources);
         var startDatetoAdd = new Date(Date.parse(value.startDate));
         var endDatetoAdd = new Date(Date.parse(value.endDate));
-        var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,value.id);
+        var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,Number(value.id));
+        cal.project.tasks.push(toAdd)
         toAdd.render();
       })
+      $('#loading').hide();
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);

@@ -41,10 +41,6 @@ function showResourceBar () {
   $("#resourceSidebar").toggleClass("hidden", 750);
 }
 
-function hideCookieSquare () {
-  $("#cookieSquare").toggleClass("hidden", 750).promise().done();
-}
-
 function updateResourceRows (target,flag) {
   $("#"+target).children().each(function(index,item) {
   //  console.log(item.id,":",flag+index);

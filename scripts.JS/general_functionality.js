@@ -94,8 +94,12 @@ function checkLoginCookie(init) {
 
 function checkAcceptCookie(){
   var accept = getCookie("cookieApproval");
-  if (accept === "true"){
-    hideCookieSquare();
+  if (accept !== "true"){
+    addCookieDiv();
+    $("#cookieAccept").click(function(event) {
+      $("#cookieSquare").toggle("fade");
+      setCookie("cookieApproval", "true", 7);
+    });
   }
 }
 
@@ -128,7 +132,7 @@ function recaptchaCallback() {
 
 
 function addCookieDiv(){
-var cookieDiv =  "<div id='toHide'><div id='cookieSquare' class='cookieWarning w3-display-bottommiddle'><h4>This site uses cookies for automatical sign in.</h4><a id='cookieAccept'  class='w3-display-bottommiddle w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4 w3-margin-right'>I understand</a></div></div>"
+var cookieDiv =  "<div id='cookieSquare' class='cookieWarning w3-display-bottommiddle'><h4>This site uses cookies for automatical sign in.</h4><a id='cookieAccept'  class='w3-display-bottommiddle w3-margin-bottom w3-button backgroundColor w3-hover-grey w3-large w3-round-large w3-panel w3-border w3-border-black w3-card-4 w3-margin-right'>I understand</a></div>"
 
 $(cookieDiv).appendTo("body");
 

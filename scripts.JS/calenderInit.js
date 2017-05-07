@@ -1,5 +1,6 @@
 $(document).ready(function(){
-
+        $('#loading').show();
+    
     $("#availableResources").sortable({
         connectWith: "#sortable",
         scroll: true,
@@ -110,7 +111,7 @@ $(document).ready(function(){
     });
 
 
-    $("ul, li").disableSelection();
+    $("ul, li,div").disableSelection();
 
 //-------- TABS!!!!!!!! ------------------------//
 

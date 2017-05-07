@@ -110,14 +110,11 @@ function updateObject($object) {
     case 'Resource':
         updateGeneral($arr);
         updateResProjRelation($arr);
-      break;
+    break;
 
-      case 'Project':
-        updateGeneral($arr);
-      break;
     default:
-      # code...
-      break;
+      updateGeneral($arr);
+    break;
   }
 }
 
@@ -140,7 +137,18 @@ function updateGeneral($arr) {
   $sql = "update ".$arr["type"]." SET ";
   foreach ($arr as $key => $value) {
 
-    if($key != "id" && $key != "type")$sql .= $key." = '".$value."'";
+    if($key != "id" && $key != "type" && !is_array($value))$sql .= $key." = '".$value."'";
+
+
+    if(is_array($value)) {
+      $sql .= $key." = '[";
+      foreach ($value as $value2) {
+        $sql .= $value2.", ";
+      }
+      $sql = substr($sql,0,-2);
+      $sql .= "]'" ;
+    }
+
     if($key != "id" && $key != "type") $sql .= ", ";
     if ($key == "type") { break;}
   }

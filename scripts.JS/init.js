@@ -1,11 +1,8 @@
 $(function() {
 
-  addCookieDiv();
 
-  $("#cookieAccept").click(function(event) {
-    hideCookieSquare();
-    setCookie("cookieApproval", "true", 7);
-  });
+
+
 
   checkAcceptCookie();
 
