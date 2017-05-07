@@ -265,7 +265,7 @@ function handleX(thisTaskID, parentTaskID){
   //console.log("HandleX:", thisTaskID, parentTaskID, pos, movedTaskLeft, width);
   //console.log("Diff:", diff," diffdays: ", diffDays, "Left:", (config.dateHeaderWidth * diffDays));
 
-
+  //dB_updateObject(cal.project.get_task_by_id(currTaskID)); insert when dates work
   $("#"+currTaskID).animate({
     left: pos + (config.dateHeaderWidth * diffDays)},
     50, function (){
@@ -279,5 +279,6 @@ function handleX(thisTaskID, parentTaskID){
       }
       handleY(thisTaskID, parentTaskID, overlappingTasks);
     })
+
     return true
 }
