@@ -89,7 +89,7 @@ Calendar.prototype._init_html_area = function(node){
   "<div id='g2' class='grid-item'></div>"+
   "<div id='g3' class='grid-item'></div>"+
   "<div id='task_4' class='task_bar' style='width: 76px; height: 26px'></div>";;
-$("#task_storage").html(html);
+  //$("#task_storage").html(html);
 
   this.divResourceViewHeader = this.divResourceView.childNodes[0];
   this.divResourceViewData   = this.divResourceView.childNodes[1];

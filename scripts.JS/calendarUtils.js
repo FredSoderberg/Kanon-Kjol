@@ -161,6 +161,16 @@ Calendar.prototype.create_resource = function (dropped,target,flag) {
   dB_updateObject(cal.project);
 };
 
+Calendar.prototype.create_task_for_storage = function(name, startTime, endTime){
+  if (startTime === undefined) startTime = new Date(this.project.startDate.getTime());
+  if (endTime   === undefined) endTime   = new Date(this.project.startDate.getTime()+(1*24*60*60*1000));
+
+  return this.project.create_task(startTime, endTime, 0, name);
+
+}
+
+
+
 Calendar.prototype.create_task = function(cell, resID) {
   //console.log("create task cell pos:", cell.position())
   var pos = cell.offset();

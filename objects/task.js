@@ -1,8 +1,16 @@
-function Task(startDate, endDate, resID, taskID) {
+function Task(startDate, endDate, resID, taskID, name) {
   this.id = taskID;
-  this.name = "Task: " + taskID;
+  this.name = "";
+
+  if (name === undefined){
+    this.name = "Task: " + taskID;
+  }else{
+    this.name = name;
+  }
+
   this.startDate = startDate;
   this.endDate = endDate;
+
   this.parentProject = cal.project.id;
   this.resources = resID;
   this.type = "Task";
@@ -15,7 +23,6 @@ function Task(startDate, endDate, resID, taskID) {
   //this.startSize.height = 0;
   //this.startSize.width = 0;
 }
-
 
 Task.prototype.render = function() {
   var timeDiff = Math.abs(this.endDate.getTime() - this.startDate.getTime());
@@ -36,6 +43,26 @@ Task.prototype.render = function() {
   cal.divTaskViewBars.innerHTML += html;
   updateInnerHtml(this);
 };
+Task.prototype.render_task_storage = function() {
+  var timeDiff = Math.abs(this.endDate.getTime() - this.startDate.getTime());
+  var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  //console.log("Task_render: ", this)
+  //console.log("Index: ", $("#"+this.resources[0]).index())
+  //var amountOfDays =
+  var html = "<div id='task_" + this.id +"'"+
+                  "res='" + this.resources[0] +
+                  "'class='task_bar grid-item' "+
+                  "style='width : " + (config.dateHeaderWidth * (diffDays + 1) - 6)+"px;"+
+                        "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
+                           "left: " + (config.dateHeaderWidth * this.calculate_days() + 3)+"px;"+
+                           "top: " + (config.rowHeight * ($("#"+this.resources[0]).index()) + 3)+"px'>";
+
+  html += "</div>";
+
+
+  updateInnerHtml(this);
+  return html;
+};
 
 function updateInnerHtml(task){
   var html = "Name:"+task.name+"</br>"+
@@ -43,6 +70,15 @@ function updateInnerHtml(task){
           "Resources:"+task.resources;
   $("#task_"+task.id).html(html);
 }
+function updateInnerHtml2(task){
+  var html = "Name:"+task.name+"</br>";
+  //+
+    //      "Date:"+dateString(task.startDate)+"-"+dateString(task.endDate)+"</br>"+
+      //    "Resources:"+task.resources;
+  $("#task_"+task.id).html(html);
+}
+
+
 function dateString(date){
   var dateString = date.getMonthName()+"/"+date.getDate();
 

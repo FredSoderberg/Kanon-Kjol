@@ -6,7 +6,8 @@ $(function (){
 var $grid = $('.grid').packery({
   itemSelector: '.grid-item, .task_bar',
   // columnWidth helps with drop positioning
-  columnWidth: 40
+  columnWidth: config.dateHeaderWidth,
+  gutter: 1
 });
 
 // make all items draggable
@@ -40,16 +41,54 @@ $st.click(function() {
         $grid.addClass('slide-up', 1000, 'easeOutBounce');
       }
   });
+var $at = $('#add_to_storage');
+$at.click(function() {
+    //console.log("clicked");
+  //console.log($st)
+  //console.log($grid)
+  var newTask = cal.create_task_for_storage(
+    $("#task_name").val(),
+    new Date($("#task_startDate").val()),
+    new Date($("#task_endDate").val()));
 
-$grid.on('drag')
+  var $newTask = $(newTask.render_task_storage());
+
+  //console.log($grid);
+  $grid.append($newTask).packery('appended', $newTask);
+
+  //$grid.packery('addItems', $newTask);
+  $grid.packery('fit', $newTask, (config.dateHeaderWidth * newTask.calculate_days()), 0)
+
+  $newTask.draggable();
+  $grid.packery( 'bindUIDraggableEvents', $newTask );
+
+  updateInnerHtml(newTask);
+
+
+  });
+
+
+
+
+//$grid.on('drag')
 
 $(".task_view_rows").droppable({
-  accept: '.grid-item, .task_bar',
+  accept: '.grid-item',
   drop: function(event, ui){
-    console.log("dropped at row")
+    console.log("dropped at row",  ui)
     var $clone = ui.draggable.clone();
     //console.log(ui.draggable.attr("id"));
+    console.log("elemnt at pos", document.elementFromPoint(ui.offset.left, ui.offset.top));
+    var $targetCell = $(document.elementFromPoint(ui.offset.left, ui.offset.top));
+
+
+
+
+    console.log("clone pos",$targetCell.position(), $clone)
     $(this).parent().children().eq(2).append($clone);
+
+    $clone.css({top: $targetCell.position().top +"px", left: $targetCell.position().left + "px", position:'absolute'});
+    $clone.removeClass('grid-item');
     /*
     $clone.removeClass();
     $clone.addClass("task_bar");
