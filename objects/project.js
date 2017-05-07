@@ -34,9 +34,9 @@ Project.prototype.init_test = function() {
 
 }
 
-Project.prototype.create_task = function(startDate, endDate, resID) {
+Project.prototype.create_task = function(startDate, endDate, resID, name) {
   //console.log("Projekt_createTask:", this)
-  var task = new Task(startDate, endDate, [resID], this.nextTaskID);
+  var task = new Task(startDate, endDate, [resID], this.nextTaskID, name);
   this.tasks.push(task);
 
   this.nextTaskID--;

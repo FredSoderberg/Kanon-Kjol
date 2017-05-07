@@ -141,8 +141,28 @@
   </script>
 
   <button id="storage_toggle">Task storage</button>
+
+  <fieldset>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
+    <label for="startDate">startDate</label>
+    <input type="text" name="startDate" id="task_startDate" value="" class="text ui-widget-content ui-corner-all">
+    <label for="endDate">endDate</label>
+    <input type="text" name="startDate" id="task_endDate" value="" class="text ui-widget-content ui-corner-all">
+
+    <!-- Allow form submission with keyboard without duplicating the dialog button
+  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
+  </fieldset>
+  <button id="add_to_storage">Add Task to Storage</button>
   </body>
 
+<script>
+  $("#task_name").val("Koda");
+  $("#task_startDate").val(cal.project.startDate);
+  var d = new Date(cal.project.startDate);
+  d.setDate(d.getDate() + 1);
+  $("#task_endDate").val(d);
+</script>
 
 
 </html>

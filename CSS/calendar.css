@@ -14,7 +14,7 @@ Grid items for unassigned tasks
 
 .slide-down
 {
-    top: -200px !important;
+    top: -76px !important;
 }
 
 
@@ -28,7 +28,6 @@ Grid items for unassigned tasks
   max-width: 1200px;
   position: relative;
   height: 200px;
-
 }
 
 /* clear fix */
@@ -42,8 +41,9 @@ Grid items for unassigned tasks
 
 .grid-item {
   float: left;
-  width: 40px;
-  height: 30px;
+  /*width: 40px;
+  /*height: 30px;
+  */
   background: #C09;
   border: 2px solid hsla(0, 0%, 0%, 0.5);
 }
@@ -88,21 +88,8 @@ div.calendar_cover{
   height: 100%;
 }
 
-#sortable {
-  min-height: 450px;
-  overflow: auto;
-}
-
-#availableResources {
-  /*padding-bottom: 420px  !important;*/
-  overflow: auto;
-  min-height: 420px;
-  max-height: 420px;
-}
-
-/*div.ui-sortable-helper {
-  z-index: 9999 !important;
-}*/
+#sortable {padding-bottom: 1000px !important;}
+#availableResources {padding-bottom: 1000px  !important;}
 
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
@@ -265,7 +252,6 @@ div .add_cell, .head_cell {
 
 div .resource_row {
   background-color: #aabacb;
-
   /*border-top: 1px solid #cccccc;*/
 
   text-align: center;
@@ -280,10 +266,6 @@ div .resource_row_odd {
 
 div .remove_cell, .resource_cell {
   background-color: #eee;
-  box-shadow: inset 1px 1px 1px 1px #fff;
-  /*background-image: linear-gradient(to top, #aaa, #fff);*/
-
-
   /*border: 1px solid black;*/
   border-right: 1px solid #aaa;
   border-top: 1px solid #aaa;
