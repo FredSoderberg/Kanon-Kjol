@@ -272,8 +272,15 @@ function handleX(thisTaskID, parentTaskID) {
     left: pos + (config.dateHeaderWidth * diffDays)},
     50).promise().done(function ()
     {
+      var currTaskObject = cal.project.get_task_by_id(Number(currTaskID.replace("task_", "")));
+      currTaskObject.startDate.add("d",diffDays);
+      currTaskObject.endDate.add("d",diffDays);
+      updateInnerHtml(currTaskObject);
+      dB_updateObject(currTaskObject)
+
       var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
       overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
+
       if(overlappingTasks.length <= 0){
         return true;
       }
