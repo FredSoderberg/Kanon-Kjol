@@ -65,72 +65,110 @@ $(document).ready(function(){
     $('.resource_view').scrollTop($(this).scrollTop());
   });
 
-  $('.task_view_bars').on('mouseout', '.ui-resizable-handle',function () {
-    //console.log($(this).scrollTop())
-    //alert("mouseover");
-    //$(this).draggable("disable");
-    //$(this).parent().resizable('destroy');
 
+function removeDragRez(id) {
+  console.log("destroys:","#"+id);
+    $("#"+id).draggable('destroy');
+    $("#"+id).resizable('destroy');
+    $("#"+id).removeClass("task_bar_resize");
+  }
+
+function addDragRez(id) {
+    console.log("creates:","#"+id);
+
+  $("#"+id).addClass("task_bar_resize");
+
+  $("#"+id).resizable({
+    grid: [ config.dateHeaderWidth , config.rowHeight ],
+    containment: ".task_view_rows",
+    start: function (e) {
+      // console.log("e",e);
+      mouseEngaged = 1;
+      createTouchBlock()
+      moveHandler(e);
+      $('body').mousemove(moveHandler);
+    },
+    stop: function(){
+      mouseEngaged = 0;
+      $('body').unbind('mousemove', moveHandler);
+      $('#sliderBlock').remove();
+
+    }
+
+   });
+
+  $("#"+id).draggable({
+    grid: [ config.dateHeaderWidth , config.rowHeight ],
+    containment: ".task_view_rows",
+    stack: ".task_bar",
+    start: function (e) {
+
+      createTouchBlock()
+      moveHandler(e);
+      $('body').mousemove(moveHandler);
+    },
+    stop: function(){
+        $('body').unbind('mousemove', moveHandler);
+        $('#sliderBlock').remove();
+    }
+    })
+}
+
+var mouseEngaged = 0;
+var debug = true;
+var createTouchBlock = function() {
+      $('<div id="sliderBlock"/>').css({position:'absolute',zIndex:1000000,width:50, height: 50, background:(debug?'#090':'transparent')}).appendTo('body');
+}
+var moveHandler = function(e) {
+    $('#sliderBlock').css({left:e.pageX-20, top:e.pageY-20});
+};
+
+
+
+
+
+
+  $('.task_view_bars').mouseleave( function (event) {
+    if(mouseEngaged == 0) {
+    if (!$(event.target).hasClass("ui-resizable-handle")) {
+      if ($(event.target).hasClass("task_bar_resize")) {
+        removeDragRez(event.target.id);
+        console.log("lämngar1:",event.target.id);
+      }
+    } else {
+
+     console.log("lämngar2:",$(event.target).parent()[0].id);
+      removeDragRez($(event.target).parent()[0].id);
+    }
+  }
   });
-  $('.task_view_bars').on('mouseover', '.task_bar',function () {
-    //console.log($(this).scrollTop())
-    //alert("mouseover");
-    //$(this).draggable("disable");
-    $(this).draggable({
-      stop: function(event, ui) {
-        // console.log("taskModeved",this);
-        // console.log("taskModeved",cal.project.get_task_by_element([this]));
-
-       $(this).draggable('destroy'); // why??
-      },
-      grid: [ config.dateHeaderWidth , config.rowHeight ],
-      containment: ".task_view_rows",
-      stack: ".task_bar",
-      //obstacle: ".task_bar_obs",
-      //preventCollision: true,
-      /*
-      drag: function( event, ui ) {
-
-      // Sizeof task height made from amount of resources
-      // stop position at bottom with Math.min
-
-      //console.log(ui.helper)
-      var rows = cal.divResourceViewData.children.length;
-      ui.position.left = Math.max( 2, ui.position.left );
-      ui.position.top = Math.max( 3,
-
-         Math.min((ui.position.top+(cal.project.get_task_by_element(ui.helper).resources.length*config.rowHeight)), (config.rowHeight*(rows-1)+3)));
 
 
-      //console.log("max :", (config.rowHeight*(rows-1)+3))
-      //console.log("min :", rows);*/
 
-      revert: function( event, ui ){
 
-        return false;
-        }
-      }).resizable({ grid: [ config.dateHeaderWidth , config.rowHeight ],
-        start: function(event, ui){
-          $(this).addClass("task_bar_resize");
-        },
-        stop: function(event, ui) {
-          $(this).removeClass("task_bar_resize");
-          $(this).resizable('destroy');
-        },
-        containment: ".task_view_rows",
-        disabled: false
-        /*
-        resize: function(event,ui){
-        var rows = cal.divResourceViewData.children.length;
-        console.log("ui size:", ui.size.height)
-        ui.position.left = Math.max( 2, ui.position.left );
-        ui.size.height = Math.max( 24,
 
-           Math.min((ui.size.height - ui.position.top + 3), (config.rowHeight*(rows)-6)));
-           */
-       });
+  $('.task_view_bars').mouseenter(function (event) {
 
+    if (!$(event.target).hasClass("ui-resizable-handle")) {
+      console.log("över:",event.target.id );
+      if($(event.target).hasClass("task_bar_resize")) {
+        removeDragRez(event.target.id);
+      }
+      addDragRez(event.target.id);
+    }
   });
+
+
+
+
+
+
+
+
+
+
+
+
   $('.task_view_bars').on('drag', '.task_bar',function () {
     //console.log($(this).scrollTop())
     //alert("mouseover");

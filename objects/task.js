@@ -124,10 +124,12 @@ $(".task_view_bars").on('resizestop', function(event, ui) {
 
 
 $(".task_view_bars").on('resizestart', function(event, ui) {
+  console.log("resizestart");
   var id = Number(event.target.id.replace("task_", ""));
   //console.log("Task ID:", id)
   var task = cal.project.get_task_by_id(id);
-
+// console.log(task);
+// console.log(id);
   task.startSize.height = $("#" + event.target.id).height();
   task.startSize.width = $("#" + event.target.id).width();
 })
@@ -244,7 +246,7 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
   }
 }
 
-function handleX(thisTaskID, parentTaskID){
+function handleX(thisTaskID, parentTaskID) {
 
   var currTaskID = thisTaskID;
   var movedTaskLeft = $("#"+parentTaskID).position().left;
@@ -268,10 +270,8 @@ function handleX(thisTaskID, parentTaskID){
   //dB_updateObject(cal.project.get_task_by_id(currTaskID)); insert when dates work
   $("#"+currTaskID).animate({
     left: pos + (config.dateHeaderWidth * diffDays)},
-    50, function (){
-
-
-
+    50).promise().done(function ()
+    {
       var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
       overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
       if(overlappingTasks.length <= 0){
@@ -279,6 +279,5 @@ function handleX(thisTaskID, parentTaskID){
       }
       handleY(thisTaskID, parentTaskID, overlappingTasks);
     })
-
     return true
 }
