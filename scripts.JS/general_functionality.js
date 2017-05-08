@@ -139,6 +139,29 @@ $(cookieDiv).appendTo("body");
 }
 
 
-function deleteTarget(){
+function deleteTarget(objectID,type){
+  switch (type) {
+    case "Resource":
 
+      var toDeleteObject = cal.project.get_task_by_resource(objectID);
+      $.each(cal.project.get_task_by_resource(objectID), function (index,value) {
+        console.log(cal.project.get_task_by_id(value));
+        set_resources(cal.project.get_task_by_id(value),0,0)
+
+        
+        $("#"+objectID).remove();
+        $("#row_"+objectID).remove();
+      })
+
+      console.log(toDeleteObject);
+    break;
+
+    case "Task":
+      var toDeleteObject = cal.project.get_task_by_id(objectID);
+      console.log(toDeleteObject);
+    break;
+
+    default:
+  }
+console.log(objectID);
 }
