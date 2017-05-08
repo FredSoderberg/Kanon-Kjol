@@ -11,7 +11,7 @@ Calendar.prototype.init = function(whereToStart) {
 
   this._create_resource_headers();
   //this._load_resources();
-  this._create_date_headers();
+  
 
 
   //this._create_empty_task_rows();
@@ -118,6 +118,7 @@ Calendar.prototype._create_resources_cells = function(resource) {
 
 Calendar.prototype._create_date_headers = function() {
   var date = new Date(this.project.startDate.getTime());
+  console.log("Datumet:",date);
   var amount = this.project.lengthDays;
   var html = "";
 

@@ -124,10 +124,12 @@ $(".task_view_bars").on('resizestop', function(event, ui) {
 
 
 $(".task_view_bars").on('resizestart', function(event, ui) {
+  console.log("resizestart");
   var id = Number(event.target.id.replace("task_", ""));
   //console.log("Task ID:", id)
   var task = cal.project.get_task_by_id(id);
-
+// console.log(task);
+// console.log(id);
   task.startSize.height = $("#" + event.target.id).height();
   task.startSize.width = $("#" + event.target.id).width();
 })
@@ -244,7 +246,7 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
   }
 }
 
-function handleX(thisTaskID, parentTaskID){
+function handleX(thisTaskID, parentTaskID) {
 
   var currTaskID = thisTaskID;
   var movedTaskLeft = $("#"+parentTaskID).position().left;
@@ -268,17 +270,77 @@ function handleX(thisTaskID, parentTaskID){
   //dB_updateObject(cal.project.get_task_by_id(currTaskID)); insert when dates work
   $("#"+currTaskID).animate({
     left: pos + (config.dateHeaderWidth * diffDays)},
-    50, function (){
-
-
+    50).promise().done(function ()
+    {
+      var currTaskObject = cal.project.get_task_by_id(Number(currTaskID.replace("task_", "")));
+      currTaskObject.startDate.add("d",diffDays);
+      currTaskObject.endDate.add("d",diffDays);
+      updateInnerHtml(currTaskObject);
+      dB_updateObject(currTaskObject)
 
       var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
       overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
+
       if(overlappingTasks.length <= 0){
         return true;
       }
       handleY(thisTaskID, parentTaskID, overlappingTasks);
     })
-
     return true
 }
+
+function removeDragRez(id) {
+  // console.log("destroys:","#"+id);
+    $("#"+id).draggable('destroy');
+    $("#"+id).resizable('destroy');
+    $("#"+id).removeClass("task_bar_resize");
+  }
+
+function addDragRez(id) {
+    // console.log("creates:","#"+id);
+
+  $("#"+id).addClass("task_bar_resize");
+
+  $("#"+id).resizable({
+    grid: [ config.dateHeaderWidth , config.rowHeight ],
+    containment: ".task_view_rows",
+    start: function (e) {
+      // console.log("e",e);
+      mouseEngaged = 1;
+      createTouchBlock()
+      moveHandler(e);
+      $('body').mousemove(moveHandler);
+    },
+    stop: function(){
+      mouseEngaged = 0;
+      $('body').unbind('mousemove', moveHandler);
+      $('#sliderBlock').remove();
+      removeDragRez();
+    }
+   });
+
+  $("#"+id).draggable({
+    grid: [ config.dateHeaderWidth , config.rowHeight ],
+    containment: ".task_view_rows",
+    stack: ".task_bar",
+    start: function (e) {
+
+      createTouchBlock()
+      moveHandler(e);
+      $('body').mousemove(moveHandler);
+    },
+    stop: function(){
+        $('body').unbind('mousemove', moveHandler);
+        $('#sliderBlock').remove();
+    }
+    })
+}
+
+var mouseEngaged = 0;
+var debug = false; //visa träffytan!
+var createTouchBlock = function() {
+      $('<div id="sliderBlock"/>').css({position:'absolute',zIndex:1000000,width:50, height: 50, background:(debug?'#090':'transparent')}).appendTo('body');
+}
+var moveHandler = function(e) {
+    $('#sliderBlock').css({left:e.pageX-20, top:e.pageY-20});
+};

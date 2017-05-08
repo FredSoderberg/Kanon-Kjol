@@ -198,7 +198,10 @@ div .task_view_header{
    border: 1px solid #c0e0c0;
    border-radius: 3px;
    position: absolute;
-   font-size: 50%
+   font-size: 50%;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
 
  }
  div .task_bar:hover{
@@ -251,8 +254,12 @@ div .add_cell, .head_cell {
 
 
 div .resource_row {
+
   background-color: #aabacb;
   /*border-top: 1px solid #cccccc;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   text-align: center;
 }
@@ -280,6 +287,7 @@ div .non_removable_cell, .resource_cell {
   border-top: 1px solid #aaa;
   vertical-align: top;
   text-align: center;
+
 }
 
 div .task_head_cell {

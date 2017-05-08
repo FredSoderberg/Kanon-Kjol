@@ -56,6 +56,8 @@ function dB_loadProjects(user) {
       cal.project.nextResourceID = data.nextResourceID;
       cal.project.nextTaskID     = data.nextTaskID;
 
+      cal._create_date_headers();
+
       dB_loadResources(data.id);
 
   }).fail(function(jqxhr, textStatus, error) {
@@ -180,12 +182,13 @@ function dB_storeObject(object) {
       case "Resource":
         $("#row_"+object.id).attr("id","row_"+data);
         $("#"+object.id).attr("id",data);
-        // object.id = Number(data);
+        cal.project.get_resource_by_id(object.id).id = Number(data);
       break;
 
       case "Task":
         $("#task_"+object.id).attr("id","task_"+data);
-        // object.id = Number(data);
+        $("#task_"+object.id).attr("id","task_"+data);
+        cal.project.get_task_by_id(object.id).id = Number(data);
       break;
 
   default:

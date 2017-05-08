@@ -65,72 +65,29 @@ $(document).ready(function(){
     $('.resource_view').scrollTop($(this).scrollTop());
   });
 
-  $('.task_view_bars').on('mouseout', '.ui-resizable-handle',function () {
-    //console.log($(this).scrollTop())
-    //alert("mouseover");
-    //$(this).draggable("disable");
-    //$(this).parent().resizable('destroy');
-
+  $('.task_view_bars').mouseleave( function (event) {
+    if(mouseEngaged == 0) {
+    if (!$(event.target).hasClass("ui-resizable-handle") && $(event.target).hasClass("task_bar_resize")) {
+      removeDragRez(event.target.id);
+      // console.log("lämngar1:",event.target.id);
+    } else {
+    //  console.log("lämngar2:",$(event.target).parent()[0].id);
+      removeDragRez($(event.target).parent()[0].id);
+    }
+  }
   });
-  $('.task_view_bars').on('mouseover', '.task_bar',function () {
-    //console.log($(this).scrollTop())
-    //alert("mouseover");
-    //$(this).draggable("disable");
-    $(this).draggable({
-      stop: function(event, ui) {
-        // console.log("taskModeved",this);
-        // console.log("taskModeved",cal.project.get_task_by_element([this]));
 
-       $(this).draggable('destroy'); // why??
-      },
-      grid: [ config.dateHeaderWidth , config.rowHeight ],
-      containment: ".task_view_rows",
-      stack: ".task_bar",
-      //obstacle: ".task_bar_obs",
-      //preventCollision: true,
-      /*
-      drag: function( event, ui ) {
+  $('.task_view_bars').mouseenter(function (event) {
 
-      // Sizeof task height made from amount of resources
-      // stop position at bottom with Math.min
-
-      //console.log(ui.helper)
-      var rows = cal.divResourceViewData.children.length;
-      ui.position.left = Math.max( 2, ui.position.left );
-      ui.position.top = Math.max( 3,
-
-         Math.min((ui.position.top+(cal.project.get_task_by_element(ui.helper).resources.length*config.rowHeight)), (config.rowHeight*(rows-1)+3)));
-
-
-      //console.log("max :", (config.rowHeight*(rows-1)+3))
-      //console.log("min :", rows);*/
-
-      revert: function( event, ui ){
-
-        return false;
-        }
-      }).resizable({ grid: [ config.dateHeaderWidth , config.rowHeight ],
-        start: function(event, ui){
-          $(this).addClass("task_bar_resize");
-        },
-        stop: function(event, ui) {
-          $(this).removeClass("task_bar_resize");
-          $(this).resizable('destroy');
-        },
-        containment: ".task_view_rows",
-        disabled: false
-        /*
-        resize: function(event,ui){
-        var rows = cal.divResourceViewData.children.length;
-        console.log("ui size:", ui.size.height)
-        ui.position.left = Math.max( 2, ui.position.left );
-        ui.size.height = Math.max( 24,
-
-           Math.min((ui.size.height - ui.position.top + 3), (config.rowHeight*(rows)-6)));
-           */
-       });
-
+    if (!$(event.target).hasClass("ui-resizable-handle")) {
+      // console.log("över:",event.target.id );
+      if($(event.target).hasClass("task_bar_resize")) {
+        removeDragRez(event.target.id);
+      }
+      addDragRez(event.target.id);
+    }
   });
+
   $('.task_view_bars').on('drag', '.task_bar',function () {
     //console.log($(this).scrollTop())
     //alert("mouseover");
@@ -192,7 +149,7 @@ $(document).ready(function(){
   var taskDialogID = 0;
   function change_taskinfo(){
     var task = cal.project.get_task_by_id(taskDialogID);
-    task.taskName = $("#task_dialog_name").val();
+    task.name = $("#task_dialog_name").val();
     updateInnerHtml(task);
     taskDialog.dialog( "close" );
   }
@@ -200,7 +157,7 @@ $(document).ready(function(){
   $(document).on("dblclick", ".task_bar", function(event, ui){
     //console.log("Vem vet");
     taskDialogID = Number(event.target.id.replace("task_", ""));
-    $("#task_dialog_name").val(cal.project.get_task_by_id(taskDialogID).taskName);
+    $("#task_dialog_name").val(cal.project.get_task_by_id(taskDialogID).name);
     taskDialog.dialog("open");
   })
   //$( ".task_view_bars").on("draggable")
