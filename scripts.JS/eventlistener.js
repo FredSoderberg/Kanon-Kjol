@@ -274,6 +274,7 @@ $(document).on("dblclick", ".resource_row", function(event, ui){
   resourceDialogID = Number($(event.target).parent().attr("id"));
   console.log("resorceID", cal.project.get_resource_by_id(resourceDialogID));
   $("#resource_dialog_name").val(cal.project.get_resource_by_id(resourceDialogID).name);
+
   resourceDialog.dialog("open")
 })
 
