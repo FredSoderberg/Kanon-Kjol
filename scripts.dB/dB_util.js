@@ -56,6 +56,8 @@ function dB_loadProjects(user) {
       cal.project.nextResourceID = data.nextResourceID;
       cal.project.nextTaskID     = data.nextTaskID;
 
+      cal._create_date_headers();
+
       dB_loadResources(data.id);
 
   }).fail(function(jqxhr, textStatus, error) {

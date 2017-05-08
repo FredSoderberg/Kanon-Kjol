@@ -198,7 +198,10 @@ div .task_view_header{
    border: 1px solid #c0e0c0;
    border-radius: 3px;
    position: absolute;
-   font-size: 50%
+   font-size: 50%;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
 
  }
  div .task_bar:hover{
