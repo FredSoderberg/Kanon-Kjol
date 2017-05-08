@@ -121,6 +121,12 @@ function signInValid() {
     return false;
 }
 
+function wrongPwd() {
+  alert("Your username and password doesn't match, please try again!");
+  $("#mail1").addClass("one");
+  $("#pass").addClass("one");
+}
+
 function recaptchaCallback() {
     $('#signIn').removeAttr('disabled');
 };

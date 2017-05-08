@@ -148,14 +148,18 @@ function dB_verifyUser() {
     username: email,
     password: pass
   }).done(function(data) {
-  //  console.log("datan:" + data);
-    if ($("#rememberMe").is(":checked")) {
-      setCookie("rememberMe", "true", 7);
+    if(data === "wrong") {
+      wrongPwd();
     }
-    setCookie("username", email, 7);
-    setCookie("sessionID", data, 7);
-    window.location.replace("calendar.html");
-
+    else {
+      //  console.log("datan:" + data);
+      if ($("#rememberMe").is(":checked")) {
+        setCookie("rememberMe", "true", 7);
+      }
+      setCookie("username", email, 7);
+      setCookie("sessionID", data, 7);
+      window.location.replace("calendar.html");
+    }
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);
