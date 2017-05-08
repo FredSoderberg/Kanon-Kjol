@@ -59,9 +59,6 @@ body {
 }
 
 .cookieWarning {
-  background: linear-gradient(
-                     lightgrey,
-                     rgba(44, 45, 47, 0.50));
 width: 100%;
 height: 100px;
 background-color: grey;
@@ -71,7 +68,7 @@ box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
 }
 
 .hidden{
-    top:-200px;
+    top: -200px;
 }
 
 #signIn {

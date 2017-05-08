@@ -114,6 +114,13 @@ font-size: 18px;
 box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
 }
 
+.deleteButton {
+background-color: red !important;
+}
+
+.ui-button.redButton {
+    background-color: red;
+}
 
 #loading {
     width: 100%;

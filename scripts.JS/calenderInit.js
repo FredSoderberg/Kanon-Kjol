@@ -1,6 +1,6 @@
 $(document).ready(function(){
         $('#loading').show();
-    
+
     $("#availableResources").sortable({
         connectWith: "#sortable",
         scroll: true,
@@ -113,6 +113,18 @@ $(document).ready(function(){
 
     $("ul, li,div").disableSelection();
 
+    $("#delete").on("click",function(){
+
+confirmDelete();
+    });
+
+
+
+
+function confirmDelete(){
+  var confirmSquare = "<div id='dialog-confirm' title='Delete this object?'><p><span class='ui-icon ui-icon-alert' style='float:left; margin:12px 12px 20px 0;'></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p></div>"
+  $(confirmSquare).appendTo("resourceDialog");
+}
 //-------- TABS!!!!!!!! ------------------------//
 
     var tabTitle = $("#tab_title")
