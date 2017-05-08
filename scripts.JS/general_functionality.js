@@ -16,17 +16,17 @@ function checkSignUp() {
       alert("Fill in your confirmed password");
       $("#confpwd").addClass("one");
     } else {
-      if ($('#' + "administrator").is(":checked")) {
+      if (($('#' + "administrator").is(":checked")) && !($('#' + "employee").is(":checked"))) {
 
         return true;
 
-      } else if ($('#' + "employee").is(":checked")) {
+      } else if (($('#' + "employee").is(":checked")) && !($('#' + "administrator").is(":checked"))){
 
-        alert("NÖÖÖÖÖFF");
+        alert("Sorry, you can only register as an administrator for now.");
         //TODO Fixa vad som händer - som employeee
 
       } else {
-        alert("What position do you have?");
+        alert("What position do you have? You can only choose one option");
       }
 
     }
