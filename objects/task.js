@@ -217,7 +217,7 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
   //console.log("HandleY:", thisTaskID, parentTaskID, overlappingTasks);
   overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
 
-  /* TODO: FIXa ändring av datum och resurser
+  /*
   var endPos = $("#" + thisTaskID).position();
 
   var changePos = task.startPos;
@@ -249,6 +249,8 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
 function handleX(thisTaskID, parentTaskID) {
 
   var currTaskID = thisTaskID;
+  var currTaskObject = cal.project.get_task_by_id(Number(currTaskID.replace("task_", "")));
+  var parentTaskObejct = cal.project.get_task_by_id(Number(parentTaskID.replace("task_", "")));
   var movedTaskLeft = $("#"+parentTaskID).position().left;
   var width = $("#"+parentTaskID).width();
   var pos = $("#"+currTaskID).position().left;
@@ -264,29 +266,47 @@ function handleX(thisTaskID, parentTaskID) {
   }
 
   var diffDays = Math.round(diff/config.dateHeaderWidth);
-  //console.log("HandleX:", thisTaskID, parentTaskID, pos, movedTaskLeft, width);
+  var newTaskStartDate = new Date(currTaskObject.startDate).add("d",diffDays);
+  var timeTravel = (cal.project.startDate > newTaskStartDate);
+  if(timeTravel) console.log("Inan början");
+    //console.log("HandleX:", thisTaskID, parentTaskID, pos, movedTaskLeft, width);
   //console.log("Diff:", diff," diffdays: ", diffDays, "Left:", (config.dateHeaderWidth * diffDays));
 
   //dB_updateObject(cal.project.get_task_by_id(currTaskID)); insert when dates work
-  $("#"+currTaskID).animate({
-    left: pos + (config.dateHeaderWidth * diffDays)},
-    50).promise().done(function ()
-    {
-      var currTaskObject = cal.project.get_task_by_id(Number(currTaskID.replace("task_", "")));
-      currTaskObject.startDate.add("d",diffDays);
-      currTaskObject.endDate.add("d",diffDays);
-      updateInnerHtml(currTaskObject);
-      dB_updateObject(currTaskObject)
-
-      var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
-      overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
-
-      if(overlappingTasks.length <= 0){
-        return true;
-      }
-      handleY(thisTaskID, parentTaskID, overlappingTasks);
+  if (timeTravel) {
+    var daysToMoveCurr = cal.project.startDate.distanceInDays(newTaskStartDate);
+    var daysToMoveParr = newTaskStartDate.distanceInDays(cal.project.startDate);
+    diffDays -= daysToMoveCurr;
+    $("#"+parentTaskID).animate({
+      left: $("#"+parentTaskID).position().left + (config.dateHeaderWidth * daysToMoveParr)},
+      50).promise().done(function ()
+      {
+        parentTaskObejct.startDate.add("d",daysToMoveParr);
+        parentTaskObejct.endDate.add("d",daysToMoveParr);
+        updateInnerHtml(parentTaskObejct);
+        dB_updateObject(parentTaskObejct)
     })
-    return true
+}
+
+    $("#"+currTaskID).animate({
+      left: pos + (config.dateHeaderWidth * diffDays)},
+      50).promise().done(function ()
+      {
+        console.log("diffDays to save:",diffDays);
+        currTaskObject.startDate.add("d",diffDays);
+        currTaskObject.endDate.add("d",diffDays);
+        updateInnerHtml(currTaskObject);
+        dB_updateObject(currTaskObject)
+
+        var overlappingTasks = $("#"+currTaskID).overlaps(".task_bar");
+        overlappingTasks = otherTasks(thisTaskID, parentTaskID, overlappingTasks);
+
+        if(overlappingTasks.length <= 0){
+          return true;
+        }
+        handleY(thisTaskID, parentTaskID, overlappingTasks);
+      })
+      return true
 }
 
 function removeDragRez(id) {
