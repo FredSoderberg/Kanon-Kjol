@@ -281,3 +281,59 @@ function handleX(thisTaskID, parentTaskID) {
     })
     return true
 }
+
+function removeDragRez(id) {
+  // console.log("destroys:","#"+id);
+    $("#"+id).draggable('destroy');
+    $("#"+id).resizable('destroy');
+    $("#"+id).removeClass("task_bar_resize");
+  }
+
+function addDragRez(id) {
+    // console.log("creates:","#"+id);
+
+  $("#"+id).addClass("task_bar_resize");
+
+  $("#"+id).resizable({
+    grid: [ config.dateHeaderWidth , config.rowHeight ],
+    containment: ".task_view_rows",
+    start: function (e) {
+      // console.log("e",e);
+      mouseEngaged = 1;
+      createTouchBlock()
+      moveHandler(e);
+      $('body').mousemove(moveHandler);
+    },
+    stop: function(){
+      mouseEngaged = 0;
+      $('body').unbind('mousemove', moveHandler);
+      $('#sliderBlock').remove();
+      removeDragRez();
+    }
+   });
+
+  $("#"+id).draggable({
+    grid: [ config.dateHeaderWidth , config.rowHeight ],
+    containment: ".task_view_rows",
+    stack: ".task_bar",
+    start: function (e) {
+
+      createTouchBlock()
+      moveHandler(e);
+      $('body').mousemove(moveHandler);
+    },
+    stop: function(){
+        $('body').unbind('mousemove', moveHandler);
+        $('#sliderBlock').remove();
+    }
+    })
+}
+
+var mouseEngaged = 0;
+var debug = false; //visa träffytan!
+var createTouchBlock = function() {
+      $('<div id="sliderBlock"/>').css({position:'absolute',zIndex:1000000,width:50, height: 50, background:(debug?'#090':'transparent')}).appendTo('body');
+}
+var moveHandler = function(e) {
+    $('#sliderBlock').css({left:e.pageX-20, top:e.pageY-20});
+};

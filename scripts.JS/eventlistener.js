@@ -65,109 +65,28 @@ $(document).ready(function(){
     $('.resource_view').scrollTop($(this).scrollTop());
   });
 
-
-function removeDragRez(id) {
-  console.log("destroys:","#"+id);
-    $("#"+id).draggable('destroy');
-    $("#"+id).resizable('destroy');
-    $("#"+id).removeClass("task_bar_resize");
-  }
-
-function addDragRez(id) {
-    console.log("creates:","#"+id);
-
-  $("#"+id).addClass("task_bar_resize");
-
-  $("#"+id).resizable({
-    grid: [ config.dateHeaderWidth , config.rowHeight ],
-    containment: ".task_view_rows",
-    start: function (e) {
-      // console.log("e",e);
-      mouseEngaged = 1;
-      createTouchBlock()
-      moveHandler(e);
-      $('body').mousemove(moveHandler);
-    },
-    stop: function(){
-      mouseEngaged = 0;
-      $('body').unbind('mousemove', moveHandler);
-      $('#sliderBlock').remove();
-
-    }
-
-   });
-
-  $("#"+id).draggable({
-    grid: [ config.dateHeaderWidth , config.rowHeight ],
-    containment: ".task_view_rows",
-    stack: ".task_bar",
-    start: function (e) {
-
-      createTouchBlock()
-      moveHandler(e);
-      $('body').mousemove(moveHandler);
-    },
-    stop: function(){
-        $('body').unbind('mousemove', moveHandler);
-        $('#sliderBlock').remove();
-    }
-    })
-}
-
-var mouseEngaged = 0;
-var debug = true;
-var createTouchBlock = function() {
-      $('<div id="sliderBlock"/>').css({position:'absolute',zIndex:1000000,width:50, height: 50, background:(debug?'#090':'transparent')}).appendTo('body');
-}
-var moveHandler = function(e) {
-    $('#sliderBlock').css({left:e.pageX-20, top:e.pageY-20});
-};
-
-
-
-
-
-
   $('.task_view_bars').mouseleave( function (event) {
     if(mouseEngaged == 0) {
-    if (!$(event.target).hasClass("ui-resizable-handle")) {
-      if ($(event.target).hasClass("task_bar_resize")) {
-        removeDragRez(event.target.id);
-        console.log("lämngar1:",event.target.id);
-      }
+    if (!$(event.target).hasClass("ui-resizable-handle") && $(event.target).hasClass("task_bar_resize")) {
+      removeDragRez(event.target.id);
+      // console.log("lämngar1:",event.target.id);
     } else {
-
-     console.log("lämngar2:",$(event.target).parent()[0].id);
+    //  console.log("lämngar2:",$(event.target).parent()[0].id);
       removeDragRez($(event.target).parent()[0].id);
     }
   }
   });
 
-
-
-
-
   $('.task_view_bars').mouseenter(function (event) {
 
     if (!$(event.target).hasClass("ui-resizable-handle")) {
-      console.log("över:",event.target.id );
+      // console.log("över:",event.target.id );
       if($(event.target).hasClass("task_bar_resize")) {
         removeDragRez(event.target.id);
       }
       addDragRez(event.target.id);
     }
   });
-
-
-
-
-
-
-
-
-
-
-
 
   $('.task_view_bars').on('drag', '.task_bar',function () {
     //console.log($(this).scrollTop())
