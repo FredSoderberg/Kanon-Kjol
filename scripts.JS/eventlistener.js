@@ -131,12 +131,20 @@ $(document).ready(function(){
     width: 350,
     modal: true,
     buttons: {
+      "Delete": function() {
+        deleteDialog.dialog( "open" );
+      },
       "Save Changes": function() {
         change_taskinfo();
       },
       "Cancel": function() {
         taskDialog.dialog( "close" );
       }
+    },
+    create:function () {
+      $(this).closest(".ui-dialog")
+      .find(".ui-button:nth-child(1)")
+      .addClass("deleteButton");
     },
     open: function() {
       $("#taskDialog").keypress(function (e) {
@@ -167,6 +175,9 @@ resourceDialog.dialog({
   width: 350,
   modal: true,
   buttons: {
+    "Delete": function() {
+      deleteDialog.dialog( "open" );
+    },
     "Save Changes": function() {
       change_resourceinfo();
     },
@@ -174,6 +185,11 @@ resourceDialog.dialog({
       resourceDialog.dialog( "close" );
     }
   },
+   create:function () {
+        $(this).closest(".ui-dialog")
+            .find(".ui-button:nth-child(1)")
+            .addClass("deleteButton");
+    },
   open: function() {
     $("#resourceDialog").keypress(function (e) {
         if(e.which == 13) {
@@ -184,6 +200,34 @@ resourceDialog.dialog({
 });
 
 var resourceDialogID = 0;
+
+//-----------------Delte Stuyff--------------------------------
+
+var deleteDialog = $("#deleteDialog");
+deleteDialog.dialog({
+  closeOnEscape: true,
+  autoOpen: false,
+  height: 400,
+  width: 350,
+  modal: true,
+  buttons: {
+    "Yes": function() {
+      deleteTarget();
+      deleteDialog.dialog( "close" );
+    },
+    "No": function() {
+      deleteDialog.dialog( "close" );
+    }
+  },
+  open: function() {
+    $("#deleteDialog").keypress(function (e) {
+        if(e.which == 13) {
+          deleteTarget();
+          deleteDialog.dialog( "close" );
+        }
+    })
+  }
+});
 
 // function change_resourceinfo(){
 //   var resource = cal.project.get_resource_by_id(resourceDialogID);
@@ -229,5 +273,7 @@ $(document).on("dblclick", ".resource_row", function(event, ui){
   create_cover();
 });
 */
+
+
 
 });

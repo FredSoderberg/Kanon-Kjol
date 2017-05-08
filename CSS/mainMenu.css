@@ -116,10 +116,8 @@ box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
 
 .deleteButton {
 background-color: red !important;
-}
-
-.ui-button.redButton {
-    background-color: red;
+background: red !important;
+color: white !important;
 }
 
 #loading {
