@@ -80,7 +80,7 @@ $(document).ready(function(){
       stop: function(event, ui) {
         // console.log("taskModeved",this);
         // console.log("taskModeved",cal.project.get_task_by_element([this]));
-        
+
        $(this).draggable('destroy'); // why??
       },
       grid: [ config.dateHeaderWidth , config.rowHeight ],
@@ -207,8 +207,21 @@ $(document).ready(function(){
 
 //-----------------Change info about resources--------------------------------
 
+$(function() {
+    $("#usermsg").keypress(function (e) {
+        if(e.which == 13) {
+            //submit form via ajax, this is not JS but server side scripting so not showing here
+            $("#chatbox").append($(this).val() + "<br/>");
+            $(this).val("");
+            e.preventDefault();
+        }
+    });
+});
+
+
 var resourceDialog = $("#resourceDialog");
 resourceDialog.dialog({
+  closeOnEscape: true,
   autoOpen: false,
   height: 400,
   width: 350,
@@ -216,23 +229,30 @@ resourceDialog.dialog({
   buttons: {
     "Save Changes": function() {
       change_resourceinfo();
+
     },
     "Cancel": function() {
       resourceDialog.dialog( "close" );
     }
   },
-  close: function() {
-    //form[ 0 ].reset();
-    //allFields.removeClass( "ui-state-error" );
+  open: function() {
+    $("#resourceDialog").keypress(function (e) {
+        if(e.which == 13) {
+          change_resourceinfo();
+        }
+    })
   }
 });
+
 var resourceDialogID = 0;
+
 function change_resourceinfo(){
   var resource = cal.project.get_resource_by_id(resourceDialogID);
   resource.name = $("#resource_dialog_name").val();
   //updateInnerHtml(resource);
   $("#"+resourceDialogID).children().eq(1).html(resource.name)
-  resourceDialog.dialog( "close" );
+    resourceDialog.dialog( "close" );
+  dB_updateObject(resource);
 }
 
 $(document).on("dblclick", ".resource_row", function(event, ui){
