@@ -1,4 +1,21 @@
 function dB_storeSignUp(email, pass) {
+  $.post('scripts.dB/dB_util.php', {
+      function: "checkUserExist",
+      username: email
+    }).done(function(data) {
+      if (Number(data) > 0) {
+        warningUserExists();
+      }
+      else {
+        dB_saveNewUser(email,pass);
+      }
+    }).fail(function(jqxhr, textStatus, error) {
+      var err = textStatus + ", " + error;
+      console.log("Request Failed: " + err);
+    });
+}
+
+function dB_saveNewUser(email, pass) {
   var project = new Project("defualt project",30,email);
   stringObject = JSON.stringify(project);
   //console.log("object: " + stringObject);

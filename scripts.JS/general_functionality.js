@@ -47,16 +47,11 @@ function RollDownFunction() {
     w3.toggleClass("#square", "div3", "div4")
   }
 }
-/* function cookieFunction() {
-  var mail = document.getElementById("mail1").value;
-  $.cookie('e-mail', 'mail', { expires: 1 });
-var knas = $.cookie('e-mail');
-  document.getElementById("output").innerHTML = knas;
+
+function warningUserExists() {
+alert("Username already exists");
+$("#name1").addClass("one");
 }
-
-function cookietoken() {
-
-} */
 
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();

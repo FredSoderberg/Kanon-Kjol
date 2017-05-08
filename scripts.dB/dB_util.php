@@ -41,6 +41,12 @@ if(isset($form_action_func))
       );
     break;
 
+    case 'checkUserExist':
+      checkUserExist(
+        $_POST['username']
+      );
+      break;
+
 
 
 
@@ -103,6 +109,17 @@ if(isset($form_action_func))
 //
 // $object3 = json_encode($object2);
 // updateObject($object3);
+
+function checkUserExist($username) {
+  $sql = "select * from user where email = '".$username."'";
+  $result = db_query($sql);
+  if($result) {
+      echo mysqli_num_rows($result);
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+}
 
 function updateObject($object) {
   $arr = json_decode($object,true);
