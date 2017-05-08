@@ -41,6 +41,12 @@ if(isset($form_action_func))
       );
     break;
 
+    case 'checkUserExist':
+      checkUserExist(
+        $_POST['username']
+      );
+      break;
+
 
 
 
@@ -103,6 +109,17 @@ if(isset($form_action_func))
 //
 // $object3 = json_encode($object2);
 // updateObject($object3);
+
+function checkUserExist($username) {
+  $sql = "select * from user where email = '".$username."'";
+  $result = db_query($sql);
+  if($result) {
+      echo mysqli_num_rows($result);
+  } else {
+    $failure = (string)$sql;
+    header('HTTP/1.0 404 Not found: '.$failure);
+  }
+}
 
 function updateObject($object) {
   $arr = json_decode($object,true);
@@ -320,15 +337,17 @@ function verifyUser($username,$pass) {
   $sql = "select password from user where email = '".$username."'";
   $result = db_query($sql);
   $passHash = mysqli_fetch_assoc($result);
+  if ($result) {
+    if(password_verify($pass,$passHash['password'])) {
+      $sessionID = rand(1000000,10000000);
+      $sql = "update user set sessionID = '$sessionID' where user.email ='$username'";
 
-  if ($result && password_verify($pass,$passHash['password'])) {
-    $sessionID = rand(1000000,10000000);
-    $sql = "update user set sessionID = '$sessionID' where user.email ='$username'";
-
-    if(db_query($sql)) {
-      echo $sessionID;
+      if(db_query($sql)) {
+        echo $sessionID;
+      }
+    } else {
+      echo "wrong";
     }
-
   } else {
       $failure = (string)$sql;
       header('HTTP/1.0 404 Not found: '.$failure);

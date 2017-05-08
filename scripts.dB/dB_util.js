@@ -1,4 +1,21 @@
 function dB_storeSignUp(email, pass) {
+  $.post('scripts.dB/dB_util.php', {
+      function: "checkUserExist",
+      username: email
+    }).done(function(data) {
+      if (Number(data) > 0) {
+        warningUserExists();
+      }
+      else {
+        dB_saveNewUser(email,pass);
+      }
+    }).fail(function(jqxhr, textStatus, error) {
+      var err = textStatus + ", " + error;
+      console.log("Request Failed: " + err);
+    });
+}
+
+function dB_saveNewUser(email, pass) {
   var project = new Project("defualt project",30,email);
   stringObject = JSON.stringify(project);
   //console.log("object: " + stringObject);
@@ -131,14 +148,18 @@ function dB_verifyUser() {
     username: email,
     password: pass
   }).done(function(data) {
-  //  console.log("datan:" + data);
-    if ($("#rememberMe").is(":checked")) {
-      setCookie("rememberMe", "true", 7);
+    if(data === "wrong") {
+      wrongPwd();
     }
-    setCookie("username", email, 7);
-    setCookie("sessionID", data, 7);
-    window.location.replace("calendar.html");
-
+    else {
+      //  console.log("datan:" + data);
+      if ($("#rememberMe").is(":checked")) {
+        setCookie("rememberMe", "true", 7);
+      }
+      setCookie("username", email, 7);
+      setCookie("sessionID", data, 7);
+      window.location.replace("calendar.html");
+    }
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
     console.log("Request Failed: " + err);

@@ -16,17 +16,17 @@ function checkSignUp() {
       alert("Fill in your confirmed password");
       $("#confpwd").addClass("one");
     } else {
-      if ($('#' + "administrator").is(":checked")) {
+      if (($('#' + "administrator").is(":checked")) && !($('#' + "employee").is(":checked"))) {
 
         return true;
 
-      } else if ($('#' + "employee").is(":checked")) {
+      } else if (($('#' + "employee").is(":checked")) && !($('#' + "administrator").is(":checked"))){
 
-        alert("NÖÖÖÖÖFF");
+        alert("Sorry, you can only register as an administrator for now.");
         //TODO Fixa vad som händer - som employeee
 
       } else {
-        alert("What position do you have?");
+        alert("What position do you have? You can only choose one option");
       }
 
     }
@@ -47,16 +47,11 @@ function RollDownFunction() {
     w3.toggleClass("#square", "div3", "div4")
   }
 }
-/* function cookieFunction() {
-  var mail = document.getElementById("mail1").value;
-  $.cookie('e-mail', 'mail', { expires: 1 });
-var knas = $.cookie('e-mail');
-  document.getElementById("output").innerHTML = knas;
+
+function warningUserExists() {
+alert("Username already exists");
+$("#name1").addClass("one");
 }
-
-function cookietoken() {
-
-} */
 
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
@@ -124,6 +119,12 @@ function signInValid() {
       $("#mail1").addClass("one");
     }
     return false;
+}
+
+function wrongPwd() {
+  alert("Your username and password doesn't match, please try again!");
+  $("#mail1").addClass("one");
+  $("#pass").addClass("one");
 }
 
 function recaptchaCallback() {
