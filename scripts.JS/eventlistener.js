@@ -246,14 +246,28 @@ resourceDialog.dialog({
 
 var resourceDialogID = 0;
 
+// function change_resourceinfo(){
+//   var resource = cal.project.get_resource_by_id(resourceDialogID);
+//   resource.name = $("#resource_dialog_name").val();
+//   //updateInnerHtml(resource);
+//   $("#"+resourceDialogID).children().eq(1).html(resource.name)
+//     resourceDialog.dialog( "close" );
+//   dB_updateObject(resource);
+// }
+
 function change_resourceinfo(){
   var resource = cal.project.get_resource_by_id(resourceDialogID);
   resource.name = $("#resource_dialog_name").val();
+  resource.groupType = $("#resource_dialog_type").val();
   //updateInnerHtml(resource);
   $("#"+resourceDialogID).children().eq(1).html(resource.name)
+  $("#"+resourceDialogID).children().eq(0).html(resource.groupType)
+
     resourceDialog.dialog( "close" );
   dB_updateObject(resource);
 }
+
+
 
 $(document).on("dblclick", ".resource_row", function(event, ui){
   //console.log("Vem vet");
