@@ -110,35 +110,32 @@
     </div>
 
     <div id="key"></div>
-    <div id="taskDialog" title="Task info">
-<p class="validateTips">Information about your task</p>
-
-<form>
-<fieldset>
-  <label for="name">Name</label>
-  <input type="text" name="name" id="task_dialog_name" value="" class="text ui-widget-content ui-corner-all">
-  <label for="startDate">StartDate</label>
-  <input type="text" name="startDate" id="task_startDate" value="" class="text ui-widget-content ui-corner-all">
-  <label for="endDate">EndDate</label>
-  <input type="text" name="startDate" id="task_endDate" value="" class="text ui-widget-content ui-corner-all">
-  <!-- Allow form submission with keyboard without duplicating the dialog button -->
-  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-</fieldset>
-</form>
-</div>
+    <div id="taskDialog" title="Task info" class="ui-dialog-content ui-widget-content">
+      <p class="validateTips">Information about your task</p>
+      <fieldset style="float:left;margin-right:20px; display:block;">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="task_dialog_name" value="" class="text ui-corner-all">
+        <label for="startDate">StartDate</label>
+        <input type="text" name="startDate" id="task_startDate" value="" class="text ui-corner-all">
+        <label for="endDate">EndDate</label>
+        <input type="text" name="startDate" id="task_endDate" value="" class="text ui-corner-all">
+        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      </fieldset>
+    </div>
 
 
-<div id="resourceDialog" title="Resource info">
-<p class="validateTips">Information about your resource</p>
-<fieldset>
-  <label for="name">Name</label>
-  <input type="text" name="name" id="resource_dialog_name" value="" class="inlineField text ui-widget-content ui-corner-all">
-  <label for="type">Type</label>
-  <input type="text" name="type" id="resource_dialog_type" value="" class="inlineField text ui-widget-content ui-corner-all w3-margin-top">
+    <div id="resourceDialog" title="Resource info" class="ui-dialog-content ui-widget-content">
+      <p class="validateTips">Information about your resource</p>
+      <fieldset style="float:left;margin-right:20px; display:block;">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="resource_dialog_name" value="" class=" text ui-widget-content ui-corner-all">
+        <label for="type">Type</label>
+        <input type="text" name="type" id="resource_dialog_type" value="" class=" text ui-widget-content ui-corner-all">
 
-</fieldset>
+      </fieldset>
 
-</div>
+    </div>
 
 
   <script type = "text/javascript">

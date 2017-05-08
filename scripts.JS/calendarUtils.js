@@ -11,7 +11,7 @@ Calendar.prototype.init = function(whereToStart) {
 
   this._create_resource_headers();
   //this._load_resources();
-  
+
 
 
   //this._create_empty_task_rows();
@@ -110,7 +110,7 @@ Calendar.prototype._create_resources_cells = function(resource) {
 //       html += "</div>";
 // }
 //      else {
-      html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString().toLowerCase()] + "</div>";
+      html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString()] + "</div>";
     // }
   }
   return html;
