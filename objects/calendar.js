@@ -1,7 +1,6 @@
 function Calendar() {
   this.userID;
   this.categories = [];
-  this.tasks      = [];
 
   this.ifSidebarOpen = false;
   this.project;
