@@ -206,12 +206,13 @@ function dB_storeObject(object) {
 
 function dB_deleteObject(object) {
   stringObject = JSON.stringify(object);
-  console.log("object: " + stringObject);
+  // console.log("object: " + stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "deleteObject",
     objectToSend: stringObject
   }).done(function(data) {
+    
     console.log("removed data: " + data);
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;

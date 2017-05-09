@@ -182,7 +182,7 @@ $(".task_view_bars").on('dragstart', function(event, ui) {
 
 function set_resources(task, shiftResources, shiftTop){
   var startRow = get_row_index(task) //+ shiftTop;
-console.log("startRow",startRow);
+// console.log("startRow",startRow);
   //console.log("column diff", shiftTime);
   //console.log("row shift", shiftResources);
   var length = (task.resources.length + shiftResources);
@@ -195,9 +195,9 @@ console.log("startRow",startRow);
       return;
     }
     //console.log("startwor:", (i))
-    console.log(i,":", startRow + i);
+    // console.log(i,":", startRow + i);
     task.resources[i] = cal.divResourceViewData.children[startRow + i].id;
-    console.log(task.id,":",task.resources[i]);
+    // console.log(task.id,":",task.resources[i]);
   }
 }
 

@@ -180,9 +180,11 @@ function updateGeneral($arr) {
   }
 }
 
+
+
 function deleteObject($object) {
   $arr = json_decode($object,true);
-  $sql = "delete from ".$arr["type"]." where ".$arr["type"].".id=".$arr["id"];
+  $sql = "delete from ".$arr["type"]." where id =".$arr["id"];
 
   if (db_query($sql)) {
       echo "record removed successfully";
