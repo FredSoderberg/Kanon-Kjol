@@ -231,6 +231,48 @@ deleteDialog.dialog({
 });
 var deleteDialogType = "";
 var deleteDialogID = 0;
+
+//--------------Change info about project-------------------------
+var projectDialog = $("#projectDialog");
+projectDialog.dialog({
+  closeOnEscape: true,
+  autoOpen: false,
+  height: 400,
+  width: 350,
+  modal: true,
+  buttons: {
+    "Delete": function() {
+      deleteDialog.dialog( "open" );
+    },
+    "Save Changes": function() {
+    //  change_projectinfo();
+    },
+    "Cancel": function() {
+      projectDialog.dialog( "close" );
+    }
+  },
+   create:function () {
+        $(this).closest(".ui-dialog")
+            .find(".ui-button:nth-child(1)")
+            .addClass("deleteButton");
+    },
+  open: function() {
+    $("#projectDialog").keypress(function (e) {
+        if(e.which == 13) {
+      //    change_projectinfo();
+        }
+    })
+  }
+});
+
+var projectDialogID = 0;
+
+$("#proj").on("click", function() {
+  projectDialog.dialog("open");
+});
+
+
+
 // function change_resourceinfo(){
 //   var resource = cal.project.get_resource_by_id(resourceDialogID);
 //   resource.name = $("#resource_dialog_name").val();
@@ -259,7 +301,18 @@ function change_taskinfo(){
 
   taskDialog.dialog( "close" );
   dB_updateObject(task);
-}
+};
+
+
+
+// function change_projectinfo (){
+//   var project = cal.project.get_task_by_id(taskDialogID);
+//   project.name = $("#project_dialog_name").val();
+//   updateInnerHtml(project);
+//
+//   projectDialog.dialog( "close" );
+//   dB_updateObject(project);
+// }
 
 
 $(document).on("dblclick", ".resource_row", function(event, ui){
@@ -276,6 +329,8 @@ $(document).on("dblclick", ".task_bar", function(event, ui){
   taskDialogID = Number(event.target.id.replace("task_", ""));
   // console.log(taskDialogID);
   $("#task_dialog_name").val(cal.project.get_task_by_id(taskDialogID).name);
+    $("#task_startDate").val(cal.project.get_task_by_id(taskDialogID).startDate);
+      $("#task_endDate").val(cal.project.get_task_by_id(taskDialogID).endDate);
   taskDialog.dialog("open");
 })
 
@@ -284,6 +339,12 @@ $(document).on("dblclick", ".task_bar", function(event, ui){
 });
 */
 
+$( function() {
+  $( "#project_startDate, #project_endDate, #task_startDate, #task_endDate, #taskStorage_startDate, #taskStorage_endDate" ).datepicker({
+    showWeek: true,
+    firstDay: 1
+  });
+} );
 
 
 });
