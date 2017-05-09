@@ -44,7 +44,7 @@ function dB_loadProjects(user) {
     function: "loadProjects",
     username: user,
   }).done(function(data) {
-      console.log("projectID:",data);
+      // console.log("projectID:",data);
       data =  data[0];
       cal.project.id             = Number(data.id);
       cal.project.name           = data.name;
@@ -207,7 +207,7 @@ function dB_storeObject(object) {
 
 function dB_deleteObject(object) {
   stringObject = JSON.stringify(object);
-  console.log("object: " + stringObject);
+  // console.log("object: " + stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "deleteObject",

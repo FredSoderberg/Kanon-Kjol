@@ -34,9 +34,9 @@ Project.prototype.init_test = function() {
 
 }
 
-Project.prototype.create_task = function(startDate, endDate, resID, name) {
+Project.prototype.create_task = function(startDate, endDate, resID, name, days) {
   //console.log("Projekt_createTask:", this)
-  var task = new Task(startDate, endDate, [resID], this.nextTaskID, name);
+  var task = new Task(startDate, endDate, [resID], this.nextTaskID, name, days);
   this.tasks.push(task);
 
   this.nextTaskID--;
@@ -114,4 +114,25 @@ Project.prototype.render_all_resources = function () {
       cal._create_empty_task_row(value.id);
     }
   });
+};
+
+Project.prototype.remove_resource_by_id = function (objectID) {
+  //this funkar inte?
+$.each(this.resources, function(index,value) {
+  if (value.id === objectID) {
+    cal.project.resources.splice(index,1);
+    return;
+  }
+})
+
+};
+
+Project.prototype.remove_task_by_id = function (objectID) {
+  //this funkar inte?
+  $.each(this.tasks, function(index,value) {
+    if (value.id === objectID) {
+      cal.project.tasks.splice(index,1);
+      return;
+    }
+  })
 };

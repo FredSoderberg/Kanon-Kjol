@@ -47,20 +47,26 @@ $at.click(function() {
   //console.log($st)
   //console.log($grid)
   var newTask = cal.create_task_for_storage(
-    $("#task_name").val(),
-    new Date($("#task_startDate").val()),
-    new Date($("#task_endDate").val()));
-
+    $("#task_name").val(),$("#taskStorage_lengthInDays").val());
+    /*
+    new Date($("#taskStorage_startDate").val()),
+    new Date($("#taskStorage_endDate").val()));
+*/
+  //console.log($("#taskStorage_startDate").val())
+  //console.log($("#taskStorage_endDate").val())
   var $newTask = $(newTask.render_task_storage());
 
-  //console.log($grid);
+  console.log(newTask.calculate_days());
   $grid.append($newTask).packery('appended', $newTask);
 
   //$grid.packery('addItems', $newTask);
-  $grid.packery('fit', $newTask, (config.dateHeaderWidth * newTask.calculate_days()), 0)
+  //$grid.packery('fit', $newTask, (config.dateHeaderWidth * newTask.calculate_days()), 0)
 
   $newTask.draggable();
   $grid.packery( 'bindUIDraggableEvents', $newTask );
+
+  //dB_storeObject(newTask);
+  //dB_updateObject(cal.project);
 
   updateInnerHtml(newTask);
 
@@ -76,18 +82,34 @@ $at.click(function() {
 $(".task_view_rows").droppable({
   accept: '.grid-item',
   drop: function(event, ui){
-    console.log("dropped at row",  ui)
+    //console.log("dropped at row",  ui)
     var $clone = ui.draggable.clone();
     //console.log(ui.draggable.attr("id"));
-    console.log("elemnt at pos", document.elementFromPoint(ui.offset.left, ui.offset.top));
+    //console.log("elemnt at pos", document.elementFromPoint(ui.offset.left, ui.offset.top));
     var $targetCell = $(document.elementFromPoint(ui.offset.left, ui.offset.top));
 
 
-    console.log("clone pos",$targetCell.position(), $clone)
+    //console.log("clone pos",$targetCell.position(), $clone)
     $(this).parent().children().eq(2).append($clone);
 
     $clone.css({top: ($targetCell.position().top + 3 )+"px", left: ($targetCell.position().left + 3)+ "px", position:'absolute'});
     $clone.removeClass('grid-item');
+
+  // console.log("CELL INDEX: ", $targetCell.index());
+
+    var cloneID   = Number($clone.attr("id").replace("task_", ""))
+    var cloneTask = cal.project.get_task_by_id(cloneID);
+
+    cloneTask.startDate = new Date(cal.project.startDate);
+    cloneTask.startDate.setDate(cloneTask.startDate.getDate() + $targetCell.index())
+    cloneTask.endDate   = new Date(cloneTask.startDate);
+    console.log("Days:",cloneTask.lengthInDays)
+    cloneTask.endDate.setDate(cloneTask.endDate.getDate() + cloneTask.lengthInDays)
+    cloneTask.resources = Number($targetCell.parent().attr("id").replace("row_", ""))
+
+    updateInnerHtml(cloneTask);
+
+    dB_updateObject(cloneTask);
     /*
     $clone.removeClass();
     $clone.addClass("task_bar");
@@ -110,6 +132,12 @@ $(".task_view_rows").droppable({
   }
 });
 
+$(document).on('keydown', function(event){
+  if (event.keyCode == 32){
+    event.preventDefault();
+  }
+})
+
 $(document).keyup(function(event){
     if(event.keyCode == 13){
         $("#add_to_storage").click();
@@ -117,7 +145,13 @@ $(document).keyup(function(event){
 
     }
 });
-
+$(document).keyup(function(event){
+  //console.log(event)
+    if(event.keyCode == 32 && event.target.id != "task_name" && event.target.id != "taskStorage_lengthInDays"){
+      //$("#add_to_storage").blur();
+      $("#storage_toggle").click();
+    }
+});
 
 
 })

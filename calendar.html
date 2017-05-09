@@ -183,15 +183,19 @@
 
     <button id="storage_toggle" class="w3-grey w3-border w3-border-black">Task storage</button>
 
-    <fieldset>
-      <label for="name">Name</label>
-      <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
-      <label for="startDate">StartDate</label>
-      <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
-      <span class="ui-icon ui-icon-calendar"></span>
-      <label for="endDate">EndDate</label>
-      <input type="text" name="startDate" id="taskStorage_endDate" value="" class="text ui-widget-content ui-corner-all">
-      <span class="ui-icon ui-icon-calendar"></span>
+  <fieldset>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
+    <label for="lengthInDays">Days</label>
+    <input type="text" name="lengthInDays" id="taskStorage_lengthInDays" value="" class="text ui-widget-content ui-corner-all">
+    <span class="ui-icon ui-icon-calendar"></span>
+    <!--
+    <label for="startDate">StartDate</label>
+    <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
+    <span class="ui-icon ui-icon-calendar"></span>
+    <label for="endDate">EndDate</label>
+    <input type="text" name="startDate" id="taskStorage_endDate" value="" class="text ui-widget-content ui-corner-all">
+    <span class="ui-icon ui-icon-calendar"></span>
 
       <!-- Allow form submission with keyboard without duplicating the dialog button
   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
@@ -200,13 +204,13 @@
     <button class="color-button">Select color</button>
   </body>
 
-  <script>
-    $("#task_name").val("TaskName");
-    $("#taskStorage_startDate").val(cal.project.startDate);
-    var d = new Date(cal.project.startDate);
-    d.setDate(d.getDate() + 1);
-    $("#taskStorage_endDate").val(d);
-  </script>
+<script>
+  $("#task_name").val("TaskName");
+  //$("#taskStorage_startDate").val(cal.project.startDate);
+  $("#taskStorage_lengthInDays").val(2);
+  //var d = new Date(cal.project.startDate);
+  //d.setDate(d.getDate() + 1);
+  //$("#taskStorage_endDate").val(d);
 
 
 </html>
