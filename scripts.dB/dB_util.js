@@ -46,18 +46,26 @@ function dB_loadProjects(user) {
   }).done(function(data) {
       // console.log("projectID:",data);
       data =  data[0];
+      var startDate = new Date(Date.parse(data.startDate));
+      var stopDate = new Date(Date.parse(data.stopDate));
+      var lengthDays = startDate.distanceInDays(stopDate);
+      console.log(lengthDays);
+      cal.project = new Project (data.name, lengthDays, data.adminEmail)
       cal.project.id             = Number(data.id);
-      cal.project.name           = data.name;
-      cal.project.adminEmail     = data.adminEmail;
-      cal.project.lengthDays     = data.lengthDays;
-      cal.project.startDate      = new Date(Date.parse(data.startDate));
-      cal.project.stopDate       = new Date(Date.parse(data.stopDate));
+      // cal.project.name           = data.name;
+      // cal.project.adminEmail     = data.adminEmail;
+      cal.project.lengthDays     = lengthDays;
+      cal.project.startDate      = startDate
+      cal.project.stopDate       = stopDate
       cal.project.categories     = data.categories;
       cal.project.nextResourceID = data.nextResourceID;
       cal.project.nextTaskID     = data.nextTaskID;
 
-      cal._create_date_headers();
 
+      // $("#proj").attr("id","proj_"+data.id)
+      $("#proj").html(data.name);
+
+      cal._create_date_headers();
       dB_loadResources(data.id);
 
   }).fail(function(jqxhr, textStatus, error) {
@@ -234,7 +242,22 @@ function dB_updateObject(object) {
   });
 }
 
+function dB_updateObjectAndReload(object) {
+  $('#loading').show();
+  stringObject = JSON.stringify(object);
+  // console.log("object: " + stringObject);
 
+  $.post('scripts.dB/dB_util.php', {
+    function: "updateObject",
+    objectToSend: stringObject
+  }).done(function(data) {
+    window.location.replace("calendar.html");
+    console.log("updated data: " + data);
+  }).fail(function(jqxhr, textStatus, error) {
+    var err = textStatus + ", " + error;
+    console.log("Request Failed: " + err);
+  });
+}
 
 
 

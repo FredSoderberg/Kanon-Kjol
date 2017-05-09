@@ -245,7 +245,7 @@ projectDialog.dialog({
       deleteDialog.dialog( "open" );
     },
     "Save Changes": function() {
-    //  change_projectinfo();
+      change_projectinfo();
     },
     "Cancel": function() {
       projectDialog.dialog( "close" );
@@ -259,7 +259,7 @@ projectDialog.dialog({
   open: function() {
     $("#projectDialog").keypress(function (e) {
         if(e.which == 13) {
-      //    change_projectinfo();
+        change_projectinfo();
         }
     })
   }
@@ -267,9 +267,7 @@ projectDialog.dialog({
 
 var projectDialogID = 0;
 
-$("#proj").on("click", function() {
-  projectDialog.dialog("open");
-});
+
 
 
 
@@ -307,14 +305,24 @@ function change_taskinfo(){
 
 
 
-// function change_projectinfo (){
-//   var project = cal.project.get_task_by_id(taskDialogID);
-//   project.name = $("#project_dialog_name").val();
-//   updateInnerHtml(project);
-//
-//   projectDialog.dialog( "close" );
-//   dB_updateObject(project);
-// }
+function change_projectinfo (){
+
+  cal.project.name = $("#project_dialog_name").val();
+  $("#proj").html($("#project_dialog_name").val())
+  console.log(cal.project.startDate);
+  console.log($("#project_startDate").val());
+  if (  cal.project.startDate != $("#project_startDate").val() ||
+        cal.project.stopDate != $("#project_endDate").val())
+        {
+          cal.project.startDate = $("#project_startDate").val();
+          cal.project.stopDate = $("#project_endDate").val();
+          projectDialog.dialog( "close" );
+          dB_updateObjectAndReload(cal.project);
+          return;
+  }
+  projectDialog.dialog( "close" );
+  dB_updateObject(cal.project);
+}
 
 
 $(document).on("dblclick", ".resource_row", function(event, ui){
@@ -337,6 +345,14 @@ $(document).on("dblclick", ".task_bar", function(event, ui){
   $("#task_color").css("background-color",($("#"+event.target.id).css("background-color")));
   taskDialog.dialog("open");
 })
+
+$("#proj").on("dblclick", function() {
+  projectDialogID = cal.project.id;
+  $("#project_dialog_name").val(cal.project.name);
+  $("#project_startDate").val(cal.project.startDate);
+  $("#project_endDate").val(cal.project.stopDate);
+  projectDialog.dialog("open");
+});
 
 /* $(".resource_view_data").on('dblclick', '.resource_cell', function(){
   create_cover();
