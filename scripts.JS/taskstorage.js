@@ -47,7 +47,7 @@ $at.click(function() {
   //console.log($st)
   //console.log($grid)
   var newTask = cal.create_task_for_storage(
-    $("#task_name").val(),$("#taskStorage_lengthInDays").val());
+    $("#task_name").val(),Number($("#taskStorage_lengthInDays").val()));
     /*
     new Date($("#taskStorage_startDate").val()),
     new Date($("#taskStorage_endDate").val()));
@@ -56,7 +56,8 @@ $at.click(function() {
   //console.log($("#taskStorage_endDate").val())
   var $newTask = $(newTask.render_task_storage());
 
-  console.log(newTask.calculate_days());
+
+  console.log(newTask.lengthInDays);
   $grid.append($newTask).packery('appended', $newTask);
 
   //$grid.packery('addItems', $newTask);
@@ -103,10 +104,13 @@ $(".task_view_rows").droppable({
     cloneTask.startDate = new Date(cal.project.startDate);
     cloneTask.startDate.setDate(cloneTask.startDate.getDate() + $targetCell.index())
     cloneTask.endDate   = new Date(cloneTask.startDate);
-    console.log("Days:",cloneTask.lengthInDays)
-    cloneTask.endDate.setDate(cloneTask.endDate.getDate() + cloneTask.lengthInDays)
-    cloneTask.resources = Number($targetCell.parent().attr("id").replace("row_", ""))
+    cloneTask.endDate.setDate(cloneTask.endDate.getDate() + (cloneTask.lengthInDays - 1))
 
+    cloneTask.resources = [];
+    cloneTask.resources[0] = Number($targetCell.parent().attr("id").replace("row_", ""))
+
+    console.log("Days:",cloneTask.lengthInDays)
+    console.log("Clone: ", cloneTask);
     updateInnerHtml(cloneTask);
 
     dB_updateObject(cloneTask);
