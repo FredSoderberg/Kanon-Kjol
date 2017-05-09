@@ -297,6 +297,8 @@ function change_resourceinfo(){
 function change_taskinfo(){
   var task = cal.project.get_task_by_id(taskDialogID);
   task.name = $("#task_dialog_name").val();
+  task.color = $("#task_color").val();
+  $("#task_"+taskDialogID).css("background-color", $("#task_color").val());
   updateInnerHtml(task);
 
   taskDialog.dialog( "close" );
@@ -328,9 +330,11 @@ $(document).on("dblclick", ".task_bar", function(event, ui){
   //console.log("Vem vet");
   taskDialogID = Number(event.target.id.replace("task_", ""));
   // console.log(taskDialogID);
-  $("#task_dialog_name").val(cal.project.get_task_by_id(taskDialogID).name);
-    $("#task_startDate").val(cal.project.get_task_by_id(taskDialogID).startDate);
-      $("#task_endDate").val(cal.project.get_task_by_id(taskDialogID).endDate);
+  var taskObject = cal.project.get_task_by_id(taskDialogID);
+  $("#task_dialog_name").val(taskObject.name);
+  $("#task_startDate").val(taskObject.startDate);
+  $("#task_endDate").val(taskObject.endDate);
+  $("#task_color").css("background-color",($("#"+event.target.id).css("background-color")));
   taskDialog.dialog("open");
 })
 
@@ -345,6 +349,11 @@ $( function() {
     firstDay: 1
   });
 } );
+
+var elem = $('.set-bg-elem')[0];
+var hueb = new Huebee( elem, {
+  setBGColor: true
+});
 
 
 });

@@ -13,6 +13,7 @@ function Task(startDate, endDate, resID, taskID, name) {
 
   this.parentProject = cal.project.id;
   this.resources = resID;
+  this.color = "#AFA";
   this.type = "Task";
 
   this.startPos = "";
@@ -33,7 +34,7 @@ Task.prototype.render = function() {
   var html = "<div id='task_" + this.id +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
-                  "style='width : " + (config.dateHeaderWidth * (diffDays + 1) - 6)+"px;"+
+                  "style='background-color:"+this.color+";width : " + (config.dateHeaderWidth * (diffDays + 1) - 6)+"px;"+
                         "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
                            "left: " + (config.dateHeaderWidth * this.calculate_days() + 3)+"px;"+
                            "top: " + (config.rowHeight * ($("#"+this.resources[0]).index()) + 3)+"px'>";
