@@ -99,16 +99,7 @@ if(isset($form_action_func))
   }
 }
 
-// $object2->id = "28";
-// $object2->name = "G.I Doe";
-// $object2->groupType = "Default";
-// $object2->type = "Resource";
-// $object2->row = "U1";
-// $object2->projectID = "28";
-// $object2->typeToNotINCLUE = "Resourgfsddgfce";
-//
-// $object3 = json_encode($object2);
-// updateObject($object3);
+
 
 function checkUserExist($username) {
   $sql = "select * from user where email = '".$username."'";
@@ -180,17 +171,45 @@ function updateGeneral($arr) {
   }
 }
 
+$object2->id = "54";
+$object2->type = "Task";
+// $object2->name = "G.I Doe";
+// $object2->groupType = "Default";
+// $object2->type = "Resource";
+// $object2->row = "U1";
+// $object2->projectID = "28";
+// $object2->typeToNotINCLUE = "Resourgfsddgfce";
+
+$object3 = json_encode($object2);
+deleteObject($object3);
+
 function deleteObject($object) {
   $arr = json_decode($object,true);
-  $sql = "delete from ".$arr["type"]." where ".$arr["type"].".id=".$arr["id"];
 
-  if (db_query($sql)) {
-      echo "record removed successfully";
-  } else {
-    $failure = (string)$sql;
-    header('HTTP/1.0 404 Not found: '.$failure);
-  }
+  $link = db_connect(false);
 
+
+  $test1 = "hej";
+  if (!$link) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+  $sql = "delete from tasks where id=?";
+  $stmt = mysqli_prepare($link,$sql);
+if (!$stmt) {
+  echo "true";
+}
+  mysqli_stmt_bind_param($stmt, "s", $test1);//$arr["type"] , $arr["id"] );
+
+  // $result = mysqli_stmt_execute($stmt);
+
+  // if ($result) {
+  //     echo "record removed successfully";
+  // } else {
+  //   $failure = (string)$result;
+  //   header('HTTP/1.0 404 Not found: '.$failure);
+  // }
+  // mysqli_stmt_close($stmt);
 }
 
 // $jsonOBJ = '{"id":-1,"name":"Task: -1","startDate":"2017-05-11T16:53:08.971Z","endDate":"2017-05-12T16:53:08.971Z","parentProject":"29","resources":[37],"type":"Task","startSize":{"height":0,"width":0}}';

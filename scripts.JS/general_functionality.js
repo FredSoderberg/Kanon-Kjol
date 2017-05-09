@@ -151,6 +151,7 @@ function deleteTarget(objectID,type){
         set_resources(value,0,0);
         updateInnerHtml(value);
       })
+      dB_deleteObject(toDeleteObject);
 
 
       // console.log(toDeleteObject);
