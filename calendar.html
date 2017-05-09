@@ -36,7 +36,6 @@
 <script src="dep.JS/packery.pkgd.min.js" charset="utf-8"></script>
 
 
-
 <head>
 
   <body class="grey-background">
@@ -56,7 +55,7 @@
 
   <div id="mySidebar" class="sidebarLeft hidden">
     <a id="resourcesButton" class="w3-bar-item w3-button tabcolor">Resources</a>
-    <a class="w3-bar-item w3-button tabcolor">Edit Chategory</a>
+    <a class="w3-bar-item w3-button tabcolor">Edit Category</a>
     <a class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
   </div>
 
@@ -105,9 +104,11 @@
             <label for="name">Name</label>
             <input type="text" name="name" id="project_dialog_name" value="" class="text ui-corner-all">
             <label for="startDate">StartDate</label>
-            <input type="text" name="startDate" id="project_startDate" value="" class="text ui-corner-all">
+            <input type="text" name="startDate" id="project_startDate" value="" class="text ui-corner-all ">
+            <span class="ui-icon ui-icon-calendar"></span>
             <label for="endDate">EndDate</label>
             <input type="text" name="startDate" id="project_endDate" value="" class="text ui-corner-all">
+            <span class="ui-icon ui-icon-calendar"></span>
             <!-- Allow form submission with keyboard without duplicating the dialog button -->
             <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
           </fieldset>
@@ -131,8 +132,10 @@
         <input type="text" name="name" id="task_dialog_name" value="" class="text ui-corner-all">
         <label for="startDate">StartDate</label>
         <input type="text" name="startDate" id="task_startDate" value="" class="text ui-corner-all">
+        <span class="ui-icon ui-icon-calendar"></span>
         <label for="endDate">EndDate</label>
         <input type="text" name="startDate" id="task_endDate" value="" class="text ui-corner-all">
+        <span class="ui-icon ui-icon-calendar"></span>
         <!-- Allow form submission with keyboard without duplicating the dialog button -->
         <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
       </fieldset>
@@ -163,28 +166,33 @@
   checkLoginCookie(true);
   </script>
 
-  <button id="storage_toggle">Task storage</button>
+  <button id="storage_toggle" class="w3-grey w3-border w3-border-black">Task storage</button>
 
   <fieldset>
     <label for="name">Name</label>
     <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
-    <label for="startDate">startDate</label>
-    <input type="text" name="startDate" id="task_startDate" value="" class="text ui-widget-content ui-corner-all">
-    <label for="endDate">endDate</label>
-    <input type="text" name="startDate" id="task_endDate" value="" class="text ui-widget-content ui-corner-all">
+    <label for="startDate">StartDate</label>
+    <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
+    <span class="ui-icon ui-icon-calendar"></span>
+    <label for="endDate">EndDate</label>
+    <input type="text" name="startDate" id="taskStorage_endDate" value="" class="text ui-widget-content ui-corner-all">
+    <span class="ui-icon ui-icon-calendar"></span>
 
     <!-- Allow form submission with keyboard without duplicating the dialog button
   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
   </fieldset>
-  <button id="add_to_storage">Add Task to Storage</button>
+  <button id="add_to_storage" class="w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Add Task to Storage</button>
   </body>
 
 <script>
-  $("#task_name").val("Koda");
-  $("#task_startDate").val(cal.project.startDate);
+  $("#task_name").val("TaskName");
+  $("#taskStorage_startDate").val(cal.project.startDate);
   var d = new Date(cal.project.startDate);
   d.setDate(d.getDate() + 1);
-  $("#task_endDate").val(d);
+  $("#taskStorage_endDate").val(d);
+
+
+
 </script>
 
 
