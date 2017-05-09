@@ -109,8 +109,9 @@ Calendar.prototype._create_resources_cells = function(resource) {
 //       html += resource[config.columns[i].label.toString().toLowerCase()];
 //       html += "</div>";
 // }
+
 //      else {
-      html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString()] + "</div>";
+      html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px; background-color:"+resource.color+";'>" + resource[config.columns[i].label.toString()] + "</div>";
     // }
   }
   return html;

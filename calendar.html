@@ -13,21 +13,21 @@
 <link rel="stylesheet" href="dep.CSS/huebee.css" media="screen">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" charset="utf-8"></script>
 <script src="https://www.w3schools.com/lib/w3.js" charset="utf-8"></script>
 <script src="dep.JS/jquery-overlaps-1.2.3/jquery.overlaps.js" charset="utf-8"></script>
 <script src="dep.JS/date.js" charset="utf-8"></script>
 
-<script src="objects/task.js"charset="utf-8"></script>
-<script src="objects/project.js"charset="utf-8"></script>
-<script src="objects/resource.js"charset="utf-8"></script>
-<script src="objects/calendar.js"charset="utf-8"></script>
+<script src="objects/task.js" charset="utf-8"></script>
+<script src="objects/project.js" charset="utf-8"></script>
+<script src="objects/resource.js" charset="utf-8"></script>
+<script src="objects/calendar.js" charset="utf-8"></script>
 
-<script src="scripts.JS/config.js"charset="utf-8"></script>
-<script src="scripts.JS/calendarUtils.js"charset="utf-8"></script>
-<script src="scripts.JS/eventlistener.js"charset="utf-8"></script>
-<script src="scripts.JS/calenderPage.js"charset="utf-8"></script>
-<script src="scripts.JS/calenderInit.js"charset="utf-8"></script>
+<script src="scripts.JS/config.js" charset="utf-8"></script>
+<script src="scripts.JS/calendarUtils.js" charset="utf-8"></script>
+<script src="scripts.JS/eventlistener.js" charset="utf-8"></script>
+<script src="scripts.JS/calenderPage.js" charset="utf-8"></script>
+<script src="scripts.JS/calenderInit.js" charset="utf-8"></script>
 <script src="scripts.JS/general_functionality.js" charset="utf-8"></script>
 <script src="scripts.dB/dB_util.js" charset="utf-8"></script>
 <script src="scripts.JS/init.js" charset="utf-8"></script>
@@ -42,10 +42,10 @@
 
   <body class="grey-background">
     <div id="loading">
-<div class="cssload-loader"></div>
+      <div class="cssload-loader"></div>
     </div>
 
-      <div id="top" class="div1 w3-display-container">
+    <div id="top" class="div1 w3-display-container">
 
       <img src="img/logo/logo.svg" alt="Planning" style="height:80% " class="w3-margin-top w3-display-topmiddle">
 
@@ -57,22 +57,22 @@
 
   <div id="mySidebar" class="sidebarLeft hidden">
     <a id="resourcesButton" class="w3-bar-item w3-button tabcolor">Resources</a>
-    <a class="w3-bar-item w3-button tabcolor">Edit Category</a>
-    <a class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
-  </div>
+      <a class="w3-bar-item w3-button tabcolor">Edit Category</a>
+      <a class="w3-bar-item w3-button tabcolor">Edit Milestone</a>
+    </div>
 
 
-    <div id="resourceSidebar" class="sidebarLeft hidden" style="height: 100%; width:200px;" >
+    <div id="resourceSidebar" class="sidebarLeft hidden" style="height: 100%; width:200px;">
       <button id="back" class="w3-bar-item w3-button tabcolor">Go back</button>
 
       <ul id="newResourceList" style="margin: 0; padding: 0; margin-bottom: 10px" class="">
-        <div id="addResource"  class="ui-state-highlight center-text" style="height:30px">Drag to add resource</div>
+        <div id="addResource" class="ui-state-highlight center-text" style="height:30px">Drag to add resource</div>
       </ul>
 
       <ul id="availableResources" style="margin: 0; padding: 0; margin-bottom: 10px;" class="">
       </ul>
     </div>
-</div>
+    </div>
     <!-- TABS NEDANFÖR -->
 
     <div id="dialog" title="Tab data">
@@ -90,9 +90,9 @@
       <ul>
 
         <li id="menuIcon" class="menuIcon">
-               <div class="bar1"></div>
-               <div class="bar2"></div>
-               <div class="bar3"></div>
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
         </li>
 
         <li>
@@ -119,13 +119,13 @@
         <button id="add_tab">Add Tab</button>
 
       </ul>
-        <div id="calendarArea" style="width:100%; height:100%;">
+      <div id="calendarArea" style="width:100%; height:100%;">
 
-            <div id="calendar" class="calendar_head" style='width:100%; height:500px; '>
-            </div>
+        <div id="calendar" class="calendar_head" style='width:100%; height:500px; '>
+        </div>
       </div>
     </div>
-<!-- TABS SLUTAR HÄR -->
+    <!-- TABS SLUTAR HÄR -->
     <div id="key"></div>
     <div id="taskDialog" title="Task info" class="ui-dialog-content ui-widget-content">
       <p class="validateTips">Information about your task</p>
@@ -139,11 +139,11 @@
         <span class="ui-icon ui-icon-calendar"></span>
 
         <label for="endDate">EndDate</label>
-        <input type="text" name="startDate" id="task_endDate" value="" class="text ui-corner-all">
+        <input type="text" name="endDate" id="task_endDate" value="" class="text ui-corner-all">
         <span class="ui-icon ui-icon-calendar"></span>
 
         <label for="color-picker">Color</label>
-        <input name = "color-picker" id="task_color" class="set-bg-elem" style="width:75px;" />
+        <input name="color-picker" id="task_color" class="set-bg-elem" style="width:75px;" />
 
 
 
@@ -151,18 +151,23 @@
       </fieldset>
     </div>
 
-
     <div id="resourceDialog" title="Resource info" class="ui-dialog-content ui-widget-content">
       <p class="validateTips">Information about your resource</p>
       <fieldset style="float:left;margin-right:20px; display:block;">
+
         <label for="name">Name</label>
         <input type="text" name="name" id="resource_dialog_name" value="" class=" text ui-widget-content ui-corner-all">
+
         <label for="type">Type</label>
         <input type="text" name="type" id="resource_dialog_type" value="" class=" text ui-widget-content ui-corner-all">
+
+        <label for="color-picker">ResourceColor</label>
+        <input name="color-picker" id="resource_dialog_color" class="set-bg-elem" style="width:75px;" />
+
       </fieldset>
     </div>
 
-    <div id='deleteDialog' title='Delete this object?' >
+    <div id='deleteDialog' title='Delete this object?'>
       <p>
         <span class='ui-icon ui-icon-alert' style='float:left; margin:12px 12px 20px 0;'>
         </span>These items will be permanently deleted and cannot be recovered. Are you sure?
@@ -170,41 +175,38 @@
     </div>
 
 
-  <script type = "text/javascript">
-  var cal = new Calendar();
-  cal.init(calendar);
-  checkLoginCookie(true);
-  </script>
+    <script type="text/javascript">
+      var cal = new Calendar();
+      cal.init(calendar);
+      checkLoginCookie(true);
+    </script>
 
-  <button id="storage_toggle" class="w3-grey w3-border w3-border-black">Task storage</button>
+    <button id="storage_toggle" class="w3-grey w3-border w3-border-black">Task storage</button>
 
-  <fieldset>
-    <label for="name">Name</label>
-    <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
-    <label for="startDate">StartDate</label>
-    <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
-    <span class="ui-icon ui-icon-calendar"></span>
-    <label for="endDate">EndDate</label>
-    <input type="text" name="startDate" id="taskStorage_endDate" value="" class="text ui-widget-content ui-corner-all">
-    <span class="ui-icon ui-icon-calendar"></span>
+    <fieldset>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
+      <label for="startDate">StartDate</label>
+      <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
+      <span class="ui-icon ui-icon-calendar"></span>
+      <label for="endDate">EndDate</label>
+      <input type="text" name="startDate" id="taskStorage_endDate" value="" class="text ui-widget-content ui-corner-all">
+      <span class="ui-icon ui-icon-calendar"></span>
 
-    <!-- Allow form submission with keyboard without duplicating the dialog button
+      <!-- Allow form submission with keyboard without duplicating the dialog button
   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-  </fieldset>
-  <button id="add_to_storage" class="w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Add Task to Storage</button>
-  <button class="color-button">Select color</button>
-</body>
+    </fieldset>
+    <button id="add_to_storage" class="w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Add Task to Storage</button>
+    <button class="color-button">Select color</button>
+  </body>
 
-<script>
-  $("#task_name").val("TaskName");
-  $("#taskStorage_startDate").val(cal.project.startDate);
-  var d = new Date(cal.project.startDate);
-  d.setDate(d.getDate() + 1);
-  $("#taskStorage_endDate").val(d);
-
-
-
-</script>
+  <script>
+    $("#task_name").val("TaskName");
+    $("#taskStorage_startDate").val(cal.project.startDate);
+    var d = new Date(cal.project.startDate);
+    d.setDate(d.getDate() + 1);
+    $("#taskStorage_endDate").val(d);
+  </script>
 
 
 </html>
