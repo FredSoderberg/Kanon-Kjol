@@ -151,7 +151,7 @@ function deleteTarget(objectID,type){
         updateInnerHtml(value);
       })
       dB_deleteObject(toDeleteObject);
-      cal.project.remove_resource_by_id(object.id);
+      cal.project.remove_resource_by_id(objectID);
 
 
       // console.log(toDeleteObject);

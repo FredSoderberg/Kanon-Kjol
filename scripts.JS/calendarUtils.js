@@ -118,7 +118,7 @@ Calendar.prototype._create_resources_cells = function(resource) {
 
 Calendar.prototype._create_date_headers = function() {
   var date = new Date(this.project.startDate.getTime());
-  console.log("Datumet:",date);
+  // console.log("Datumet:",date);
   var amount = this.project.lengthDays;
   var html = "";
 

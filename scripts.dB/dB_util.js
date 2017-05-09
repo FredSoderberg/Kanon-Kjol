@@ -44,7 +44,7 @@ function dB_loadProjects(user) {
     function: "loadProjects",
     username: user,
   }).done(function(data) {
-      console.log("projectID:",data);
+      // console.log("projectID:",data);
       data =  data[0];
       cal.project.id             = Number(data.id);
       cal.project.name           = data.name;
@@ -212,7 +212,6 @@ function dB_deleteObject(object) {
     function: "deleteObject",
     objectToSend: stringObject
   }).done(function(data) {
-    
     console.log("removed data: " + data);
   }).fail(function(jqxhr, textStatus, error) {
     var err = textStatus + ", " + error;
