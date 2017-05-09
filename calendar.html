@@ -95,9 +95,23 @@
         </li>
 
         <li>
-          <a href="#calendarArea">Projekt 1</a>
+          <a id="proj" href="#calendarArea">Projekt 1</a>
           <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
         </li>
+
+        <div id="projectDialog" title="Project info" class="ui-dialog-content ui-widget-content">
+          <p class="validateTips">Information about your project</p>
+          <fieldset style="float:left;margin-right:20px; display:block;">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="project_dialog_name" value="" class="text ui-corner-all">
+            <label for="startDate">StartDate</label>
+            <input type="text" name="startDate" id="project_startDate" value="" class="text ui-corner-all">
+            <label for="endDate">EndDate</label>
+            <input type="text" name="startDate" id="project_endDate" value="" class="text ui-corner-all">
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+          </fieldset>
+        </div>
 
         <button id="add_tab">Add Tab</button>
 
