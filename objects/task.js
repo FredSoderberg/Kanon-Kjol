@@ -1,4 +1,4 @@
-function Task(startDate, endDate, resID, taskID, name) {
+function Task(startDate, endDate, resID, taskID, name, days) {
   this.id = taskID;
   this.name = "";
 
@@ -10,6 +10,7 @@ function Task(startDate, endDate, resID, taskID, name) {
 
   this.startDate = startDate;
   this.endDate = endDate;
+  this.lengthInDays = days;
 
   this.parentProject = cal.project.id;
   this.resources = resID;
@@ -45,18 +46,16 @@ Task.prototype.render = function() {
   updateInnerHtml(this);
 };
 Task.prototype.render_task_storage = function() {
-  var timeDiff = Math.abs(this.endDate.getTime() - this.startDate.getTime());
-  var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  //var timeDiff = Math.abs(this.endDate.getTime() - this.startDate.getTime());
+  //var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
   //console.log("Task_render: ", this)
   //console.log("Index: ", $("#"+this.resources[0]).index())
   //var amountOfDays =
   var html = "<div id='task_" + this.id +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar grid-item' "+
-                  "style='width : " + (config.dateHeaderWidth * (diffDays + 1) - 6)+"px;"+
-                        "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
-                           "left: " + (config.dateHeaderWidth * this.calculate_days() + 3)+"px;"+
-                           "top: " + (config.rowHeight * ($("#"+this.resources[0]).index()) + 3)+"px'>";
+                  "style='width : " + (config.dateHeaderWidth * this.lengthInDays - 6)+"px;"+
+                        "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px'>";
 
   html += "</div>";
 

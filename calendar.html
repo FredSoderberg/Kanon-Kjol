@@ -181,6 +181,10 @@
   <fieldset>
     <label for="name">Name</label>
     <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
+    <label for="lengthInDays">Days</label>
+    <input type="text" name="lengthInDays" id="taskStorage_lengthInDays" value="" class="text ui-widget-content ui-corner-all">
+    <span class="ui-icon ui-icon-calendar"></span>
+    <!--
     <label for="startDate">StartDate</label>
     <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
     <span class="ui-icon ui-icon-calendar"></span>
@@ -197,10 +201,11 @@
 
 <script>
   $("#task_name").val("TaskName");
-  $("#taskStorage_startDate").val(cal.project.startDate);
-  var d = new Date(cal.project.startDate);
-  d.setDate(d.getDate() + 1);
-  $("#taskStorage_endDate").val(d);
+  //$("#taskStorage_startDate").val(cal.project.startDate);
+  $("#taskStorage_lengthInDays").val(2);
+  //var d = new Date(cal.project.startDate);
+  //d.setDate(d.getDate() + 1);
+  //$("#taskStorage_endDate").val(d);
 
 
 

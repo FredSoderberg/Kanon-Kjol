@@ -162,11 +162,13 @@ Calendar.prototype.create_resource = function (dropped,target,flag) {
   dB_updateObject(cal.project);
 };
 
-Calendar.prototype.create_task_for_storage = function(name, startTime, endTime){
-  if (startTime === undefined) startTime = new Date(this.project.startDate.getTime());
-  if (endTime   === undefined) endTime   = new Date(this.project.startDate.getTime()+(1*24*60*60*1000));
-
-  return this.project.create_task(startTime, endTime, 0, name);
+Calendar.prototype.create_task_for_storage = function(name, days){
+  //if (startTime === undefined) startTime = new Date(this.project.startDate.getTime());
+  //if (endTime   === undefined) endTime   = new Date(this.project.startDate.getTime());
+  var newTask = this.project.create_task(new Date(this.project.startDate.getTime()), new Date(this.project.startDate.getTime()), 0, name, days);
+  dB_storeObject(newTask);
+  dB_updateObject(cal.project);
+  return
 
 }
 
