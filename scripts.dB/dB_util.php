@@ -181,7 +181,7 @@ $object2->type = "Task";
 // $object2->typeToNotINCLUE = "Resourgfsddgfce";
 
 $object3 = json_encode($object2);
-deleteObject($object3);
+//deleteObject($object3);
 
 function deleteObject($object) {
   $arr = json_decode($object,true);
@@ -197,7 +197,7 @@ function deleteObject($object) {
   $sql = "delete from tasks where id=?";
   $stmt = mysqli_prepare($link,$sql);
 if (!$stmt) {
-  echo "true";
+  //echo "true";
 }
   mysqli_stmt_bind_param($stmt, "s", $test1);//$arr["type"] , $arr["id"] );
 
