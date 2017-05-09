@@ -118,7 +118,7 @@ $(".task_view_bars").on('resizestop', function(event, ui) {
   set_resources(task, shiftResources, 0);
   updateInnerHtml(task);
 
-  console.log("update:resizestop");
+  // console.log("update:resizestop");
   dB_updateObject(task);
 })
 
@@ -178,15 +178,23 @@ $(".task_view_bars").on('dragstart', function(event, ui) {
 });
 
 function set_resources(task, shiftResources, shiftTop){
-  var startRow = get_row_index(task) + shiftTop;
-
+  var startRow = get_row_index(task) //+ shiftTop;
+console.log("startRow",startRow);
   //console.log("column diff", shiftTime);
   //console.log("row shift", shiftResources);
   var length = (task.resources.length + shiftResources);
   task.resources = [];
   for (var i = 0; i < length; i++) {
+    if (cal.divResourceViewData.children[startRow + i] === undefined) {
+      task.endDate.add("d",1);
+      $("#task_"+task.id).animate({width:"+="+config.dateHeaderWidth+"px"},50);
+      $("#task_"+task.id).animate({height:"-="+config.rowHeight+"px"},50);
+      return;
+    }
     //console.log("startwor:", (i))
+    console.log(i,":", startRow + i);
     task.resources[i] = cal.divResourceViewData.children[startRow + i].id;
+    console.log(task.id,":",task.resources[i]);
   }
 }
 
@@ -200,7 +208,11 @@ function get_task_position(event) {
 }
 
 function get_row_index(task) {
-  return $("#" + task.resources[0]).index();
+  var val = $("#task_"+task.id).css("top");
+   val = val.substring(0,val.length - 2);
+  var div30 = parseInt(val)/config.rowHeight;
+  var floored = Math.floor(div30);
+  return floored;//$("#" + task.resources[0]).index();
 }
 
 function otherTasks(thisTaskID, parentTaskID, overlappingTasks){
@@ -234,8 +246,16 @@ function handleY(thisTaskID, parentTaskID, overlappingTasks){
   var indexNewRes = startRow + changePos.top;
 */
 
-
-  if (overlappingTasks.length <= 0) return;
+  //
+  // if (overlappingTasks.length <= 0 && $(".task_bar").overlaps(".task_bar").length <= 0) {
+  //   return;
+  // }
+  // else if ($(".task_bar").overlaps(".task_bar").length > 0) {
+  //   console.log($(".task_bar").overlaps(".task_bar"));
+  // }
+  if (overlappingTasks.length <= 0) {
+    return;
+  }
 
 
 
@@ -305,8 +325,12 @@ function handleX(thisTaskID, parentTaskID) {
           return true;
         }
         handleY(thisTaskID, parentTaskID, overlappingTasks);
+
+
       })
-      return true
+      // console.log(currTaskID,"-return");
+      return true;
+
 }
 
 function removeDragRez(id) {
@@ -323,6 +347,7 @@ function addDragRez(id) {
 
   $("#"+id).resizable({
     grid: [ config.dateHeaderWidth , config.rowHeight ],
+
     containment: ".task_view_rows",
     start: function (e) {
       // console.log("e",e);
@@ -332,6 +357,8 @@ function addDragRez(id) {
       $('body').mousemove(moveHandler);
     },
     stop: function(){
+      console.log(this);
+
       mouseEngaged = 0;
       $('body').unbind('mousemove', moveHandler);
       $('#sliderBlock').remove();

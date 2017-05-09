@@ -144,16 +144,16 @@ function deleteTarget(objectID,type){
     case "Resource":
 
       var toDeleteObject = cal.project.get_task_by_resource(objectID);
+      $("#"+objectID).remove();
+      $("#row_"+objectID).remove();
       $.each(cal.project.get_task_by_resource(objectID), function (index,value) {
-        console.log(cal.project.get_task_by_id(value));
-        set_resources(cal.project.get_task_by_id(value),0,0)
-
-        
-        $("#"+objectID).remove();
-        $("#row_"+objectID).remove();
+        console.log(value);
+        set_resources(value,0,0);
+        updateInnerHtml(value);
       })
 
-      console.log(toDeleteObject);
+
+      // console.log(toDeleteObject);
     break;
 
     case "Task":

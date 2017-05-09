@@ -105,6 +105,7 @@ function dB_loadTasks(projIDToGet) {
         var startDatetoAdd = new Date(Date.parse(value.startDate));
         var endDatetoAdd = new Date(Date.parse(value.endDate));
         var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,Number(value.id));
+        toAdd.name = value.name;
         cal.project.tasks.push(toAdd)
         toAdd.render();
       })

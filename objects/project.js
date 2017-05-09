@@ -45,24 +45,14 @@ Project.prototype.create_task = function(startDate, endDate, resID, name) {
 
 Project.prototype.get_task_by_resource = function(resID){
   var touchingTasks = [];
-  var currTask
   $.each(this.tasks, function (index,valueTask) {
 
     $.each(valueTask.resources, function (index,valueResource) {
       if (valueResource === resID) {
-        console.log(valueTask);
-        //TODO får ut tasks som berörs men finns dubletter av nån anledning?
+        touchingTasks.push(valueTask);
       }
     })
-
   })
-    // for (var i2 = 0; i < currTask.resources.length; i2++) {
-    //   if (currTask.resources[i] == resID) {
-    //     touchingTasks.push(this.tasks[i].resources[i2]);
-    //   }
-
-
-
   return touchingTasks;
 }
 
