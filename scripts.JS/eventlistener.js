@@ -321,19 +321,6 @@ $(document).ready(function() {
 
 }
 
-
-
-
-  // function change_projectinfo (){
-  //   var project = cal.project.get_task_by_id(taskDialogID);
-  //   project.name = $("#project_dialog_name").val();
-  //   updateInnerHtml(project);
-  //
-  //   projectDialog.dialog( "close" );
-  //   dB_updateObject(project);
-  // }
-
-
   $(document).on("dblclick", ".resource_row", function(event, ui) {
     resourceDialogID = Number($(event.target).parent().attr("id"));
     var resourceObject = cal.project.get_resource_by_id(resourceDialogID);
@@ -351,7 +338,10 @@ $(document).ready(function() {
     $("#task_dialog_name").val(taskObject.name);
     $("#task_startDate").val(taskObject.startDate);
     $("#task_endDate").val(taskObject.endDate);
+    $("#task_color").val(taskObject.color);
+    // console.log(taskObject.color);
     $("#task_color").css("background-color", ($("#" + event.target.id).css("background-color")));
+    //console.log(taskDialogID);
     taskDialog.dialog("open");
   })
 

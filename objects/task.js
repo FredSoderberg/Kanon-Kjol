@@ -187,6 +187,7 @@ function set_resources(task, shiftResources, shiftTop){
   var length = (task.resources.length + shiftResources);
   task.resources = [];
   for (var i = 0; i < length; i++) {
+    // console.log(cal.divResourceViewData.children[startRow + i]);
     if (cal.divResourceViewData.children[startRow + i] === undefined) {
       task.endDate.add("d",1);
       $("#task_"+task.id).animate({width:"+="+config.dateHeaderWidth+"px"},50);
@@ -359,7 +360,7 @@ function addDragRez(id) {
       $('body').mousemove(moveHandler);
     },
     stop: function(){
-      console.log(this);
+      // console.log(this);
 
       mouseEngaged = 0;
       $('body').unbind('mousemove', moveHandler);

@@ -45,14 +45,16 @@ Project.prototype.create_task = function(startDate, endDate, resID, name, days) 
 
 Project.prototype.get_task_by_resource = function(resID){
   var touchingTasks = [];
-  $.each(this.tasks, function (index,valueTask) {
-
+  $.each(cal.project.tasks, function (index,valueTask) {
+// console.log();
     $.each(valueTask.resources, function (index,valueResource) {
-      if (valueResource === resID) {
+      if (valueResource == resID) {
+        // console.log("träff:",valueTask);
         touchingTasks.push(valueTask);
       }
     })
   })
+  console.log(touchingTasks);
   return touchingTasks;
 }
 
@@ -60,7 +62,7 @@ Project.prototype.get_task_by_id = function (taskID) {
 
   for (var task in this.tasks) {
     // console.log(this.tasks[task].id)
-    if (this.tasks[task].id === taskID) {
+    if (this.tasks[task].id == taskID) {
       return this.tasks[task];
     }
   }
@@ -119,9 +121,9 @@ Project.prototype.render_all_resources = function () {
 Project.prototype.remove_resource_by_id = function (objectID) {
   //this funkar inte?
 $.each(this.resources, function(index,value) {
-  console.log(value);
+  // console.log(value);
   if (value.id === objectID) {
-    console.log("träff:",index);
+    // console.log("träff:",index);
     cal.project.resources.splice(index,1);
     return false;
   }
