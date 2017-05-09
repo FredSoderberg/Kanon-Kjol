@@ -192,7 +192,7 @@ function set_resources(task, shiftResources, shiftTop){
       task.endDate.add("d",1);
       $("#task_"+task.id).animate({width:"+="+config.dateHeaderWidth+"px"},50);
       $("#task_"+task.id).animate({height:"-="+config.rowHeight+"px"},50);
-      return;
+      return task;
     }
     //console.log("startwor:", (i))
     // console.log(i,":", startRow + i);

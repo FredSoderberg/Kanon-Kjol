@@ -20,6 +20,7 @@ $(document).ready(function(){
           if(ui.sender[0].id === "sortable") {
             // console.log("droppedid remove:",ui.item[0].id);
             $("#row_"+ui.item[0].id).remove();
+            updateTasksReosurces(ui.item[0].id)
           }
          }
     });
@@ -82,7 +83,7 @@ $(document).ready(function(){
 
     $("#tabs").tabs({
           activate: function(event, ui){
-          
+
           }
       });
 

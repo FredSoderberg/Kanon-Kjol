@@ -139,6 +139,14 @@ $(cookieDiv).appendTo("body");
 }
 
 
+function updateTasksReosurces(objectID) {
+  $.each(cal.project.get_task_by_resource(objectID), function (index,value) {
+    set_resources(value,0,0);
+    updateInnerHtml(value);
+    dB_updateObject(value);
+  })
+}
+
 function deleteTarget(objectID,type){
   switch (type) {
     case "Resource":
@@ -146,10 +154,7 @@ function deleteTarget(objectID,type){
       var toDeleteObject = cal.project.get_resource_by_id(objectID);
       $("#"+objectID).remove();
       $("#row_"+objectID).remove();
-      $.each(cal.project.get_task_by_resource(objectID), function (index,value) {
-        set_resources(value,0,0);
-        updateInnerHtml(value);
-      })
+      updateTasksReosurces(objectID)
       dB_deleteObject(toDeleteObject);
       cal.project.remove_resource_by_id(objectID);
 
