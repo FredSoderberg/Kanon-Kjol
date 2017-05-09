@@ -109,8 +109,9 @@ Calendar.prototype._create_resources_cells = function(resource) {
 //       html += resource[config.columns[i].label.toString().toLowerCase()];
 //       html += "</div>";
 // }
+
 //      else {
-      html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px'>" + resource[config.columns[i].label.toString()] + "</div>";
+      html += "<div class='resource_cell' style='width: " + config.columns[i].width + "px; background-color:"+resource.color+";'>" + resource[config.columns[i].label.toString()] + "</div>";
     // }
   }
   return html;
@@ -162,12 +163,11 @@ Calendar.prototype.create_resource = function (dropped,target,flag) {
   dB_updateObject(cal.project);
 };
 
-Calendar.prototype.create_task_for_storage = function(name, startTime, endTime){
-  if (startTime === undefined) startTime = new Date(this.project.startDate.getTime());
-  if (endTime   === undefined) endTime   = new Date(this.project.startDate.getTime()+(1*24*60*60*1000));
+Calendar.prototype.create_task_for_storage = function(name, days){
+  //if (startTime === undefined) startTime = new Date(this.project.startDate.getTime());
+  //if (endTime   === undefined) endTime   = new Date(this.project.startDate.getTime());
 
-  return this.project.create_task(startTime, endTime, 0, name);
-
+  return this.project.create_task(new Date(this.project.startDate.getTime()), new Date(this.project.startDate.getTime()), 0, name, days);
 }
 
 

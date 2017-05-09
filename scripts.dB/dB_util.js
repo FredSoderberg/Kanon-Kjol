@@ -89,6 +89,7 @@ function dB_loadResources(projIDToGet) {
         value['name'],
         value['groupType']);
         toAdd.row = value['rowNumber'];
+        toAdd.color = value['color'];
         toAdd.projectID = projIDToGet;
   //      console.log(projIDToGet,"- resurs:",toAdd);
         cal.project.resources.push(toAdd);
