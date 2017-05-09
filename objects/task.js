@@ -116,6 +116,8 @@ $(".task_view_bars").on('resizestop', function(event, ui) {
   //console.log("Shifttime:", shiftTime)
   task.endDate.setDate(task.endDate.getDate() + shiftTime);
 
+  handleY("task_"+id, null,$("#"+"task_"+id).overlaps(".task_bar"));
+
   set_resources(task, shiftResources, 0);
   updateInnerHtml(task);
 

@@ -64,6 +64,7 @@ $at.click(function() {
 
   updateInnerHtml(newTask);
 
+  $("#task_name").val("");
 
   });
 
@@ -82,12 +83,10 @@ $(".task_view_rows").droppable({
     var $targetCell = $(document.elementFromPoint(ui.offset.left, ui.offset.top));
 
 
-
-
     console.log("clone pos",$targetCell.position(), $clone)
     $(this).parent().children().eq(2).append($clone);
 
-    $clone.css({top: $targetCell.position().top +"px", left: $targetCell.position().left + "px", position:'absolute'});
+    $clone.css({top: ($targetCell.position().top + 3 )+"px", left: ($targetCell.position().left + 3)+ "px", position:'absolute'});
     $clone.removeClass('grid-item');
     /*
     $clone.removeClass();
@@ -102,13 +101,22 @@ $(".task_view_rows").droppable({
             */
     //ui.helper.remove();
     //ui.draggable.remove();
+
+
     $(".packery-drop-placeholder").remove();
     $grid.packery('remove', $(".packery-drop-placeholder")).packery('shiftLayout');
     $grid.packery('remove', ui.draggable).packery('shiftLayout');
-
+    handleY($clone.attr("id"), null,$clone.overlaps(".task_bar"));
   }
+});
 
-})
+$(document).keyup(function(event){
+    if(event.keyCode == 13){
+        $("#add_to_storage").click();
+        $("#task_name").focus();
+
+    }
+});
 
 
 
