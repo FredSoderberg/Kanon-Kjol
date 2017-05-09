@@ -8,7 +8,7 @@ Calendar.prototype.init = function(whereToStart) {
   //this.project.init_test();
   this._init_html_area(whereToStart);
   this._set_size();
-  cal._create_date_headers();
+  // this._create_date_headers();
   this._create_resource_headers();
   //this._load_resources();
 

@@ -119,9 +119,11 @@ Project.prototype.render_all_resources = function () {
 Project.prototype.remove_resource_by_id = function (objectID) {
   //this funkar inte?
 $.each(this.resources, function(index,value) {
+  console.log(value);
   if (value.id === objectID) {
+    console.log("träff:",index);
     cal.project.resources.splice(index,1);
-    return;
+    return false;
   }
 })
 
@@ -132,7 +134,7 @@ Project.prototype.remove_task_by_id = function (objectID) {
   $.each(this.tasks, function(index,value) {
     if (value.id === objectID) {
       cal.project.tasks.splice(index,1);
-      return;
+      return false;
     }
   })
 };

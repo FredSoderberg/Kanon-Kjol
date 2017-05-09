@@ -49,7 +49,7 @@ function dB_loadProjects(user) {
       var startDate = new Date(Date.parse(data.startDate));
       var stopDate = new Date(Date.parse(data.stopDate));
       var lengthDays = startDate.distanceInDays(stopDate);
-      console.log(lengthDays);
+      // console.log(lengthDays);
       cal.project = new Project (data.name, lengthDays, data.adminEmail)
       cal.project.id             = Number(data.id);
       // cal.project.name           = data.name;
