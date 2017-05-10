@@ -128,6 +128,9 @@ Calendar.prototype._create_date_headers = function() {
 
   for (var i = 0; i < amount; i++) {
     if (date.getDayAbbreviation() === "Sun" || (i+1) === amount){
+      if((i+1) === amount) {
+        date.add("d", 2);
+      }
       weekhtml += "<div class='task_week_cell' style='width: "+(config.dateHeaderWidth*weekdays)+"px'> W:"+date.getWeekNumber()+"</div>"
       weekdays = 1;
     }else {

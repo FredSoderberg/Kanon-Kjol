@@ -119,8 +119,8 @@ $(document).ready(function() {
   var taskDialog = $("#taskDialog");
   taskDialog.dialog({
     autoOpen: false,
-    height: 400,
-    width: 350,
+    height: 600,
+    width: 500,
     modal: true,
     buttons: {
       "Delete": function() {
