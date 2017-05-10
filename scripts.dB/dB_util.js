@@ -113,8 +113,7 @@ function dB_loadTasks(projIDToGet) {
         var resourceList = JSON.parse(value.resources);
         var startDatetoAdd = new Date(Date.parse(value.startDate));
         var endDatetoAdd = new Date(Date.parse(value.endDate));
-        var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,Number(value.id));
-        toAdd.name = value.name;
+        var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,Number(value.id),value.name,Number(value.lengthInDays));
         toAdd.color = value.color;
         cal.project.tasks.push(toAdd)
         toAdd.render();
@@ -230,7 +229,7 @@ function dB_deleteObject(object) {
 
 function dB_updateObject(object) {
   stringObject = JSON.stringify(object);
-  // console.log("object: " + stringObject);
+  console.log("object: " + stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "updateObject",
@@ -278,88 +277,88 @@ function dB_updateObjectAndReload(object) {
 
 
 // ----------------------- DEPRECATED ------------------------------------------
-function dB_builObjectTable(object) {
-  stringObject = JSON.stringify(object);
-  // console.log("object: " + stringObject);
-
-  $.post('scripts.dB/dB_util.php', {
-    function: "builObjectTable",
-    objectToSend: stringObject
-  }).done(function(data) {
-    console.log("created table data: " + data);
-  }).fail(function(jqxhr, textStatus, error) {
-    var err = textStatus + ", " + error;
-    console.log("Request Failed: " + err);
-  });
-}
-
-function dB_buildAllTables(objects) {
-  $.each(objects, function(index, value) {
-    if (value.type === "user") {
-      dB_buildUserTable();
-    } else {
-      dB_builObjectTable(value);
-    }
-
-  });
-}
-
-function dB_buildUserTable() {
-  $.post('scripts.dB/dB_util.php', {function: "builUserTable"}).done(function(data) {
-    console.log("created table data: " + data);
-  }).fail(function(jqxhr, textStatus, error) {
-    var err = textStatus + ", " + error;
-    console.log("Request Failed: " + err);
-  });
-}
-
-function dB_dropObjectTable(object) {
-  stringObject = JSON.stringify(object);
-  console.log("object: " + stringObject);
-
-  $.post('scripts.dB/dB_util.php', {
-    function: "dropObjectTable",
-    objectToSend: stringObject
-  }).done(function(data) {
-    console.log("droped table data: " + data);
-  }).fail(function(jqxhr, textStatus, error) {
-    var err = textStatus + ", " + error;
-    console.log("Request Failed: " + err);
-  });
-}
-
-function dB_createDatabase(objects) {
-  $.post('scripts.dB/dB_util.php', {function: "createDatabase"}).done(function(data) {
-    console.log("created Nock-Off database: " + data);
-    $.each(objects, function(index, value) {
-      if (value.type === "user") {
-        dB_buildUserTable();
-      } else {
-        dB_builObjectTable(value);
-      }
-
-    });
-
-  }).fail(function(jqxhr, textStatus, error) {
-    var err = textStatus + ", " + error;
-    console.log("Request Failed: " + err);
-  });
-}
-
-function dB_dropAllTables(objects) {
-  $.each(objects, function(index, value) {
-    dB_dropObjectTable(value);
-  });
-}
-
-function dB_dropDB() {
-  $.post('scripts.dB/dB_util.php', {function: "dropDB"}).done(function(data) {
-    console.log("dropped Nock-Off database: " + data);
-  }).fail(function(jqxhr, textStatus, error) {
-    var err = textStatus + ", " + error;
-    console.log("Request Failed: " + err);
-  });
-}
+// function dB_builObjectTable(object) {
+//   stringObject = JSON.stringify(object);
+//   // console.log("object: " + stringObject);
+//
+//   $.post('scripts.dB/dB_util.php', {
+//     function: "builObjectTable",
+//     objectToSend: stringObject
+//   }).done(function(data) {
+//     console.log("created table data: " + data);
+//   }).fail(function(jqxhr, textStatus, error) {
+//     var err = textStatus + ", " + error;
+//     console.log("Request Failed: " + err);
+//   });
+// }
+//
+// function dB_buildAllTables(objects) {
+//   $.each(objects, function(index, value) {
+//     if (value.type === "user") {
+//       dB_buildUserTable();
+//     } else {
+//       dB_builObjectTable(value);
+//     }
+//
+//   });
+// }
+//
+// function dB_buildUserTable() {
+//   $.post('scripts.dB/dB_util.php', {function: "builUserTable"}).done(function(data) {
+//     console.log("created table data: " + data);
+//   }).fail(function(jqxhr, textStatus, error) {
+//     var err = textStatus + ", " + error;
+//     console.log("Request Failed: " + err);
+//   });
+// }
+//
+// function dB_dropObjectTable(object) {
+//   stringObject = JSON.stringify(object);
+//   console.log("object: " + stringObject);
+//
+//   $.post('scripts.dB/dB_util.php', {
+//     function: "dropObjectTable",
+//     objectToSend: stringObject
+//   }).done(function(data) {
+//     console.log("droped table data: " + data);
+//   }).fail(function(jqxhr, textStatus, error) {
+//     var err = textStatus + ", " + error;
+//     console.log("Request Failed: " + err);
+//   });
+// }
+//
+// function dB_createDatabase(objects) {
+//   $.post('scripts.dB/dB_util.php', {function: "createDatabase"}).done(function(data) {
+//     console.log("created Nock-Off database: " + data);
+//     $.each(objects, function(index, value) {
+//       if (value.type === "user") {
+//         dB_buildUserTable();
+//       } else {
+//         dB_builObjectTable(value);
+//       }
+//
+//     });
+//
+//   }).fail(function(jqxhr, textStatus, error) {
+//     var err = textStatus + ", " + error;
+//     console.log("Request Failed: " + err);
+//   });
+// }
+//
+// function dB_dropAllTables(objects) {
+//   $.each(objects, function(index, value) {
+//     dB_dropObjectTable(value);
+//   });
+// }
+//
+// function dB_dropDB() {
+//   $.post('scripts.dB/dB_util.php', {function: "dropDB"}).done(function(data) {
+//     console.log("dropped Nock-Off database: " + data);
+//   }).fail(function(jqxhr, textStatus, error) {
+//     var err = textStatus + ", " + error;
+//     console.log("Request Failed: " + err);
+//   });
+// }
 
 //------------------------------------------------------
 // function removeTask(task) {

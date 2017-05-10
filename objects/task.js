@@ -1,6 +1,5 @@
 function Task(startDate, endDate, resID, taskID, name, days) {
   this.id = taskID;
-  this.name = "";
 
   if (name === undefined){
     this.name = "Task: " + taskID;
@@ -189,15 +188,24 @@ function set_resources(task, shiftResources, shiftTop){
   for (var i = 0; i < length; i++) {
     // console.log(cal.divResourceViewData.children[startRow + i]);
     if (cal.divResourceViewData.children[startRow + i] === undefined) {
+      
       task.endDate.add("d",1);
-      $("#task_"+task.id).animate({width:"+="+config.dateHeaderWidth+"px"},50);
-      $("#task_"+task.id).animate({height:"-="+config.rowHeight+"px"},50);
-      return task;
+      $("#task_"+task.id).animate({width:"+="+config.dateHeaderWidth+"px"},50).promise().done(function ()
+      {
+        $("#task_"+task.id).animate({height:"-="+config.rowHeight+"px"},50).promise().done(function () {
+          handleY("task_"+task.id, null,$("#"+"task_"+task.id).overlaps(".task_bar"));
+          return false;
+        })
+      // $("#task_"+task.id).animate({},50);
+    })}
+    else {
+      task.resources[i] = cal.divResourceViewData.children[startRow + i].id;
     }
     //console.log("startwor:", (i))
     // console.log(i,":", startRow + i);
-    task.resources[i] = cal.divResourceViewData.children[startRow + i].id;
+
     // console.log(task.id,":",task.resources[i]);
+
   }
 }
 

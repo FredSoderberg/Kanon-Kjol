@@ -140,7 +140,11 @@ $(cookieDiv).appendTo("body");
 
 
 function updateTasksReosurces(objectID) {
-  $.each(cal.project.get_task_by_resource(objectID), function (index,value) {
+  var tasksToUpdate = cal.project.get_task_by_resource(objectID);
+  console.log(tasksToUpdate);
+  $.each(tasksToUpdate, function (index,value) {
+
+    console.log("index:",index,":",value);
     set_resources(value,0,0);
     updateInnerHtml(value);
     dB_updateObject(value);

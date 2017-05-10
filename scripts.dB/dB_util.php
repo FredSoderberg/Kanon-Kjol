@@ -99,17 +99,6 @@ if(isset($form_action_func))
   }
 }
 
-// $object2->id = "28";
-// $object2->name = "G.I Doe";
-// $object2->groupType = "Default";
-// $object2->type = "Resource";
-// $object2->row = "U1";
-// $object2->projectID = "28";
-// $object2->typeToNotINCLUE = "Resourgfsddgfce";
-//
-// $object3 = json_encode($object2);
-// updateObject($object3);
-
 function checkUserExist($username) {
   $sql = "select * from user where email = '".$username."'";
   $result = db_query($sql);
@@ -149,6 +138,19 @@ function updateResProjRelation($arr) {
   }
 }
 
+// $object2->id = "28";
+// $object2->name = "G.I Doe";
+// $object2->startDate = "Default";
+// $object2->endDate = "U1";
+// $object2->lengthDays = 2;
+// $object2->parentProject = "28";
+// $object2->resources = [20];
+// $object2->color = "#AFA2"
+// $object2->type = "Task"
+//
+// $object3 = json_encode($object2);
+// updateObject($object3);
+
 function updateGeneral($arr) {
 
   $sql = "update ".$arr["type"]." SET ";
@@ -171,7 +173,7 @@ function updateGeneral($arr) {
   }
   $sql = substr($sql,0,-2);
   $sql .= " where ".$arr["type"].".id = ".$arr["id"];
-
+// echo $sql
   if (db_query($sql)) {
       echo "record modified successfully";
   } else {

@@ -182,8 +182,8 @@ Calendar.prototype.create_task = function(cell, resID) {
   endDate.setDate(endDate.getDate()+1);
 
   //console.debug("Task: ", $("#task_" + this.project.taskID).position())
-
-  var newTask = this.project.create_task(startDate, endDate, resID);
+console.log(resID);
+  var newTask = this.project.create_task(startDate, endDate, resID,undefined,startDate.distanceInDays(endDate)+1);
 
   //console.log("Task_prerender: ", newTask)
   dB_storeObject(newTask);

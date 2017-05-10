@@ -54,7 +54,7 @@ Project.prototype.get_task_by_resource = function(resID){
       }
     })
   })
-  console.log(touchingTasks);
+  // console.log(touchingTasks);
   return touchingTasks;
 }
 
