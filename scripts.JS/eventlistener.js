@@ -278,6 +278,31 @@ $(document).ready(function() {
     var task = cal.project.get_task_by_id(taskDialogID);
     task.name = $("#task_dialog_name").val();
     task.color = $("#task_color").val();
+    var newDayCount = new Date($("#task_startDate").val()).distanceInDays(new Date($("#task_endDate").val()));
+    newDayCount++;
+    // console.log(newDayCount);
+
+    if ( (newDayCount <= 0)) {
+      taskDialog.dialog("close");
+      return;
+    }
+
+    if (task.startDate != $("#task_startDate").val() ||
+        task.endDate != $("#task_endDate").val()) {
+          task.lengthInDays = newDayCount
+          task.startDate = new Date($("#task_startDate").val());
+          task.endDate = new Date($("#task_endDate").val());
+
+          $("#task_"+task.id).remove();
+          if(task.resources[0] === 0) {
+            task.render_toStorage();
+          }
+          else {
+          task.render();
+          }
+
+    }
+
     $("#task_" + taskDialogID).css("background-color", $("#task_color").val());
     updateInnerHtml(task);
 
@@ -286,37 +311,20 @@ $(document).ready(function() {
   };
 
   function change_projectinfo (){
-
-
-
   cal.project.name = $("#project_dialog_name").val();
-
   $("#proj").html($("#project_dialog_name").val())
-
-  console.log(cal.project.startDate);
-
-  console.log($("#project_startDate").val());
-
+  // console.log(cal.project.startDate);
+  // console.log($("#project_startDate").val());
   if (  cal.project.startDate != $("#project_startDate").val() ||
-
         cal.project.stopDate != $("#project_endDate").val())
-
         {
-
           cal.project.startDate = $("#project_startDate").val();
-
           cal.project.stopDate = $("#project_endDate").val();
-
           projectDialog.dialog( "close" );
-
           dB_updateObjectAndReload(cal.project);
-
           return;
-
   }
-
   projectDialog.dialog( "close" );
-
   dB_updateObject(cal.project);
 
 }

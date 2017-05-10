@@ -44,6 +44,15 @@ Task.prototype.render = function() {
   cal.divTaskViewBars.innerHTML += html;
   updateInnerHtml(this);
 };
+
+Task.prototype.render_toStorage = function () {
+    var $toAdd = $(this.render_task_storage());
+    $("#task_storage").append($toAdd).packery('appended', $toAdd);
+    $toAdd.draggable();
+    $("#task_storage").packery( 'bindUIDraggableEvents', $toAdd );
+    updateInnerHtml(this);
+};
+
 Task.prototype.render_task_storage = function() {
   //var timeDiff = Math.abs(this.endDate.getTime() - this.startDate.getTime());
   //var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));

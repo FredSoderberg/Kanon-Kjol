@@ -118,11 +118,7 @@ function dB_loadTasks(projIDToGet) {
         cal.project.tasks.push(toAdd)
         console.log(resourceList[0]);
         if(resourceList[0] === 0) {
-          var $toAdd = $(toAdd.render_task_storage());
-          $("#task_storage").append($toAdd).packery('appended', $toAdd);
-          $toAdd.draggable();
-          $("#task_storage").packery( 'bindUIDraggableEvents', $toAdd );
-          updateInnerHtml(toAdd);
+          toAdd.render_toStorage();
         }else {
         toAdd.render();
         }
