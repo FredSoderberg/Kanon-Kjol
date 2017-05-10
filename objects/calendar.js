@@ -23,8 +23,11 @@ function Calendar() {
   this.divResourceViewData;
 
   this.divTaskViewHeader;
-  this.divTaskViewData;
+  this.divTaskWeeks;
+  this.divTaskDays;
 
+
+  this.divTaskViewData;
   this.divTaskViewRows;
   this.divTaskViewLinks;
   this.divTaskViewBars;
@@ -93,7 +96,7 @@ Calendar.prototype._init_html_area = function(node){
   this.divResourceViewHeader = this.divResourceView.childNodes[0];
   this.divResourceViewData   = this.divResourceView.childNodes[1];
 
-	this.divTaskView.innerHTML = "<div class='task_view_header col_container'></div>"+
+	this.divTaskView.innerHTML = "<div class='task_view_header row_container'></div>"+
                                 "<div class='task_view_data'>"+
                                   "<div class='task_view_rows row_container'></div>"+
                                   "<div class='task_view_links'></div>"+
@@ -111,6 +114,13 @@ Calendar.prototype._init_html_area = function(node){
 	this.divTaskViewLinks  = this.divTaskViewData.childNodes[1];
 	this.divTaskViewBars   = this.divTaskViewData.childNodes[2];
   //console.debug("Taskview", this.divResourceView);
+
+  //Creating weeks and Days
+  this.divTaskViewHeader.innerHTML = "<div class='task_weeks col_container'></div>"+
+                                     "<div class='task_days col_container'></div>";
+
+  this.divTaskWeeks  = this.divTaskViewHeader.childNodes[0];
+  this.divTaskDays   = this.divTaskViewHeader.childNodes[1];
 
 };
 
@@ -140,7 +150,8 @@ Calendar.prototype._set_size = function(){
   this.divResourceView.style.height = baseBox.innerHeight - 18 + "px";
   this.divTaskView.style.height     = baseBox.innerHeight  + "px";
 
-
+  this.divTaskWeeks.style.height    = (config.headerHeight/2)+"px";
+  this.divTaskDays.style.height     = (config.headerHeight/2)+"px";
   //baseBox.innerHeight - this.divScrollHor.offsetHeight + "px";
 
 
@@ -175,6 +186,6 @@ Calendar.prototype._set_size = function(){
 
   //this.divTaskStorage.style.top          = baseBox.innerHeight  - 18 + "px";
   //this.divTaskStorage.style.left         = rvWidth + "px";
-  $("#task_storage").width(baseBox.innerWidth - rvWidth);
+  $("#task_storage").width(baseBox.innerWidth - rvWidth - 18);
   //$("#task_storage").height(200);
 };

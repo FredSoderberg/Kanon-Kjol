@@ -123,19 +123,37 @@ Calendar.prototype._create_date_headers = function() {
   var amount = this.project.lengthDays;
   var html = "";
 
+  var weekdays = 1;
+  var weekhtml = "";
+
   for (var i = 0; i < amount; i++) {
+    if (date.getDayAbbreviation() === "Sun" || (i+1) === amount){
+      weekhtml += "<div class='task_week_cell' style='width: "+(config.dateHeaderWidth*weekdays)+"px'> W:"+date.getWeekNumber()+"</div>"
+      weekdays = 1;
+    }else {
+      weekdays++;
+    }
     html += "<div class='task_head_cell' style='width: " + config.dateHeaderWidth + "px; height: "+(config.headerHeight/2)+"px;'>" + date.getDate() + "</br>" + date.getDayAbbreviation() + "</div>";
-    date.setDate(date.getDate() + 1);
+    date.add("d", 1);
   };
-  this.divTaskViewHeader.innerHTML = html;
+  this.divTaskDays.innerHTML = html;
+  this.divTaskWeeks.innerHTML = weekhtml;
 
   //this._create_empty_task_rows(amount);
 };
 
 Calendar.prototype._create_row_cells = function() {
+  var date = new Date(this.project.startDate.getTime());
   var html = "";
   for (var i = 0; i < this.project.lengthDays; i++) {
-    html += "<div class='task_row_cell' style='width: " + config.dateHeaderWidth + "px; height: " + config.rowHeight + "px'></div>";
+    if (date.getDayAbbreviation() === "Sun"){
+      html += "<div class='task_row_cell_sun' style='width: " + config.dateHeaderWidth + "px; height: " + config.rowHeight + "px'></div>";
+    }else if(date.getDayAbbreviation() === "Sat"){
+      html += "<div class='task_row_cell_sat' style='width: " + config.dateHeaderWidth + "px; height: " + config.rowHeight + "px'></div>";
+    }else{
+      html += "<div class='task_row_cell' style='width: " + config.dateHeaderWidth + "px; height: " + config.rowHeight + "px'></div>";
+    }
+    date.add("d", 1);
   };
   return html;
 };
