@@ -47,9 +47,29 @@ $(document).ready(function(){
     $( "#sortable" ).sortable({
         connectWith: "#availableResources",
         dropOnEmpty: true,
-
+        start: function (event,ui) {
+          pre = ui.item.index();
+        },
         stop: function(event, ui) {
+console.log(ui.item.index());
+                // lst = $(this[0]).attr('id');
+                // post = ui.item.index();
+                // console.log(lst);
+                // console.log(pre);
+                // console.log(post);
+                // other = (lst == 'list1') ? 'list2' : 'list1';
+                // console.log(other);
+                // //Use insertBefore if moving UP, or insertAfter if moving DOWN
+                // if (post > pre) {
+                //     $('#'+other+ ' div:eq(' +pre+ ')').insertAfter('#'+other+ ' div:eq(' +post+ ')');
+                // }else{
+                //     $('#'+other+ ' div:eq(' +pre+ ')').insertBefore('#'+other+ ' div:eq(' +post+ ')');
+                // }
+
+
           updateResourceRows("sortable","A");
+
+
         },
         receive: function(event, ui) {
           var dropped = $(this).data().uiSortable.currentItem;
