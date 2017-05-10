@@ -197,7 +197,6 @@ function dB_storeObject(object) {
 
       case "Task":
         $("#task_"+object.id).attr("id","task_"+data);
-        $("#task_"+object.id).attr("id","task_"+data);
         cal.project.get_task_by_id(object.id).id = Number(data);
       break;
 

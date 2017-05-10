@@ -184,8 +184,10 @@ Calendar.prototype.create_resource = function (dropped,target,flag) {
 Calendar.prototype.create_task_for_storage = function(name, days){
   //if (startTime === undefined) startTime = new Date(this.project.startDate.getTime());
   //if (endTime   === undefined) endTime   = new Date(this.project.startDate.getTime());
-
-  return this.project.create_task(new Date(this.project.startDate.getTime()), new Date(this.project.startDate.getTime()), 0, name, days);
+var taskToCreate = this.project.create_task(new Date(this.project.startDate.getTime()), new Date(this.project.startDate.getTime()), 0, name, days);
+console.log(taskToCreate);
+dB_storeObject(taskToCreate);
+  return taskToCreate
 }
 
 
