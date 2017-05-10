@@ -18,7 +18,7 @@ var config = {
     {name:"id", label:"id", width:30}
   ],
   resources: [],
-  headerHeight: 40,
+  headerHeight: 60,
   taskWidth: 500,
   rowHeight: 30,
 

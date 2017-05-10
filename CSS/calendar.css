@@ -294,10 +294,16 @@ div .task_head_cell {
   background-color: #eeeeee;
   border-right: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 0px 0px 0px 0px;
+
   vertical-align: top;
   text-align: center;
   line-height: 40px;
+  font-family: "Arial", Arial, sans-serif;
+  font-size: 0.875em;
+  font-variant: small-caps;
+  line-height: 1;
+
   /*border-bottom-color: 1px solid #aaaaaa;*/
 }
 

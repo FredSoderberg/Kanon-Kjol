@@ -34,11 +34,13 @@ $st.click(function() {
   //console.log($st)
   //console.log($grid)
       if($grid.hasClass('slide-up')) {
-        $grid.addClass('slide-down', 1000, 'easeOutBounce');
         $grid.removeClass('slide-up');
+        $grid.addClass('slide-down', 1000, 'easeOutBounce');
+
       } else {
         $grid.removeClass('slide-down');
         $grid.addClass('slide-up', 1000, 'easeOutBounce');
+
       }
   });
 var $at = $('#add_to_storage');
