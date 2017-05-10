@@ -124,7 +124,7 @@ Calendar.prototype._create_date_headers = function() {
   var html = "";
 
   for (var i = 0; i < amount; i++) {
-    html += "<div class='task_head_cell' style='width: " + config.dateHeaderWidth + "px;'>" + date.getDate() + "</div>";
+    html += "<div class='task_head_cell' style='width: " + config.dateHeaderWidth + "px; height: "+(config.headerHeight/2)+"px;'>" + date.getDate() + "</br>" + date.getDayAbbreviation() + "</div>";
     date.setDate(date.getDate() + 1);
   };
   this.divTaskViewHeader.innerHTML = html;
