@@ -305,17 +305,49 @@ div .task_head_cell {
   text-align: center;
   line-height: 40px;
   font-family: "Arial", Arial, sans-serif;
-  font-size: 0.875em;
+  font-size: 0.8em;
   font-variant: small-caps;
   line-height: 1;
 
   /*border-bottom-color: 1px solid #aaaaaa;*/
 }
+div .task_week_cell {
+  background-color: #eeeeee;
+  border-right: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  border-radius: 0px 0px 0px 0px;
+
+  text-align: center;
+  font-family: "Arial", Arial, sans-serif;
+  font-size: 0.875em;
+  font-variant: small-caps;
+
+  /*line-height: 40px;
+  line-height: 1;*/
+
+  /*border-bottom-color: 1px solid #aaaaaa;*/
+}
+
 
 
  div .task_row_cell{
-   border-top: 1px solid #ddd;
-   border-left: 1px solid #ddd;
-   border-right: 1px solid #ddd;
-   border-bottom: 1px solid #ddd;
+   border-top: 1px solid #f2f2f2;
+   border-left: 1px solid #f2f2f2;
+   border-right: 1px solid #f2f2f2;
+   border-bottom: 1px solid #f2f2f2;
+ }
+
+ div .task_row_cell_sat{
+   border-top: 1px solid #bbb;
+   border-left: 1px solid #888;
+   border-right: 1px solid #bbb;
+   border-bottom: 1px solid #bbb;
+   background-color: #edd;
+ }
+ div .task_row_cell_sun{
+   border-top: 1px solid #bbb;
+   border-left: 1px solid #bbb;
+   border-right: 2px solid #888;
+   border-bottom: 1px solid #bbb;
+   background-color: #edd;
  }
