@@ -141,10 +141,10 @@ $(cookieDiv).appendTo("body");
 
 function updateTasksReosurces(objectID) {
   var tasksToUpdate = cal.project.get_task_by_resource(objectID);
-  console.log(tasksToUpdate);
+  // console.log(tasksToUpdate);
   $.each(tasksToUpdate, function (index,value) {
 
-    console.log("index:",index,":",value);
+    // console.log("index:",index,":",value);
     set_resources(value,0,0);
     updateInnerHtml(value);
     dB_updateObject(value);
@@ -176,5 +176,5 @@ function deleteTarget(objectID,type){
 
     default:
   }
-console.log(objectID);
+// console.log(objectID);
 }

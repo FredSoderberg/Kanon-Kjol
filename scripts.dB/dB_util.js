@@ -229,7 +229,7 @@ function dB_deleteObject(object) {
 
 function dB_updateObject(object) {
   stringObject = JSON.stringify(object);
-  console.log("object: " + stringObject);
+  // console.log("object: " + stringObject);
 
   $.post('scripts.dB/dB_util.php', {
     function: "updateObject",

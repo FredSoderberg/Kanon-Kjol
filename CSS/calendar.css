@@ -28,6 +28,7 @@ Grid items for unassigned tasks
   max-width: 1200px;
   position: relative;
   height: 200px;
+
 }
 
 /* clear fix */
@@ -142,9 +143,8 @@ div .task_view{
 }
 div .resource_view{
      background-color: #88cccc;
-
      overflow: hidden;
-     position: relative;
+     position: absolute;
 
 
 }

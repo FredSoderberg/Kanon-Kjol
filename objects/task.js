@@ -53,7 +53,8 @@ Task.prototype.render_task_storage = function() {
   var html = "<div id='task_" + this.id +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar grid-item' "+
-                  "style='width : " + (config.dateHeaderWidth * this.lengthInDays - 6)+"px;"+
+                  "style='background-color:"+this.color+"; "+
+                        "width : " + (config.dateHeaderWidth * this.lengthInDays - 6)+"px;"+
                         "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px'>";
 
   html += "</div>";
@@ -188,16 +189,23 @@ function set_resources(task, shiftResources, shiftTop){
   for (var i = 0; i < length; i++) {
     // console.log(cal.divResourceViewData.children[startRow + i]);
     if (cal.divResourceViewData.children[startRow + i] === undefined) {
-      
-      task.endDate.add("d",1);
-      $("#task_"+task.id).animate({width:"+="+config.dateHeaderWidth+"px"},50).promise().done(function ()
-      {
-        $("#task_"+task.id).animate({height:"-="+config.rowHeight+"px"},50).promise().done(function () {
-          handleY("task_"+task.id, null,$("#"+"task_"+task.id).overlaps(".task_bar"));
-          return false;
-        })
-      // $("#task_"+task.id).animate({},50);
-    })}
+      if (length == 1) {
+        $("#task_storage").append($("#task_"+task.id)).packery( 'appended', $("#task_"+task.id) );
+        // $("#task_"+task.id).draggable();
+        // $("#task_storage").packery( 'bindUIDraggableEvents', $("#task_"+task.id) );
+        // task.resources = 0;
+        // console.log("do something! halp!!");
+      } else {
+        task.endDate.add("d",1);
+        $("#task_"+task.id).animate({width:"+="+config.dateHeaderWidth+"px"},50).promise().done(function ()
+        {
+          $("#task_"+task.id).animate({height:"-="+config.rowHeight+"px"},50).promise().done(function () {
+            handleY("task_"+task.id, null,$("#"+"task_"+task.id).overlaps(".task_bar"));
+            return false;
+          })
+        }
+      )}
+    }
     else {
       task.resources[i] = cal.divResourceViewData.children[startRow + i].id;
     }

@@ -72,7 +72,8 @@
       <ul id="availableResources" style="margin: 0; padding: 0; margin-bottom: 10px;" class="">
       </ul>
     </div>
-    </div>
+
+  </div>
     <!-- TABS NEDANFÖR -->
 
     <div id="dialog" title="Tab data">
@@ -100,32 +101,33 @@
           <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
         </li>
 
-        <div id="projectDialog" title="Project info" class="ui-dialog-content ui-widget-content">
-          <p class="validateTips">Information about your project</p>
-          <fieldset style="float:left;margin-right:20px; display:block;">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="project_dialog_name" value="" class="text ui-corner-all">
-            <label for="startDate">StartDate</label>
-            <input type="text" name="startDate" id="project_startDate" value="" class="text ui-corner-all ">
-            <span class="ui-icon ui-icon-calendar"></span>
-            <label for="endDate">EndDate</label>
-            <input type="text" name="startDate" id="project_endDate" value="" class="text ui-corner-all">
-            <span class="ui-icon ui-icon-calendar"></span>
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
-            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-          </fieldset>
-        </div>
+
 
         <button id="add_tab">Add Tab</button>
 
       </ul>
       <div id="calendarArea" style="width:100%; height:100%;">
-
-        <div id="calendar" class="calendar_head" style='width:100%; height:500px; '>
-        </div>
+        <div id="calendar" class="calendar_head" style='width:100%; height:500px; '></div>
       </div>
+
     </div>
     <!-- TABS SLUTAR HÄR -->
+    <div id="projectDialog" title="Project info" class="ui-dialog-content ui-widget-content">
+      <p class="validateTips">Information about your project</p>
+      <fieldset style="float:left;margin-right:20px; display:block;">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="project_dialog_name" value="" class="text ui-corner-all">
+        <label for="startDate">StartDate</label>
+        <input type="text" name="startDate" id="project_startDate" value="" class="text ui-corner-all ">
+        <span class="ui-icon ui-icon-calendar"></span>
+        <label for="endDate">EndDate</label>
+        <input type="text" name="startDate" id="project_endDate" value="" class="text ui-corner-all">
+        <span class="ui-icon ui-icon-calendar"></span>
+
+
+      </fieldset>
+    </div>
+
     <div id="key"></div>
     <div id="taskDialog" title="Task info" class="ui-dialog-content ui-widget-content">
       <p class="validateTips">Information about your task</p>
@@ -146,8 +148,6 @@
         <input name="color-picker" id="task_color" class="set-bg-elem" style="width:75px;" />
 
 
-
-        <!-- Allow form submission with keyboard without duplicating the dialog button -->
       </fieldset>
     </div>
 

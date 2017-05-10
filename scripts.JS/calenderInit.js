@@ -30,7 +30,7 @@ $(document).ready(function(){
     $( "#sortable" ).sortable({
         connectWith: "#availableResources",
         dropOnEmpty: true,
-        cursor: "move",
+
         stop: function(event, ui) {
           updateResourceRows("sortable","A");
         },
