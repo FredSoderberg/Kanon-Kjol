@@ -64,7 +64,8 @@ function dB_loadProjects(user) {
 
       // $("#proj").attr("id","proj_"+data.id)
       $("#proj").html(data.name);
-
+      config.taskWidth = cal.project.lengthDays * config.dateHeaderWidth;
+      cal._set_size();
       cal._create_date_headers();
       dB_loadResources(data.id);
 
