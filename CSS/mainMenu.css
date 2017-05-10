@@ -78,8 +78,14 @@ overflow: auto;
   background-color: blue;
 }
 
+
+
 .sidebarScroll {
-  overflow: scroll;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
+  overflow-x: auto;
+  max-width: 200px;
 }
 
 .sidebarLeft {

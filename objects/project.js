@@ -110,6 +110,14 @@ Project.prototype.render_all_resources = function () {
     //  console.log(value);
     if(value.row.charAt(0) === "U") {
       $(cal._create_resource(value)).appendTo("#availableResources");
+      var padding = $("#availableResources").css("padding-bottom");
+      // console.log(padding);
+      if (Number(padding.substring(0,padding.length-2)) < config.rowHeight) {
+      $("#availableResources").css("padding-bottom","0px")
+      }
+      else {
+      $("#availableResources").css("padding-bottom","-="+config.rowHeight)
+      }
     }
     else if (value.row.charAt(0) === "A") {
       $(cal._create_resource(value)).appendTo("#sortable");

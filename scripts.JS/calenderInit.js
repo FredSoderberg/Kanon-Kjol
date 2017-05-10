@@ -1,12 +1,21 @@
 $(document).ready(function(){
         $('#loading').show();
 
+
+
     $("#availableResources").sortable({
         connectWith: "#sortable",
-        scroll: true,
         dropOnEmpty: true,
+        scroll: false,
+        helper:"clone",
+        appendTo:"body",
         stop: function(event,ui) {
-
+          if(($(this).children().length < 13)) {
+            $("#availableResources").css("padding-bottom","+="+config.rowHeight);
+          }
+          // if (this.childs) {
+          //
+          // }
            updateResourceRows("availableResources","U");
         },
         receive: function(event, ui) {
@@ -22,6 +31,14 @@ $(document).ready(function(){
             $("#row_"+ui.item[0].id).remove();
             updateTasksReosurces(ui.item[0].id)
           }
+          var padding = $("#availableResources").css("padding-bottom");
+          if (Number(padding.substring(0,padding.length-2)) < config.rowHeight) {
+          $("#availableResources").css("padding-bottom","0px")
+          }
+          else {
+          $("#availableResources").css("padding-bottom","-="+config.rowHeight)
+          }
+
          }
     });
 
@@ -53,6 +70,7 @@ $(document).ready(function(){
             $("#addResource").draggable({
            connectToSortable: "#sortable, #availableResources",
            helper: "clone",
+
            start: function (event) {
               var dragClone = $("#newResourceList").find("div:last")
               $(dragClone).removeClass();
