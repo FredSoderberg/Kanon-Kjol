@@ -111,8 +111,8 @@ $(".task_view_rows").droppable({
     cloneTask.resources = [];
     cloneTask.resources[0] = Number($targetCell.parent().attr("id").replace("row_", ""))
 
-    console.log("Days:",cloneTask.lengthInDays)
-    console.log("Clone: ", cloneTask);
+    // console.log("Days:",cloneTask.lengthInDays)
+    // console.log("Clone: ", cloneTask);
     updateInnerHtml(cloneTask);
 
     dB_updateObject(cloneTask);

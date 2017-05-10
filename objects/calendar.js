@@ -62,7 +62,6 @@ Calendar.prototype._init_html_area = function(node){
   this.divBase.innerHTML = "<div class='calendar_container' style='height:400px'>"+
                               "<div class='resource_view'></div>"+
                               "<div class='task_view' style='width:100%'></div>"+
-                              "<div id='task_storage' class='grid slide-down'></div>"+
                               "<div class='gantt_ver_scroll'>"+
                                 "<div></div>"+
                               "</div>"+
@@ -186,6 +185,6 @@ Calendar.prototype._set_size = function(){
 
   //this.divTaskStorage.style.top          = baseBox.innerHeight  - 18 + "px";
   //this.divTaskStorage.style.left         = rvWidth + "px";
-  $("#task_storage").width(baseBox.innerWidth - rvWidth - 18);
+  $("#task_storage").width(baseBox.innerWidth - rvWidth );//- 18);
   //$("#task_storage").height(200);
 };

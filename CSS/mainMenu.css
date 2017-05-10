@@ -147,3 +147,9 @@ color: white !important;
     z-index: 1000;
     display:none;
 }
+.task_storage_pos {
+  display: inline-block;
+}
+.widthMatchResRow {
+  width: 200px;
+}

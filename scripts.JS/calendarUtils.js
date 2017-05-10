@@ -7,7 +7,7 @@ Calendar.prototype.init = function(whereToStart) {
 
   //this.project.init_test();
   this._init_html_area(whereToStart);
-  
+
   // this._create_date_headers();
   this._create_resource_headers();
   //this._load_resources();
@@ -162,7 +162,7 @@ Calendar.prototype._create_empty_task_row = function(resID) {
   var html = "";
   //console.debug("Rows", this._create_empty_task_rows_cells(amount));
   //var width = this.project.lengthDays * config.taskWidth;
-  console.log(config.taskWidth);
+  // console.log(config.taskWidth);
   html += "<div id='row_" + resID + "' class='task_row col_container' style='width: " + config.taskWidth + "px; height: " + config.rowHeight + "px'></div>";
 
   this.divTaskViewRows.innerHTML += html;

@@ -117,7 +117,7 @@ function dB_loadTasks(projIDToGet) {
         var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,Number(value.id),value.name,Number(value.lengthInDays));
         toAdd.color = value.color;
         cal.project.tasks.push(toAdd)
-        console.log(resourceList[0]);
+        // console.log(resourceList[0]);
         if(resourceList[0] === 0) {
           toAdd.render_toStorage();
         }else {

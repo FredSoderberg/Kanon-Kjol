@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="/CSS/Loader.css">
 <link rel="stylesheet" href="dep.CSS/huebee.css" media="screen">
-<link rel="stylesheet" href="/dep.CSS/perfect-scrollbar.min.css">
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" charset="utf-8"></script>
@@ -39,8 +38,6 @@
 <script src="scripts.JS/taskstorage.js" charset="utf-8"></script>
 <script src="dep.JS/packery.pkgd.min.js" charset="utf-8"></script>
 <script src="dep.JS/huebee.pkgd.js"></script>
-<script src="dep.JS/perfect-scrollbar.jquery.min.js"></script>
-<script src="dep.JS/perfect-scrollbar.min.js"></script>
 
 <head>
 
@@ -183,41 +180,38 @@
       var cal = new Calendar();
       cal.init(calendar);
       checkLoginCookie(true);
+      $("#task_name").val("TaskName");
+      //$("#taskStorage_startDate").val(cal.project.startDate);
+      $("#taskStorage_lengthInDays").val(2);
+      //var d = new Date(cal.project.startDate);
+      //d.setDate(d.getDate() + 1);
+      //$("#taskStorage_endDate").val(d);
     </script>
 
-<div class="">
-    <button id="storage_toggle" class="w3-grey w3-border w3-border-black">Task storage</button>
+    <div class="" style="task_storage_pos">
+        <!-- <button id="storage_toggle" class="w3-grey w3-border w3-border-black">Task storage</button> -->
+        <div id='task_storage' class='grid task_storage_pos' style="float:right;"></div>
 
-  <fieldset>
-    <label for="name">Name</label>
-    <input type="text" name="name" id="task_name" value="" class="text ui-widget-content ui-corner-all">
-    <label for="lengthInDays">Days</label>
-    <input type="text" name="lengthInDays" id="taskStorage_lengthInDays" value="" class="text ui-widget-content ui-corner-all">
-    <!--
-    <label for="startDate">StartDate</label>
-    <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
-    <span class="ui-icon ui-icon-calendar"></span>
-    <label for="endDate">EndDate</label>
-    <input type="text" name="startDate" id="taskStorage_endDate" value="" class="text ui-widget-content ui-corner-all">
-    <span class="ui-icon ui-icon-calendar"></span>
 
-      <!-- Allow form submission with keyboard without duplicating the dialog button
-  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-    </fieldset>
-    <button id="add_to_storage" class="w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Add Task to Storage</button>
-</div>
+      <div class="task_storage_pos" style="float:left; padding-left:5px">
+
+
+          <label for="name">Name</label><br/>
+          <input type="text" name="name" id="task_name" size="15" value="" class="text ui-widget-content ui-corner-all"><br/>
+          <label for="lengthInDays">Days</label><br/>
+          <input type="text" name="lengthInDays" id="taskStorage_lengthInDays" size="3" value="" class="text ui-widget-content ui-corner-all"><br/>
+          <!--
+          <label for="startDate">StartDate</label>
+          <input type="text" name="startDate" id="taskStorage_startDate" value="" class="text ui-widget-content ui-corner-all">
+          <span class="ui-icon ui-icon-calendar"></span>
+          <label for="endDate">EndDate</label>
+          <input type="text" name="startDate" id="taskStorage_endDate" value="" class="text ui-widget-content ui-corner-all">
+          <span class="ui-icon ui-icon-calendar"></span>
+
+            <!-- Allow form submission with keyboard without duplicating the dialog button
+        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
+                <button id="add_to_storage" class="w3-margin-bottom w3-margin-right w3-button w3-grey w3-medium w3-panel w3-border w3-border-black w3-card-4">Add Task to Storage</button>
+      </div>
+    </div>
   </body>
-
-<script>
-  $("#task_name").val("TaskName");
-  //$("#taskStorage_startDate").val(cal.project.startDate);
-  $("#taskStorage_lengthInDays").val(2);
-  //var d = new Date(cal.project.startDate);
-  //d.setDate(d.getDate() + 1);
-  //$("#taskStorage_endDate").val(d);
-
-
-</script>
-
-
 </html>
