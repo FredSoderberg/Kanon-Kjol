@@ -116,7 +116,16 @@ function dB_loadTasks(projIDToGet) {
         var toAdd = new Task(startDatetoAdd,endDatetoAdd,resourceList,Number(value.id),value.name,Number(value.lengthInDays));
         toAdd.color = value.color;
         cal.project.tasks.push(toAdd)
+        console.log(resourceList[0]);
+        if(resourceList[0] === 0) {
+          var $toAdd = $(toAdd.render_task_storage());
+          $("#task_storage").append($toAdd).packery('appended', $toAdd);
+          $toAdd.draggable();
+          $("#task_storage").packery( 'bindUIDraggableEvents', $toAdd );
+          updateInnerHtml(toAdd);
+        }else {
         toAdd.render();
+        }
       })
       $('#loading').hide();
   }).fail(function(jqxhr, textStatus, error) {
