@@ -57,6 +57,10 @@ width: 75%;
     left:-200px;
 }
 
+.notABottomBitch {
+z-index: 1000;
+}
+
 .newWidth{
 width: 25%;
 }
@@ -74,9 +78,15 @@ overflow: auto;
   background-color: blue;
 }
 
+.sidebarScroll {
+  overflow: scroll;
+}
+
 .sidebarLeft {
     position: absolute;
-
+    /*overflow: scroll;*/
+    /*box-sizing: border-box;*/
+    /*position: relative;*/
     border-radius: 3px;
     width: 200px;
     height:500px;

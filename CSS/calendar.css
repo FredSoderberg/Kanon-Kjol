@@ -144,13 +144,15 @@ div .task_view{
 div .resource_view{
      background-color: #88cccc;
      overflow: hidden;
-     position: absolute;
+     /*position: absolute;*/
+     /*Fuckar med sidomenyn???*/
 
 
 }
 div .calendar_container{
 
-  overflow: hidden;
+  /*overflow: hidden;*/
+/*Fuckar med sidomenyn???*/
 
   box-sizing: border-box;
   position: relative;
