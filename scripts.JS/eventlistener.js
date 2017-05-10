@@ -118,9 +118,10 @@ $(document).ready(function() {
 
   var taskDialog = $("#taskDialog");
   taskDialog.dialog({
+    closeOnEscape: true,
     autoOpen: false,
     height: 600,
-    width: 500,
+    width: 350,
     modal: true,
     buttons: {
       "Delete": function() {
@@ -160,7 +161,7 @@ $(document).ready(function() {
   resourceDialog.dialog({
     closeOnEscape: true,
     autoOpen: false,
-    height: 400,
+    height: 600,
     width: 350,
     modal: true,
     buttons: {
@@ -198,7 +199,7 @@ $(document).ready(function() {
   deleteDialog.dialog({
     closeOnEscape: true,
     autoOpen: false,
-    height: 400,
+    height: 600,
     width: 350,
     modal: true,
     buttons: {
