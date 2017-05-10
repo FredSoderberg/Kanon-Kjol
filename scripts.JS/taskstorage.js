@@ -59,7 +59,7 @@ $at.click(function() {
   var $newTask = $(newTask.render_task_storage());
 
 
-  console.log(newTask.lengthInDays);
+  // console.log(newTask.lengthInDays);
   $grid.append($newTask).packery('appended', $newTask);
 
   //$grid.packery('addItems', $newTask);
@@ -138,13 +138,13 @@ $(".task_view_rows").droppable({
   }
 });
 
-$(document).on('keydown', function(event){
-  if (event.keyCode == 32){
-    event.preventDefault();
-  }
-})
+// $(document).on('keydown', function(event){
+//   if (event.keyCode == 32){
+//     event.preventDefault();
+//   }
+// })
 
-$(document).keyup(function(event){
+$("#task_name, #taskStorage_lengthInDays").keyup(function(event){
     if(event.keyCode == 13){
         $("#add_to_storage").click();
         $("#task_name").focus();
@@ -153,7 +153,7 @@ $(document).keyup(function(event){
 });
 $(document).keyup(function(event){
   //console.log(event)
-    if(event.keyCode == 32 && event.target.id != "task_name" && event.target.id != "taskStorage_lengthInDays"){
+    if(event.keyCode == 32 && event.target.id != "task_name" && event.target.id != "taskStorage_lengthInDays"  && !$(".ui-dialog").is(":visible")){
       //$("#add_to_storage").blur();
       $("#storage_toggle").click();
     }

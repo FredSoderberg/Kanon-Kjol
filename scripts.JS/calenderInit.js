@@ -6,7 +6,7 @@ $(document).ready(function(){
     $("#availableResources").sortable({
         connectWith: "#sortable",
         dropOnEmpty: true,
-        scroll: false,
+        // scroll: false,
         helper:"clone",
         appendTo:"body",
         stop: function(event,ui) {
