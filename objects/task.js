@@ -28,14 +28,19 @@ function Task(startDate, endDate, resID, taskID, name, days) {
 Task.prototype.render = function() {
   var timeDiff = Math.abs(this.endDate.getTime() - this.startDate.getTime());
   var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
   //console.log("Task_render: ", this)
   //console.log("Index: ", $("#"+this.resources[0]).index())
   //var amountOfDays =
   var html = "<div id='task_" + this.id +"'"+
                   "res='" + this.resources[0] +
                   "'class='task_bar task_bar_obs' "+
-                  "style='background-color:"+this.color+";width : " + (config.dateHeaderWidth * (diffDays + 1) - 6)+"px;"+
-                        "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
+                  "style='background-color:"+this.color+";";
+
+  html += "border: 1px solid "+ tinycolor(this.color).darken(20).desaturate(60)+";";
+
+  html += "width : " + (config.dateHeaderWidth * (diffDays + 1) - 6)+"px;"+
+  "height : " + (config.rowHeight * (Math.max(this.resources.length,1)) - 6)+"px;"+
                            "left: " + (config.dateHeaderWidth * this.calculate_days() + 3)+"px;"+
                            "top: " + (config.rowHeight * ($("#"+this.resources[0]).index()) + 3)+"px'>";
 
@@ -87,9 +92,9 @@ Task.prototype.render_task_storage = function() {
 };
 
 function updateInnerHtml(task){
-  var html = "Name:"+task.name+"</br>"+
+  var html = task.name;/*+"</br>"+
           "Date:"+dateString(task.startDate)+"-"+dateString(task.endDate)+"</br>"+
-          "Resources:"+task.resources;
+          "Resources:"+task.resources;*/
   $("#task_"+task.id).html(html);
 }
 function updateInnerHtml2(task){

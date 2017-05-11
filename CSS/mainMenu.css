@@ -32,10 +32,11 @@
 .div1 {
     width: 100%;
     padding: 50px;
-    border: 1px solid grey;
-    background-color: grey;
+    border: 1px solid #adabab;
+    background-color: #adabab;
     /*box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);*/
 }
+
 
 .colour{
   background-color: grey;
@@ -108,7 +109,7 @@ background-color: lightgrey;
     padding: 0 0 0 0 !important;
 }
 .grey-background {
-  background-color: grey !important;
+  background-color: #adabab; !important;
 }
 /*.resourceDrag {
   vertical-align:top;
@@ -118,13 +119,16 @@ background-color: lightgrey;
 }
 
 .cookieWarning {
-  background: linear-gradient(
+  /*background:linear-gradient(
                      grey,
-                     rgba(0, 0, 0, 0.5));
+                     blue,
+                     red,
+                     rgba(0, 0, 0, 0.5));*/
 
 width: 100%;
 height: 100px;
-background-color: grey;
+border: 1px solid grey;
+background-color: #999;
 text-align: center;
 font-size: 18px;
 box-shadow: 10px 10px 15px rgba(44, 45, 47, 0.79);
@@ -147,23 +151,18 @@ color: white !important;
     z-index: 1000;
     display:none;
 }
-.task_storage_pos {
-  display: inline-block;
-}
+
 .widthMatchResRow {
   width: 200px;
 }
-#task_storage {
-  position: absolute;
-  max-height: 150px;
-  height: 150px;
-  min-height: 150px;
-  /*overflow-y: auto;*/
-  /*margin-bottom: 5px;*/
-}
+
 .overflowAuto {
   overflow-y: auto;
 }
 .overflowHidden {
   overflow: visible;
+}
+
+.background-color {
+  background-color: #f0f0f0 !important
 }

@@ -43,11 +43,11 @@ Calendar.prototype._get_column_width = function() {
 Calendar.prototype._create_resource_headers = function() {
   var html = "";
   for (col in config.columns) {
-    if (config.columns[col].label == "add") {
-      html += "<div class='add_cell' style='width: " + config.columns[col].width + "px'>" + config.columns[col].label + "</div>";
-    } else {
-      html += "<div class='head_cell' style='width: " + config.columns[col].width + "px'>" + config.columns[col].label + "</div>";
-    }
+    // if (config.columns[col].label == "add") {
+    //   html += "<div class='add_cell' style='width: " + config.columns[col].width + "px'>" + config.columns[col].label + "</div>";
+    // } else {
+      html += "<div class='head_cell' style='width: " + config.columns[col].width + "px'>" + config.columns[col].name + "</div>";
+    // }
   };
   this.divResourceViewHeader.innerHTML = html;
 }
@@ -171,7 +171,7 @@ Calendar.prototype._create_empty_task_row = function(resID) {
   this.divTaskViewRows.innerHTML += html;
 
   $("#row_" + resID).html(this._create_row_cells());
-  $("#row_" + resID).children('div:first').html(resID);
+  // $("#row_" + resID).children('div:first').html(resID);
 };
 
 Calendar.prototype.create_resource = function (dropped,target,flag) {

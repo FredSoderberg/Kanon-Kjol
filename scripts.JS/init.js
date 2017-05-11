@@ -24,6 +24,13 @@ $(function() {
  }
   });
 
+  $("#mail1, #pass").keydown(function(event){
+    // console.log(event);
+    if (event.which == 13 && signInValid()) {
+        dB_verifyUser();
+    }
+  });
+
   $("#signOut").click(function(event) {
     deleteCookies();
     window.location.href = "index.html";
