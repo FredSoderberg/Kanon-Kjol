@@ -48,7 +48,20 @@ Task.prototype.render = function() {
 Task.prototype.render_toStorage = function () {
     var $toAdd = $(this.render_task_storage());
     $("#task_storage").append($toAdd).packery('appended', $toAdd);
-    $toAdd.draggable();
+    $toAdd.draggable({
+      start: function (event,ui) {
+        console.log("start!");
+        $("#task_storage").css("width","-=18px");
+        $("#task_storage").removeClass("overflowAuto");
+        $("#task_storage").addClass("overflowHidden");
+      },
+      stop: function (event,ui) {
+
+        $("#task_storage").addClass("overflowAuto");
+        $("#task_storage").removeClass("overflowHidden");
+        $("#task_storage").css("width","+=18px");
+      }
+    });
     $("#task_storage").packery( 'bindUIDraggableEvents', $toAdd );
     updateInnerHtml(this);
 };

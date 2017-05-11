@@ -46,11 +46,11 @@
       <div class="cssload-loader"></div>
     </div>
 
-    <div id="top" class="div1 w3-display-container">
+    <div id="top" class="div1 w3-display-container" >
 
       <img src="img/logo/logo.svg" alt="Planning" style="height:80% " class="w3-margin-top w3-display-topmiddle">
 
-      <a id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4">Sign out
+      <a id="signOut" class="w3-display-topright w3-margin-bottom w3-margin-right w3-button w3-grey w3-large w3-panel w3-border w3-border-black w3-card-4" >Sign out
         <a/>
     </div>
 
@@ -129,7 +129,7 @@
       </fieldset>
     </div>
 
-    <div id="key"></div>
+    <!-- <div id="key"></div> -->
     <div id="taskDialog" title="Task info" class="ui-dialog-content ui-widget-content">
       <p class="validateTips">Information about your task</p>
       <fieldset style="width:100%; margin-right:20px; display:block;">
@@ -190,10 +190,9 @@
 
     <div class="" style="task_storage_pos">
         <!-- <button id="storage_toggle" class="w3-grey w3-border w3-border-black">Task storage</button> -->
-        <div id='task_storage' class='grid task_storage_pos' style="float:right;"></div>
 
 
-      <div class="task_storage_pos" style="float:left; padding-left:5px">
+      <div class="task_storage_pos" style="float:left; padding-left:5px; width:231px;">
 
 
           <label for="name">Name</label><br/>
@@ -212,6 +211,7 @@
         <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
                 <button id="add_to_storage" class="w3-margin-bottom w3-margin-right w3-button w3-grey w3-medium w3-panel w3-border w3-border-black w3-card-4">Add Task to Storage</button>
       </div>
+            <div id='task_storage' class='grid task_storage_pos overflowAuto'></div>
     </div>
   </body>
 </html>

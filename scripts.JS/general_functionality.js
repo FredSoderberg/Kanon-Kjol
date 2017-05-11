@@ -138,6 +138,15 @@ var cookieDiv =  "<div id='cookieSquare' class='cookieWarning w3-display-bottomm
 $(cookieDiv).appendTo("body");
 }
 
+function updateALLTasksResources() {
+  $.each(cal.project.tasks, function (index,value) {
+
+    // console.log("index:",index,":",value);
+    set_resources(value,0,0);
+    updateInnerHtml(value);
+    dB_updateObject(value);
+  })
+}
 
 function updateTasksReosurces(objectID) {
   var tasksToUpdate = cal.project.get_task_by_resource(objectID);

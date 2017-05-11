@@ -153,3 +153,17 @@ color: white !important;
 .widthMatchResRow {
   width: 200px;
 }
+#task_storage {
+  position: absolute;
+  max-height: 150px;
+  height: 150px;
+  min-height: 150px;
+  /*overflow-y: auto;*/
+  /*margin-bottom: 5px;*/
+}
+.overflowAuto {
+  overflow-y: auto;
+}
+.overflowHidden {
+  overflow: visible;
+}
