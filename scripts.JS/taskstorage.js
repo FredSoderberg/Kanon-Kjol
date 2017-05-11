@@ -7,7 +7,9 @@ var $grid = $('.grid').packery({
   itemSelector: '.grid-item, .task_bar',
   // columnWidth helps with drop positioning
   columnWidth: config.dateHeaderWidth,
-  gutter: 1
+  gutter: 1,
+  resize: false
+
 });
 
 // make all items draggable
@@ -50,28 +52,43 @@ $at.click(function() {
   //console.log($grid)
   var newTask = cal.create_task_for_storage(
     $("#task_name").val(),Number($("#taskStorage_lengthInDays").val()));
+    newTask.render_toStorage();
     /*
     new Date($("#taskStorage_startDate").val()),
     new Date($("#taskStorage_endDate").val()));
 */
   //console.log($("#taskStorage_startDate").val())
   //console.log($("#taskStorage_endDate").val())
-  var $newTask = $(newTask.render_task_storage());
-
-
-  // console.log(newTask.lengthInDays);
-  $grid.append($newTask).packery('appended', $newTask);
-
-  //$grid.packery('addItems', $newTask);
-  //$grid.packery('fit', $newTask, (config.dateHeaderWidth * newTask.calculate_days()), 0)
-
-  $newTask.draggable();
-  $grid.packery( 'bindUIDraggableEvents', $newTask );
-
-  //dB_storeObject(newTask);
-  //dB_updateObject(cal.project);
-
-  updateInnerHtml(newTask);
+  // var $newTask = $(newTask.render_task_storage());
+  //
+  //
+  // // console.log(newTask.lengthInDays);
+  // $grid.append($newTask).packery('appended', $newTask);
+  //
+  // //$grid.packery('addItems', $newTask);
+  // //$grid.packery('fit', $newTask, (config.dateHeaderWidth * newTask.calculate_days()), 0)
+  //
+  // $newTask.draggable({
+  //   // connectWith: ".task_view_rows",
+  //
+  //   // appendTo:"body",
+  //   // helper:"clone",
+  //   start: function (event,ui) {
+  //     console.log("start!");
+  //     $("#task_storage").removeClass("overflowAuto");
+  //     $("#task_storage").addClass("overflowHidden");
+  //   },
+  //   stop: function (event,ui) {
+  //     $("#task_storage").addClass("overflowAuto");
+  //     $("#task_storage").removeClass("overflowHidden");
+  //   }
+  // });
+  // $grid.packery( 'bindUIDraggableEvents', $newTask );
+  //
+  // //dB_storeObject(newTask);
+  // //dB_updateObject(cal.project);
+  //
+  // updateInnerHtml(newTask);
 
   $("#task_name").val("");
 

@@ -72,7 +72,7 @@ $(document).ready(function() {
         // console.log("lämngar1:",event.target.id);
       } else {
         //  console.log("lämngar2:",$(event.target).parent()[0].id);
-        console.log("remove:",$(event.target).parent()[0].id);
+        // console.log("remove:",$(event.target).parent()[0].id);
         removeDragRez($(event.target).parent()[0].id);
       }
     }
@@ -106,15 +106,7 @@ $(document).ready(function() {
     $('#key').html(key);
   });
 
-  $('#sortable').sortable({
-    change: function(ui, event) {
-      var id = event.item.attr('id');
-      console.log("Id Drag: ", id);
-    }
-  });
-  $("#sortable").disableSelection();
-  $(".task_view_rows").sortable();
-  $(".task_view_rows").disableSelection();
+
 
   var taskDialog = $("#taskDialog");
   taskDialog.dialog({

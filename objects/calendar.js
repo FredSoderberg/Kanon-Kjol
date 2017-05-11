@@ -185,6 +185,6 @@ Calendar.prototype._set_size = function(){
 
   //this.divTaskStorage.style.top          = baseBox.innerHeight  - 18 + "px";
   //this.divTaskStorage.style.left         = rvWidth + "px";
-  $("#task_storage").width(baseBox.innerWidth - rvWidth );//- 18);
+  $("#task_storage").width(baseBox.innerWidth - rvWidth);//- 18);
   //$("#task_storage").height(200);
 };
