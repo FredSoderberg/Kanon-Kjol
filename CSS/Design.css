@@ -12,3 +12,28 @@
 .ui-tabs .ui-tabs-panel {
   background-color: #;
 }
+.add-button {
+  float: right;
+  height: 100%;
+  margin-right: 5px;
+  height: 30%;
+  padding: 2px;
+  /*border-style:outset;*/
+  border-radius: 50%;
+  border: 1px solid grey;
+  box-shadow: 1px 1px 1px black
+}
+
+.add-button:hover {
+  box-shadow: 2px 2px 1px black
+}
+.signout-button {
+  margin:20px;
+  height:50%;
+  box-shadow:3px 3px 1px grey;
+  border-radius:50%;
+}
+
+.signout-button:hover {
+  box-shadow:4px 4px 1px grey;
+}

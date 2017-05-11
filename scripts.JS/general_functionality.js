@@ -150,7 +150,7 @@ function updateALLTasksResources() {
 
 function updateTasksReosurces(objectID) {
   var tasksToUpdate = cal.project.get_task_by_resource(objectID);
-  // console.log(tasksToUpdate);
+  console.log(objectID,":BEFORE:",tasksToUpdate);
   $.each(tasksToUpdate, function (index,value) {
 
     // console.log("index:",index,":",value);
@@ -158,6 +158,7 @@ function updateTasksReosurces(objectID) {
     updateInnerHtml(value);
     dB_updateObject(value);
   })
+  console.log(objectID,":AFTER:",tasksToUpdate);
 }
 
 function deleteTarget(objectID,type){

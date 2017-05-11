@@ -295,8 +295,11 @@ $(document).ready(function() {
           }
 
     }
-
+    var borderColor = tinycolor(task.color).darken(20).desaturate(60)
     $("#task_" + taskDialogID).css("background-color", $("#task_color").val());
+    $("#task_" + taskDialogID).css("border", "1px solid "+borderColor);
+    
+
     updateInnerHtml(task);
 
     taskDialog.dialog("close");
@@ -325,10 +328,14 @@ $(document).ready(function() {
   $(document).on("dblclick", ".resource_row", function(event, ui) {
     resourceDialogID = Number($(event.target).parent().attr("id"));
     var resourceObject = cal.project.get_resource_by_id(resourceDialogID);
+var bgColor = $("#"+resourceDialogID).children().eq(0).css("background-color");
     // console.log("resorceID", cal.project.get_resource_by_id(resourceDialogID));
     $("#resource_dialog_name").val(resourceObject.name);
     $("#resource_dialog_type").val(resourceObject.groupType);
-    $("#resource_dialog_color").css("background-color", ($("#" + resourceDialogID).css("background-color")));
+    $("#resource_dialog_color").val(resourceObject.color);
+    // console.log(resourceDialogID);
+    // console.log($("#"+resourceDialogID).children().eq(0).css("background-color"));
+    $("#resource_dialog_color").css("background-color", bgColor);
     resourceDialog.dialog("open");
   })
 
@@ -374,14 +381,31 @@ $(document).ready(function() {
   });
 
 
-  var elem = $('.set-bg-elem')[1];
-  var elem2 = $('.set-bg-elem')[0];
-
-  var hueb2 = new Huebee(elem2, {
-    setBGColor: true
-  });
-  var hueb = new Huebee(elem, {
-    setBGColor: true
+  // var elem = $('.set-bg-elem')[0];
+  // var elem2 = $('.set-bg-elem')[0];
+  //
+  // var hueb2 = new Huebee(elem2, {
+  //   setBGColor: true
+  // });
+  // var hueb = new Huebee(elem, {
+  //
+  // });
+// '#FAA', '#FDA', '#FFA', '#DFA', '#AFA', '#AFD', '#AFF', '#ADF', '#AAF', '#DAF', '#FAF', '#FAD',
+// '#F55', '#FA5', '#FF5', '#AF5', '#5F5', '#5FA', '#5FF', '#5AF', '#55F', '#A5F', '#F5F', '#F5A',
+// '#FBB', '#FDB', '#FFB', '#DFB', '#BFB', '#BFD', '#BFF', '#BDF', '#BBF', '#DBF', '#FBF', '#FBD',
+// '#E77', '#EA7', '#EE7', '#AE7', '#7E7', '#7EA', '#7EE', '#7AE', '#77E', '#A7E', '#E7E', '#E7A'
+  $('.set-bg-elem').each( function( i, elem ) {
+    var hueb = new Huebee( elem, {
+      saturations: 0,
+      shades:0,
+      customColors: [
+        '#FAA', '#FDA', '#FFA', '#DFA', '#AFA', '#AFD', '#AFF', '#ADF', '#AAF', '#DAF', '#FAF', '#FAD',
+        '#F55', '#FA5', '#FF5', '#AF5', '#5F5', '#5FA', '#5FF', '#5AF', '#55F', '#A5F', '#F5F', '#F5A',
+        '#FBB', '#FDB', '#FFB', '#DFB', '#BFB', '#BFD', '#BFF', '#BDF', '#BBF', '#DBF', '#FBF', '#FBD',
+        '#E77', '#EA7', '#EE7', '#AE7', '#7E7', '#7EA', '#7EE', '#7AE', '#77E', '#A7E', '#E7E', '#E7A'
+      ],
+      setBGColor: true
+    });
   });
 
 

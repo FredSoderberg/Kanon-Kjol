@@ -9,6 +9,10 @@ $(document).ready(function(){
         // scroll: false,
         helper:"clone",
         appendTo:"body",
+        // start: function (event, ui) {
+        //   console.log(ui.item);
+        //   $(".ui-sortable-helper").addClass("col_container");
+        // },
         stop: function(event,ui) {
           if(($(this).children().length < 13)) {
             $("#availableResources").css("padding-bottom","+="+config.rowHeight);
@@ -42,20 +46,27 @@ $(document).ready(function(){
          }
     });
 
-
-
     $( "#sortable" ).sortable({
         connectWith: "#availableResources",
         dropOnEmpty: true,
         start: function (event,ui) {
-          pre = ui.item.index();
-          preID = ui.item[0].id;
+           pre = ui.item.index();
+
         },
         stop: function(event, ui) {
+          aft = ui.item.index();
+          preID = $("#sortable").children().eq(pre)[0].id;
+          aftID = $("#sortable").children().eq(aft)[0].id;
+          // console.log("pre: ",pre);
+          // console.log("aft: ",aft);
+          //
+          // console.log("preID: ",preID);
+          // console.log("aftID: ",aftID);
+
           // console.log($(".task_view_rows").children()[ui.item.index()]);
           var moveRowBefore = $(".task_view_rows").children()[ui.item.index()];
           // console.log($("")(ui.item.index()));
-          if (pre > ui.item.index()) {
+          if (pre > aft) {
             $("#row_"+ui.item[0].id).insertBefore(moveRowBefore);
           }
           else {
@@ -65,7 +76,7 @@ $(document).ready(function(){
           // console.log(preID);
 
           updateResourceRows("sortable","A");
-          updateTasksReosurces(ui.item[0].id);
+          updateTasksReosurces(aftID);
           updateTasksReosurces(preID);
         },
         receive: function(event, ui) {
@@ -88,10 +99,17 @@ $(document).ready(function(){
 
     $(".task_view_rows").sortable({
       start: function (event,ui) {
+        console.log(ui.item);
         pre = ui.item.index();
-        preID = ui.item[0].id.replace("row_", "");
       },
       stop: function(event, ui) {
+        aft = ui.item.index();
+        preID = $("#sortable").children().eq(pre)[0].id.replace("row_", "");
+        aftID = $("#sortable").children().eq(aft)[0].id.replace("row_", "");
+        // console.log("pre: ",pre);
+        // console.log("aft: ",aft);
+        // console.log("preID: ",preID);
+        // console.log("aftID: ",aftID);
         // console.log($("#sortable").children()[ui.item.index()]);
         var moveRowBefore = $("#sortable").children()[ui.item.index()];
         // console.log($("")(ui.item.index()));
@@ -102,10 +120,11 @@ $(document).ready(function(){
           $("#"+ui.item[0].id.replace("row_", "")).insertAfter(moveRowBefore);
         }
         // console.log(ui.item[0].id);
+        // // console.log(preID);
         // console.log(preID);
-
+        // console.log(aftID);
         updateResourceRows("sortable","A");
-        updateTasksReosurces(ui.item[0].id.replace("row_", ""));
+        updateTasksReosurces(aftID);
         updateTasksReosurces(preID);
       }
     });
