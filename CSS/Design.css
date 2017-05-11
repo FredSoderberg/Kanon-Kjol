@@ -1,0 +1,14 @@
+.ButtRad {
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.barBorder {
+  border-right: 2px solid grey;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.ui-tabs .ui-tabs-panel {
+  background-color: #;
+}
