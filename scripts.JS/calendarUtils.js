@@ -127,16 +127,22 @@ Calendar.prototype._create_date_headers = function() {
   var weekhtml = "";
 
   for (var i = 0; i < amount; i++) {
+
+    html += "<div class='task_head_cell' style='width: " + config.dateHeaderWidth + "px; height: "+(config.headerHeight/2)+"px;'>" + date.getDate() + "</br>" + date.getDayAbbreviation() + "</div>";
+
     if (date.getDayAbbreviation() === "Sun" || (i+1) === amount){
-      if((i+1) === amount) {
-        date.add("d", 2);
+      if ((i+1) === amount){
+        date.add('d', 7 - weekdays);
       }
+        console.log("What i:", i)
+        console.log("What date:", date)
+        console.log("Date week:", date.getWeekNumber())
+
       weekhtml += "<div class='task_week_cell' style='width: "+(config.dateHeaderWidth*weekdays)+"px'> W:"+date.getWeekNumber()+"</div>"
       weekdays = 1;
     }else {
       weekdays++;
     }
-    html += "<div class='task_head_cell' style='width: " + config.dateHeaderWidth + "px; height: "+(config.headerHeight/2)+"px;'>" + date.getDate() + "</br>" + date.getDayAbbreviation() + "</div>";
     date.add("d", 1);
   };
   this.divTaskDays.innerHTML = html;
