@@ -382,6 +382,8 @@ function handleX(thisTaskID, parentTaskID) {
 }
 
 function removeDragRez(id) {
+  if (id === undefined) return;
+
    console.log("destroys:","#"+id);
     $("#"+id).draggable('destroy');
     $("#"+id).resizable('destroy');
@@ -389,6 +391,7 @@ function removeDragRez(id) {
   }
 
 function addDragRez(id) {
+    if (id === undefined) return;
     // console.log("creates:","#"+id);
 
   $("#"+id).addClass("task_bar_resize");
