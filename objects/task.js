@@ -382,7 +382,7 @@ function handleX(thisTaskID, parentTaskID) {
 }
 
 function removeDragRez(id) {
-  // console.log("destroys:","#"+id);
+   console.log("destroys:","#"+id);
     $("#"+id).draggable('destroy');
     $("#"+id).resizable('destroy');
     $("#"+id).removeClass("task_bar_resize");

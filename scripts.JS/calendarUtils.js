@@ -134,9 +134,9 @@ Calendar.prototype._create_date_headers = function() {
       if ((i+1) === amount){
         date.add('d', 7 - weekdays);
       }
-        console.log("What i:", i)
-        console.log("What date:", date)
-        console.log("Date week:", date.getWeekNumber())
+        // console.log("What i:", i)
+        // console.log("What date:", date)
+        // console.log("Date week:", date.getWeekNumber())
 
       weekhtml += "<div class='task_week_cell' style='width: "+(config.dateHeaderWidth*weekdays)+"px'> W:"+date.getWeekNumber()+"</div>"
       weekdays = 1;
