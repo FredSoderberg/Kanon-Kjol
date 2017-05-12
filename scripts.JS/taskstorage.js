@@ -50,8 +50,12 @@ $at.click(function() {
     //console.log("clicked");
   //console.log($st)
   //console.log($grid)
+  var days = Number($("#taskStorage_lengthInDays").val());
+  if(days === 0 || days === "" || days === undefined) return;
   var newTask = cal.create_task_for_storage(
-    $("#task_name").val(),Number($("#taskStorage_lengthInDays").val()));
+    $("#task_name").val(),
+    days)
+  
     newTask.render_toStorage();
     /*
     new Date($("#taskStorage_startDate").val()),
