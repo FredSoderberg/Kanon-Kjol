@@ -9,11 +9,11 @@ function db_connect($create) {
     // Try and connect to the database, if a connection has not been established yet
     if(!isset($connection)) {
          // Load configuration as an array. Use the actual location of your configuration file
-        $config = parse_ini_file('../../Db_connection/configDB.ini');
+        $config = parse_ini_file('../../../../Nock-Pass/nock-off.ini');
         if ($create) {
-          $connection = mysqli_connect('localhost:3307',$config['username'],$config['password']);
+          $connection = mysqli_connect('localhost:3306',$config['username'],$config['password']);
         } else {
-          $connection = mysqli_connect('localhost:3307',$config['username'],$config['password'],$config['dbname']);
+          $connection = mysqli_connect('localhost:3306',$config['username'],$config['password'],$config['dbname']);
         }
     }
 
